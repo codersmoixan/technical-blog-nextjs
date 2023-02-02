@@ -7,5 +7,9 @@ module.exports = withPlugins([withVideos], {
   env: {
     APP_ENV: process.env.APP_ENV,
     BASE_API_URL: process.env.BASE_API_URL
+  },
+  output: 'standalone',
+  experimental: {
+    outputStandalone: true
   }
 })
