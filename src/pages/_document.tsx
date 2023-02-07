@@ -14,7 +14,7 @@ export default class MyDocument extends Document {
     return (
       <Html lang="zh">
         {/* eslint-disable-next-line @next/next/no-css-tags */}
-        <link rel="stylesheet" href="/fonts/open-sans.css"/>
+        <link rel="stylesheet" href="/fonts/font-family.css"/>
         <Head>
           <meta name="baidu-site-verification" content="k2rYxsvycd" />
           {/* PWA primary color */}

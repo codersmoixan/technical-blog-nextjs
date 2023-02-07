@@ -79,11 +79,10 @@ const theme = createTheme({
   },
   palette: {
     primary: {
-      main: '#181622',
+      main: '#7635dc',
     },
     background: {
-      default: '#f5f1ea',
-
+      default: '#FFFFFF',
     },
     text: {
       primary: '#181622',
@@ -109,7 +108,7 @@ const theme = createTheme({
       '冬青黑体简体中文',
     ].join(','),
     h1: {
-      fontSize: 'clamp(34px, 6vw, 64px)',
+      fontSize: 'clamp(64px, 6vw, 96px)',
       fontWeight: 700,
       lineHeight: 1.5,
     },

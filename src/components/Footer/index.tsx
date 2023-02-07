@@ -11,9 +11,11 @@ import Logo from "components/Logo";
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
+    position: 'relative',
     width: '100%',
     height: 700,
-    backgroundColor: theme.palette.primary.main
+    backgroundColor: theme.palette.primary.main,
+    zIndex: 99
   },
   logo: {
     width: 80,

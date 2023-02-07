@@ -1,0 +1,55 @@
+@font-face {
+    font-family: 'Open Sans';
+    font-weight: normal;
+    font-style: normal;
+    src: url('OpenSans-Regular.ttf'), url('OpenSans-Bold.ttf'), url('OpenSans-ExtraBold.ttf');
+}
+
+@font-face {
+    font-family: 'OpenSans Bold';
+    font-weight: normal;
+    font-style: normal;
+    src: url('OpenSans-Bold.ttf');
+}
+
+@font-face {
+    font-family: 'OpenSans ExtraBold';
+    font-weight: normal;
+    font-style: normal;
+    src: url('OpenSans-ExtraBold.ttf');
+}
+
+@font-face {
+    font-family: 'OpenSans Semibold';
+    font-weight: normal;
+    font-style: normal;
+    src: url('OpenSans-Semibold.ttf');
+}
+
+@font-face {
+    font-family: 'Barlow Black';
+    font-weight: normal;
+    font-style: normal;
+    src: url('Barlow-Black.ttf');
+}
+
+@font-face {
+    font-family: 'Barlow Bold';
+    font-weight: normal;
+    font-style: normal;
+    src: url('Barlow-Bold.ttf');
+}
+
+@font-face {
+    font-family: 'BarlowSemiCondensed ExtraBold';
+    font-weight: normal;
+    font-style: normal;
+    src: url('BarlowSemiCondensed-ExtraBold.ttf');
+}
+
+@font-face {
+    font-family: 'BarlowSemiCondensed Black';
+    font-weight: normal;
+    font-style: normal;
+    src: url('BarlowSemiCondensed-Black.ttf');
+}
