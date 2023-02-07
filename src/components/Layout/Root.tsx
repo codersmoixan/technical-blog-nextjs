@@ -8,6 +8,7 @@ import { makeStyles } from "@mui/styles";
 import Image, { StaticImageData } from "next/image";
 import { motion } from "framer-motion";
 import type { Theme } from "@mui/material";
+import clsx from "clsx";
 
 interface RootProps extends BoxProps {
   backdrop?: string | StaticImageData;
@@ -41,11 +42,11 @@ const useStyles = makeStyles((theme: Theme) => ({
 }))
 
 function Root(props: RootProps) {
-  const { children, backdrop = '', alt = '', animate = true, ...other } = props
+  const { children, backdrop = '', alt = '', animate = true, className, ...other } = props
   const classes = useStyles(props)
 
   return (
-    <Box className={classes.root} {...other}>
+    <Box className={clsx(className, classes.root)} {...other}>
       {animate ? (
         <motion.div
           initial={{ opacity: 0 }}
