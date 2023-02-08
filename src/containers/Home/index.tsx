@@ -25,11 +25,11 @@ function Home() {
   const classes = useStyles()
 
   return (
-    <Root>
+    <>
       <HomeSign />
       <Box className={classes.placeholder}></Box>
       <Box className={classes.content}>这是一个测试</Box>
-    </Root>
+    </>
   )
 }
 
