@@ -1,34 +1,36 @@
-import Banner from "components/Layout/Banner";
 import Typography from "@mui/material/Typography";
 import Buttons from "components/Buttons";
-import Content from "components/Layout/Content";
-import {makeStyles} from "@mui/styles";
-import {Theme} from "@mui/material";
-import {useRouter} from "next/router";
+import { makeStyles } from "@mui/styles";
+import { useRouter } from "next/router";
 import routes from "@/src/routes";
-import {BoxProps} from "@mui/material/Box";
+import Box from "@mui/material/Box"
+import Image from "next/image";
+import HeroLight1 from "assets/images/home/hero_light_1.png"
+import HeroLight2 from "assets/images/home/hero_light_2.png"
+import type { BoxProps } from "@mui/material/Box";
+import type { Theme } from "@mui/material";
 
 const useStyles = makeStyles((theme: Theme) => ({
-  container: {
+  root: {
     position: 'fixed',
     top: 0,
     left: 0,
+    display: 'flex',
+    justifyContent: 'space-between',
     width: '100%',
     height: '100vh',
     zIndex: 1,
     backgroundColor: 'rgba(255, 255, 255, .9)'
   },
   banner: {
-    marginTop: theme.spacing(15),
-    width: 600,
+    margin: theme.spacing(15, 'auto'),
+    display: 'flex',
+    width: theme.status.contentWidth,
     height: 'auto',
     [theme.breakpoints.down('md')]: {
       marginTop: theme.spacing(9),
       justifyContent: 'flex-start',
       width: 'auto',
-    },
-    [theme.breakpoints.up('lg')]: {
-      justifyContent: 'flex-end',
     },
     color: theme.palette.text.primary,
   },
@@ -62,6 +64,52 @@ const useStyles = makeStyles((theme: Theme) => ({
       background: 'linear-gradient(76.35deg, rgb(128, 26, 230) 15.89%, rgb(162, 26, 230) 89.75%)'
     }
   },
+  rotation: {
+    display: 'flex',
+    position: 'relative',
+    marginLeft: theme.spacing(10),
+    width: 616,
+    height: 919
+  },
+  rotationContent: {
+    display: 'flex',
+    position: 'absolute',
+    '& > div': {
+      display: 'flex',
+      flexDirection: 'column',
+      position: 'relative',
+      height: '100%'
+    },
+    '& img': {
+      width: '100%',
+      height: '100%'
+    }
+  },
+  left: {
+    width: 344,
+    animation: `$leftRotationAnimate 120s linear infinite`
+  },
+  '@keyframes leftRotationAnimate': {
+    '0%': {
+      transform: 'translateY(-50%)',
+    },
+    '100%': {
+      transform: 'translateY(0%)',
+    },
+  },
+  right: {
+    marginLeft: theme.spacing(-2),
+    width: 720,
+    animation: `$rightRotationAnimate 120s linear infinite`
+  },
+  '@keyframes rightRotationAnimate': {
+    '0%': {
+      transform: 'translateY(0%)',
+    },
+    '100%': {
+      transform: 'translateY(-50%)',
+    },
+  },
 }))
 
 function HomeSign(props: BoxProps) {
@@ -71,33 +119,47 @@ function HomeSign(props: BoxProps) {
   const handleToShare = () => history.push(routes.sharing())
 
   return (
-    <Content className={classes.container}>
-      <Banner className={classes.banner}>
-        <Typography variant="h2" fontWeight={700} color="inherit">
-          你一路颠沛流离
-        </Typography>
-        <Typography variant="h2" fontWeight={700} color="inherit">
-          到最遥远的地方旅行
-        </Typography>
-        <Typography variant="h1" fontWeight={700} color="inherit" className={classes.prominent}>
-          Smoixan
-        </Typography>
-        <Typography
-          variant="body1"
-          classes={{ root: classes.subtitle }}
-          color="inherit"
-        >
-          未来，就是你站在茫茫大海的这一边，遥望着海的那一边，充满好奇心，憧憬着对海那边的向往，正是对未知的不了解和向往，所以才有了去追逐未来的勇气。
-        </Typography>
-        <Buttons
-          variant="contained"
-          className={classes.startShare}
-          onClick={handleToShare}
-        >
-          开始你的旅行
-        </Buttons>
-      </Banner>
-    </Content>
+    <Box className={classes.root}>
+      <Box className={classes.banner}>
+        <Box width={600}>
+          <Typography variant="h2" fontWeight={700} color="inherit">
+            你一路颠沛流离
+          </Typography>
+          <Typography variant="h2" fontWeight={700} color="inherit">
+            到最遥远的地方旅行
+          </Typography>
+          <Typography variant="h1" fontWeight={700} color="inherit" className={classes.prominent}>
+            Smoixan
+          </Typography>
+          <Typography
+            variant="body1"
+            classes={{ root: classes.subtitle }}
+            color="inherit"
+          >
+            未来，就是你站在茫茫大海的这一边，遥望着海的那一边，充满好奇心，憧憬着对海那边的向往，正是对未知的不了解和向往，所以才有了去追逐未来的勇气。
+          </Typography>
+          <Buttons
+            variant="contained"
+            className={classes.startShare}
+            onClick={handleToShare}
+          >
+            开始你的旅行
+          </Buttons>
+        </Box>
+        <Box className={classes.rotation}>
+          <Box className={classes.rotationContent}>
+            <Box className={classes.left}>
+              <Image src={HeroLight1} alt="hero_light" className="top" />
+              <Image src={HeroLight1} alt="hero_light" className="bottom" />
+            </Box>
+            <Box className={classes.right}>
+              <Image src={HeroLight2} alt="hero_light" />
+              <Image src={HeroLight2} alt="hero_light" />
+            </Box>
+          </Box>
+        </Box>
+      </Box>
+    </Box>
   )
 }
 
