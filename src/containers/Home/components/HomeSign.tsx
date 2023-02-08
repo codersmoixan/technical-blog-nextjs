@@ -9,6 +9,7 @@ import HeroLight1 from "assets/images/home/hero_light_1.png"
 import HeroLight2 from "assets/images/home/hero_light_2.png"
 import type { BoxProps } from "@mui/material/Box";
 import type { Theme } from "@mui/material";
+import MediaQuery from "components/MediaQuery";
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -20,7 +21,9 @@ const useStyles = makeStyles((theme: Theme) => ({
     width: '100%',
     height: '100vh',
     zIndex: 1,
-    backgroundColor: 'rgba(255, 255, 255, .9)'
+    background: 'linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.9)) center center / cover no-repeat, url(/images/home/overlay_2.jpg)',
+    backgroundPosition: 'center center',
+    backgroundRepeat: 'no-repeat'
   },
   banner: {
     margin: theme.spacing(15, 'auto'),
@@ -30,9 +33,19 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.down('md')]: {
       marginTop: theme.spacing(9),
       justifyContent: 'flex-start',
-      width: 'auto',
+      width: '100%',
     },
     color: theme.palette.text.primary,
+  },
+  notice: {
+    width: 600,
+    [theme.breakpoints.down('md')]: {
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+      padding: theme.spacing(6, 2),
+      width: '100%'
+    }
   },
   prominent: {
     fontFamily: 'Barlow Black',
@@ -54,7 +67,8 @@ const useStyles = makeStyles((theme: Theme) => ({
     }
   },
   subtitle: {
-    margin: theme.spacing(3, 0)
+    margin: theme.spacing(3, 0),
+    textAlign: 'center'
   },
   startShare: {
     width: 195,
@@ -121,7 +135,7 @@ function HomeSign(props: BoxProps) {
   return (
     <Box className={classes.root}>
       <Box className={classes.banner}>
-        <Box width={600}>
+        <Box className={classes.notice}>
           <Typography variant="h2" fontWeight={700} color="inherit">
             你一路颠沛流离
           </Typography>
@@ -146,18 +160,20 @@ function HomeSign(props: BoxProps) {
             开始你的旅行
           </Buttons>
         </Box>
-        <Box className={classes.rotation}>
-          <Box className={classes.rotationContent}>
-            <Box className={classes.left}>
-              <Image src={HeroLight1} alt="hero_light" className="top" />
-              <Image src={HeroLight1} alt="hero_light" className="bottom" />
-            </Box>
-            <Box className={classes.right}>
-              <Image src={HeroLight2} alt="hero_light" />
-              <Image src={HeroLight2} alt="hero_light" />
+        <MediaQuery media={['pad', 'pc']}>
+          <Box className={classes.rotation}>
+            <Box className={classes.rotationContent}>
+              <Box className={classes.left}>
+                <Image src={HeroLight1} alt="hero_light" className="top" />
+                <Image src={HeroLight1} alt="hero_light" className="bottom" />
+              </Box>
+              <Box className={classes.right}>
+                <Image src={HeroLight2} alt="hero_light" />
+                <Image src={HeroLight2} alt="hero_light" />
+              </Box>
             </Box>
           </Box>
-        </Box>
+        </MediaQuery>
       </Box>
     </Box>
   )
