@@ -7,20 +7,27 @@ const useStyles = makeStyles((theme: Theme) => ({
     top: 0,
     left: 0,
     width: '100%',
+    height: theme.status.navHeight,
     boxSizing: 'border-box',
     zIndex: 999,
     backgroundColor: 'rgba(255, 255, 255, 0)',
-    transition: 'all .6s',
+    transition: 'all .2s',
     [theme.breakpoints.down('lg')]: {
       padding: theme.spacing(0, 3),
       display: 'flex',
       justifyContent: 'space-between',
       alignItems: 'center',
-      height: 72,
+      height: 64,
     }
   },
   focus: {
     backgroundColor: 'rgba(255, 255, 255, .9)',
+    boxShadow: '0 0 15px #e3e4e5',
+    height: 72,
+    backdropFilter: 'blur(6px)',
+    [theme.breakpoints.down('lg')]: {
+      height: 56,
+    }
   },
   blur: {
     backgroundColor: 'rgba(255, 255, 255, 0)'
@@ -31,13 +38,14 @@ const useStyles = makeStyles((theme: Theme) => ({
     alignItems: 'center',
     margin: '0 auto',
     width: '100%',
+    height: '100%',
     maxWidth: theme.status.navWidth,
   },
   menus: {
     display: 'flex',
     alignItems: 'center',
     marginLeft: theme.spacing(3),
-    height: theme.status.navHeight,
+    height: '100%',
     transition: theme.status.transition(),
     [theme.breakpoints.up('lg')]: {
       marginLeft: theme.spacing(10)
