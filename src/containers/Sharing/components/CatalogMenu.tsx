@@ -27,6 +27,7 @@ interface CatalogMenuProps {
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
+  ...theme.styles,
   root: {
     position: 'relative',
     width: 253,
@@ -74,12 +75,10 @@ const useStyles = makeStyles((theme: Theme) => ({
     }
   },
   menuLabel: {
-    ...theme.common.spaceBetweenCenter,
     padding: theme.spacing(0, 3),
     flex: 1,
   },
   searchBtn: {
-    ...theme.common.verticalCenter,
     width: 72,
     height: '100%',
     color: theme.palette.primary.main,
@@ -164,11 +163,11 @@ export default forwardRef(function CatalogMenu({ menus, onSearchFocus }: Catalog
             })}
             ref={ref}
           >
-            <Box className={classes.menuLabel} onClick={handleCatalogFocus}>
+            <Box className={clsx(classes.menuLabel, classes.spaceBetweenCenter)} onClick={handleCatalogFocus}>
               <Typography variant="h5" fontWeight={400} width="80%">前端</Typography>
               <TransformIcon focus={focus} originIcon={<ExpandLess />} finishIcon={<ExpandMore />} />
             </Box>
-            <Box className={classes.searchBtn} onClick={handleSearchFocus}>
+            <Box className={clsx(classes.searchBtn, classes.verticalCenter)} onClick={handleSearchFocus}>
               <Search />
             </Box>
           </Box>

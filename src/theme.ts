@@ -16,10 +16,11 @@ interface CustomThemeStatusOptions extends Required<typeof statusOptions> {}
 
 interface CustomThemeOptions {
   status: CustomThemeStatusOptions;
-  common: {
+  styles: {
     verticalCenter: CSSProperties;
     inlineCenter: CSSProperties;
     spaceBetweenCenter: CSSProperties;
+    columnCenter: CSSProperties;
   }
 }
 
@@ -61,7 +62,7 @@ const statusOptions = {
 const theme = createTheme({
   breakpoints,
   status: statusOptions,
-  common: {
+  styles: {
     verticalCenter: {
       display: 'flex',
       alignItems: 'center',
@@ -74,6 +75,11 @@ const theme = createTheme({
     spaceBetweenCenter: {
       display: 'flex',
       justifyContent: 'space-between',
+      alignItems: 'center'
+    },
+    columnCenter: {
+      display: 'flex',
+      flexDirection: 'column',
       alignItems: 'center'
     }
   },
