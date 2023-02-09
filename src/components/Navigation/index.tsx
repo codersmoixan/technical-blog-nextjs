@@ -20,7 +20,6 @@ import MenuIcon from "components/Icons/MenuIcon";
 import MenuDrawer from "components/Navigation/components/MenuDrawer";
 import UserButtons from "components/Navigation/components/UserButtons";
 import AccordionMenu from "components/Navigation/components/AccordionMenu";
-import throttle from "lodash/throttle";
 import routes from "@/src/routes";
 import { useTheme } from "@mui/material/styles";
 import { Variant } from "components/Variant";
@@ -37,7 +36,7 @@ function Navigation() {
   useEffect(() => {
     const scroll = () => setFocus(window.scrollY >= 150)
 
-    window.addEventListener('scroll', throttle(scroll, 500))
+    window.addEventListener('scroll', scroll)
 
     return () => removeEventListener('scroll', scroll)
   }, [])

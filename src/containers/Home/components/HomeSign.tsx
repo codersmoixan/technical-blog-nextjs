@@ -26,24 +26,25 @@ const useStyles = makeStyles((theme: Theme) => ({
     backgroundRepeat: 'no-repeat'
   },
   banner: {
-    margin: theme.spacing(15, 'auto'),
     display: 'flex',
+    margin: '0 auto',
     width: theme.status.contentWidth,
     height: 'auto',
     [theme.breakpoints.down('md')]: {
-      marginTop: theme.spacing(9),
+      margin: theme.spacing(9, 0, 0),
       justifyContent: 'flex-start',
       width: '100%',
     },
     color: theme.palette.text.primary,
   },
   notice: {
-    width: 600,
+    margin: theme.spacing(18, 'auto'),
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    width: 480,
     [theme.breakpoints.down('md')]: {
-      display: 'flex',
-      flexDirection: 'column',
-      alignItems: 'center',
-      padding: theme.spacing(6, 2),
+      margin: theme.spacing(6, 2),
       width: '100%'
     }
   },
@@ -68,7 +69,11 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   subtitle: {
     margin: theme.spacing(3, 0),
-    textAlign: 'center'
+    width: 420,
+    textAlign: 'center',
+    [theme.breakpoints.down('md')]: {
+      width: '100%'
+    }
   },
   startShare: {
     width: 195,
@@ -88,6 +93,8 @@ const useStyles = makeStyles((theme: Theme) => ({
   rotationContent: {
     display: 'flex',
     position: 'absolute',
+    overflow: 'hidden',
+    marginTop: theme.spacing(11),
     '& > div': {
       display: 'flex',
       flexDirection: 'column',
@@ -150,7 +157,7 @@ function HomeSign(props: BoxProps) {
             classes={{ root: classes.subtitle }}
             color="inherit"
           >
-            未来，就是你站在茫茫大海的这一边，遥望着海的那一边，充满好奇心，憧憬着对海那边的向往，正是对未知的不了解和向往，所以才有了去追逐未来的勇气。
+            未来，就是你站在茫茫大海的这一边，遥望着海的那一边，充满好奇心，憧憬着对海那边的向往。
           </Typography>
           <Buttons
             variant="contained"
