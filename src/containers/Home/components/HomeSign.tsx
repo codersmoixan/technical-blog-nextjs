@@ -7,11 +7,14 @@ import Box from "@mui/material/Box"
 import Image from "next/image";
 import HeroLight1 from "assets/images/home/hero_light_1.png"
 import HeroLight2 from "assets/images/home/hero_light_2.png"
+import MediaQuery from "components/MediaQuery";
+import clsx from "clsx";
+import { availableIcons } from "containers/Home/constants";
 import type { BoxProps } from "@mui/material/Box";
 import type { Theme } from "@mui/material";
-import MediaQuery from "components/MediaQuery";
 
 const useStyles = makeStyles((theme: Theme) => ({
+  ...theme.styles,
   root: {
     position: 'fixed',
     top: 0,
@@ -131,6 +134,26 @@ const useStyles = makeStyles((theme: Theme) => ({
       transform: 'translateY(-50%)',
     },
   },
+  available: {
+    marginTop: theme.spacing(5),
+    width: 185,
+  },
+  availableTitle: {
+    fontWeight: 700,
+    color: theme.palette.text.secondary
+  },
+  availableIcons: {
+    display: 'flex',
+    marginTop: theme.spacing(3),
+    width: '100%',
+    color: theme.palette.text.secondary
+  },
+  svgIcon: {
+    display: 'inline-block',
+    width: 24,
+    height: 24,
+    backgroundColor: 'currentColor',
+  }
 }))
 
 function HomeSign(props: BoxProps) {
@@ -166,6 +189,23 @@ function HomeSign(props: BoxProps) {
           >
             开始你的旅行
           </Buttons>
+          <Box className={clsx(classes.available, classes.columnCenter)}>
+            <Typography
+              variant="caption"
+              className={classes.availableTitle}
+            >
+              AVAILABLE FOR
+            </Typography>
+            <Box className={clsx(classes.availableIcons, classes.spaceBetweenCenter)}>
+              {availableIcons.map(icon => (
+                <span
+                  key={icon.id}
+                  className={classes.svgIcon}
+                  style={{ ['-webkit-mask']: `url(${icon.icon}) center center / contain no-repeat` } as any}
+                ></span>
+              ))}
+            </Box>
+          </Box>
         </Box>
         <MediaQuery media={['pad', 'pc']}>
           <Box className={classes.rotation}>
