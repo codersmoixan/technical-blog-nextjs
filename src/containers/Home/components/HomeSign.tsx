@@ -5,8 +5,6 @@ import { useRouter } from "next/router";
 import routes from "@/src/routes";
 import Box from "@mui/material/Box"
 import Image from "next/image";
-import HeroLight1 from "assets/images/home/hero_light_1.png"
-import HeroLight2 from "assets/images/home/hero_light_2.png"
 import MediaQuery from "components/MediaQuery";
 import clsx from "clsx";
 import { availableIcons } from "containers/Home/constants";
@@ -211,12 +209,12 @@ function HomeSign(props: BoxProps) {
           <Box className={classes.rotation}>
             <Box className={classes.rotationContent}>
               <Box className={classes.left}>
-                <Image src={HeroLight1} alt="hero_light" className="top" />
-                <Image src={HeroLight1} alt="hero_light" className="bottom" />
+                <img src="/images/home/hero_light_1.png" alt="hero_light" />
+                <img src="/images/home/hero_light_1.png" alt="hero_light" />
               </Box>
               <Box className={classes.right}>
-                <Image src={HeroLight2} alt="hero_light" />
-                <Image src={HeroLight2} alt="hero_light" />
+                <img src="/images/home/hero_light_2.png" alt="hero_light" />
+                <img src="/images/home/hero_light_2.png" alt="hero_light" />
               </Box>
             </Box>
           </Box>
