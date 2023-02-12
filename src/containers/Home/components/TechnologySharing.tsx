@@ -11,6 +11,9 @@ const useStyles = makeStyles((theme: Theme) => ({
   ...theme.styles,
   root: {
     padding: theme.spacing(15, 0),
+    [theme.breakpoints.down('md')]: {
+      padding: theme.spacing(10, 2)
+    }
   },
   title: {
     '& .MuiTypography-caption': {
@@ -25,17 +28,33 @@ const useStyles = makeStyles((theme: Theme) => ({
   card: {
     margin: theme.spacing(0, 'auto'),
     paddingTop: theme.spacing(10),
-    width: 1152,
+    display: 'flex',
+    justifyContent: 'space-between',
+    maxWidth: 1152,
     height: 438,
+    [theme.breakpoints.down('md')]: {
+      display: 'block',
+      paddingTop: theme.spacing(2),
+      width: '100%',
+      height: 'auto'
+    }
   },
   item: {
-    padding: theme.spacing(10, 5),
+    padding: theme.spacing(7, 5, 10),
     width: '33%',
     height: '100%',
+    borderRadius: 16,
     boxSizing: 'border-box',
-    '&.center': {
-      borderRadius: 16,
-      boxShadow: 'rgb(145 158 171 / 16%) -40px 40px 80px'
+    [theme.breakpoints.down('md')]: {
+      margin: theme.spacing(3, 0),
+      width: '100%',
+      boxShadow: 'rgb(145 158 171 / 20%) 0px 0px 2px 0px, rgb(145 158 171 / 12%) 0px 12px 24px -4px',
+      transition: 'box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms'
+    }
+  },
+  center: {
+    [theme.breakpoints.up('md')]: {
+      boxShadow: 'rgb(145 158 171 / 16%) -40px 40px 80px',
     }
   },
   description: {
@@ -66,7 +85,7 @@ function TechnologySharing() {
         </ScrollInView>
       </Box>
       <ScrollInView initial={initial}>
-        <Box className={clsx(classes.card, classes.spaceBetweenCenter)}>
+        <Box className={classes.card}>
           <Box className={classes.item}>
             <Box className={classes.inlineCenter}>
               <Image src="/icons/home/ic_design.svg" alt="ic_development" width={48} height={48} />
@@ -84,7 +103,7 @@ function TechnologySharing() {
               </Typography>
             </Box>
           </Box>
-          <Box className={clsx(classes.item, 'center')}>
+          <Box className={clsx(classes.item, classes.center)}>
             <Box className={classes.inlineCenter}>
               <Image src="/icons/home/ic_development.svg" alt="ic_development" width={48} height={48} />
             </Box>
