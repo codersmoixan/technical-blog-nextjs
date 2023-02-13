@@ -19,10 +19,10 @@ const useStyles = makeStyles((theme: Theme) => ({
     marginRight: theme.spacing(3),
     width: 216,
     minHeight: 256,
-    transition: theme.status.transition(),
+    transition: theme.config.transition(),
     '& img': {
       height: 140,
-      transition: theme.status.transition(),
+      transition: theme.config.transition(),
     }
   },
 }))
@@ -36,7 +36,7 @@ function SharingSwiper({ blogs, ...other }: SharingSwiperProps) {
     <SidesSwiper data={blogs} triggerScroll={mdUp} {...other}>
       {blog => (
         <BlogCard key={blog.id} title={blog.title} date="2022.11.06" className={classes.card}>
-          <Typography variant="caption" color={theme.status.textSecondary}>{blog.description}</Typography>
+          <Typography variant="caption" color={theme.colorPalette.text.textSecondary}>{blog.description}</Typography>
         </BlogCard>
       )}
     </SidesSwiper>

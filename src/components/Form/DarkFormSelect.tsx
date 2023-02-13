@@ -7,29 +7,29 @@ interface DarkFormSelect extends FormSelectProps {}
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
     '& .MuiOutlinedInput-notchedOutline': {
-      borderColor: theme.status.sullenGrey,
+      borderColor: theme.colorPalette.primary.sullenGrey,
     },
   },
   label: {
     '&.MuiFormLabel-root': {
-      color: theme.status.lightGrey,
+      color: theme.colorPalette.primary.lightGrey,
       '&.Mui-focused': {
-        color: theme.status.lightPurple,
+        color: theme.colorPalette.primary.lightPurple,
       },
     },
   },
   input: {
     '&:hover': {
       '& .MuiOutlinedInput-notchedOutline': {
-        borderColor: theme.status.lightGrey,
+        borderColor: theme.colorPalette.primary.lightGrey,
       },
     },
     '& .MuiInputBase-input': {
-      color: theme.status.lightGrey,
+      color: theme.colorPalette.primary.lightGrey,
     },
     '&.Mui-focused': {
       '& .MuiOutlinedInput-notchedOutline': {
-        borderColor: theme.status.lightPurple,
+        borderColor: theme.colorPalette.primary.lightPurple,
         borderWidth: 1
       },
     },
@@ -38,7 +38,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     }
   },
   value: {
-    color: theme.status.lightGrey
+    color: theme.colorPalette.primary.lightGrey
   },
   placeholder: {
     color: '#3b3a47 !important'

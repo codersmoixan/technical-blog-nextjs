@@ -35,7 +35,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     display: 'none'
   },
   chipError: {
-    borderColor: theme.status.error
+    borderColor: theme.colorPalette.primary.error
   }
 }))
 
@@ -90,7 +90,7 @@ function FormChipSelect({ options, onSelect, name, rules }: ChipSelectProps) {
       </Grid>
       <Box>
         <input ref={ref} {...fieldProps} className={classes.formText} />
-        {isError && <Typography variant="caption" color={theme.status.error}>{fieldState.error?.message}</Typography>}
+        {isError && <Typography variant="caption" color={theme.colorPalette.primary.error}>{fieldState.error?.message}</Typography>}
       </Box>
     </>
   )

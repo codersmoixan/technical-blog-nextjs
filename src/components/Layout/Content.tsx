@@ -18,7 +18,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   root: {
     position: 'relative',
     margin: '0 auto',
-    maxWidth: theme.status.contentWidth,
+    maxWidth: theme.config.contentWidth,
     [theme.breakpoints.down('md')]: {
       margin: '72px auto 0',
       paddingTop: 0

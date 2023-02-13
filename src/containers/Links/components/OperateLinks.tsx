@@ -23,7 +23,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   submit: {
     '&.MuiButton-contained': {
-      backgroundColor: theme.status.lightPurple
+      backgroundColor: theme.colorPalette.primary.lightPurple
     }
   }
 }))

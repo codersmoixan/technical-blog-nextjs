@@ -46,7 +46,7 @@ const useStyles = makeStyles((theme: Theme) => ({
       top: -7,
       fontSize: 12,
       color: theme.palette.text.primary,
-      backgroundColor: theme.status.transparent
+      backgroundColor: theme.colorPalette.primary.transparent
     },
   },
   input: {
@@ -68,7 +68,7 @@ const useStyles = makeStyles((theme: Theme) => ({
       },
     },
     '& .MuiOutlinedInput-notchedOutline': {
-      backgroundColor: (props: FormTextProps) => props.bgColor ?? theme.status.transparent,
+      backgroundColor: (props: FormTextProps) => props.bgColor ?? theme.colorPalette.primary.transparent,
     },
 
     '&.Mui-focused': {
@@ -77,7 +77,7 @@ const useStyles = makeStyles((theme: Theme) => ({
       },
       '&.Mui-error': {
         '& .MuiOutlinedInput-notchedOutline': {
-          borderColor: theme.status.error
+          borderColor: theme.colorPalette.primary.error
         },
       }
     },
@@ -112,7 +112,7 @@ function FormText(props: FormTextProps) {
         error={isError}
         {...other}
       />
-      {isError && <Typography variant="caption" color={theme.status.error}>{helpText ?? fieldState.error?.message}</Typography>}
+      {isError && <Typography variant="caption" color={theme.colorPalette.primary.error}>{helpText ?? fieldState.error?.message}</Typography>}
     </FormControl>
   )
 }

@@ -10,6 +10,7 @@ import clsx from "clsx";
 import { availableIcons } from "containers/Home/constants";
 import type { BoxProps } from "@mui/material/Box";
 import type { Theme } from "@mui/material";
+import GradientTypography from "components/Typography/GradientTypography";
 
 const useStyles = makeStyles((theme: Theme) => ({
   ...theme.styles,
@@ -29,7 +30,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   banner: {
     display: 'flex',
     margin: '0 auto',
-    width: theme.status.contentWidth,
+    width: theme.config.contentWidth,
     height: 'auto',
     [theme.breakpoints.down('md')]: {
       margin: theme.spacing(9, 0, 0),
@@ -47,25 +48,6 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.down('md')]: {
       margin: theme.spacing(6, 2),
       width: '100%'
-    }
-  },
-  prominent: {
-    fontFamily: 'Barlow Black',
-    letterSpacing: 6,
-    background: '-webkit-linear-gradient(300deg, rgb(118, 53, 220) 0%, rgb(255, 171, 0) 25%, rgb(118, 53, 220) 50%, rgb(255, 171, 0) 75%, rgb(118, 53, 220) 100%) 0% 0% / 400%',
-    ['-webkit-background-clip']: 'text',
-    color: theme.status.transparent,
-    animation: `$prominentAnimate 20s linear infinite`
-  },
-  '@keyframes prominentAnimate': {
-    '0%': {
-      backgroundPosition: '0% center',
-    },
-    '50%': {
-      backgroundPosition: '100% center',
-    },
-    '100%': {
-      backgroundPosition: '0% center',
     }
   },
   subtitle: {
@@ -170,9 +152,9 @@ function HomeSign(props: BoxProps) {
           <Typography variant="h2" fontWeight={700} color="inherit">
             到最遥远的地方旅行
           </Typography>
-          <Typography variant="h1" fontWeight={700} color="inherit" className={classes.prominent}>
+          <GradientTypography>
             Smoixan
-          </Typography>
+          </GradientTypography>
           <Typography
             variant="body1"
             classes={{ root: classes.subtitle }}

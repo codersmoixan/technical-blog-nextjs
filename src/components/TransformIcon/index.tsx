@@ -29,7 +29,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     justifyContent: 'center',
     alignItems: 'center',
     color: theme.palette.primary.main,
-    transition: theme.status.transition(0.5)
+    transition: theme.config.transition(0.5)
   },
   fadeIn: {
     opacity: 0,

@@ -17,7 +17,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   banner: {
     display: 'flex',
     alignItems: 'center',
-    height: theme.status.backdropHeight,
+    height: theme.config.backdropHeight,
   }
 }))
 

@@ -81,7 +81,7 @@ function Navigation() {
               </Box>
             </Box>
             <Box className={classes.tools}>
-              <FormText label="搜索本站" bgColor={theme.status.transparent} />
+              <FormText label="搜索本站" bgColor={theme.colorPalette.primary.transparent} />
               <UserButtons />
             </Box>
           </Box>

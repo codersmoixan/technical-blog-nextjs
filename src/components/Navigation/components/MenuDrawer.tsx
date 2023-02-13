@@ -33,12 +33,12 @@ const useStyles = makeStyles((theme: Theme) => ({
       padding: theme.spacing(1, 2)
     },
     '& .MuiButton-outlined': {
-      borderColor: theme.status.white,
-      color: theme.status.white
+      borderColor: theme.colorPalette.primary.default,
+      color: theme.colorPalette.primary.default
     },
     '& .MuiButton-contained': {
-      borderColor: theme.status.white,
-      backgroundColor: theme.status.white,
+      borderColor: theme.colorPalette.primary.default,
+      backgroundColor: theme.colorPalette.background.default,
       color: theme.palette.primary.main
     }
   },
@@ -50,10 +50,10 @@ const useStyles = makeStyles((theme: Theme) => ({
     '& .MuiAccordionSummary-content': {
       '& > p': {
         fontSize: 18,
-        color: theme.status.white
+        color: theme.colorPalette.text.default
       },
       '& .transform-icon > div': {
-        color: theme.status.white
+        color: theme.colorPalette.text.default
       }
     },
     '& .MuiAccordionSummary-root': {
@@ -63,7 +63,7 @@ const useStyles = makeStyles((theme: Theme) => ({
       padding: theme.spacing(0, 2),
       '& > a': {
         fontSize: 16,
-        color: theme.status.white
+        color: theme.colorPalette.text.default
       }
     }
   },

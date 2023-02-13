@@ -20,7 +20,7 @@ export interface SearchFormTextProps extends FormTextProps {
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
     width: '100%',
-    transition: theme.status.transition()
+    transition: theme.config.transition()
   },
   formText: {
     position: 'relative',
@@ -30,7 +30,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   focus: {
     '& .MuiInputBase-root': {
-      backgroundColor: theme.status.white
+      backgroundColor: theme.colorPalette.background.default
     }
   },
   backdrop: {

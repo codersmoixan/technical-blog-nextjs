@@ -48,7 +48,7 @@ const useStyles = makeStyles((theme: Theme) => ({
       height: 25,
       borderRadius: 2,
       backgroundColor: theme.palette.primary.main,
-      color: theme.status.white,
+      color: theme.colorPalette.text.default,
       '& .MuiChip-label': {
         fontSize: 12
       }
@@ -70,7 +70,7 @@ const useStyles = makeStyles((theme: Theme) => ({
       top: -7,
       fontSize: 12,
       color: theme.palette.text.primary,
-      backgroundColor: theme.status.transparent
+      backgroundColor: theme.colorPalette.primary.transparent
     }
   },
   input: {
@@ -96,14 +96,14 @@ const useStyles = makeStyles((theme: Theme) => ({
       },
       '&.Mui-error': {
         '& .MuiOutlinedInput-notchedOutline': {
-          borderColor: theme.status.error
+          borderColor: theme.colorPalette.primary.error
         },
       }
     }
   },
   value: {},
   placeholder: {
-    color: theme.status.placeholder
+    color: theme.colorPalette.primary.placeholder
   }
 }))
 
@@ -254,7 +254,7 @@ function FormSelect(props: FormSelectProps) {
           </MenuItem>
         ))}
       </Select>
-      {isError && <Typography variant="caption" color={theme.status.error}>{fieldState.error?.message}</Typography>}
+      {isError && <Typography variant="caption" color={theme.colorPalette.primary.error}>{fieldState.error?.message}</Typography>}
     </FormControl>
   );
 }
