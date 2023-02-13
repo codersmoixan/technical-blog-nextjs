@@ -41,17 +41,17 @@ const useStyles = makeStyles((theme: Theme) => ({
     height: 72,
     textAlign: 'right',
     lineHeight: '72px',
-    backgroundColor: (props: GlobalDrawerProps) => props.bgColor ? props.bgColor : theme.status.bgDark,
+    backgroundColor: (props: GlobalDrawerProps) => props.bgColor ? props.bgColor : theme.colorPalette.background.dark,
     zIndex: 999,
     '& > button.MuiButtonBase-root': {
-      color: theme.status.white
+      color: theme.colorPalette.text.default
     }
   },
   paper: {
     '&.MuiPaper-root': {
       position: 'static',
       height: '100%',
-      backgroundColor: (props: GlobalDrawerProps) => props.bgColor ? props.bgColor : theme.status.bgDark
+      backgroundColor: (props: GlobalDrawerProps) => props.bgColor ? props.bgColor : theme.colorPalette.background.dark
     }
   },
   bottom: {

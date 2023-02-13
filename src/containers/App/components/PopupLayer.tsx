@@ -13,7 +13,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     backgroundColor: theme.palette.primary.main,
     paddingBottom: theme.spacing(4),
     '& .MuiButtonBase-root': {
-      color: theme.status.white
+      color: theme.colorPalette.text.default
     }
   },
   closeIcon: {

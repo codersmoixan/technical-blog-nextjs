@@ -1,11 +1,4 @@
 @font-face {
-    font-family: 'Open Sans';
-    font-weight: normal;
-    font-style: normal;
-    src: url('OpenSans-Regular.ttf'), url('OpenSans-Bold.ttf'), url('OpenSans-ExtraBold.ttf');
-}
-
-@font-face {
     font-family: 'OpenSans Bold';
     font-weight: normal;
     font-style: normal;
@@ -52,4 +45,11 @@
     font-weight: normal;
     font-style: normal;
     src: url('BarlowSemiCondensed-Black.ttf');
+}
+
+@font-face {
+    font-family: 'Public Sans';
+    font-weight: normal;
+    font-style: normal;
+    src: url('PublicSans-Regular.ttf');
 }

@@ -52,7 +52,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     width: '100%',
     boxShadow: 'rgb(19 19 19 / 12%) 0px 2px 5px 0.5px',
     '& .MuiInputBase-root': {
-      backgroundColor: theme.status.white,
+      backgroundColor: theme.colorPalette.primary.default,
     },
     '& input.MuiInputBase-input': {
       height: 58
@@ -67,7 +67,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     width: 185,
     height: 45,
     backgroundColor: theme.palette.primary.main,
-    color: theme.status.white,
+    color: theme.palette.text.primary,
     borderRadius: '2px 2px 0 0',
     '& > svg': {
       marginRight: theme.spacing(1),
@@ -117,7 +117,7 @@ function SharingRoot({ children, backdrop }: SharingRootProps) {
             <Box className={classes.search}>
               <SearchFormText
                 className={classes.formText}
-                bgColor={theme.status.transparent}
+                bgColor={theme.colorPalette.primary.transparent}
                 placeholder="这里可以搜索你想知道的内容"
                 anchorPoint={pointRef}
                 inputProps={{

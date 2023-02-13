@@ -23,7 +23,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   active: {
     backgroundColor: theme.palette.primary.main,
-    color: theme.status.white,
+    color: theme.colorPalette.text.default,
     '&:hover': {
       '&.MuiChip-outlined': {
         backgroundColor: theme.palette.primary.main

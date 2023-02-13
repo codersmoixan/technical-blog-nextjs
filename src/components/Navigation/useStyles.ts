@@ -7,7 +7,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     top: 0,
     left: 0,
     width: '100%',
-    height: theme.status.navHeight,
+    height: theme.config.navHeight,
     boxSizing: 'border-box',
     zIndex: 999,
     backgroundColor: 'rgba(255, 255, 255, 0)',
@@ -39,14 +39,14 @@ const useStyles = makeStyles((theme: Theme) => ({
     margin: '0 auto',
     width: '100%',
     height: '100%',
-    maxWidth: theme.status.navWidth,
+    maxWidth: theme.config.navWidth,
   },
   menus: {
     display: 'flex',
     alignItems: 'center',
     marginLeft: theme.spacing(3),
     height: '100%',
-    transition: theme.status.transition(),
+    transition: theme.config.transition(),
     [theme.breakpoints.up('lg')]: {
       marginLeft: theme.spacing(10)
     }
@@ -70,7 +70,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   btn: {
     '&.MuiButton-textPrimary': {
-      color: theme.status.lightGrey
+      color: theme.colorPalette.primary.lightGrey
     }
   }
 }))

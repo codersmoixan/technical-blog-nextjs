@@ -73,8 +73,8 @@ const useStyles = makeStyles((theme: Theme) => ({
     padding: theme.spacing(1, 2)
   },
   avatar: {
-    backgroundColor: theme.status.bgDark,
-    color: theme.status.white
+    backgroundColor: theme.colorPalette.background.dark,
+    color: theme.colorPalette.text.default
   },
   title: {},
   date: {

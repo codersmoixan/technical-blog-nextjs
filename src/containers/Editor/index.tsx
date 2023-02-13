@@ -23,9 +23,9 @@ const editorHeight = (media: string) => media === 'mobile' ? 'calc(100vh - 145px
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
     minHeight: '100vh',
-    backgroundColor: theme.status.white,
-    borderLeft: `1px solid ${theme.status.colorSecondary}`,
-    borderRight: `1px solid ${theme.status.colorSecondary}`,
+    backgroundColor: theme.colorPalette.background.default,
+    borderLeft: `1px solid ${theme.colorPalette.primary.colorSecondary}`,
+    borderRight: `1px solid ${theme.colorPalette.primary.colorSecondary}`,
   },
   header: {
     position: 'sticky',
@@ -35,7 +35,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     alignItems: 'center',
     padding: theme.spacing( 0, 3),
     height: 85,
-    backgroundColor: theme.status.white,
+    backgroundColor: theme.colorPalette.background.default,
     zIndex: 999,
     [theme.breakpoints.down('sm')]: {
       height: 65
@@ -67,8 +67,8 @@ const useStyles = makeStyles((theme: Theme) => ({
     position: 'sticky',
     top: 85,
     zIndex: 999,
-    borderBottom: `1px solid ${theme.status.colorSecondary}`,
-    borderTop: `1px solid ${theme.status.colorSecondary}`,
+    borderBottom: `1px solid ${theme.colorPalette.primary.colorSecondary}`,
+    borderTop: `1px solid ${theme.colorPalette.primary.colorSecondary}`,
     [theme.breakpoints.down('sm')]: {
       top: 65
     }

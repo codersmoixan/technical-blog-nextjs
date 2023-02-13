@@ -53,12 +53,12 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   prevBtn: {
     '&.Mui-disabled.MuiButton-textPrimary': {
-      color: theme.status.disabled
+      color: theme.colorPalette.text.disabled
     }
   },
   nextBtn: {
     '&.Mui-disabled.MuiButton-textPrimary': {
-      color: theme.status.disabled
+      color: theme.colorPalette.text.disabled
     }
   }
 }))

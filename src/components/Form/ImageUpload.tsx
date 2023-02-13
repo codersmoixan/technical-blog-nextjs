@@ -26,7 +26,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     width: 120,
     height: 120,
     cursor: 'pointer',
-    border: `1px solid ${theme.status.disabled}`,
+    border: `1px solid ${theme.colorPalette.primary.disabled}`,
     borderRadius: 2
   },
   preview: {
@@ -56,7 +56,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     alignItems: 'center',
     opacity: 0,
     transition: 'all .3s',
-    color: theme.status.white,
+    color: theme.colorPalette.text.default,
     '&:hover': {
       opacity: 1,
       backgroundColor: 'rgba(0, 0, 0, .5)'

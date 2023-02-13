@@ -55,7 +55,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     position: 'relative',
     display: 'flex',
     height: 72,
-    backgroundColor: theme.status.white,
+    backgroundColor: theme.colorPalette.background.default,
     zIndex: 1,
     '&.focus': {
       boxShadow: 'rgb(227 227 227) 0px 2px 4px',
@@ -63,7 +63,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   menuTitle: {
     paddingBottom: theme.spacing(4),
-    borderBottom: `1px solid ${theme.status.colorSecondary}`
+    borderBottom: `1px solid ${theme.colorPalette.primary.colorSecondary}`
   },
   menu: {
     width: 205,
@@ -82,7 +82,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     width: 72,
     height: '100%',
     color: theme.palette.primary.main,
-    backgroundColor: theme.status.darkPeach
+    backgroundColor: theme.colorPalette.primary.darkPeach
   },
   menuHeader: {
     display: 'flex',
@@ -90,11 +90,11 @@ const useStyles = makeStyles((theme: Theme) => ({
     alignItems: 'center',
     height: 56,
     color: theme.palette.primary.main,
-    borderBottom: `1px solid ${theme.status.colorSecondary}`
+    borderBottom: `1px solid ${theme.colorPalette.primary.colorSecondary}`
   },
   menuContainer: {
     padding: theme.spacing(0, 3),
-    backgroundColor: theme.status.white,
+    backgroundColor: theme.colorPalette.background.default,
     boxShadow: 'rgb(227 227 227) 0px 2px 4px',
   }
 }))

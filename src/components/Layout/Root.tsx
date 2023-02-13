@@ -30,7 +30,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     top: 0,
     left: 0,
     width: '100%',
-    height: theme.status.backdropHeight,
+    height: theme.config.backdropHeight,
     [theme.breakpoints.down('md')]: {
       width: 'auto'
     }

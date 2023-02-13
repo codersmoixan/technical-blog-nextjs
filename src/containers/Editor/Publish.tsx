@@ -45,7 +45,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   drawerHeader: {
     textAlign: 'center',
     '& > button.MuiButtonBase-root': {
-      color: theme.status.darkColor
+      color: theme.colorPalette.text.dark
     }
   },
   drawerPaper: {
@@ -157,7 +157,7 @@ function Publish({ open = false, onClose, onPublish }: PublishProps) {
       <MediaQuery media="mobile">
         <GlobalDrawer
           open={open}
-          bgColor={theme.status.white}
+          bgColor={theme.colorPalette.background.default}
           classes={{
             header: classes.drawerHeader,
             paper: classes.drawerPaper

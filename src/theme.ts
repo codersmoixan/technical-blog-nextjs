@@ -12,10 +12,12 @@ const breakpoints = createBreakpoints({
   }
 })
 
-interface CustomThemeStatusOptions extends Required<typeof statusOptions> {}
+interface ColorPaletteOptions extends Required<typeof colorPalette> {}
+interface ConfigOptions extends Required<typeof config> {}
 
 interface CustomThemeOptions {
-  status: CustomThemeStatusOptions;
+  colorPalette: ColorPaletteOptions;
+  config: ConfigOptions;
   styles: {
     verticalCenter: CSSProperties;
     inlineCenter: CSSProperties;
@@ -33,35 +35,50 @@ declare module '@mui/material/styles' {
 const TB_STATUS_TRANSITION_TIME = '.3s'
 const TB_STATUS_TRANSITION = (t?: number) => t ? `all ${t}s` : `all ${TB_STATUS_TRANSITION_TIME}`
 
-
-const statusOptions = {
+const config = {
   backdropHeight: 580,
   navWidth: 1408,
   contentWidth: 1376,
   navHeight: 88,
   transition: TB_STATUS_TRANSITION,
   transitionTime: TB_STATUS_TRANSITION_TIME,
+}
 
-  white: '#FFFFFF',
-  bgDark: '#131313',
-  darkColor: '#131313',
-  darkPeach: '#f8f6f1',
-  colorSecondary: '#d8dee3',
-  textSecondary: '#737373',
-  transparent: 'transparent',
-  placeholder: '#c1c5cd',
-  disabled: '#86909c',
-  error: '#d32f2f',
-  lightGrey: '#6c6b7b',
-  lightPurple: '#853bce',
-  sullenGrey: '#33323e',
-
-  blue500: 'hsl(220, 80%, 55%)',
+const colorPalette = {
+  primary: {
+    main: '#7635dc',
+    default: '#FFFFFF',
+    colorSecondary: '#d8dee3',
+    transparent: 'transparent',
+    dark: '#131313',
+    sullenGrey: '#33323e',
+    lightGrey: '#6c6b7b',
+    lightPurple: '#853bce',
+    error: '#d32f2f',
+    placeholder: '#c1c5cd',
+    disabled: '#86909c',
+    darkPeach: '#f8f6f1',
+  },
+  background: {
+    default: '#FFFFFF',
+    dark: '#131313'
+  },
+  text: {
+    default: '#FFFFFF',
+    textSecondary: '#737373',
+    disabled: '#86909c',
+    dark: '#131313',
+  },
+  button: {
+    default: '#FFFFFF',
+    background: '',
+  }
 }
 
 const theme = createTheme({
   breakpoints,
-  status: statusOptions,
+  colorPalette,
+  config,
   styles: {
     verticalCenter: {
       display: 'flex',

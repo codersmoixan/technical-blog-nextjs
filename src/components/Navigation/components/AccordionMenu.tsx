@@ -25,7 +25,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     width: '100%',
     paddingTop: theme.spacing(11),
     zIndex: -1,
-    backgroundColor: theme.status.white,
+    backgroundColor: theme.palette.background.default,
     boxShadow: 'rgb(19 19 19 / 8%) 0px 2px 4px 0px',
   },
   accordionContent: {
@@ -39,7 +39,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   menuTitle: {
     minWidth: 180,
     fontWeight: 700,
-    color: theme.status.textSecondary,
+    color: theme.colorPalette.text.textSecondary,
   },
   menuContent: {
     color: theme.palette.primary.main,

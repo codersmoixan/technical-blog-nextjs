@@ -10,33 +10,33 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   label: {
     '&.MuiFormLabel-root': {
-      color: theme.status.lightGrey,
+      color: theme.colorPalette.primary.lightGrey,
       '&.Mui-focused': {
-        color: theme.status.lightPurple,
+        color: theme.colorPalette.primary.lightPurple,
       },
     },
   },
   input: {
     '& .MuiOutlinedInput-notchedOutline': {
-      borderColor: theme.status.sullenGrey,
+      borderColor: theme.colorPalette.primary.sullenGrey,
     },
     '&:hover': {
       '& .MuiOutlinedInput-notchedOutline': {
-        borderColor: theme.status.lightGrey,
+        borderColor: theme.colorPalette.primary.lightGrey,
       },
     },
     '& .MuiInputBase-input': {
-      color: theme.status.lightGrey,
+      color: theme.colorPalette.primary.lightGrey,
     },
     '&.Mui-focused': {
       '& fieldset.MuiOutlinedInput-notchedOutline': {
-        borderColor: theme.status.lightPurple,
+        borderColor: theme.colorPalette.primary.lightPurple,
         borderWidth: 1
       },
     },
     '&.checked': {
       '& fieldset.MuiOutlinedInput-notchedOutline': {
-        backgroundColor: theme.status.transparent,
+        backgroundColor: theme.colorPalette.primary.transparent,
       },
     }
   },

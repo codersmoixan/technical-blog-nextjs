@@ -37,7 +37,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     right: 8
   },
   maxLength: {
-    color: theme.status.error
+    color: theme.colorPalette.primary.error
   }
 }))
 
