@@ -28,7 +28,7 @@ yarn.lock
 
 # local env files
 .env*.local
-#.env.development
+.env.development
 .env.production
 
 # vercel
