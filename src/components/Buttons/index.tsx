@@ -29,7 +29,7 @@ const useStyles = makeStyles((theme: Theme) => ({
       color: theme.palette.text.primary
     },
     '&.MuiButton-contained': {
-      background: theme.palette.primary.main
+      background: theme.colorPalette.button.background
     },
   },
   emptySpace: {
