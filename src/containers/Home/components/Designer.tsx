@@ -11,7 +11,7 @@ import Buttons from "components/Buttons";
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
     position: 'relative',
-    backgroundColor: theme.palette.background.default
+    backgroundColor: theme.colorPalette.background.secondary
   },
   topTriangle: {
     position: 'absolute',
@@ -57,7 +57,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   bottomTriangle: {
     transform: 'rotate(180deg)',
-    color: theme.colorPalette.background.dark
+    color: theme.colorPalette.primary.transparent
   },
 }))
 

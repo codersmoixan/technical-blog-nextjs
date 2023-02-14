@@ -61,17 +61,19 @@ const colorPalette = {
   },
   background: {
     default: '#FFFFFF',
-    dark: '#131313'
+    dark: '#131313',
+    secondary: 'rgba(145, 158, 171, 0.08)'
   },
   text: {
     default: '#FFFFFF',
     textSecondary: '#737373',
     disabled: '#86909c',
     dark: '#131313',
+    secondary: '#86909c',
   },
   button: {
     default: '#FFFFFF',
-    background: '',
+    background: 'linear-gradient(76.35deg, rgb(128, 26, 230) 15.89%, rgb(162, 26, 230) 89.75%)',
   }
 }
 

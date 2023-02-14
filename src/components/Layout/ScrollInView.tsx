@@ -1,10 +1,10 @@
 import React, { useMemo, useRef } from "react";
 import { useInView } from "framer-motion";
-import Box from "@mui/material/Box";
+import Box, { BoxProps } from "@mui/material/Box";
 import { makeStyles } from "@mui/styles";
 import type { CSSProperties } from "@mui/styles";
 
-export interface ScrollInViewProps {
+export interface ScrollInViewProps extends BoxProps {
   transform?: string;
   initial?: CSSProperties;
   animate?: CSSProperties;
