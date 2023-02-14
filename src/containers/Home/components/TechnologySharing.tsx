@@ -92,7 +92,7 @@ function TechnologySharing() {
             </Box>
             <Box className={clsx(classes.description, classes.columnCenter)}>
               <Typography variant="h5" fontWeight={700}>
-                UI & UI Design
+                UI & Designer
               </Typography>
               <Typography variant="body1">
                 如果你是一个UI设计师，

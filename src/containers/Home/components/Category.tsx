@@ -6,22 +6,35 @@ import Content from "components/Layout/Content";
 import { useTheme } from "@mui/material/styles";
 import ScrollInView from "components/Layout/ScrollInView";
 import clsx from "clsx";
+import CategoryList from "containers/Home/components/CategoryList";
 
 const useStyles = makeStyles((theme: Theme) => ({
   ...theme.styles,
   root: {
-    paddingTop: theme.spacing(15),
+    padding: theme.spacing(15, 0),
     backgroundColor: theme.colorPalette.background.secondary
   },
-  content: {
-
-  },
   title: {
+    marginBottom: theme.spacing(10),
     '& .MuiTypography-h2': {
       margin: theme.spacing(3, 0, 2),
       textAlign: 'center'
     }
   },
+  content: {
+    display: 'flex',
+    margin: '0 auto',
+    width: 1152,
+    borderRadius: 16,
+    border: `1px dashed ${theme.colorPalette.primary.colorSecondary}`
+  },
+  item: {
+    width: '33%',
+    borderLeft: `1px dashed ${theme.colorPalette.primary.colorSecondary}`,
+    '&.category-list:first-of-type': {
+      border: 'none'
+    }
+  }
 }))
 
 const initial = { transform: 'translateY(100px)' }
@@ -32,7 +45,7 @@ function Category() {
 
   return (
     <Box className={classes.root}>
-      <Content className={classes.content}>
+      <Content>
         <Box className={clsx(classes.title, classes.columnCenter)}>
           <ScrollInView initial={initial}>
             <Typography variant="caption" fontWeight={700} color={theme.palette.text.secondary}>BLOG CATEGORY</Typography>
@@ -46,6 +59,13 @@ function Category() {
             </Typography>
           </ScrollInView>
         </Box>
+        <ScrollInView initial={initial}>
+          <Box className={classes.content}>
+            <CategoryList className={classes.item} title="开发 & 开发者" sinkerColor="red" />
+            <CategoryList className={classes.item} title="UI & Designer" />
+            <CategoryList className={classes.item} title="部署 & 运维" sinkerColor="orange" />
+          </Box>
+        </ScrollInView>
       </Content>
     </Box>
   )
