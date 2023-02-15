@@ -48,6 +48,7 @@ const colorPalette = {
   primary: {
     main: '#7635dc',
     default: '#FFFFFF',
+    secondary: 'rgba(229 230, 232, 1)',
     colorSecondary: '#d8dee3',
     transparent: 'transparent',
     dark: '#131313',
@@ -74,6 +75,17 @@ const colorPalette = {
   button: {
     default: '#FFFFFF',
     background: 'linear-gradient(76.35deg, rgb(128, 26, 230) 15.89%, rgb(162, 26, 230) 89.75%)',
+  },
+  setting: {
+    one: '#00AB55',
+    two: '#078DEE',
+    three: '#7635dc',
+    four: '#2065D1',
+    five: '#fda92d',
+    six: '#FF3030',
+    colorSecondary: 'rgba(99, 115, 129)',
+    bgSecondary: 'rgba(229 230, 232, .1)',
+    bgActive: 'rgba(245, 239, 253, 1)',
   }
 }
 

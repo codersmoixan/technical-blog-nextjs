@@ -7,6 +7,8 @@ import OperateTag from "containers/Tag/components/OperateTag";
 import OperateCategory from "containers/Category/components/OperateCategory";
 import OperateLinks from "containers/Links/components/OperateLinks";
 import type { Theme } from "@mui/material";
+import ThemeSetting from "containers/App/components/ThemeSetting";
+import Drawer from "@mui/material/Drawer";
 
 const useStyles = makeStyles((theme: Theme) => ({
   paper: {
@@ -21,29 +23,43 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }))
 
-const content = {
+const dialogContent = {
   tags: <OperateTag />,
   category: <OperateCategory />,
   links: <OperateLinks />
+}
+
+const drawerContent = {
+  setting: <ThemeSetting />
 }
 
 function PopupLayer() {
   const classes = useStyles()
   const { clearSpeedDial, speedDial } = useSpeedDial()
 
-  const centerDialogContent = getValue(content, speedDial as (keyof typeof content))
+  const centerDialogContent = getValue(dialogContent, speedDial as (keyof typeof dialogContent))
+  const rightDrawerContent = getValue(drawerContent, speedDial as (keyof typeof drawerContent))
 
   return (
-    <CenterDialog
-      open={!!centerDialogContent}
-      onClose={clearSpeedDial}
-      classes={{
-        paper: classes.paper,
-        closeIcon: classes.closeIcon,
-      }}
-    >
-      {centerDialogContent}
-    </CenterDialog>
+    <>
+      <CenterDialog
+        open={!!centerDialogContent}
+        onClose={clearSpeedDial}
+        classes={{
+          paper: classes.paper,
+          closeIcon: classes.closeIcon,
+        }}
+      >
+        {centerDialogContent}
+      </CenterDialog>
+      <Drawer
+        anchor="right"
+        open={true}
+        onClose={clearSpeedDial}
+      >
+        <ThemeSetting />
+      </Drawer>
+    </>
   )
 }
 

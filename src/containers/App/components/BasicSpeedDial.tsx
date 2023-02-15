@@ -13,16 +13,16 @@ import Queue from '@mui/icons-material/Queue';
 import PostAdd from '@mui/icons-material/PostAdd';
 import VerticalAlignTop from "@mui/icons-material/VerticalAlignTop";
 import { makeStyles } from "@mui/styles";
-import type { Theme } from "@mui/material";
-import {useRouter} from "next/router";
+import { useRouter } from "next/router";
 import routes from "@/src/routes";
-import isString from "lodash/isString";
-import type { ReactNode } from "react";
 import Link from "next/link";
 import useSpeedDial from "containers/App/hooks/useSpeedDial";
+import ThemeSettingIcon from "containers/App/components/ThemeSettingIcon";
+import type { ReactNode } from "react";
+import type { Theme } from "@mui/material";
 
 export interface SpeedDialOption {
-  id: keyof (typeof routes) | 'top';
+  id: keyof (typeof routes) | 'top' | 'setting';
   icon: ReactNode;
   name?: string;
 }
@@ -33,6 +33,7 @@ export interface BasicSpeedDialProps extends Omit<SpeedDialProps, 'onChange' | '
 }
 
 const actions: SpeedDialOption[] = [
+  { id: 'setting', icon: <ThemeSettingIcon />, name: '主题设置' },
   { id: 'links', icon: <AddLink />, name: '新增友情链接' },
   { id: 'category', icon: <Queue />, name: '新增归档类型' },
   { id: 'tags', icon: <BookmarkAdd />, name: '新增标签' },
@@ -78,6 +79,8 @@ function BasicSpeedDial({ onChange, ...other }: BasicSpeedDialProps) {
     if (id === 'editor') {
       return
     }
+
+    console.log(action, 9899);
 
     changeSpeedDial(id)
 
