@@ -54,7 +54,7 @@ function PopupLayer() {
       </CenterDialog>
       <Drawer
         anchor="right"
-        open={true}
+        open={!!rightDrawerContent}
         onClose={clearSpeedDial}
       >
         <ThemeSetting />
