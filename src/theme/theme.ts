@@ -1,6 +1,6 @@
-import { createTheme } from "@mui/material/styles";
-import { createBreakpoints } from "@mui/system";
+import { createBreakpoints, Breakpoints } from "@mui/system";
 import type { CSSProperties } from "@mui/styles";
+import type { TypographyOptions } from "@mui/material/styles/createTypography";
 
 const breakpoints = createBreakpoints({
   values: {
@@ -12,24 +12,17 @@ const breakpoints = createBreakpoints({
   }
 })
 
-interface ColorPaletteOptions extends Required<typeof colorPalette> {}
-interface ConfigOptions extends Required<typeof config> {}
-
-interface CustomThemeOptions {
-  colorPalette: ColorPaletteOptions;
+export interface ConfigOptions extends Required<typeof config> {}
+export interface ThemeOptions {
+  breakpoints: Breakpoints;
+  typography: TypographyOptions;
   config: ConfigOptions;
   styles: {
     verticalCenter: CSSProperties;
     inlineCenter: CSSProperties;
     spaceBetweenCenter: CSSProperties;
     columnCenter: CSSProperties;
-  }
-}
-
-declare module '@mui/material/styles' {
-  interface Theme extends CustomThemeOptions {}
-  // allow configuration using `createTheme`
-  interface ThemeOptions extends CustomThemeOptions {}
+  };
 }
 
 const TB_STATUS_TRANSITION_TIME = '.3s'
@@ -44,54 +37,8 @@ const config = {
   transitionTime: TB_STATUS_TRANSITION_TIME,
 }
 
-const colorPalette = {
-  primary: {
-    main: '#7635dc',
-    default: '#FFFFFF',
-    secondary: 'rgba(229 230, 232, 1)',
-    colorSecondary: '#d8dee3',
-    transparent: 'transparent',
-    dark: '#131313',
-    sullenGrey: '#33323e',
-    lightGrey: '#6c6b7b',
-    lightPurple: '#853bce',
-    error: '#d32f2f',
-    placeholder: '#c1c5cd',
-    disabled: '#86909c',
-    darkPeach: '#f8f6f1',
-  },
-  background: {
-    default: '#FFFFFF',
-    dark: '#131313',
-    secondary: 'rgba(145, 158, 171, 0.08)'
-  },
-  text: {
-    default: '#FFFFFF',
-    textSecondary: '#737373',
-    disabled: '#86909c',
-    dark: '#131313',
-    secondary: '#86909c',
-  },
-  button: {
-    default: '#FFFFFF',
-    background: 'linear-gradient(76.35deg, rgb(128, 26, 230) 15.89%, rgb(162, 26, 230) 89.75%)',
-  },
-  setting: {
-    one: '#00AB55',
-    two: '#078DEE',
-    three: '#7635dc',
-    four: '#2065D1',
-    five: '#fda92d',
-    six: '#FF3030',
-    colorSecondary: 'rgba(99, 115, 129)',
-    bgSecondary: 'rgba(229 230, 232, .1)',
-    bgActive: 'rgba(245, 239, 253, 1)',
-  }
-}
-
-const theme = createTheme({
+const theme: ThemeOptions = {
   breakpoints,
-  colorPalette,
   config,
   styles: {
     verticalCenter: {
@@ -113,18 +60,6 @@ const theme = createTheme({
       flexDirection: 'column',
       alignItems: 'center'
     }
-  },
-  palette: {
-    primary: {
-      main: '#7635dc',
-    },
-    background: {
-      default: 'rgb(252, 252, 252)',
-    },
-    text: {
-      primary: '#181622',
-      secondary: '#86909c',
-    },
   },
   typography: {
     fontFamily: [
@@ -185,14 +120,7 @@ const theme = createTheme({
       fontSize: '0.75rem',
       lineHeight: 1.5
     }
-  },
-  components: {
-    MuiTypography: {
-      defaultProps: {
-        color: '#181622'
-      }
-    }
   }
-})
+}
 
 export default theme

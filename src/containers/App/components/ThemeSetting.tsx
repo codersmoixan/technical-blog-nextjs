@@ -1,16 +1,17 @@
 import Box from "@mui/material/Box";
 import { makeStyles } from "@mui/styles";
-import type { Theme } from "@mui/material";
 import Typography from "@mui/material/Typography";
-import {useTheme} from "@mui/material/styles";
+import { useTheme } from "@mui/material/styles";
 import clsx from "clsx";
 import useSwitchTheme from "containers/App/hooks/useSwitchTheme";
 import MaskIcon from "components/MaskIcon";
 import Grid from "@mui/material/Grid";
-import type { ThemePresets } from "../types"
+import { themePresets } from "../constants"
+import type { Theme } from "@mui/material";
+import type { ThemeSettingPresets } from "../types"
 
 interface MakeStylesProps {
-  presets: ThemePresets;
+  presets: ThemeSettingPresets;
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -84,8 +85,6 @@ const useStyles = makeStyles((theme: Theme) => ({
   }
 }))
 
-const themePresets: ThemePresets[] = ['one', 'two', 'three', 'four', 'five', 'six']
-
 function ThemeSetting() {
   const { mode, presets, switchMode, switchPresets } = useSwitchTheme()
   const classes = useStyles({ presets })
@@ -122,7 +121,7 @@ function ThemeSetting() {
           <Typography variant="caption" color={theme.palette.text.secondary}>预设</Typography>
           <Box className="items">
             <Grid container spacing={1.5}>
-              {themePresets.map((item: ThemePresets) => (
+              {themePresets.map((item: ThemeSettingPresets) => (
                 <Grid item key={item}>
                   <Box
                     className={clsx(classes.item, classes.presetsItem, {

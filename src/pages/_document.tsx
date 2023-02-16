@@ -6,7 +6,7 @@ import Document, {
   NextScript,
 } from 'next/document';
 import { ServerStyleSheets } from "@mui/styles";
-import theme from "@/src/theme";
+// import index from "@/src/theme/theme";
 
 export default class MyDocument extends Document {
 
@@ -22,7 +22,7 @@ export default class MyDocument extends Document {
             name="viewport"
             content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
           />
-          <meta name="theme-color" content={theme.palette.primary.main} />
+          {/*<meta name="theme-color" content={index.palette.primary.main} />*/}
           <link rel="icon" type="image/png" href="/favicon.ico" />
           <link href="https://unpkg.com/prismjs@latest/themes/prism.css" rel="stylesheet" />
         </Head>

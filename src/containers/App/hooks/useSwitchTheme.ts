@@ -1,21 +1,49 @@
-import { useState } from "react";
-import type { ThemePresets } from "../types"
+import { useEffect, useState } from "react";
+import {shallowEqual, useDispatch, useSelector} from "react-redux";
+import { updateThemeSetting, selectThemeSetting } from "containers/App/slice";
+import type { ThemeSettingPresets, ThemeSetting, ThemeSettingMode } from "../types"
+import useDeepCompareEffect from "hooks/common/effect/useDeepCompareEffect";
 
 const useSwitchTheme = () => {
-  const [mode, setMode] = useState<'light' | 'dark'>('light')
-  const [presets, setPresets] = useState<ThemePresets>('one')
+  const dispatch = useDispatch()
+  const themeSetting = useSelector(selectThemeSetting, shallowEqual) as ThemeSetting
+  const [setting, setSetting] = useState<ThemeSetting>(themeSetting)
 
-  const switchMode = (type: 'light' | 'dark') => {
-    setMode(type)
+  useEffect(() => {
+    const storageSetting = localStorage.getItem('setting')
+
+    if (storageSetting) {
+      setSetting({ ...(JSON.parse(storageSetting) as ThemeSetting) })
+    }
+  }, [])
+
+  useDeepCompareEffect(() => {
+    setSetting({ ...themeSetting })
+  }, [themeSetting])
+
+  const updateSetting = (option: ThemeSetting) => {
+    dispatch(updateThemeSetting(option))
+    localStorage.setItem('setting', JSON.stringify(option))
   }
 
-  const switchPresets = (type: ThemePresets) => {
-    setPresets(type)
+  const switchMode = (type: ThemeSettingMode) => {
+    updateSetting({
+      ...setting,
+      mode: type
+    })
+  }
+
+  const switchPresets = (type: ThemeSettingPresets) => {
+    updateSetting({
+      ...setting,
+      presets: type
+    })
   }
 
   return {
-    mode,
-    presets,
+    mode: setting.mode,
+    presets: setting.presets,
+    setting,
     switchMode,
     switchPresets
   }
