@@ -2,7 +2,7 @@ import Box, { BoxProps } from "@mui/material/Box";
 import { makeStyles } from "@mui/styles";
 import clsx from "clsx";
 import LogoIcon from "components/Icons/LogoIcon";
-import theme from "@/src/theme";
+import defaultTheme from "@/src/theme/defaultTheme";
 import type { Theme } from "@mui/material";
 
 interface LogoProps extends BoxProps {
@@ -24,7 +24,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }))
 
-function Logo({ className, bgColor = theme.colorPalette.background.default, color, ...other }: LogoProps) {
+function Logo({ className, bgColor = defaultTheme.colorPalette.background.default, color, ...other }: LogoProps) {
   const classes = useStyles()
 
   return (
