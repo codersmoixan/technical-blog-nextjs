@@ -21,10 +21,11 @@ const useStyles = makeStyles((theme: Theme) => ({
     }
   },
   focus: {
-    backgroundColor: 'rgba(255, 255, 255, .9)',
     boxShadow: '0 0 15px #e3e4e5',
     height: 72,
-    backdropFilter: 'blur(6px)',
+    backdropFilter: 'saturate(50%) blur(4px)',
+    backgroundImage: `radial-gradient(transparent 1px, ${theme.colorPalette.background.default} 1px)`,
+    backgroundSize: '3px 3px',
     [theme.breakpoints.down('lg')]: {
       height: 56,
     }

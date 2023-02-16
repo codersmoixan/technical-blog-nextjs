@@ -54,6 +54,12 @@ const useStyles = makeStyles((theme: Theme) => ({
       bottom: 12,
       right: 12
     }
+  },
+  speedDial: {
+    color: theme.palette.primary.main,
+    '& a': {
+      color: theme.palette.primary.main
+    }
   }
 }))
 
@@ -101,6 +107,7 @@ function BasicSpeedDial({ onChange, ...other }: BasicSpeedDialProps) {
             icon={action.icon}
             tooltipTitle={action.name}
             onClick={() => handleAction(action)}
+            className={classes.speedDial}
           />
         ))}
       </SpeedDial>

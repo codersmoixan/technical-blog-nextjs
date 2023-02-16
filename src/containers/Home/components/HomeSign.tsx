@@ -63,7 +63,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     height: 50,
     fontSize: 16,
     '&.MuiButton-contained': {
-      background: 'linear-gradient(76.35deg, rgb(128, 26, 230) 15.89%, rgb(162, 26, 230) 89.75%)'
+      background: theme.colorPalette.gradient.button
     }
   },
   rotation: {
