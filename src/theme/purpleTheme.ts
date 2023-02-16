@@ -59,12 +59,12 @@ const colorPalette = {
   }
 }
 
-const defaultTheme = createTheme({
+const purpleTheme = createTheme({
   ...theme,
   colorPalette,
   palette: {
     primary: {
-      main: '#00AB55',
+      main: '#7635dc',
     },
     background: {
       default: 'rgb(252, 252, 252)',
@@ -83,4 +83,4 @@ const defaultTheme = createTheme({
   }
 })
 
-export default defaultTheme
+export default purpleTheme
