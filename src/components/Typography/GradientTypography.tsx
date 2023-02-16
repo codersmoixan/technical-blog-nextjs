@@ -11,7 +11,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   root: {
     fontFamily: 'Barlow Black',
     letterSpacing: 6,
-    background: '-webkit-linear-gradient(300deg, rgb(118, 53, 220) 0%, rgb(255, 171, 0) 25%, rgb(118, 53, 220) 50%, rgb(255, 171, 0) 75%, rgb(118, 53, 220) 100%) 0% 0% / 400%',
+    background: theme.colorPalette.gradient.propagate,
     ['-webkit-background-clip']: 'text',
     color: theme.colorPalette.primary.transparent,
   },

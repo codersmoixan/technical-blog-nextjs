@@ -22,6 +22,8 @@ const useStyles = makeStyles((theme: Theme) => ({
     height: 42,
     borderColor: theme.palette.primary.main,
     textTransform: 'none',
+    borderRadius: 8,
+    fontSize: 14,
     '&:hover': {
       backgroundColor: 'transparent'
     },

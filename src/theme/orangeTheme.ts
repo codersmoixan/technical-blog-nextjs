@@ -44,7 +44,7 @@ const colorPalette = {
   },
   button: {
     default: '#FFFFFF',
-    background: 'linear-gradient(76.35deg, rgb(128, 26, 230) 15.89%, rgb(162, 26, 230) 89.75%)',
+    background: '#fda92d',
   },
   setting: {
     one: '#00AB55',
@@ -56,6 +56,10 @@ const colorPalette = {
     colorSecondary: 'rgba(99, 115, 129)',
     bgSecondary: 'rgba(229 230, 232, .1)',
     bgActive: 'rgba(245, 239, 253, 1)',
+  },
+  gradient: {
+    propagate: '-webkit-linear-gradient(300deg, rgb(253, 169, 45) 0%, rgb(255, 171, 0) 25%, rgb(118, 53, 220) 50%, rgb(255, 171, 0) 75%, rgb(253, 169, 45) 100%) 0% 0% / 400%',
+    button: 'linear-gradient(76.35deg, rgb(253, 169, 45) 15.89%, rgb(118, 53, 220) 89.75%)',
   }
 }
 

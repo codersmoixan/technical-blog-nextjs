@@ -61,8 +61,8 @@ function Category() {
         </Box>
         <ScrollInView initial={initial}>
           <Box className={classes.content}>
-            <CategoryList className={classes.item} title="开发 & 开发者" sinkerColor="red" />
-            <CategoryList className={classes.item} title="UI & Designer" />
+            <CategoryList className={classes.item} title="开发 & 开发者" sinkerColor={theme.palette.primary.main} />
+            <CategoryList className={classes.item} title="UI & Designer" sinkerColor="red" />
             <CategoryList className={classes.item} title="部署 & 运维" sinkerColor="orange" />
           </Box>
         </ScrollInView>
