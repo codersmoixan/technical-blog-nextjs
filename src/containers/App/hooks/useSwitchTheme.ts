@@ -3,14 +3,19 @@ import {shallowEqual, useDispatch, useSelector} from "react-redux";
 import { updateThemeSetting, selectThemeSetting } from "containers/App/slice";
 import type { ThemeSettingPresets, ThemeSetting, ThemeSettingMode } from "../types"
 import useDeepCompareEffect from "hooks/common/effect/useDeepCompareEffect";
+import isEmpty from "lodash/isEmpty";
 
 const useSwitchTheme = () => {
   const dispatch = useDispatch()
   const themeSetting = useSelector(selectThemeSetting, shallowEqual) as ThemeSetting
-  const [setting, setSetting] = useState<ThemeSetting>(themeSetting)
+  const [setting, setSetting] = useState<ThemeSetting>({
+    mode: 'light',
+    presets: 'one'
+  })
 
   useEffect(() => {
     const storageSetting = localStorage.getItem('setting')
+    console.log(storageSetting, 2234);
 
     if (storageSetting) {
       setSetting({ ...(JSON.parse(storageSetting) as ThemeSetting) })
@@ -18,7 +23,9 @@ const useSwitchTheme = () => {
   }, [])
 
   useDeepCompareEffect(() => {
-    setSetting({ ...themeSetting })
+    if (!isEmpty(themeSetting)) {
+      setSetting({ ...themeSetting })
+    }
   }, [themeSetting])
 
   const updateSetting = (option: ThemeSetting) => {

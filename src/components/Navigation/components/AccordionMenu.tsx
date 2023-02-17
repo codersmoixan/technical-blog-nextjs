@@ -25,7 +25,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     width: '100%',
     paddingTop: theme.spacing(11),
     zIndex: -1,
-    backgroundColor: theme.palette.background.default,
+    backgroundColor: theme.colorPalette.background.main,
     boxShadow: 'rgb(19 19 19 / 8%) 0px 2px 4px 0px',
   },
   accordionContent: {

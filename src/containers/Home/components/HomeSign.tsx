@@ -1,10 +1,10 @@
+import { memo } from "react";
 import Typography from "@mui/material/Typography";
 import Buttons from "components/Buttons";
 import { makeStyles } from "@mui/styles";
 import { useRouter } from "next/router";
 import routes from "@/src/routes";
 import Box from "@mui/material/Box"
-import Image from "next/image";
 import MediaQuery from "components/MediaQuery";
 import clsx from "clsx";
 import { availableIcons } from "containers/Home/constants";
@@ -23,7 +23,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     width: '100%',
     height: '100vh',
     zIndex: 1,
-    background: 'linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.9)) center center / cover no-repeat, url(/images/home/overlay_2.jpg)',
+    background: `linear-gradient(${theme.colorPalette.background.main}, ${theme.colorPalette.background.main}) center center / cover no-repeat, url(/images/home/overlay_2.jpg)`,
     backgroundPosition: 'center center',
     backgroundRepeat: 'no-repeat'
   },
@@ -146,10 +146,10 @@ function HomeSign(props: BoxProps) {
     <Box className={classes.root}>
       <Box className={classes.banner}>
         <Box className={classes.notice}>
-          <Typography variant="h2" fontWeight={700} color="inherit">
+          <Typography variant="h2" fontWeight={700}>
             你一路颠沛流离
           </Typography>
-          <Typography variant="h2" fontWeight={700} color="inherit">
+          <Typography variant="h2" fontWeight={700}>
             到最遥远的地方旅行
           </Typography>
           <GradientTypography>
@@ -158,7 +158,6 @@ function HomeSign(props: BoxProps) {
           <Typography
             variant="body1"
             classes={{ root: classes.subtitle }}
-            color="inherit"
           >
             未来，就是你站在茫茫大海的这一边，遥望着海的那一边，充满好奇心，憧憬着对海那边的向往。
           </Typography>
@@ -206,4 +205,4 @@ function HomeSign(props: BoxProps) {
   )
 }
 
-export default HomeSign
+export default memo(HomeSign)

@@ -71,7 +71,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   btn: {
     '&.MuiButton-textPrimary': {
-      color: theme.colorPalette.primary.lightGrey
+      color: theme.colorPalette.text.textSecondary
     }
   }
 }))

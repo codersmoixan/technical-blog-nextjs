@@ -3,10 +3,7 @@ import type { RootState } from "store/index"
 
 const initialState = {
   speedDial: '',
-  setting: {
-    mode: 'light',
-    presets: 'one'
-  }
+  setting: {}
 }
 
 const appSlice = createSlice({
@@ -23,10 +20,7 @@ const appSlice = createSlice({
       state.setting = action.payload
     },
     clearThemeSetting(state) {
-      state.setting = {
-        mode: 'light',
-        presets: 'one'
-      }
+      state.setting = {}
     }
   }
 })
