@@ -18,7 +18,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   content: {
     position: 'relative',
     zIndex: 1,
-    backgroundColor: theme.palette.background.default
+    backgroundColor: theme.colorPalette.background.main
   }
 }))
 

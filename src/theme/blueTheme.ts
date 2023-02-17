@@ -16,7 +16,7 @@ declare module '@mui/material/styles' {
 
 const colorPalette = {
   primary: {
-    main: '#7635dc',
+    main: '#2065D1',
     default: '#FFFFFF',
     secondary: 'rgba(229 230, 232, 1)',
     colorSecondary: '#d8dee3',
@@ -31,18 +31,21 @@ const colorPalette = {
     darkPeach: '#f8f6f1',
   },
   background: {
+    main: 'rgb(252, 252, 252)',
     default: '#FFFFFF',
     dark: '#131313',
     secondary: 'rgba(145, 158, 171, 0.08)'
   },
   text: {
+    main: '#2065D1',
     default: '#FFFFFF',
-    textSecondary: '#737373',
+    textSecondary: '#6c6b7b',
     disabled: '#86909c',
     dark: '#131313',
     secondary: '#86909c',
   },
   button: {
+    main: '#2065D1',
     default: '#FFFFFF',
     background: '#2065D1',
   },

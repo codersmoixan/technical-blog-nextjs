@@ -31,56 +31,64 @@ const useStyles = makeStyles((theme: Theme) => ({
     position: 'relative'
   },
   label: {
-    '&.MuiFormLabel-root': {
-      position: 'absolute',
-      top: '50%',
-      left: 14,
-      transform: 'translateY(-50%) scale(1)',
-      fontSize: 14,
-      color: theme.palette.text.primary,
-      transition: 'all .3s'
-    },
+    position: 'absolute',
+    top: '50%',
+    left: 14,
+    transform: 'translateY(-50%) scale(1)',
+    fontSize: 14,
+    color: theme.palette.primary.main,
+    transition: 'all .3s',
     '&.MuiFormLabel-root.Mui-focused, &.checked': {
       transform: 'scale(0.85)',
       left: 16,
       top: -7,
       fontSize: 12,
-      color: theme.palette.text.primary,
+      color: theme.palette.primary.main,
       backgroundColor: theme.colorPalette.primary.transparent
     },
   },
   input: {
+    '&:hover': {
+      '& .MuiOutlinedInput-notchedOutline': {
+        borderColor: theme.palette.primary.main,
+        borderWidth: 2
+      }
+    },
     '& .MuiInputBase-input': {
       position: 'relative',
       padding: theme.spacing(0, 1.75),
       height: 42,
       '&::-webkit-input-placeholder': {/*Webkit browsers*/
-        fontSize: 14
+        fontSize: 14,
+        color: theme.palette.primary.main,
       },
       '&::-moz-placeholder': {/*Mozilla Firefox 4 to 8*/
         fontSize: 14,
+        color: theme.palette.primary.main,
       },
       '&::moz-placeholder': {/*Mozilla Firefox 19+*/
-        fontSize: 14
+        fontSize: 14,
+        color: theme.palette.primary.main,
       },
       '&::-ms-input-placeholder': {/*Internet Explorer 10+*/
-        fontSize: 14
+        fontSize: 14,
+        color: theme.palette.primary.main,
       },
     },
+  },
+  notchedOutline: {
+    borderColor: theme.palette.primary.main,
+    backgroundColor: (props: FormTextProps) => props.bgColor ?? theme.colorPalette.primary.transparent,
+  },
+  focused: {
     '& .MuiOutlinedInput-notchedOutline': {
-      backgroundColor: (props: FormTextProps) => props.bgColor ?? theme.colorPalette.primary.transparent,
+      borderColor: theme.palette.primary.main,
     },
-
-    '&.Mui-focused': {
+    '&.Mui-error': {
       '& .MuiOutlinedInput-notchedOutline': {
-        borderColor: theme.palette.primary.main,
+        borderColor: theme.colorPalette.primary.error
       },
-      '&.Mui-error': {
-        '& .MuiOutlinedInput-notchedOutline': {
-          borderColor: theme.colorPalette.primary.error
-        },
-      }
-    },
+    }
   }
 }))
 
@@ -97,14 +105,27 @@ function FormText(props: FormTextProps) {
 
   return (
     <FormControl variant="outlined" className={clsx(classes.root, className)}>
-      {label && <InputLabel htmlFor="form-text" className={clsx(classes.label, {
-        checked: fieldProps.value
-      })}>{label}</InputLabel>}
+      {label && (
+        <InputLabel
+          htmlFor="form-text"
+          className={clsx({
+            checked: fieldProps.value
+          })}
+          classes={{
+            root: classes.label,
+          }}
+        >{label}</InputLabel>
+      )}
       <OutlinedInput
         id="form-text"
-        className={clsx(classes.input, {
+        className={clsx({
           checked: fieldProps.value
         })}
+        classes={{
+          root: classes.input,
+          notchedOutline: classes.notchedOutline,
+          focused: classes.focused,
+        }}
         label={label}
         placeholder={isString(label) ? label : ''}
         {...fieldProps}

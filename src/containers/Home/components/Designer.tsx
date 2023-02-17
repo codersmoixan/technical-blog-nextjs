@@ -18,7 +18,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     top: 0,
     left: 0,
     width: '100%',
-    color: theme.palette.background.default,
+    color: theme.colorPalette.background.main,
     zIndex: 9
   },
   content: {
