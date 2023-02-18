@@ -1,8 +1,7 @@
-import { makeStyles } from "@mui/styles";
+import makeStyles, { Theme } from "utils/styles/makeStyles";
 import Box, { BoxProps } from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import { useTheme } from "@mui/material/styles";
-import type { Theme } from "@mui/material";
 import clsx from "clsx";
 import TickIcon from "components/Icons/TickIcon";
 import Buttons from "components/Buttons";
@@ -61,7 +60,7 @@ const useStyles = makeStyles((theme: Theme) => ({
       fontSize: 20
     }
   }
-}))
+}), 'HomeCategoryList')
 
 const initList = [
   { id: 1, label: '前端' },
