@@ -38,7 +38,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     },
     '& .MuiButton-contained': {
       borderColor: theme.colorPalette.primary.default,
-      backgroundColor: theme.colorPalette.background.default,
+      backgroundColor: theme.colorPalette.background.main,
       color: theme.palette.primary.main
     }
   },

@@ -157,7 +157,7 @@ function Publish({ open = false, onClose, onPublish }: PublishProps) {
       <MediaQuery media="mobile">
         <GlobalDrawer
           open={open}
-          bgColor={theme.colorPalette.background.default}
+          bgColor={theme.colorPalette.background.main}
           classes={{
             header: classes.drawerHeader,
             paper: classes.drawerPaper

@@ -17,7 +17,7 @@ const darkTheme = {
     },
     background: {
       main: 'rgb(22, 28, 36)',
-      default: '#FFFFFF',
+      default: 'rgba(22, 28, 36, 0.94)',
       dark: '#131313',
       secondary: 'rgba(145, 158, 171, 0.08)'
     },
@@ -41,6 +41,13 @@ const darkTheme = {
       bgActive: 'rgba(245, 239, 253, 1)',
     },
   },
+  componentStyleOverrides: {
+    Navigation: {
+      root: {
+        color: 'pink'
+      }
+    }
+  },
   components: {
     MuiTypography: {
       defaultProps: {
@@ -55,7 +62,7 @@ const darkTheme = {
           }
         }
       }
-    }
+    },
   }
 }
 
