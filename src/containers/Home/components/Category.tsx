@@ -1,6 +1,5 @@
 import Box from "@mui/material/Box";
-import { makeStyles } from "@mui/styles";
-import type { Theme } from "@mui/material";
+import makeStyles, { Theme } from "utils/styles/makeStyles";
 import Typography from "@mui/material/Typography";
 import Content from "components/Layout/Content";
 import { useTheme } from "@mui/material/styles";
@@ -35,7 +34,7 @@ const useStyles = makeStyles((theme: Theme) => ({
       border: 'none'
     }
   }
-}))
+}), 'HomeCategory')
 
 const initial = { transform: 'translateY(100px)' }
 

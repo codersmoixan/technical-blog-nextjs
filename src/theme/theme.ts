@@ -3,7 +3,7 @@ import type { CSSProperties } from "@mui/styles";
 import type { TypographyOptions } from "@mui/material/styles/createTypography";
 import type { EmptyObject } from "@/src/tb.types"
 
-const breakpoints = createBreakpoints({
+export const breakpoints = createBreakpoints({
   values: {
     xs: 0,
     sm: 500,

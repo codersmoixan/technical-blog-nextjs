@@ -1,6 +1,5 @@
 import Box from "@mui/material/Box";
-import { makeStyles } from "@mui/styles";
-import type { Theme } from "@mui/material";
+import makeStyles, { Theme } from "utils/styles/makeStyles";
 import Typography from "@mui/material/Typography";
 import Content from "components/Layout/Content";
 import clsx from "clsx";
@@ -52,7 +51,7 @@ const useStyles = makeStyles((theme: Theme) => ({
       transition: 'box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms'
     }
   },
-  center: {
+  development: {
     [theme.breakpoints.up('md')]: {
       boxShadow: 'rgb(145 158 171 / 16%) -40px 40px 80px',
     }
@@ -65,7 +64,7 @@ const useStyles = makeStyles((theme: Theme) => ({
       color: theme.palette.text.secondary
     }
   }
-}))
+}), 'HomeTechnologySharing')
 
 const initial = { transform: 'translateY(100px)' }
 
@@ -103,7 +102,7 @@ function TechnologySharing() {
               </Typography>
             </Box>
           </Box>
-          <Box className={clsx(classes.item, classes.center)}>
+          <Box className={clsx(classes.item, classes.development)}>
             <Box className={classes.inlineCenter}>
               <Image src="/icons/home/ic_development.svg" alt="ic_development" width={48} height={48} />
             </Box>

@@ -1,5 +1,4 @@
-import { makeStyles } from "@mui/styles";
-import type { Theme } from "@mui/material";
+import makeStyles, { Theme } from "utils/styles/makeStyles";
 import Box from "@mui/material/Box";
 import FullTriangle from "containers/Home/components/FullTriangle";
 import Image from "next/image";
@@ -11,6 +10,7 @@ import Buttons from "components/Buttons";
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
     position: 'relative',
+    overflow: 'hidden',
     backgroundColor: theme.colorPalette.background.secondary
   },
   topTriangle: {
@@ -59,7 +59,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     transform: 'rotate(180deg)',
     color: theme.colorPalette.primary.transparent
   },
-}))
+}), 'HomeDesigner')
 
 function Designer() {
   const classes = useStyles()

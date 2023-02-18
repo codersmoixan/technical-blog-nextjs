@@ -1,3 +1,5 @@
+import { breakpoints } from "./theme"
+
 const darkTheme = {
   colorPalette: {
     primary: {
@@ -45,6 +47,34 @@ const darkTheme = {
     Navigation: {
       root: {
         color: 'pink'
+      }
+    },
+    HomeTechnologySharing: {
+      development: {
+        [breakpoints.up('md')]: {
+          boxShadow: 'rgb(0 0 0 / 40%) -40px 40px 80px',
+        }
+      }
+    },
+    HomeCategory: {
+      content: {
+        borderColor: 'rgba(145, 158, 171, 0.24)'
+      },
+      item: {
+        borderColor: 'rgba(145, 158, 171, 0.24)'
+      }
+    },
+    HomeCategoryList: {
+      item: {
+        color: '#FFFFFF'
+      },
+      button: {
+        color: '#FFFFFF'
+      }
+    },
+    HomeDesigner: {
+      image: {
+        boxShadow: 'rgb(0 0 0) -40px 80px 80px'
       }
     }
   },
