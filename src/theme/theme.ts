@@ -1,6 +1,7 @@
 import { createBreakpoints, Breakpoints } from "@mui/system";
 import type { CSSProperties } from "@mui/styles";
 import type { TypographyOptions } from "@mui/material/styles/createTypography";
+import type { EmptyObject } from "@/src/tb.types"
 
 const breakpoints = createBreakpoints({
   values: {
@@ -23,6 +24,7 @@ export interface ThemeOptions {
     spaceBetweenCenter: CSSProperties;
     columnCenter: CSSProperties;
   };
+  componentStyleOverrides: EmptyObject;
 }
 
 const TB_STATUS_TRANSITION_TIME = '.3s'
@@ -40,6 +42,7 @@ const config = {
 const theme: ThemeOptions = {
   breakpoints,
   config,
+  componentStyleOverrides: {},
   styles: {
     verticalCenter: {
       display: 'flex',

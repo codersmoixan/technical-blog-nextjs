@@ -59,7 +59,7 @@ function Navigation() {
   const handleToHome = () => history.push(routes.home)
 
   return (
-    <>
+    <Box component="header">
       <MediaQuery media={['pc', 'pad']}>
         <Box
           className={clsx(classes.root, focus ? classes.focus : classes.blur)}
@@ -108,7 +108,7 @@ function Navigation() {
           onClose={() => setOpenDialog(false)}
         />
       </MediaQuery>
-    </>
+    </Box>
   )
 }
 

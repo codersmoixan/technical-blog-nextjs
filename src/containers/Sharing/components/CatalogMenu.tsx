@@ -55,7 +55,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     position: 'relative',
     display: 'flex',
     height: 72,
-    backgroundColor: theme.colorPalette.background.default,
+    backgroundColor: theme.colorPalette.background.main,
     zIndex: 1,
     '&.focus': {
       boxShadow: 'rgb(227 227 227) 0px 2px 4px',
@@ -94,7 +94,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   menuContainer: {
     padding: theme.spacing(0, 3),
-    backgroundColor: theme.colorPalette.background.default,
+    backgroundColor: theme.colorPalette.background.main,
     boxShadow: 'rgb(227 227 227) 0px 2px 4px',
   }
 }))

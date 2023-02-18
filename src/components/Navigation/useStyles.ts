@@ -1,5 +1,4 @@
-import { makeStyles } from "@mui/styles";
-import type {Theme} from "@mui/material";
+import makeStyles, { Theme } from "utils/styles/makeStyles";
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -18,13 +17,13 @@ const useStyles = makeStyles((theme: Theme) => ({
       justifyContent: 'space-between',
       alignItems: 'center',
       height: 64,
-    }
+    },
   },
   focus: {
-    boxShadow: '0 0 15px #e3e4e5',
     height: 72,
+    boxShadow: `0 0 15px ${theme.colorPalette.background.main}`,
     backdropFilter: 'saturate(50%) blur(4px)',
-    backgroundImage: `radial-gradient(transparent 1px, ${theme.colorPalette.background.default} 1px)`,
+    backgroundImage: `radial-gradient(transparent 1px, ${theme.colorPalette.background.main} 1px)`,
     backgroundSize: '3px 3px',
     [theme.breakpoints.down('lg')]: {
       height: 56,
@@ -74,6 +73,6 @@ const useStyles = makeStyles((theme: Theme) => ({
       color: theme.colorPalette.text.textSecondary
     }
   }
-}))
+}), 'Navigation')
 
 export default useStyles

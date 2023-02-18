@@ -24,7 +24,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }))
 
-function Logo({ className, bgColor = defaultTheme.colorPalette.background.default, color, ...other }: LogoProps) {
+function Logo({ className, bgColor = defaultTheme.colorPalette.background.main, color, ...other }: LogoProps) {
   const classes = useStyles()
 
   return (

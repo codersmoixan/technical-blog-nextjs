@@ -30,7 +30,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   focus: {
     '& .MuiInputBase-root': {
-      backgroundColor: theme.colorPalette.background.default
+      backgroundColor: theme.colorPalette.background.main
     }
   },
   backdrop: {
