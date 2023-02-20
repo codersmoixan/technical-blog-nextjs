@@ -48,6 +48,7 @@ const colorPalette = {
     main: '#00AB55',
     default: '#FFFFFF',
     background: '#00AB55',
+    hover: 'rgba(0, 171, 85, .8)'
   },
   setting: {
     one: '#00AB55',
@@ -57,7 +58,7 @@ const colorPalette = {
     five: '#fda92d',
     six: '#FF3030',
     colorSecondary: 'rgba(99, 115, 129)',
-    bgSecondary: 'rgba(229 230, 232, .1)',
+    bgSecondary: 'rgba(229, 230, 232, .1)',
     bgActive: 'rgba(245, 239, 253, 1)',
   },
   gradient: {

@@ -24,15 +24,19 @@ const useStyles = makeStyles((theme: Theme) => ({
     textTransform: 'none',
     borderRadius: 8,
     fontSize: 14,
-    '&:hover': {
-      backgroundColor: 'transparent'
-    },
   },
   contained: {
-    background: theme.colorPalette.button.background
+    backgroundColor: theme.colorPalette.button.main,
+    '&.MuiButton-root:hover': {
+      backgroundColor: theme.colorPalette.button.hover,
+    },
   },
   textPrimary: {
-    color: theme.palette.text.primary
+    color: theme.palette.text.primary,
+    '&.MuiButton-root:hover': {
+      backgroundColor: 'transparent',
+      color: theme.colorPalette.button.hover,
+    },
   },
   emptySpace: {
     '&.MuiButtonBase-root': {

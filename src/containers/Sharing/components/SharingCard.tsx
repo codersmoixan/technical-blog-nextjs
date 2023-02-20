@@ -16,13 +16,12 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import ShareIcon from '@mui/icons-material/Share';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import Image, { StaticImageData } from "next/image";
-import { makeStyles } from "@mui/styles";
+import makeStyles, { Theme } from "utils/styles/makeStyles";
 import ShareFour from "assets/images/share/share-four.png"
 import Typography from "@mui/material/Typography";
 import MediaQuery from "components/MediaQuery";
 import Box from "@mui/material/Box";
 import useSeparateChildren from "hooks/common/useSeparateChildren";
-import type { Theme } from "@mui/material";
 import clsx from "clsx";
 
 interface SharingCardProps {
@@ -98,7 +97,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     flex: 1
   },
   expanded: {}
-}))
+}), 'SharingCard')
 
 const variants = {
   opacity: 1,

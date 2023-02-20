@@ -3,14 +3,14 @@
  * @description SharingSwiper
  */
 
-import SidesSwiper, {SidesSwiperProps} from "components/Swiper/SidesSwiper";
-import BlogCard from "containers/Sharing/components/SharingCard";
+import SideSwiper, { SideSwiperProps } from "components/Swiper/SideSwiper";
+import SharingCard from "containers/Sharing/components/SharingCard";
 import Typography from "@mui/material/Typography";
-import { useTheme } from "@mui/material/styles";
-import { Theme, useMediaQuery } from "@mui/material";
+import { useMediaQuery } from "@mui/material";
 import { makeStyles } from "@mui/styles";
+import type { Theme } from "@mui/material";
 
-interface SharingSwiperProps extends Pick<SidesSwiperProps, 'title'> {
+interface SharingSwiperProps extends Pick<SideSwiperProps, 'title'> {
   blogs: any[]
 }
 
@@ -23,23 +23,25 @@ const useStyles = makeStyles((theme: Theme) => ({
     '& img': {
       height: 140,
       transition: theme.config.transition(),
+    },
+    '& .MuiTypography-caption': {
+      color: theme.colorPalette.text.textSecondary
     }
   },
-}))
+}), )
 
 function SharingSwiper({ blogs, ...other }: SharingSwiperProps) {
-  const theme = useTheme()
   const mdUp = useMediaQuery((theme: Theme) => theme.breakpoints.up('md'))
   const classes = useStyles()
 
   return (
-    <SidesSwiper data={blogs} triggerScroll={mdUp} {...other}>
+    <SideSwiper data={blogs} triggerScroll={mdUp} {...other}>
       {blog => (
-        <BlogCard key={blog.id} title={blog.title} date="2022.11.06" className={classes.card}>
-          <Typography variant="caption" color={theme.colorPalette.text.textSecondary}>{blog.description}</Typography>
-        </BlogCard>
+        <SharingCard key={blog.id} title={blog.title} date="2022.11.06" className={classes.card}>
+          <Typography variant="caption">{blog.description}</Typography>
+        </SharingCard>
       )}
-    </SidesSwiper>
+    </SideSwiper>
   )
 }
 

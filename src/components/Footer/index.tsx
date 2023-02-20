@@ -14,7 +14,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     position: 'relative',
     width: '100%',
     height: 700,
-    backgroundColor: theme.palette.primary.main,
+    backgroundColor: theme.colorPalette.background.main,
     zIndex: 99
   },
   logo: {

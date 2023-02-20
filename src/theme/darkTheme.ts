@@ -1,4 +1,5 @@
 import { breakpoints } from "./theme"
+import SharingSwiper from "containers/Sharing/components/SharingSwiper";
 
 const darkTheme = {
   colorPalette: {
@@ -45,8 +46,21 @@ const darkTheme = {
   },
   componentStyleOverrides: {
     Navigation: {
-      root: {
-        color: 'pink'
+      focus: {
+        backgroundColor: 'rgba(22, 28, 36, 0.8)',
+        '& .tools': {
+          '& .MuiOutlinedInput-notchedOutline': {
+            backgroundColor: 'transparent'
+          },
+          '& .MuiButton-outlined': {
+            backgroundColor: 'transparent'
+          }
+        }
+      },
+      btn: {
+        '&.MuiButton-textPrimary': {
+          color: '#FFFFFF'
+        }
       }
     },
     HomeTechnologySharing: {
@@ -75,6 +89,23 @@ const darkTheme = {
     HomeDesigner: {
       image: {
         boxShadow: 'rgb(0 0 0) -40px 80px 80px'
+      }
+    },
+    SideSwiper: {
+      prevBtn: {
+        color: '#FFFFFF'
+      },
+      nextBtn: {
+        color: '#FFFFFF'
+      }
+    },
+    SharingCard: {
+      root: {
+        backgroundColor: 'rgb(22, 28, 36)',
+        boxShadow: 'rgb(0 0 0 / 40%) 4px 4px 16px',
+        '&:hover': {
+          boxShadow: 'rgb(0 0 0) 0px 5px 15px'
+        },
       }
     }
   },
