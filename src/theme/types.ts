@@ -8,6 +8,8 @@ export interface ComponentStyleOverrides {
   HomeCategory?: EmptyObject;
   HomeCategoryList?: EmptyObject;
   HomeDesigner?: EmptyObject;
+  SideSwiper?: EmptyObject;
+  SharingCard?: EmptyObject;
 }
 export type ComponentStyleOverridesKey = keyof ComponentStyleOverrides
 

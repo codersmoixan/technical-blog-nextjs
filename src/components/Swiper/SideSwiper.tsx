@@ -1,20 +1,19 @@
 /**
  * @author zhengji.su
- * @description SidesSwiper
+ * @description SideSwiper
  */
 
 import Box, { BoxProps } from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
-import { makeStyles } from "@mui/styles";
+import makeStyles, { Theme } from "utils/styles/makeStyles";
 import VariantList from "components/Variant/VariantList";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight"
 import Buttons from "components/Buttons";
-import useSidesSwiper from "components/Swiper/hooks/useSidesSwiper";
-import type { Theme } from "@mui/material";
+import useSideSwiper from "components/Swiper/hooks/useSideSwiper";
 import type { ReactNode } from "react";
 
-export interface SidesSwiperProps extends Omit<BoxProps, 'children'> {
+export interface SideSwiperProps extends Omit<BoxProps, 'children'> {
   data: any[];
   children: (option: any) => ReactNode;
   triggerScroll?: boolean;
@@ -61,12 +60,13 @@ const useStyles = makeStyles((theme: Theme) => ({
       color: theme.colorPalette.text.disabled
     }
   }
-}))
+}), 'SideSwiper')
 
-function SidesSwiper({ data, title, triggerScroll, children, ...other }: SidesSwiperProps) {
-  const classes = useStyles()
+function SideSwiper(props: SideSwiperProps) {
+  const { data, title, triggerScroll, children, ...other } = props
+  const classes = useStyles(props)
 
-  const { containerRef, swiperRef, prevDisabled, nextDisabled, onNext, onPrev } = useSidesSwiper({
+  const { containerRef, swiperRef, prevDisabled, nextDisabled, onNext, onPrev } = useSideSwiper({
     sideLength: data.length,
     sideSize: 240,
   })
@@ -112,4 +112,4 @@ function SidesSwiper({ data, title, triggerScroll, children, ...other }: SidesSw
   )
 }
 
-export default SidesSwiper
+export default SideSwiper

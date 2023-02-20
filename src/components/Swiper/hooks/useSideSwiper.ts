@@ -1,15 +1,14 @@
 import { useMemo, useRef, useState, useEffect } from "react";
-import get from "lodash/get";
 import throttle from "lodash/throttle";
 import useMount from "hooks/common/effect/useMount";
 import type { EmptyObject } from "@/src/tb.types";
 
-interface UseSidesSwiperProps {
+interface UseSideSwiperProps {
   sideSize: number;
   sideLength: number;
 }
 
-const useSidesSwiper = ({ sideLength, sideSize }: UseSidesSwiperProps) => {
+const useSideSwiper = ({ sideLength, sideSize }: UseSideSwiperProps) => {
   const [swiper, setSwiper] = useState<EmptyObject>({})
   const [container, setContainer] = useState<EmptyObject>({})
   const [step, setStep] = useState(0)
@@ -85,4 +84,4 @@ const useSidesSwiper = ({ sideLength, sideSize }: UseSidesSwiperProps) => {
   }
 }
 
-export default useSidesSwiper
+export default useSideSwiper

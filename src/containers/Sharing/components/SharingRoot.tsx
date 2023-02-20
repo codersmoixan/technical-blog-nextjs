@@ -19,6 +19,7 @@ import { options } from "../constants"
 import type { Theme } from "@mui/material";
 import type { StaticImageData } from "next/image";
 import useSeparateChildren from "hooks/common/useSeparateChildren";
+import Buttons from "components/Buttons";
 
 interface SharingRootProps {
   backdrop?: string | StaticImageData;
@@ -26,6 +27,7 @@ interface SharingRootProps {
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
+  ...theme.styles,
   banner: {
     alignItems: 'flex-start'
   },
@@ -59,19 +61,21 @@ const useStyles = makeStyles((theme: Theme) => ({
     }
   },
   back: {
-    position: 'absolute',
-    bottom: 0,
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    width: 185,
-    height: 45,
-    backgroundColor: theme.palette.primary.main,
-    color: theme.palette.text.primary,
-    borderRadius: '2px 2px 0 0',
-    '& > svg': {
-      marginRight: theme.spacing(1),
-      fontSize: 16
+    '&.MuiButton-root': {
+      position: 'absolute',
+      bottom: 0,
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      width: 185,
+      height: 45,
+      backgroundColor: theme.palette.primary.main,
+      borderRadius: '2px 2px 0 0',
+      color: theme.colorPalette.text.default,
+      '& svg': {
+        marginRight: theme.spacing(1),
+        fontSize: 14
+      }
     }
   },
 }))
@@ -103,11 +107,13 @@ function SharingRoot({ children, backdrop }: SharingRootProps) {
             </>
           )}
           <MediaQuery media={['pad', 'pc']}>
-            <Box className={classes.back} ref={pointRef}>
-              <ArrowBack />
-              <Typography component="a" variant="body1" color="white">
-                返回首页
-              </Typography>
+            <Box ref={pointRef}>
+              <Buttons variant="contained" className={classes.back}>
+                <ArrowBack />
+                <Typography component="a" variant="body1" color="inherit">
+                  返回首页
+                </Typography>
+              </Buttons>
             </Box>
           </MediaQuery>
         </Banner>

@@ -44,12 +44,12 @@ function App({ Component, pageProps }: AppProps) {
       </NodeVisible>
       <Box position="relative" zIndex={9}>
         <Component {...pageProps} />
-        <NodeVisible>
-          <BasicSpeedDial />
-        </NodeVisible>
       </Box>
       <NodeVisible>
         <Footer />
+      </NodeVisible>
+      <NodeVisible>
+        <BasicSpeedDial />
       </NodeVisible>
       <Snackbar />
       <PopupLayer />

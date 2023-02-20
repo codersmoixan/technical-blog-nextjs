@@ -48,6 +48,7 @@ const colorPalette = {
     main: '#078DEE',
     default: '#FFFFFF',
     background: '#078DEE',
+    hover: 'rgba(141, 238, 100, .8)'
   },
   setting: {
     one: '#00AB55',
