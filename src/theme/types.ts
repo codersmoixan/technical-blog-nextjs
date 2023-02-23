@@ -10,6 +10,7 @@ export interface ComponentStyleOverrides {
   HomeDesigner?: EmptyObject;
   SideSwiper?: EmptyObject;
   SharingCard?: EmptyObject;
+  AccordionMenu?: EmptyObject;
 }
 export type ComponentStyleOverridesKey = keyof ComponentStyleOverrides
 

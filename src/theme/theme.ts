@@ -32,8 +32,8 @@ const TB_STATUS_TRANSITION = (t?: number) => t ? `all ${t}s` : `all ${TB_STATUS_
 
 const config = {
   backdropHeight: 580,
-  navWidth: 1408,
-  contentWidth: 1376,
+  navWidth: 1200,
+  contentWidth: 1200,
   navHeight: 88,
   transition: TB_STATUS_TRANSITION,
   transitionTime: TB_STATUS_TRANSITION_TIME,

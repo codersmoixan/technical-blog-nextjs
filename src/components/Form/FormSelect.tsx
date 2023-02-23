@@ -74,6 +74,22 @@ const useStyles = makeStyles((theme: Theme) => ({
     }
   },
   input: {
+    '&.Mui-focused': {
+      '& .MuiOutlinedInput-notchedOutline': {
+        borderColor: theme.palette.primary.main,
+      },
+      '&.Mui-error': {
+        '& .MuiOutlinedInput-notchedOutline': {
+          borderColor: theme.colorPalette.primary.error
+        },
+      }
+    },
+    '&:hover': {
+      '& .MuiOutlinedInput-notchedOutline': {
+        borderColor: theme.palette.primary.main,
+        borderWidth: 2
+      }
+    },
     '& .MuiInputBase-input': {
       padding: theme.spacing(0, 1.75),
       height: 42,
@@ -90,20 +106,19 @@ const useStyles = makeStyles((theme: Theme) => ({
         fontSize: 14
       },
     },
-    '&.Mui-focused': {
-      '& .MuiOutlinedInput-notchedOutline': {
-        borderColor: theme.palette.primary.main,
-      },
-      '&.Mui-error': {
-        '& .MuiOutlinedInput-notchedOutline': {
-          borderColor: theme.colorPalette.primary.error
-        },
-      }
-    }
+    '& .MuiOutlinedInput-notchedOutline': {
+      borderColor: theme.palette.primary.main,
+    },
+    '& .MuiSvgIcon-root': {
+      color: theme.palette.primary.main
+    },
   },
-  value: {},
+  value: {
+    color: theme.palette.primary.main
+  },
   placeholder: {
-    color: theme.colorPalette.primary.placeholder
+    color: theme.palette.primary.main,
+    opacity: 0.5
   }
 }))
 

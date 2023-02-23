@@ -12,7 +12,7 @@ import Drawer from "@mui/material/Drawer";
 
 const useStyles = makeStyles((theme: Theme) => ({
   paper: {
-    backgroundColor: theme.palette.primary.main,
+    backgroundColor: theme.colorPalette.background.main,
     paddingBottom: theme.spacing(4),
     '& .MuiButtonBase-root': {
       color: theme.colorPalette.text.default

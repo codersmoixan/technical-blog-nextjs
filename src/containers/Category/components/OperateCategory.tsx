@@ -2,12 +2,12 @@ import { makeStyles } from "@mui/styles";
 import Box from "@mui/material/Box";
 import Logo from "components/Logo";
 import Grid from "@mui/material/Grid";
-import DarkFormText from "components/Form/DarkFormText";
 import Buttons from "components/Buttons";
 import Form from "components/Form/Form";
 import useForm from "hooks/common/useForm";
 import type { Theme } from "@mui/material";
 import useCategory from "containers/Category/hooks/useCategory";
+import FormText from "components/Form/FormText";
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -21,11 +21,6 @@ const useStyles = makeStyles((theme: Theme) => ({
   form: {
     marginTop: theme.spacing(3)
   },
-  submit: {
-    '&.MuiButton-contained': {
-      backgroundColor: theme.colorPalette.primary.lightPurple
-    }
-  }
 }))
 
 function OperateCategory() {
@@ -39,13 +34,12 @@ function OperateCategory() {
       <Form observer={observer} className={classes.form} onFinish={add}>
         <Grid container spacing={2}>
           <Grid item xs={12}>
-            <DarkFormText name="label" placeholder="你的分类: Go" />
+            <FormText name="label" placeholder="你的分类: Go" />
           </Grid>
           <Grid item xs={12}>
             <Buttons
               fullWidth
               variant="contained"
-              className={classes.submit}
               type="submit"
               loading={loading}
             >提交</Buttons>

@@ -63,6 +63,12 @@ const darkTheme = {
         }
       }
     },
+    AccordionMenu: {
+      root: {
+        border: '1px solid rgba(145, 158, 171, 0.16)',
+        boxShadow: 'rgb(0 0 0 / 24%) -40px 40px 80px -8px'
+      }
+    },
     HomeTechnologySharing: {
       development: {
         [breakpoints.up('md')]: {
