@@ -22,7 +22,6 @@ const useStyles = makeStyles((theme: Theme) => ({
     justifyContent: 'space-between',
     width: '100%',
     height: '100vh',
-    zIndex: 1,
     backgroundPosition: 'center center',
     backgroundRepeat: 'no-repeat'
   },

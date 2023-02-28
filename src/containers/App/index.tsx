@@ -45,7 +45,7 @@ function App({ Component, pageProps }: AppProps) {
       <NodeVisible>
         <Navigation />
       </NodeVisible>
-      <Box position="relative" zIndex={9}>
+      <Box position="relative">
         <Component {...pageProps} />
       </Box>
       <NodeVisible>

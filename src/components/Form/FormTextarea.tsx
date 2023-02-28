@@ -91,7 +91,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 }))
 
 function FormTextarea(props: FormTextareaProps) {
-  const { name, rules, maxLength: propMaxLength = 100, disabled } = props
+  const { name, rules, maxLength: propMaxLength = 100, disabled, className } = props
   const classes = useStyles(props)
   const { fieldProps, fieldState, ref } = useFormController({
     name,
@@ -109,7 +109,7 @@ function FormTextarea(props: FormTextareaProps) {
   const valueLength = fieldProps.value?.length || 0
 
   return (
-    <Box className={clsx(classes.root, {
+    <Box className={clsx(className, classes.root, {
       error: !isUndefined(fieldState.error)
     })}>
       <TextField
