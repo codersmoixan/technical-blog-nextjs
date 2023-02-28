@@ -28,7 +28,8 @@ export interface FormTextProps extends OutlinedInputProps {
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
-    position: 'relative'
+    position: 'relative',
+    width: '100%'
   },
   label: {
     position: 'absolute',
@@ -58,21 +59,18 @@ const useStyles = makeStyles((theme: Theme) => ({
       position: 'relative',
       padding: theme.spacing(0, 1.75),
       height: 42,
+      color: theme.palette.primary.main,
       '&::-webkit-input-placeholder': {/*Webkit browsers*/
         fontSize: 14,
-        color: theme.palette.primary.main,
       },
       '&::-moz-placeholder': {/*Mozilla Firefox 4 to 8*/
         fontSize: 14,
-        color: theme.palette.primary.main,
       },
       '&::moz-placeholder': {/*Mozilla Firefox 19+*/
         fontSize: 14,
-        color: theme.palette.primary.main,
       },
       '&::-ms-input-placeholder': {/*Internet Explorer 10+*/
         fontSize: 14,
-        color: theme.palette.primary.main,
       },
     },
   },

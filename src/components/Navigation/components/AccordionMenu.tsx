@@ -4,35 +4,39 @@
  */
 
 import React from 'react'
-import Box, {BoxProps} from '@mui/material/Box';
-import { makeStyles } from "@mui/styles";
+import Box from '@mui/material/Box';
+import makeStyles, { Theme } from "utils/styles/makeStyles";
 import Typography from "@mui/material/Typography";
-import type { Theme } from "@mui/material";
-import type { MenuItem, NavigationItem } from "components/Navigation/constant";
 import get from "lodash/get";
 import isEmpty from "lodash/isEmpty";
-import {VariantContent} from "components/Variant";
+import { VariantContent } from "components/Variant";
+import clsx from "clsx";
 
-interface AccordionMenuProps extends BoxProps{
-  tab: NavigationItem | null,
+import type { MenuItem, NavigationItem } from "components/Navigation/constant";
+
+interface AccordionMenuProps {
+  tab: NavigationItem | null;
+  className?: string;
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
     position: 'absolute',
-    left: 0,
-    top: 0,
-    width: '100%',
-    paddingTop: theme.spacing(11),
+    left: '50%',
+    top: 72,
+    display: 'none',
+    transform: 'translateX(-50%)',
+    width: theme.config.contentWidth,
+    height: 355,
     zIndex: -1,
-    backgroundColor: theme.colorPalette.background.main,
-    boxShadow: 'rgb(19 19 19 / 8%) 0px 2px 4px 0px',
+    backgroundColor: theme.colorPalette.background.default,
+    borderRadius: 16,
+    backdropFilter: 'blur(6px)',
+    opacity: 0
   },
   accordionContent: {
     display: 'flex',
-    justifyContent: 'center',
-    padding: theme.spacing(3),
-    margin: '0 auto',
+    padding: theme.spacing(4, 3),
     width: 980,
     height: 'auto'
   },
@@ -47,19 +51,22 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   contentItem: {
     padding: theme.spacing(1, 0),
+    color: theme.colorPalette.text.secondary
   }
-}))
+}), 'AccordionMenu')
 
 const rootVariants = {
   open: {
-    height: 'auto'
+    display: 'block',
+    opacity: 1
   },
   closed: {
-    height: 0
+    display: 'none',
+    opacity: 0
   }
 }
 
-function AccordionMenu({ tab }: AccordionMenuProps) {
+function AccordionMenu({ tab, className }: AccordionMenuProps) {
   const classes = useStyles()
 
   if (isEmpty(tab)) {
@@ -69,11 +76,11 @@ function AccordionMenu({ tab }: AccordionMenuProps) {
   const menus = (get(tab, 'menus', [])) as MenuItem[]
 
   return  (
-    <VariantContent className={classes.root} variants={rootVariants}>
+    <VariantContent className={clsx(className, classes.root, 'sm-accordion__menu')} variants={rootVariants}>
       <VariantContent
         key={tab.id}
-        initial={{ x: -30, opacity: 0 }}
-        animate={{ x: 0, opacity: 1 }}
+        initial={{ y: 30, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.5 }}
         className={classes.accordionContent}
       >
@@ -83,7 +90,7 @@ function AccordionMenu({ tab }: AccordionMenuProps) {
             <Box className={classes.menuContent}>
               {item.menus?.map((menu: any) => (
                 <Box key={menu.id} className={classes.contentItem}>
-                  <Typography variant="body1">{menu.label}</Typography>
+                  <Typography variant="body1" color="inherit">{menu.label}</Typography>
                 </Box>
               ))}
             </Box>

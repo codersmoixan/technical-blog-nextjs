@@ -45,7 +45,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   focus: {
     height: 72,
-    boxShadow: `0 0 15px ${theme.colorPalette.background.main}`,
+    boxShadow: '0 0 16px rgb(0 0 0 / 8%)',
     // backdropFilter: 'saturate(50%) blur(4px)',
     // backgroundImage: `radial-gradient(transparent 1px, ${theme.colorPalette.background.main} 1px)`,
     // backgroundSize: '3px 3px',
@@ -61,7 +61,7 @@ const useStyles = makeStyles((theme: Theme) => ({
       '& .MuiButton-outlined': {
         backgroundColor: theme.colorPalette.background.main
       }
-    }
+    },
   },
   blur: {
     backgroundColor: 'rgba(255, 255, 255, 0)'
@@ -106,7 +106,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     '&.MuiButton-textPrimary': {
       color: theme.colorPalette.text.dark
     }
-  }
+  },
 }), 'Navigation')
 
 function Navigation() {
@@ -132,7 +132,7 @@ function Navigation() {
     }
 
     if (type === 'enter') {
-      return !isEmpty(tab.menus) && setFocusTab(tab)
+      return !isEmpty(tab.menus) ? setFocusTab(tab) : setFocusTab(null)
     }
 
 
@@ -166,7 +166,9 @@ function Navigation() {
               </Box>
             </Box>
             <Box className={clsx(classes.tools, 'tools')}>
-              <FormText label="搜索本站" bgColor={theme.colorPalette.primary.transparent} />
+              <Box width={200}>
+                <FormText label="搜索本站" bgColor={theme.colorPalette.primary.transparent} />
+              </Box>
               <UserButtons />
             </Box>
           </Box>

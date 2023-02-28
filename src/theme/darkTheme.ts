@@ -1,5 +1,4 @@
 import { breakpoints } from "./theme"
-import SharingSwiper from "containers/Sharing/components/SharingSwiper";
 
 const darkTheme = {
   colorPalette: {
@@ -45,6 +44,11 @@ const darkTheme = {
     },
   },
   componentStyleOverrides: {
+    App: {
+      root: {
+        background: 'linear-gradient(rgba(22, 28, 36, 0.94), rgba(22, 28, 36, 0.94)) center center / cover no-repeat, url(/images/home/overlay_2.jpg)'
+      }
+    },
     Navigation: {
       focus: {
         backgroundColor: 'rgba(22, 28, 36, 0.8)',
@@ -61,6 +65,12 @@ const darkTheme = {
         '&.MuiButton-textPrimary': {
           color: '#FFFFFF'
         }
+      }
+    },
+    AccordionMenu: {
+      root: {
+        border: '1px solid rgba(145, 158, 171, 0.16)',
+        boxShadow: 'rgb(0 0 0 / 24%) -40px 40px 80px -8px'
       }
     },
     HomeTechnologySharing: {
@@ -107,7 +117,7 @@ const darkTheme = {
           boxShadow: 'rgb(0 0 0) 0px 5px 15px'
         },
       }
-    }
+    },
   },
   components: {
     MuiTypography: {

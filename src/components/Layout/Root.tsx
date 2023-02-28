@@ -23,7 +23,6 @@ const useStyles = makeStyles((theme: Theme) => ({
     overflowX: 'hidden',
     width: '100%',
     background: (props: RootProps) => props.bgColor || theme.colorPalette.background.main,
-    zIndex: -1,
   },
   review: {
     position: 'absolute',

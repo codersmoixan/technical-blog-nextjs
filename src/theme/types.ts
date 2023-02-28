@@ -3,6 +3,7 @@ import type { CSSProperties } from "@mui/styles";
 import type { EmptyObject } from "@/src/tb.types"
 
 export interface ComponentStyleOverrides {
+  App?: EmptyObject;
   Navigation?: EmptyObject;
   HomeTechnologySharing?: EmptyObject;
   HomeCategory?: EmptyObject;
@@ -10,6 +11,8 @@ export interface ComponentStyleOverrides {
   HomeDesigner?: EmptyObject;
   SideSwiper?: EmptyObject;
   SharingCard?: EmptyObject;
+  AccordionMenu?: EmptyObject;
+  Articles?: EmptyObject;
 }
 export type ComponentStyleOverridesKey = keyof ComponentStyleOverrides
 
