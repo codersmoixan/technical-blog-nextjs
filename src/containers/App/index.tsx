@@ -5,7 +5,7 @@
 
 import Box from '@mui/material/Box';
 import { motion, useScroll, useSpring } from "framer-motion";
-import { makeStyles } from "@mui/styles";
+import makeStyles, { Theme } from "utils/styles/makeStyles";
 import NodeVisible from "components/NodeVisible";
 import Navigation from "components/Navigation";
 import BasicSpeedDial  from "containers/App/components/BasicSpeedDial";
@@ -13,9 +13,12 @@ import Footer from "components/Footer";
 import Snackbar from "components/Snackbar";
 import PopupLayer from "containers/App/components/PopupLayer";
 import type { AppProps } from "next/app";
-import type { Theme } from "@mui/material";
 
 const useStyles = makeStyles((theme: Theme) => ({
+  root: {
+    backgroundSize: '100% 100%',
+    backgroundAttachment: 'fixed'
+  },
   scrollProgress: {
     position: 'fixed',
     top: 0,
@@ -25,7 +28,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     backgroundColor: theme.palette.primary.main,
     zIndex: 9999,
   }
-}))
+}), 'App')
 
 function App({ Component, pageProps }: AppProps) {
   const classes = useStyles()
@@ -37,7 +40,7 @@ function App({ Component, pageProps }: AppProps) {
   });
 
   return (
-    <Box>
+    <Box className={classes.root}>
       <motion.div style={{ scaleX }} className={classes.scrollProgress} />
       <NodeVisible>
         <Navigation />

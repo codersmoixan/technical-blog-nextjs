@@ -1,8 +1,8 @@
 import { makeStyles } from "@mui/styles";
 import Box, {BoxProps} from "@mui/material/Box";
-import type { Theme } from "@mui/material";
-import Typography from "@mui/material/Typography";
 import useSeparateChildren from "hooks/common/useSeparateChildren";
+import clsx from "clsx";
+import type { Theme } from "@mui/material";
 
 interface ArticleInfoProps extends BoxProps {}
 
@@ -26,10 +26,11 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 function UserInfo(props: ArticleInfoProps) {
   const classes = useStyles(props)
-  const { main, description } = useSeparateChildren(props.children, ['main', 'description'])
+  const { className, children, ...other } = props
+  const { main, description } = useSeparateChildren(children, ['main', 'description'])
 
   return (
-    <Box className={classes.root} {...props}>
+    <Box className={clsx(className, classes.root)} {...other}>
       <Box className={classes.avatar}></Box>
       <Box className={classes.info}>
         {main}

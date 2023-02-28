@@ -23,7 +23,6 @@ const useStyles = makeStyles((theme: Theme) => ({
     width: '100%',
     height: '100vh',
     zIndex: 1,
-    background: `linear-gradient(${theme.colorPalette.background.default}, ${theme.colorPalette.background.default}) center center / cover no-repeat, url(/images/home/overlay_2.jpg)`,
     backgroundPosition: 'center center',
     backgroundRepeat: 'no-repeat'
   },
