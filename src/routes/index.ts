@@ -2,22 +2,9 @@ export type RouteParam = string | number
 
 export type RouteValue = (id?: RouteParam) => string
 
-export type Routes = {
-  home: string;
-  sharing: RouteValue;
-  category: RouteValue;
-  tags: RouteValue;
-  works: RouteValue;
-  links: RouteValue;
-  notes: RouteValue;
-  shareCategory: (category?: RouteParam, id?: RouteParam) => string;
-  about: string;
-  editor: string;
-  login: string;
-  signup: string;
-}
+export type Routes = keyof typeof routes
 
-const routes: Routes = {
+const routes = {
   home: '/',
   sharing: (id?: RouteParam) => id ? `/sharing/${id}` : '/sharing',
   shareCategory: (category?: RouteParam, id?: RouteParam) => category && id ?  `/share/${category}/${id}` : '/sharing',
@@ -26,6 +13,7 @@ const routes: Routes = {
   works: (id?: RouteParam) => id ? `/works/${id}` : '/works',
   links: (id?: RouteParam) => id ? `/links/${id}` : '/links',
   notes: (id?: RouteParam) => id ? `/notes/${id}` : '/notes',
+  articles: (id?: RouteParam) => id ? `/articles/${id}` : '/notfound',
   editor: '/editor',
   about: '/about',
   login: '/login',

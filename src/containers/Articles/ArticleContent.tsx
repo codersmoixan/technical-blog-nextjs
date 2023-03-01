@@ -9,6 +9,7 @@ import Form  from "components/Form/Form";
 import useForm from "hooks/common/useForm";
 import FormTextarea from "components/Form/FormTextarea";
 import Buttons from "components/Buttons";
+import MediaQuery from "components/MediaQuery";
 
 interface ArticleContentProps extends BoxProps {}
 
@@ -181,22 +182,24 @@ function ArticleContent(props: ArticleContentProps) {
           ))}
         </Box>
       </Box>
-      <Box className={classes.fixedComment}>
-        <Form observer={fullObserver} onFinish={handleSubmit} className="form">
-          <Box className="textarea">
-            <FormTextarea
-              name="comment"
-              placeholder="写下你的评论..."
-              rules={{ required: '请输入你的评论' }}
-              rows={1}
-            />
-          </Box>
-          <Box className={clsx(classes.buttons, 'buttons')}>
-            <Buttons type="submit" variant="contained">发布</Buttons>
-            <Buttons variant="outlined">取消</Buttons>
-          </Box>
-        </Form>
-      </Box>
+      <MediaQuery media="pc">
+        <Box className={classes.fixedComment}>
+          <Form observer={fullObserver} onFinish={handleSubmit} className="form">
+            <Box className="textarea">
+              <FormTextarea
+                name="comment"
+                placeholder="写下你的评论..."
+                rules={{ required: '请输入你的评论' }}
+                rows={1}
+              />
+            </Box>
+            <Box className={clsx(classes.buttons, 'buttons')}>
+              <Buttons type="submit" variant="contained">发布</Buttons>
+              <Buttons variant="outlined">取消</Buttons>
+            </Box>
+          </Form>
+        </Box>
+      </MediaQuery>
     </Box>
   )
 }
