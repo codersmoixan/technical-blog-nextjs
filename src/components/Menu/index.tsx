@@ -42,7 +42,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   accordion: {
     backgroundColor: theme.colorPalette.primary.transparent,
     boxShadow: 'none',
-    borderBottom: `${(props: MenuProps) => props.isBorder ? `1px solid ${theme.colorPalette.primary.colorSecondary}` : 'none'}`,
+    borderBottom: (props: MenuProps) => props.isBorder ? `1px solid ${theme.colorPalette.primary.colorSecondary}` : 'none',
     '&.MuiPaper-root': {
       borderRadius: 0,
     },

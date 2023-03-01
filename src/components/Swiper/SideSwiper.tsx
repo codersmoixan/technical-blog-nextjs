@@ -37,8 +37,8 @@ const useStyles = makeStyles((theme: Theme) => ({
     cursor: 'pointer'
   },
   banner: {
-    padding: theme.spacing(3, 0, 3, 0),
-    // marginLeft: theme.spacing(-3),
+    padding: theme.spacing(3, 2),
+    marginLeft: theme.spacing(-2),
     overflowX: 'clip',
     [theme.breakpoints.down('md')]: {
       overflowX: 'auto',

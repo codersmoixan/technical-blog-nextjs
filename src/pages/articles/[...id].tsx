@@ -4,6 +4,7 @@ import ArticleContent from "containers/Articles/ArticleContent";
 import ArticleAside from "containers/Articles/ArticleAside";
 import Content from "components/Layout/Content";
 import {useRouter} from "next/router";
+import MediaQuery from "components/MediaQuery";
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -13,11 +14,18 @@ const useStyles = makeStyles((theme: Theme) => ({
   content: {
     display: 'flex',
     marginTop: theme.spacing(11),
-    justifyContent: 'space-between'
+    justifyContent: 'space-between',
+    [theme.breakpoints.down('md')]: {
+      marginTop: theme.spacing(8),
+      padding: 0
+    }
   },
   articleContent: {
     marginRight: theme.spacing(2),
-    flex: 1
+    flex: 1,
+    [theme.breakpoints.down('md')]: {
+      margin: 0
+    }
   },
   aside: {
     width: 275
@@ -34,7 +42,9 @@ function Articles() {
     <Box className={classes.root}>
       <Content className={classes.content}>
         <ArticleContent className={classes.articleContent} />
-        <ArticleAside className={classes.aside} />
+        <MediaQuery media="pc">
+          <ArticleAside className={classes.aside} />
+        </MediaQuery>
       </Content>
     </Box>
   )

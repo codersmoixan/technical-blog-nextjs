@@ -5,7 +5,7 @@
 
 import React, { useState, forwardRef, ReactElement, ReactNode, ForwardedRef } from 'react';
 import { styled } from '@mui/material/styles';
-import Card from '@mui/material/Card';
+import Card, { CardProps } from '@mui/material/Card';
 import CardHeader from '@mui/material/CardHeader';
 import CardContent from '@mui/material/CardContent';
 import CardActions from '@mui/material/CardActions';
@@ -24,7 +24,7 @@ import Box from "@mui/material/Box";
 import useSeparateChildren from "hooks/common/useSeparateChildren";
 import clsx from "clsx";
 
-interface SharingCardProps {
+interface SharingCardProps extends Pick<CardProps, 'onClick'> {
   title: ReactNode;
   date: ReactNode;
   avatar?: ReactNode;
@@ -115,7 +115,8 @@ export default forwardRef(function SharingCard(props: SharingCardProps, ref: For
     date,
     actions,
     className,
-    children
+    children,
+    ...other
   } = props
   const classes = useStyles(props)
   const { description, expanded } = useSeparateChildren(children, ['description', 'expanded'])
@@ -127,7 +128,7 @@ export default forwardRef(function SharingCard(props: SharingCardProps, ref: For
   };
 
   return (
-    <Card className={clsx(className, classes.root)} ref={ref}>
+    <Card className={clsx(className, classes.root)} ref={ref} {...other}>
       <Image className={classes.image} src={image} alt="" />
       <Box className={classes.content}>
         <Box display="flex" justifyContent="flex-start" flexDirection="column">
