@@ -20,6 +20,8 @@ const useStyles = makeStyles((theme: Theme) => ({
     minWidth: 80,
     borderRadius: 2,
     cursor: 'pointer',
+    borderColor: theme.palette.primary.main,
+    color: theme.colorPalette.text.default
   },
   active: {
     backgroundColor: theme.palette.primary.main,

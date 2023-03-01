@@ -33,12 +33,12 @@ const colorPalette = {
   background: {
     main: 'rgb(252, 252, 252)',
     default: '#FFFFFF',
-    dark: '#131313',
+    primary: 'rgb(252, 252, 252)',
     secondary: 'rgba(145, 158, 171, 0.08)'
   },
   text: {
     main: '#fda92d',
-    default: '#FFFFFF',
+    default: '#131313',
     textSecondary: '#6c6b7b',
     disabled: '#86909c',
     dark: '#131313',

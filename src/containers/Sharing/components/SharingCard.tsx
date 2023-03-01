@@ -72,7 +72,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     padding: theme.spacing(1, 2)
   },
   avatar: {
-    backgroundColor: theme.colorPalette.background.dark,
+    backgroundColor: theme.colorPalette.background.main,
     color: theme.colorPalette.text.default
   },
   title: {},

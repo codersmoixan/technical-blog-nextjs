@@ -38,7 +38,7 @@ const colorPalette = {
   },
   text: {
     main: '#FF3030',
-    default: '#FFFFFF',
+    default: '#131313',
     textSecondary: '#6c6b7b',
     disabled: '#86909c',
     dark: '#131313',

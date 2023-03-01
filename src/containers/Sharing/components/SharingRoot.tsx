@@ -54,7 +54,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     width: '100%',
     boxShadow: 'rgb(19 19 19 / 12%) 0px 2px 5px 0.5px',
     '& .MuiInputBase-root': {
-      backgroundColor: theme.colorPalette.primary.default,
+      backgroundColor: theme.colorPalette.background.default,
     },
     '& input.MuiInputBase-input': {
       height: 58

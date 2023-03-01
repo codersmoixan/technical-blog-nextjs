@@ -20,7 +20,7 @@ const darkTheme = {
     background: {
       main: 'rgb(22, 28, 36)',
       default: 'rgba(22, 28, 36, 0.94)',
-      dark: '#131313',
+      primary: 'rgb(252, 252, 252)',
       secondary: 'rgba(145, 158, 171, 0.08)'
     },
     text: {

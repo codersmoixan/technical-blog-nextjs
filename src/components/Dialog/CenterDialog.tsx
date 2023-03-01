@@ -29,7 +29,8 @@ interface CenterDialogProps extends DialogProps {
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
     '& .MuiPaper-root': {
-      maxWidth: 'initial'
+      maxWidth: 'initial',
+      backgroundColor: theme.colorPalette.background.main,
     }
   },
   title: {

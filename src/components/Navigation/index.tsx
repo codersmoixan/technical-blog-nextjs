@@ -104,7 +104,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   btn: {
     '&.MuiButton-textPrimary': {
-      color: theme.colorPalette.text.dark
+      color: theme.colorPalette.text.default
     }
   },
 }), 'Navigation')

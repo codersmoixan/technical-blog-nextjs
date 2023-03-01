@@ -23,7 +23,6 @@ const editorHeight = (media: string) => media === 'mobile' ? 'calc(100vh - 145px
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
     minHeight: '100vh',
-    backgroundColor: theme.colorPalette.background.main,
     borderLeft: `1px solid ${theme.colorPalette.primary.colorSecondary}`,
     borderRight: `1px solid ${theme.colorPalette.primary.colorSecondary}`,
   },
@@ -35,7 +34,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     alignItems: 'center',
     padding: theme.spacing( 0, 3),
     height: 85,
-    backgroundColor: theme.colorPalette.background.main,
+    backgroundColor: 'rgb(252, 252, 252)',
     zIndex: 999,
     [theme.breakpoints.down('sm')]: {
       height: 65
@@ -53,7 +52,10 @@ const useStyles = makeStyles((theme: Theme) => ({
     }
   },
   actions: {
-    display: 'flex'
+    display: 'flex',
+    '& .MuiButton-outlined': {
+      color: theme.palette.primary.main
+    }
   },
   submit: {
     marginLeft: theme.spacing(3),
