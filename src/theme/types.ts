@@ -1,6 +1,16 @@
-import type { ConfigOptions } from "@/src/theme/theme";
 import type { CSSProperties } from "@mui/styles";
 import type { EmptyObject } from "@/src/tb.types"
+import type { Breakpoints } from "@mui/system";
+import type { ThemeOptions as MuiThemeOptions } from "@mui/material";
+
+export interface ConfigOptions {
+  backdropHeight: number;
+  navWidth: number;
+  contentWidth: number;
+  navHeight: number;
+  transition: (t?: number) => string;
+  transitionTime: string;
+}
 
 export interface CustomThemeOptions {
   config: ConfigOptions;
@@ -66,14 +76,14 @@ export interface ColorPaletteOptions {
   }
 }
 
-export interface DefaultThemeOptions extends CustomThemeOptions {
+export interface CustomThemeOptions {
   colorPalette: ColorPaletteOptions;
 }
 
 declare module '@mui/material/styles' {
-  interface Theme extends DefaultThemeOptions {}
+  interface Theme extends CustomThemeOptions {}
   // allow configuration using `createTheme`
-  interface ThemeOptions extends DefaultThemeOptions {}
+  interface ThemeOptions extends CustomThemeOptions {}
 }
 
 export interface ComponentStyleOverrides {
@@ -88,4 +98,18 @@ export interface ComponentStyleOverrides {
   AccordionMenu?: EmptyObject;
   Articles?: EmptyObject;
 }
+
 export type ComponentStyleOverridesKey = keyof ComponentStyleOverrides
+
+export interface DefaultThemeOptions extends Pick<MuiThemeOptions, 'config' | 'typography'> {
+  breakpoints: Breakpoints;
+  styles: {
+    verticalCenter: CSSProperties;
+    inlineCenter: CSSProperties;
+    spaceBetweenCenter: CSSProperties;
+    columnCenter: CSSProperties;
+  };
+  componentStyleOverrides: EmptyObject;
+}
+
+export interface ThemeOptions extends MuiThemeOptions, CustomThemeOptions {}

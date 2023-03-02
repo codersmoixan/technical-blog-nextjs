@@ -1,6 +1,7 @@
 import theme from "./theme";
+import type { ThemeOptions } from "./types"
 
-const defaultTheme = {
+const defaultTheme: ThemeOptions = {
   ...theme,
   colorPalette: {
     primary: {
