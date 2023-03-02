@@ -4,7 +4,7 @@
  */
 
 import Box from '@mui/material/Box';
-import SpeedDial, {SpeedDialProps} from '@mui/material/SpeedDial';
+import SpeedDial, { SpeedDialProps } from '@mui/material/SpeedDial';
 import SpeedDialIcon from '@mui/material/SpeedDialIcon';
 import SpeedDialAction from '@mui/material/SpeedDialAction';
 import BookmarkAdd from '@mui/icons-material/BookmarkAdd';

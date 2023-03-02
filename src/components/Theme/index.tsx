@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
-import { ThemeProvider } from "@mui/material/styles";
+import {useEffect, useMemo, useState} from "react";
+import {createTheme, ThemeProvider} from "@mui/material/styles";
 import defaultTheme from "@/src/theme/defaultTheme";
 import useSwitchTheme from "containers/App/hooks/useSwitchTheme";
 import cyanTheme from "@/src/theme/cyanTheme";
@@ -9,6 +9,7 @@ import blueTheme from "@/src/theme/blueTheme";
 import redTheme from "@/src/theme/redTheme";
 import darkTheme from "@/src/theme/darkTheme"
 import type { ReactNode } from "react";
+import type { Theme as MuiTheme } from "@mui/material";
 
 interface ThemeProps {
   children: ReactNode
@@ -26,22 +27,17 @@ const themePresets = {
 function Theme({ children }: ThemeProps) {
   const { presets, mode } = useSwitchTheme()
 
-  const [theme, setTheme] = useState(themePresets[presets])
+  const theme = useMemo(() => {
+    const themeOptions = createTheme(themePresets[presets])
 
-  useEffect(() => {
-    const themeOptions = themePresets[presets]
-    if (mode === 'dark') {
-      setTheme({
-        ...themeOptions,
-        ...darkTheme,
-        colorPalette: {
-          ...themeOptions.colorPalette,
-          ...darkTheme.colorPalette
-        },
-      })
-    } else {
-      setTheme(themeOptions)
-    }
+    return (mode === 'dark' ? {
+      ...themeOptions,
+      ...darkTheme,
+      colorPalette: {
+        ...themeOptions.colorPalette,
+        ...darkTheme.colorPalette
+      },
+    } : themeOptions) as MuiTheme
   }, [mode, presets])
 
   return (

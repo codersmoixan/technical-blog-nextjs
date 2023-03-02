@@ -22,7 +22,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     height: 42,
     borderColor: theme.palette.primary.main,
     textTransform: 'none',
-    borderRadius: 8,
+    borderRadius: 4,
     fontSize: 14,
   },
   contained: {
