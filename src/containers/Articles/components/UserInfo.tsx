@@ -1,6 +1,6 @@
 import { makeStyles } from "@mui/styles";
 import Box, {BoxProps} from "@mui/material/Box";
-import useSeparateChildren from "hooks/common/useSeparateChildren";
+import useSeparateChildren from "hooks/useSeparateChildren";
 import clsx from "clsx";
 import type { Theme } from "@mui/material";
 

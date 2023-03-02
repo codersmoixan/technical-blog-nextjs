@@ -6,7 +6,7 @@ import Typography from "@mui/material/Typography";
 import UserInfo from "containers/Articles/components/UserInfo";
 import AnchorPointer from "containers/Articles/components/AnchorPointer";
 import Form  from "components/Form/Form";
-import useForm from "hooks/common/useForm";
+import useForm from "hooks/form/useForm";
 import FormTextarea from "components/Form/FormTextarea";
 import Buttons from "components/Buttons";
 import MediaQuery from "components/MediaQuery";

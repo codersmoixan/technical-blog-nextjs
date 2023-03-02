@@ -1,6 +1,6 @@
 import { useMemo, useRef, useState, useEffect } from "react";
 import throttle from "lodash/throttle";
-import useMount from "hooks/common/effect/useMount";
+import useMount from "hooks/effect/useMount";
 import type { EmptyObject } from "@/src/tb.types";
 
 interface UseSideSwiperProps {

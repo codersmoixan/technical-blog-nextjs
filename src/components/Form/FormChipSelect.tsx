@@ -7,7 +7,7 @@ import {useEffect, useState} from "react";
 import Grid from "@mui/material/Grid";
 import TBChip from "components/TBChip";
 import { makeStyles } from "@mui/styles";
-import useFormController from "hooks/common/useFormController";
+import useFormController from "hooks/form/useFormController";
 import type { Theme } from "@mui/material";
 import type { EmptyObject } from "@/src/tb.types"
 import Box from "@mui/material/Box";
@@ -15,7 +15,7 @@ import Typography from "@mui/material/Typography";
 import {useTheme} from "@mui/material/styles";
 import clsx from "clsx";
 import isUndefined from "lodash/isUndefined";
-import useDeepCompareEffect from "hooks/common/effect/useDeepCompareEffect";
+import useDeepCompareEffect from "hooks/effect/useDeepCompareEffect";
 
 export type ChipOption = {
   id: string | number;

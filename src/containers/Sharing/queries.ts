@@ -1,6 +1,6 @@
 import { getSharingListApi, addSharingApi, updateSharingApi, deleteSharingApi } from "containers/Sharing/api";
-import useQuery from "hooks/common/query/useQuery";
-import useMutation from "hooks/common/query/useMutation";
+import useQuery from "hooks/query/useQuery";
+import useMutation from "hooks/query/useMutation";
 import type { PageParams } from "@/src/tb.types";
 import type { AddSharingParam } from "containers/Sharing/types";
 

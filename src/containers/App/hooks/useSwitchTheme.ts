@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { shallowEqual, useDispatch, useSelector } from "react-redux";
 import { updateThemeSetting, selectThemeSetting } from "containers/App/slice";
-import useDeepCompareEffect from "hooks/common/effect/useDeepCompareEffect";
+import useDeepCompareEffect from "hooks/effect/useDeepCompareEffect";
 import isEmpty from "lodash/isEmpty";
 import type { ThemeSettingPresets, ThemeSetting, ThemeSettingMode } from "../types"
 

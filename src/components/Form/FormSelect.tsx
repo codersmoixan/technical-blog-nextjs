@@ -14,10 +14,10 @@ import { makeStyles } from "@mui/styles";
 import Typography from "@mui/material/Typography";
 import isString from "lodash/isString";
 import get from "lodash/get";
-import useFormController from "hooks/common/useFormController";
+import useFormController from "hooks/form/useFormController";
 import OutlinedInput from "@mui/material/OutlinedInput";
 import isUndefined from "lodash/isUndefined";
-import useUpdateEffect from "hooks/common/effect/useUpdateEffect";
+import useUpdateEffect from "hooks/effect/useUpdateEffect";
 import InputLabel from "@mui/material/InputLabel";
 import type { EmptyObject } from "@/src/tb.types"
 import clsx from "clsx";

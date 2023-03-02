@@ -4,7 +4,7 @@ import Logo from "components/Logo";
 import Grid from "@mui/material/Grid";
 import Buttons from "components/Buttons";
 import Form from "components/Form/Form";
-import useForm from "hooks/common/useForm";
+import useForm from "hooks/form/useForm";
 import type { Theme } from "@mui/material";
 import useCategory from "containers/Category/hooks/useCategory";
 import FormText from "components/Form/FormText";

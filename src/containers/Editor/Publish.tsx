@@ -13,7 +13,7 @@ import FormSelect from "components/Form/FormSelect";
 import ImageUpload from "components/Form/ImageUpload";
 import FormTextarea from "components/Form/FormTextarea";
 import Form from "components/Form/Form";
-import useForm from "hooks/common/useForm";
+import useForm from "hooks/form/useForm";
 import type { Theme } from "@mui/material";
 import FormChipSelect from "components/Form/FormChipSelect";
 import isEmpty from "lodash/isEmpty";
