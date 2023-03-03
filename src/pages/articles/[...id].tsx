@@ -5,6 +5,7 @@ import ArticleAside from "containers/Articles/ArticleAside";
 import Content from "components/Layout/Content";
 import {useRouter} from "next/router";
 import MediaQuery from "components/MediaQuery";
+import DynamicParticleClock from "components/ParticleClock/DynamicParticleClock";
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -46,6 +47,7 @@ function Articles() {
           <ArticleAside className={classes.aside} />
         </MediaQuery>
       </Content>
+      {/*<DynamicParticleClock width={500} height={500} />*/}
     </Box>
   )
 }

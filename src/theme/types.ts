@@ -14,6 +14,7 @@ export interface ConfigOptions {
 
 export interface CustomThemeOptions {
   config: ConfigOptions;
+  colorPalette: ColorPaletteOptions;
   styles: {
     verticalCenter: CSSProperties;
     inlineCenter: CSSProperties;
@@ -76,10 +77,6 @@ export interface ColorPaletteOptions {
   }
 }
 
-export interface CustomThemeOptions {
-  colorPalette: ColorPaletteOptions;
-}
-
 declare module '@mui/material/styles' {
   interface Theme extends CustomThemeOptions {}
   // allow configuration using `createTheme`
@@ -109,7 +106,7 @@ export interface DefaultThemeOptions extends Pick<MuiThemeOptions, 'config' | 't
     spaceBetweenCenter: CSSProperties;
     columnCenter: CSSProperties;
   };
-  componentStyleOverrides: EmptyObject;
+  componentStyleOverrides: ComponentStyleOverrides;
 }
 
 export interface ThemeOptions extends MuiThemeOptions, CustomThemeOptions {}

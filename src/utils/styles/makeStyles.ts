@@ -1,5 +1,5 @@
 import { makeStyles as muiMakeStyles } from "@mui/styles";
-import mergeStyles from "utils/styles/mergeStyles";
+import merge from "lodash/merge";
 import type { Theme as MuiTheme } from "@mui/material";
 import type { Styles } from "@mui/styles/withStyles";
 import type { StyleRules } from "@mui/styles/withStyles/withStyles";
@@ -23,7 +23,7 @@ function makeStyles<
     if (componentName) {
       const styleOverrides = theme.componentStyleOverrides[componentName as ComponentStyleOverridesKey] as StyleRules<Props, ClassKey>
 
-      return mergeStyles(componentStyles, styleOverrides)
+      return merge(componentStyles, styleOverrides)
     }
 
     return componentStyles

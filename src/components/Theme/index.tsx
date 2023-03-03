@@ -1,7 +1,8 @@
 import { useMemo } from "react";
-import {createTheme, ThemeProvider} from "@mui/material/styles";
-import defaultTheme from "@/src/theme/defaultTheme";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
 import useSwitchTheme from "containers/App/hooks/useSwitchTheme";
+import defaultTheme from "@/src/theme/defaultTheme";
+import merge from "lodash/merge";
 import cyanTheme from "@/src/theme/cyanTheme";
 import purpleTheme from "@/src/theme/purpleTheme";
 import orangeTheme from "@/src/theme/orangeTheme";
@@ -29,14 +30,16 @@ function Theme({ children }: ThemeProps) {
   const theme = useMemo(() => {
     const themeOptions = createTheme(themePresets[presets])
 
-    return mode === 'dark' ? {
-      ...themeOptions,
-      ...darkTheme,
-      colorPalette: {
-        ...themeOptions.colorPalette,
-        ...darkTheme.colorPalette
-      },
-    } : themeOptions
+    return mode === 'dark' ? merge(themeOptions, darkTheme) : themeOptions
+
+    // return mode === 'dark' ? {
+    //   ...themeOptions,
+    //   ...darkTheme,
+    //   colorPalette: {
+    //     ...themeOptions.colorPalette,
+    //     ...darkTheme.colorPalette
+    //   },
+    // } : themeOptions
   }, [mode, presets])
 
   return (
