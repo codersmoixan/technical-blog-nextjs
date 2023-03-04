@@ -53,7 +53,7 @@ function App({ Component, pageProps }: AppProps) {
       <NodeVisible blackList={[routes.editor, routes.login]}>
         <Footer />
       </NodeVisible>
-      <NodeVisible>
+      <NodeVisible blackList={[routes.editor, routes.login]}>
         <BasicSpeedDial />
       </NodeVisible>
       <Snackbar />

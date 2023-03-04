@@ -94,6 +94,7 @@ export interface ComponentStyleOverrides {
   SharingCard?: EmptyObject;
   AccordionMenu?: EmptyObject;
   Articles?: EmptyObject;
+  Login?: EmptyObject;
 }
 
 export type ComponentStyleOverridesKey = keyof ComponentStyleOverrides

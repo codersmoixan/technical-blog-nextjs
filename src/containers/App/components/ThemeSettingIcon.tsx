@@ -5,6 +5,9 @@ import type { Theme } from "@mui/material";
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
     color: theme.palette.primary.main
   }
 }))

@@ -22,11 +22,12 @@ const useStyles = makeStyles((theme: Theme) => ({
     height: 42,
     borderColor: theme.palette.primary.main,
     textTransform: 'none',
-    borderRadius: 4,
+    borderRadius: 8,
     fontSize: 14,
   },
   contained: {
     backgroundColor: theme.colorPalette.button.main,
+    fontWeight: 700,
     '&.MuiButton-root:hover': {
       backgroundColor: theme.colorPalette.button.hover,
     },

@@ -8,7 +8,7 @@ const darkTheme = {
       secondary: 'rgba(229 230, 232, 1)',
       colorSecondary: '#d8dee3',
       transparent: 'transparent',
-      dark: '#131313',
+      dark: 'rgb(22, 28, 36)',
       sullenGrey: '#33323e',
       lightGrey: '#6c6b7b',
       lightPurple: '#853bce',
@@ -28,7 +28,7 @@ const darkTheme = {
       default: '#FFFFFF',
       textSecondary: '#FFFFFF',
       disabled: '#86909c',
-      dark: '#131313',
+      dark: 'rgb(22, 28, 36)',
       secondary: '#86909c',
     },
     setting: {
@@ -118,6 +118,17 @@ const darkTheme = {
         },
       }
     },
+    Login: {
+      formContent: {
+        '& .submit': {
+          backgroundColor: 'rgb(252, 252, 252)',
+          color: 'rgb(33, 43, 54)'
+        }
+      },
+      fab: {
+        boxShadow: 'rgb(0 0 0 / 36%) -12px 12px 32px -4px'
+      }
+    }
   },
   components: {
     MuiTypography: {
