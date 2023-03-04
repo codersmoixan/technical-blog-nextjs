@@ -4,7 +4,7 @@ import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { SnackbarProvider } from "notistack"
 import SetupApp from "containers/App"
-import Theme from "components/Theme";
+import ThemeProvider from "components/ThemeProvider";
 
 import store from "../store";
 
@@ -17,11 +17,11 @@ export default function App(props: AppProps) {
   return (
     <Provider store={store}>
       <QueryClientProvider client={queryClient}>
-        <Theme>
+        <ThemeProvider>
           <SnackbarProvider>
             <SetupApp {...props} />
           </SnackbarProvider>
-        </Theme>
+        </ThemeProvider>
         <ReactQueryDevtools initialIsOpen />
       </QueryClientProvider>
     </Provider>

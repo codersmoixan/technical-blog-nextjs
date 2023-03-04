@@ -1,9 +1,9 @@
 /**
  * @author zhengji.su
- * @description Index
+ * @description Navigation
  */
 
-import { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Box from "@mui/material/Box";
 import Image from "next/image";
 import Logo from "assets/images/logo/logo.dark.jpg"
@@ -17,7 +17,6 @@ import isString from "lodash/isString"
 import MediaQuery from "components/MediaQuery";
 import MenuIcon from "components/Icons/MenuIcon";
 import MenuDrawer from "components/Navigation/components/MenuDrawer";
-import UserButtons from "components/Navigation/components/UserButtons";
 import AccordionMenu from "components/Navigation/components/AccordionMenu";
 import routes from "@/src/routes";
 import { useTheme } from "@mui/material/styles";
@@ -88,7 +87,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   tools: {
     display: 'flex',
     alignItems: 'center',
-    justifyContent: 'space-between',
+    justifyContent: 'flex-end',
     width: 425
   },
   logo: {
@@ -143,6 +142,8 @@ function Navigation() {
 
   const handleToHome = () => history.push(routes.home)
 
+  const handleJumpToLogin = () => history.push(routes.login)
+
   return (
     <Box component="header">
       <MediaQuery media={['pc', 'pad']}>
@@ -166,10 +167,10 @@ function Navigation() {
               </Box>
             </Box>
             <Box className={clsx(classes.tools, 'tools')}>
-              <Box width={200}>
+              <Box width={200} mr={3}>
                 <FormText label="搜索本站" bgColor={theme.colorPalette.primary.transparent} />
               </Box>
-              <UserButtons />
+              <Buttons variant="contained" color="primary" disableRipple onClick={handleJumpToLogin}>Sign in</Buttons>
             </Box>
           </Box>
           <Variant focus={!isEmpty(focusTab?.menus)}>

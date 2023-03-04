@@ -7,6 +7,7 @@ import React, { useState, useEffect } from 'react'
 import Box from '@mui/material/Box';
 import {makeStyles} from "@mui/styles";
 import {Theme} from "@mui/material";
+import Head from "next/head";
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -19,7 +20,10 @@ function Login() {
 
   return (
     <Box className={classes.root}>
-      Login
+      <Head>
+        <title>登录你的账号</title>
+        <meta name="description" content="Login" />
+      </Head>
     </Box>
   )
 }
