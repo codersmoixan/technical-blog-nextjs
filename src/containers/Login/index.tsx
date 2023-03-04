@@ -13,6 +13,7 @@ import Fab from "@mui/material/Fab";
 import ThemeSettingIcon from "containers/App/components/ThemeSettingIcon";
 import useSpeedDial from "containers/App/hooks/useSpeedDial";
 import makeStyles, { Theme } from "utils/styles/makeStyles";
+import Image from "next/image";
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -71,7 +72,10 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   other: {
     padding: theme.spacing(4),
-    textAlign: 'center'
+    textAlign: 'center',
+    '& .MuiButton-root': {
+      minWidth: 50
+    }
   },
   fab: {
     position: 'fixed',
@@ -133,9 +137,12 @@ function Login() {
           </Divider>
           <div className={classes.other}>
             <Buttons className={classes.button}>
-              <Typography>
+              <Typography component="span" display="flex" alignItems="center">
                 <GitHub />
               </Typography>
+            </Buttons>
+            <Buttons className={classes.button}>
+              <Image src="/icons/ic_wechat.svg" width={26} height={26} alt="ic_wechat"/>
             </Buttons>
           </div>
         </div>
