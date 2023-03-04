@@ -45,9 +45,16 @@
     "@types/react": "18.0.25",
     "@types/react-dom": "18.0.8",
     "@types/store": "^2.0.2",
+    "@typescript-eslint/eslint-plugin": "^5.54.0",
     "babel-plugin-prismjs": "^2.1.0",
     "eslint": "8.27.0",
     "eslint-config-next": "13.0.3",
-    "next-compose-plugins": "^2.2.1"
+    "eslint-config-prettier": "^8.6.0",
+    "eslint-config-standard-with-typescript": "^34.0.0",
+    "eslint-plugin-import": "^2.27.5",
+    "eslint-plugin-n": "^15.6.1",
+    "eslint-plugin-react": "^7.32.2",
+    "next-compose-plugins": "^2.2.1",
+    "prettier": "^2.8.4"
   }
 }

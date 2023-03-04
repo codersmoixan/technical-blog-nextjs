@@ -3,25 +3,18 @@
  * @description BeforeRoute
  */
 
-import { useRouter } from "next/router";
-import Box from "@mui/material/Box";
-import type { ReactNode } from "react";
+import useBeforeRoute from "core/BeforeRoute/hooks/useBeforeRoute";
 
 interface BeforeRouteProps {
-  children: ReactNode;
-  blackList?: string[];
+  children: JSX.Element;
+  include?: string[];
+  exclude?: string[];
 }
 
-const useVisible = (list: string[]) => {
-  const router = useRouter()
+function BeforeRoute({ include, exclude, children }: BeforeRouteProps) {
+  const access = useBeforeRoute({ include, exclude })
 
-  return !list.includes(router.route)
-}
-
-function BeforeRoute({ blackList = [], ...other }: BeforeRouteProps) {
-  const visible = useVisible(blackList)
-
-  return visible ? <Box {...other} /> : null
+  return access ? children : null
 }
 
 export default BeforeRoute

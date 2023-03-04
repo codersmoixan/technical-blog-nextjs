@@ -44,16 +44,16 @@ function App({ Component, pageProps }: AppProps) {
   return (
     <Box className={classes.root}>
       <motion.div style={{ scaleX }} className={classes.scrollProgress} />
-      <BeforeRoute blackList={[routes.editor, routes.login]}>
+      <BeforeRoute exclude={[routes.editor, routes.login]}>
         <Navigation />
       </BeforeRoute>
       <Box position="relative">
         <Component {...pageProps} />
       </Box>
-      <BeforeRoute blackList={[routes.editor, routes.login]}>
+      <BeforeRoute exclude={[routes.editor, routes.login]}>
         <Footer />
       </BeforeRoute>
-      <BeforeRoute blackList={[routes.editor, routes.login]}>
+      <BeforeRoute exclude={[routes.editor, routes.login]}>
         <BasicSpeedDial />
       </BeforeRoute>
       <Snackbar />
