@@ -4,8 +4,8 @@ import {
   useGetCategoryQuery,
   useUpdateCategoryMutation,
 } from "containers/Category/queries";
-import useNotifier from "components/Snackbar/hooks/useNotifier";
-import useSpeedDial from "containers/App/hooks/useSpeedDial";
+import useNotifier from "core/Snackbar/hooks/useNotifier";
+import useSpeedDial from "hooks/useSpeedDial";
 
 export interface UseCategoryReturns {
   categories: any[];

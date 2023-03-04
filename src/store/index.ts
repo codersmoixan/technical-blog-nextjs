@@ -1,6 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit";
 import sharingSlice from "containers/Sharing/slice";
-import notifierSlice from "utils/../components/Snackbar/slice";
+import notifierSlice from "core/Snackbar/slice";
 import appSlice from "containers/App/slice";
 
 const store = configureStore({

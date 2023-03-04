@@ -5,15 +5,15 @@
 
 import Box from '@mui/material/Box';
 import Grid from "@mui/material/Grid";
-import useNotifier from "components/Snackbar/hooks/useNotifier";
+import useNotifier from "core/Snackbar/hooks/useNotifier";
 import CenterDialog from "components/Dialog/CenterDialog";
 import { makeStyles } from "@mui/styles";
 import { useState } from "react";
 import FormSelect from "components/Form/FormSelect";
 import ImageUpload from "components/Form/ImageUpload";
 import FormTextarea from "components/Form/FormTextarea";
-import Form from "components/Form/Form";
-import useForm from "hooks/form/useForm";
+import Form from "@/src/core/Form";
+import useForm from "@/src/core/Form/hooks/useForm";
 import type { Theme } from "@mui/material";
 import FormChipSelect from "components/Form/FormChipSelect";
 import isEmpty from "lodash/isEmpty";

@@ -1,6 +1,6 @@
 import Typography from "@mui/material/Typography";
-import Form from "components/Form/Form";
-import useForm from "hooks/form/useForm";
+import Form from "@/src/core/Form";
+import useForm from "@/src/core/Form/hooks/useForm";
 import FormText from "components/Form/FormText";
 import React from "react";
 import Box from "@mui/material/Box";
@@ -11,8 +11,8 @@ import { GitHub } from "@mui/icons-material";
 import MediaQuery from "components/MediaQuery";
 import Fab from "@mui/material/Fab";
 import ThemeSettingIcon from "containers/App/components/ThemeSettingIcon";
-import useSpeedDial from "containers/App/hooks/useSpeedDial";
-import makeStyles, { Theme } from "utils/styles/makeStyles";
+import useSpeedDial from "hooks/useSpeedDial";
+import makeStyles, { Theme } from "core/makeStyles";
 import Image from "next/image";
 
 const useStyles = makeStyles((theme: Theme) => ({

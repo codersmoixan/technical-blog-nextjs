@@ -5,12 +5,12 @@
 
 import Box from '@mui/material/Box';
 import { motion, useScroll, useSpring } from "framer-motion";
-import makeStyles, { Theme } from "utils/styles/makeStyles";
-import NodeVisible from "components/NodeVisible";
+import makeStyles, { Theme } from "core/makeStyles";
+import BeforeRoute from "core/BeforeRoute";
 import Navigation from "components/Navigation";
 import BasicSpeedDial  from "containers/App/components/BasicSpeedDial";
 import Footer from "components/Footer";
-import Snackbar from "components/Snackbar";
+import Snackbar from "core/Snackbar";
 import PopupLayer from "containers/App/components/PopupLayer";
 import type { AppProps } from "next/app";
 import routes from "@/src/routes";
@@ -44,18 +44,18 @@ function App({ Component, pageProps }: AppProps) {
   return (
     <Box className={classes.root}>
       <motion.div style={{ scaleX }} className={classes.scrollProgress} />
-      <NodeVisible blackList={[routes.editor, routes.login]}>
+      <BeforeRoute blackList={[routes.editor, routes.login]}>
         <Navigation />
-      </NodeVisible>
+      </BeforeRoute>
       <Box position="relative">
         <Component {...pageProps} />
       </Box>
-      <NodeVisible blackList={[routes.editor, routes.login]}>
+      <BeforeRoute blackList={[routes.editor, routes.login]}>
         <Footer />
-      </NodeVisible>
-      <NodeVisible blackList={[routes.editor, routes.login]}>
+      </BeforeRoute>
+      <BeforeRoute blackList={[routes.editor, routes.login]}>
         <BasicSpeedDial />
-      </NodeVisible>
+      </BeforeRoute>
       <Snackbar />
       <PopupLayer />
     </Box>

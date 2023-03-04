@@ -1,8 +1,8 @@
 import React, { useEffect } from "react"
 import isEmpty from "lodash/isEmpty";
 import { useDispatch, useSelector } from "react-redux";
-import useNotifier from "components/Snackbar/hooks/useNotifier";
-import { getNotifications, removeSnackbar } from "components/Snackbar/slice";
+import useNotifier from "core/Snackbar/hooks/useNotifier";
+import { getNotifications, removeSnackbar } from "core/Snackbar/slice";
 
 function Snackbar() {
   const notifications = useSelector(getNotifications)

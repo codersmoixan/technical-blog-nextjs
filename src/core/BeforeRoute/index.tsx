@@ -1,13 +1,13 @@
 /**
  * @author zhengji.su
- * @description NodeVisible
+ * @description BeforeRoute
  */
 
 import { useRouter } from "next/router";
 import Box from "@mui/material/Box";
 import type { ReactNode } from "react";
 
-interface NodeVisibleProps {
+interface BeforeRouteProps {
   children: ReactNode;
   blackList?: string[];
 }
@@ -18,10 +18,10 @@ const useVisible = (list: string[]) => {
   return !list.includes(router.route)
 }
 
-function NodeVisible({ blackList = [], ...other }: NodeVisibleProps) {
+function BeforeRoute({ blackList = [], ...other }: BeforeRouteProps) {
   const visible = useVisible(blackList)
 
   return visible ? <Box {...other} /> : null
 }
 
-export default NodeVisible
+export default BeforeRoute

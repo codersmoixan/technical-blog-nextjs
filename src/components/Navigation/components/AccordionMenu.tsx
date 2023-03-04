@@ -5,7 +5,7 @@
 
 import React from 'react'
 import Box from '@mui/material/Box';
-import makeStyles, { Theme } from "utils/styles/makeStyles";
+import makeStyles, { Theme } from "core/makeStyles";
 import Typography from "@mui/material/Typography";
 import get from "lodash/get";
 import isEmpty from "lodash/isEmpty";

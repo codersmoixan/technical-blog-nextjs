@@ -21,7 +21,7 @@ import AccordionMenu from "components/Navigation/components/AccordionMenu";
 import routes from "@/src/routes";
 import { useTheme } from "@mui/material/styles";
 import { Variant } from "components/Variant";
-import makeStyles, { Theme } from "utils/styles/makeStyles";
+import makeStyles, { Theme } from "core/makeStyles";
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {

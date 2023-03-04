@@ -24,7 +24,8 @@
       "utils/*": ["./src/utils/*"],
       "service/*": ["./src/service/*"],
       "api/*": ["./src/api/*"],
-      "assets/*": ["./src/assets/*"]
+      "assets/*": ["./src/assets/*"],
+      "core/*": ["./src/core/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],

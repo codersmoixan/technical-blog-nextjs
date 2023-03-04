@@ -10,7 +10,7 @@ import isString from "lodash/isString";
 import isUndefined from "lodash/isUndefined"
 import clsx from "clsx";
 import type { ReactNode } from "react";
-import useFormController from "hooks/form/useFormController";
+import useFormController from "@/src/core/Form/hooks/useFormController";
 import type { EmptyObject } from "@/src/tb.types"
 import type { Theme } from "@mui/material";
 import Typography from "@mui/material/Typography";
