@@ -18,7 +18,7 @@ const useVisible = (list: string[]) => {
   return !list.includes(router.route)
 }
 
-function NodeVisible({ blackList = ['/editor'], ...other }: NodeVisibleProps) {
+function NodeVisible({ blackList = [], ...other }: NodeVisibleProps) {
   const visible = useVisible(blackList)
 
   return visible ? <Box {...other} /> : null

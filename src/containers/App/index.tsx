@@ -13,11 +13,13 @@ import Footer from "components/Footer";
 import Snackbar from "components/Snackbar";
 import PopupLayer from "containers/App/components/PopupLayer";
 import type { AppProps } from "next/app";
+import routes from "@/src/routes";
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
+    background: `linear-gradient(rgba(252, 252, 252, 0.9), rgba(252, 252, 252, 0.9)) center center / cover no-repeat, url(/images/home/overlay_2.jpg)`,
     backgroundSize: '100% 100%',
-    backgroundAttachment: 'fixed'
+    backgroundAttachment: 'fixed',
   },
   scrollProgress: {
     position: 'fixed',
@@ -42,13 +44,13 @@ function App({ Component, pageProps }: AppProps) {
   return (
     <Box className={classes.root}>
       <motion.div style={{ scaleX }} className={classes.scrollProgress} />
-      <NodeVisible>
+      <NodeVisible blackList={[routes.editor, routes.login]}>
         <Navigation />
       </NodeVisible>
       <Box position="relative">
         <Component {...pageProps} />
       </Box>
-      <NodeVisible>
+      <NodeVisible blackList={[routes.editor, routes.login]}>
         <Footer />
       </NodeVisible>
       <NodeVisible>
