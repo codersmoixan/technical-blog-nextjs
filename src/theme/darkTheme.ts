@@ -120,15 +120,20 @@ const darkTheme = {
 			}
 		},
 		Login: {
-			formContent: {
-				'& .submit': {
-					backgroundColor: 'rgb(252, 252, 252)',
-					color: 'rgb(33, 43, 54)'
-				}
-			},
 			fab: {
 				boxShadow: 'rgb(0 0 0 / 36%) -12px 12px 32px -4px'
-			}
+			},
+      submit: {
+        backgroundColor: 'rgb(252, 252, 252)',
+        color: 'rgb(33, 43, 54)',
+        '&.MuiButton-root:hover': {
+          backgroundColor: 'rgba(252, 252, 252, 0.94)'
+        }
+      },
+      example: {
+        backgroundColor: 'rgb(0, 55, 104)',
+        color: 'rgb(97, 243, 243)',
+      }
 		}
 	},
 	components: {

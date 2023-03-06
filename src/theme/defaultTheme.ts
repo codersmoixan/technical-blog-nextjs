@@ -23,7 +23,7 @@ const defaultTheme: ThemeOptions = {
       main: 'rgb(252, 252, 252)',
       default: '#FFFFFF',
       primary: 'rgb(252, 252, 252)',
-      secondary: 'rgba(145, 158, 171, 0.08)'
+      secondary: 'rgba(145, 158, 171, 0.08)',
     },
     text: {
       main: '#00AB55',

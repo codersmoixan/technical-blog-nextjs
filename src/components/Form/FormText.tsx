@@ -53,6 +53,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     }
   },
   input: {
+    borderRadius: 8,
     '&:hover': {
       '& .MuiOutlinedInput-notchedOutline': {
         borderColor: theme.palette.primary.main,
