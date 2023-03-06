@@ -1,12 +1,12 @@
 /**
  * @author zhengji.su
- * @description Sharing
+ * @description SharingPage
  */
 import SharingMain from "containers/Sharing/SharingMain";
 import Box from "@mui/material/Box";
 import Head from "next/head";
 
-function Sharing() {
+function SharingPage() {
 
   return (
     <Box>
@@ -19,4 +19,4 @@ function Sharing() {
   )
 }
 
-export default Sharing
+export default SharingPage

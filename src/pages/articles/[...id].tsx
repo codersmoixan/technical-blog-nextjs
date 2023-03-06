@@ -34,7 +34,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   }
 }), 'Articles')
 
-function Articles() {
+function ArticlesPage() {
   const classes = useStyles()
   const history = useRouter()
 
@@ -57,4 +57,4 @@ function Articles() {
   )
 }
 
-export default Articles
+export default ArticlesPage

@@ -11,7 +11,7 @@ import { AccordionDetails, AccordionSummary } from "@mui/material";
 import Buttons from "components/Buttons";
 import clsx from "clsx";
 import TransformIcon from "components/TransformIcon";
-import { VariantContent } from "components/Variant";
+import { VariantContent } from "components/Animation/Variant";
 import { stiffnessVariants } from "utils/variants";
 import useDeepCompareEffect from "hooks/effect/useDeepCompareEffect";
 import type { Theme } from "@mui/material";

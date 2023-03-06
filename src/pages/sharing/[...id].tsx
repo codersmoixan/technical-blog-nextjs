@@ -6,7 +6,7 @@
 import SharingUnit from "containers/Sharing/SharingUnit";
 import Head from "next/head";
 
-function Unit() {
+function SharingUnitPage() {
 
   return (
     <>
@@ -19,4 +19,4 @@ function Unit() {
   )
 }
 
-export default Unit
+export default SharingUnitPage

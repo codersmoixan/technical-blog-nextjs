@@ -9,9 +9,6 @@ import Divider from "@mui/material/Divider";
 import type { FieldValues } from "react-hook-form/dist/types/fields";
 import { GitHub } from "@mui/icons-material";
 import MediaQuery from "components/MediaQuery";
-import Fab from "@mui/material/Fab";
-import ThemeSettingIcon from "containers/App/components/ThemeSettingIcon";
-import useSpeedDial from "hooks/useSpeedDial";
 import makeStyles, { Theme } from "core/makeStyles";
 import Image from "next/image";
 
@@ -77,21 +74,10 @@ const useStyles = makeStyles((theme: Theme) => ({
       minWidth: 50
     }
   },
-  fab: {
-    position: 'fixed',
-    right: 24,
-    bottom: 24,
-    backgroundColor: theme.colorPalette.background.main,
-    boxShadow: 'rgb(99 115 129 / 36%) -12px 12px 32px -4px',
-    '&:hover': {
-      backgroundColor: theme.colorPalette.background.default
-    }
-  }
 }), 'Login')
 
 function Login() {
   const classes = useStyles()
-  const { updateSpeedDial } = useSpeedDial()
   const { observer } = useForm()
 
   const handleLogin = (options: FieldValues) => {
@@ -147,9 +133,6 @@ function Login() {
           </div>
         </div>
       </div>
-      <Fab className={classes.fab} onClick={() => updateSpeedDial('setting')}>
-        <ThemeSettingIcon />
-      </Fab>
     </div>
   )
 }

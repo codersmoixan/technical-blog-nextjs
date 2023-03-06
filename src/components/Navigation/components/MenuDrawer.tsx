@@ -11,7 +11,7 @@ import { useRouter } from "next/router";
 import isString from "lodash/isString";
 import ExpandLess from "@mui/icons-material/ExpandLess";
 import ExpandMore from "@mui/icons-material/ExpandMore"
-import { Variant, VariantContent } from "components/Variant";
+import { Variant, VariantContent } from "components/Animation/Variant";
 import { stiffnessVariants } from "utils/variants";
 import GlobalDrawer from "components/GlobalDrawer";
 import type { Theme } from "@mui/material";

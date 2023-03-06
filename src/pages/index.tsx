@@ -4,6 +4,7 @@
  */
 import HomeContainer from "containers/Home";
 import Head from "next/head";
+import routes from "@/src/routes";
 
 function Home() {
 
@@ -19,3 +20,13 @@ function Home() {
 }
 
 export default Home
+
+
+// export async function getServerSideProps() {
+//   return {
+//     redirect: {
+//       destination: routes.notFond,
+//       permanent: false
+//     }
+//   }
+// }

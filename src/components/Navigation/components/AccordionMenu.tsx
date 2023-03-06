@@ -9,7 +9,7 @@ import makeStyles, { Theme } from "core/makeStyles";
 import Typography from "@mui/material/Typography";
 import get from "lodash/get";
 import isEmpty from "lodash/isEmpty";
-import { VariantContent } from "components/Variant";
+import { VariantContent } from "components/Animation/Variant";
 import clsx from "clsx";
 
 import type { MenuItem, NavigationItem } from "components/Navigation/constant";

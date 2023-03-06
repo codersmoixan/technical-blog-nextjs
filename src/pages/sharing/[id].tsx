@@ -6,7 +6,7 @@
 import SharingMain from "containers/Sharing/SharingMain";
 import Head from "next/head";
 
-function SharingSlug() {
+function SharingSlugPage() {
 
   return (
     <>
@@ -19,4 +19,4 @@ function SharingSlug() {
   )
 }
 
-export default SharingSlug
+export default SharingSlugPage

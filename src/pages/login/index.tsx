@@ -1,12 +1,12 @@
 /**
  * @author zhengji.su
- * @description Login
+ * @description LoginPage
  */
 
 import Head from "next/head";
 import LoginContainer from "containers/Login";
 
-function Login() {
+function LoginPage() {
 
   return (
     <>
@@ -19,4 +19,4 @@ function Login() {
   )
 }
 
-export default Login
+export default LoginPage

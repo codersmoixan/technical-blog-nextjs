@@ -20,7 +20,7 @@ import MenuDrawer from "components/Navigation/components/MenuDrawer";
 import AccordionMenu from "components/Navigation/components/AccordionMenu";
 import routes from "@/src/routes";
 import { useTheme } from "@mui/material/styles";
-import { Variant } from "components/Variant";
+import { Variant } from "components/Animation/Variant";
 import makeStyles, { Theme } from "core/makeStyles";
 
 const useStyles = makeStyles((theme: Theme) => ({
