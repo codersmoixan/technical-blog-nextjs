@@ -1,6 +1,6 @@
 import { MutationFunction, useMutation as useReactMutation } from "@tanstack/react-query";
 import type { UseMutationOptions } from "@tanstack/react-query";
-import type { UseQueryOrMutationResultValue } from "hooks/common/query/type";
+import type { UseQueryOrMutationResultValue } from "hooks/query/type";
 
 export interface UseReactMutationOptions<D, T> extends Pick<UseMutationOptions, 'mutationKey'> {
   mutationFn: MutationFunction<D, T>

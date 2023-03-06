@@ -1,4 +1,4 @@
-import makeStyles, { Theme } from "utils/styles/makeStyles";
+import makeStyles, { Theme } from "core/makeStyles";
 import Box from "@mui/material/Box";
 import FullTriangle from "containers/Home/components/FullTriangle";
 import Image from "next/image";

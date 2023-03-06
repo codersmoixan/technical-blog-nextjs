@@ -16,7 +16,7 @@ import ExpandMore from "@mui/icons-material/ExpandMore";
 import clsx from "clsx";
 import Close from "@mui/icons-material/Close"
 import Buttons from "components/Buttons";
-import { Variant, VariantContent } from "components/Variant";
+import { Variant, VariantContent } from "components/Animation/Variant";
 import type { Theme } from "@mui/material";
 import type { Variants } from "framer-motion";
 import useSwitchCatalog from "containers/Sharing/hooks/useSwitchCatalog";

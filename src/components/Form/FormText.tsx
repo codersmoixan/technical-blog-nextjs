@@ -10,7 +10,7 @@ import isString from "lodash/isString";
 import isUndefined from "lodash/isUndefined"
 import clsx from "clsx";
 import type { ReactNode } from "react";
-import useFormController from "hooks/common/useFormController";
+import useFormController from "@/src/core/Form/hooks/useFormController";
 import type { EmptyObject } from "@/src/tb.types"
 import type { Theme } from "@mui/material";
 import Typography from "@mui/material/Typography";
@@ -27,7 +27,8 @@ export interface FormTextProps extends OutlinedInputProps {
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
-  root: {
+  root: {},
+  formControl: {
     position: 'relative',
     width: '100%'
   },
@@ -47,12 +48,20 @@ const useStyles = makeStyles((theme: Theme) => ({
       color: theme.palette.primary.main,
       backgroundColor: theme.colorPalette.primary.transparent
     },
+    '&.error, &.error.Mui-focused': {
+      color: theme.colorPalette.primary.error,
+    }
   },
   input: {
     '&:hover': {
       '& .MuiOutlinedInput-notchedOutline': {
         borderColor: theme.palette.primary.main,
-        borderWidth: 2
+        borderWidth: 2,
+      },
+      '&.Mui-error': {
+        '& .MuiOutlinedInput-notchedOutline': {
+          borderColor: theme.colorPalette.primary.error,
+        },
       }
     },
     '& .MuiInputBase-input': {
@@ -84,9 +93,9 @@ const useStyles = makeStyles((theme: Theme) => ({
     },
     '&.Mui-error': {
       '& .MuiOutlinedInput-notchedOutline': {
-        borderColor: theme.colorPalette.primary.error
+        borderColor: theme.colorPalette.primary.error,
       },
-    }
+    },
   }
 }))
 
@@ -102,37 +111,40 @@ function FormText(props: FormTextProps) {
   const isError = error ?? !isUndefined(fieldState.error)
 
   return (
-    <FormControl variant="outlined" className={clsx(classes.root, className)}>
-      {label && (
-        <InputLabel
-          htmlFor="form-text"
+    <div className={classes.root}>
+      <FormControl variant="outlined" className={clsx(classes.formControl, className)}>
+        {label && (
+          <InputLabel
+            htmlFor="form-text"
+            className={clsx({
+              checked: fieldProps.value,
+              error: isError
+            })}
+            classes={{
+              root: classes.label,
+            }}
+          >{label}</InputLabel>
+        )}
+        <OutlinedInput
+          id="form-text"
           className={clsx({
             checked: fieldProps.value
           })}
           classes={{
-            root: classes.label,
+            root: classes.input,
+            notchedOutline: classes.notchedOutline,
+            focused: classes.focused,
           }}
-        >{label}</InputLabel>
-      )}
-      <OutlinedInput
-        id="form-text"
-        className={clsx({
-          checked: fieldProps.value
-        })}
-        classes={{
-          root: classes.input,
-          notchedOutline: classes.notchedOutline,
-          focused: classes.focused,
-        }}
-        label={label}
-        placeholder={isString(label) ? label : ''}
-        {...fieldProps}
-        inputRef={ref}
-        error={isError}
-        {...other}
-      />
+          label={label}
+          placeholder={isString(label) ? label : ''}
+          {...fieldProps}
+          inputRef={ref}
+          error={isError}
+          {...other}
+        />
+      </FormControl>
       {isError && <Typography variant="caption" color={theme.colorPalette.primary.error}>{helpText ?? fieldState.error?.message}</Typography>}
-    </FormControl>
+    </div>
   )
 }
 

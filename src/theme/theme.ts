@@ -1,7 +1,5 @@
-import { createBreakpoints, Breakpoints } from "@mui/system";
-import type { CSSProperties } from "@mui/styles";
-import type { TypographyOptions } from "@mui/material/styles/createTypography";
-import type { EmptyObject } from "@/src/tb.types"
+import { createBreakpoints } from "@mui/system";
+import type { DefaultThemeOptions } from "./types"
 
 export const breakpoints = createBreakpoints({
   values: {
@@ -13,35 +11,19 @@ export const breakpoints = createBreakpoints({
   }
 })
 
-export interface ConfigOptions extends Required<typeof config> {}
-export interface ThemeOptions {
-  breakpoints: Breakpoints;
-  typography: TypographyOptions;
-  config: ConfigOptions;
-  styles: {
-    verticalCenter: CSSProperties;
-    inlineCenter: CSSProperties;
-    spaceBetweenCenter: CSSProperties;
-    columnCenter: CSSProperties;
-  };
-  componentStyleOverrides: EmptyObject;
-}
-
 const TB_STATUS_TRANSITION_TIME = '.3s'
 const TB_STATUS_TRANSITION = (t?: number) => t ? `all ${t}s` : `all ${TB_STATUS_TRANSITION_TIME}`
 
-const config = {
-  backdropHeight: 580,
-  navWidth: 1200,
-  contentWidth: 1200,
-  navHeight: 88,
-  transition: TB_STATUS_TRANSITION,
-  transitionTime: TB_STATUS_TRANSITION_TIME,
-}
-
-const theme: ThemeOptions = {
+const theme: DefaultThemeOptions = {
   breakpoints,
-  config,
+  config: {
+    backdropHeight: 580,
+    navWidth: 1200,
+    contentWidth: 1200,
+    navHeight: 88,
+    transition: TB_STATUS_TRANSITION,
+    transitionTime: TB_STATUS_TRANSITION_TIME,
+  },
   componentStyleOverrides: {},
   styles: {
     verticalCenter: {

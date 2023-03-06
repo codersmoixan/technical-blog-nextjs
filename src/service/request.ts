@@ -2,7 +2,7 @@ import Axios from "./axios";
 import store from "../store/index"
 import { requestHeader } from "./utils";
 import { BASE_API_URL } from "./utils";
-import { enqueueSnackbar } from "components/Snackbar/slice";
+import { enqueueSnackbar } from "core/Snackbar/slice";
 import type { AxiosRequestConfig, AxiosResponse } from "axios";
 import type { RequestConfig } from "./type";
 

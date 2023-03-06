@@ -1,11 +1,11 @@
-import useQuery from "hooks/common/query/useQuery";
+import useQuery from "hooks/query/useQuery";
 import {
   addCategoryApi,
   deleteCategoryApi,
   getCategoryApi,
   updateCategoryApi
 } from "containers/Category/api";
-import useMutation from "hooks/common/query/useMutation";
+import useMutation from "hooks/query/useMutation";
 import type { AddOrUpdateCategoryParam } from './types'
 
 export enum CATEGORY_QUERY_KEY {

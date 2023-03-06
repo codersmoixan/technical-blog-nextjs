@@ -1,5 +1,5 @@
 import Box from "@mui/material/Box";
-import makeStyles, { Theme } from "utils/styles/makeStyles";
+import makeStyles, { Theme } from "core/makeStyles";
 import Typography from "@mui/material/Typography";
 import Content from "components/Layout/Content";
 import { useTheme } from "@mui/material/styles";

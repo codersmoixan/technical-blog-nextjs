@@ -1,5 +1,5 @@
 import { useQuery as useReactQuery, UseQueryOptions, UseQueryResult } from "@tanstack/react-query";
-import type { UseQueryOrMutationResultValue } from "hooks/common/query/type";
+import type { UseQueryOrMutationResultValue } from "hooks/query/type";
 
 export const querySetting: UseQueryOptions = {
   refetchOnMount: false,

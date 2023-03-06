@@ -1,21 +1,21 @@
 /**
  * @author zhengji.su
- * @description Index
+ * @description FormChipSelect
  */
 
-import {useEffect, useState} from "react";
+import { useState } from "react";
 import Grid from "@mui/material/Grid";
 import TBChip from "components/TBChip";
 import { makeStyles } from "@mui/styles";
-import useFormController from "hooks/common/useFormController";
-import type { Theme } from "@mui/material";
-import type { EmptyObject } from "@/src/tb.types"
+import useFormController from "@/src/core/Form/hooks/useFormController";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
-import {useTheme} from "@mui/material/styles";
+import { useTheme } from "@mui/material/styles";
 import clsx from "clsx";
 import isUndefined from "lodash/isUndefined";
-import useDeepCompareEffect from "hooks/common/effect/useDeepCompareEffect";
+import useDeepCompareEffect from "hooks/effect/useDeepCompareEffect";
+import type { Theme } from "@mui/material";
+import type { EmptyObject } from "@/src/tb.types"
 
 export type ChipOption = {
   id: string | number;

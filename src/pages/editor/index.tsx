@@ -1,11 +1,6 @@
-import dynamic  from 'next/dynamic'
+import DynamicShareEditor from "containers/Editor/DynamicShareEditor";
 
-const ShareEditor = dynamic(
-  () => import('containers/Editor'),
-  {ssr: false}
-)
+export default function EditorPage() {
 
-export default function Editor() {
-
-  return <ShareEditor />
+  return <DynamicShareEditor />
 }

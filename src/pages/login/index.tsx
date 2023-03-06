@@ -1,27 +1,22 @@
 /**
  * @author zhengji.su
- * @description Login
+ * @description LoginPage
  */
 
-import React, { useState, useEffect } from 'react'
-import Box from '@mui/material/Box';
-import {makeStyles} from "@mui/styles";
-import {Theme} from "@mui/material";
+import Head from "next/head";
+import LoginContainer from "containers/Login";
 
-const useStyles = makeStyles((theme: Theme) => ({
-  root: {
-
-  }
-}))
-
-function Login() {
-  const classes = useStyles()
+function LoginPage() {
 
   return (
-    <Box className={classes.root}>
-      Login
-    </Box>
+    <>
+      <Head>
+        <title>登录你的账号</title>
+        <meta name="description" content="Login" />
+      </Head>
+      <LoginContainer />
+    </>
   )
 }
 
-export default Login
+export default LoginPage

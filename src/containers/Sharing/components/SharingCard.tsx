@@ -16,12 +16,12 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import ShareIcon from '@mui/icons-material/Share';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import Image, { StaticImageData } from "next/image";
-import makeStyles, { Theme } from "utils/styles/makeStyles";
+import makeStyles, { Theme } from "core/makeStyles";
 import ShareFour from "assets/images/share/share-four.png"
 import Typography from "@mui/material/Typography";
 import MediaQuery from "components/MediaQuery";
 import Box from "@mui/material/Box";
-import useSeparateChildren from "hooks/common/useSeparateChildren";
+import useSeparateChildren from "hooks/useSeparateChildren";
 import clsx from "clsx";
 
 interface SharingCardProps extends Pick<CardProps, 'onClick'> {
@@ -72,7 +72,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     padding: theme.spacing(1, 2)
   },
   avatar: {
-    backgroundColor: theme.colorPalette.background.dark,
+    backgroundColor: theme.colorPalette.background.main,
     color: theme.colorPalette.text.default
   },
   title: {},

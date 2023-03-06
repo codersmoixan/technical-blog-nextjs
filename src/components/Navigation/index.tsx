@@ -1,9 +1,9 @@
 /**
  * @author zhengji.su
- * @description Index
+ * @description Navigation
  */
 
-import { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Box from "@mui/material/Box";
 import Image from "next/image";
 import Logo from "assets/images/logo/logo.dark.jpg"
@@ -17,12 +17,11 @@ import isString from "lodash/isString"
 import MediaQuery from "components/MediaQuery";
 import MenuIcon from "components/Icons/MenuIcon";
 import MenuDrawer from "components/Navigation/components/MenuDrawer";
-import UserButtons from "components/Navigation/components/UserButtons";
 import AccordionMenu from "components/Navigation/components/AccordionMenu";
 import routes from "@/src/routes";
 import { useTheme } from "@mui/material/styles";
-import { Variant } from "components/Variant";
-import makeStyles, { Theme } from "utils/styles/makeStyles";
+import { Variant } from "components/Animation/Variant";
+import makeStyles, { Theme } from "core/makeStyles";
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -88,7 +87,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   tools: {
     display: 'flex',
     alignItems: 'center',
-    justifyContent: 'space-between',
+    justifyContent: 'flex-end',
     width: 425
   },
   logo: {
@@ -104,7 +103,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   btn: {
     '&.MuiButton-textPrimary': {
-      color: theme.colorPalette.text.dark
+      color: theme.colorPalette.text.default
     }
   },
 }), 'Navigation')
@@ -143,60 +142,74 @@ function Navigation() {
 
   const handleToHome = () => history.push(routes.home)
 
+  const handleJumpToLogin = () => history.push(routes.login)
+
   return (
-    <Box component="header">
-      <MediaQuery media={['pc', 'pad']}>
-        <Box
-          className={clsx(classes.root, focus ? classes.focus : classes.blur)}
-          onMouseLeave={() => handleCheckRoute(null, 'leave')}
-        >
-          <Box className={classes.content}>
-            <Box display="flex" alignItems="center">
-              <Image src={Logo} alt="" className={classes.logo} onClick={handleToHome} />
-              <Box className={classes.menus}>
-                {NAVIGATION_LIST.map(tab => (
-                  <Buttons
-                    key={tab.id}
-                    variant="text"
-                    onClick={() => handleCheckRoute(tab)}
-                    onMouseEnter={() => handleCheckRoute(tab, 'enter')}
-                    className={classes.btn}
-                  >{tab.label}</Buttons>
-                ))}
-              </Box>
-            </Box>
-            <Box className={clsx(classes.tools, 'tools')}>
-              <Box width={200}>
-                <FormText label="搜索本站" bgColor={theme.colorPalette.primary.transparent} />
-              </Box>
-              <UserButtons />
-            </Box>
-          </Box>
-          <Variant focus={!isEmpty(focusTab?.menus)}>
-            <AccordionMenu tab={focusTab} />
-          </Variant>
-        </Box>
-      </MediaQuery>
-      <MediaQuery media="mobile">
-        <Box className={clsx(classes.root, focus ? classes.focus : classes.blur)}>
-          <Image src={Logo} alt="" className={classes.logo} onClick={handleToHome} />
-          <Buttons
-            variant="text"
-            space={false}
-            className={classes.open}
-            onClick={handleOpenDialog}
-          >
-            <MenuIcon />
-          </Buttons>
-        </Box>
-        <MenuDrawer
-          menus={NAVIGATION_LIST}
-          open={openDialog}
-          onClose={() => setOpenDialog(false)}
-        />
-      </MediaQuery>
-    </Box>
-  )
+		<Box component="header">
+			<MediaQuery media={['pc', 'pad']}>
+				<Box
+					className={clsx(classes.root, focus ? classes.focus : classes.blur)}
+					onMouseLeave={() => handleCheckRoute(null, 'leave')}
+				>
+					<Box className={classes.content}>
+						<Box display="flex" alignItems="center">
+							<Image src={Logo} alt="" className={classes.logo} onClick={handleToHome} />
+							<Box className={classes.menus}>
+								{NAVIGATION_LIST.map(tab => (
+									<Buttons
+										key={tab.id}
+										variant="text"
+										onClick={() => handleCheckRoute(tab)}
+										onMouseEnter={() => handleCheckRoute(tab, 'enter')}
+										className={classes.btn}
+									>
+										{tab.label}
+									</Buttons>
+								))}
+							</Box>
+						</Box>
+						<Box className={clsx(classes.tools, 'tools')}>
+							<Box width={200} mr={3}>
+								<FormText
+									label="搜索本站"
+									bgColor={theme.colorPalette.primary.transparent}
+								/>
+							</Box>
+							<Buttons
+								variant="contained"
+								color="primary"
+								disableRipple
+								onClick={handleJumpToLogin}
+							>
+								Sign in
+							</Buttons>
+						</Box>
+					</Box>
+					<Variant focus={!isEmpty(focusTab?.menus)}>
+						<AccordionMenu tab={focusTab} />
+					</Variant>
+				</Box>
+			</MediaQuery>
+			<MediaQuery media="mobile">
+				<Box className={clsx(classes.root, focus ? classes.focus : classes.blur)}>
+					<Image src={Logo} alt="" className={classes.logo} onClick={handleToHome} />
+					<Buttons
+						variant="text"
+						space={false}
+						className={classes.open}
+						onClick={handleOpenDialog}
+					>
+						<MenuIcon />
+					</Buttons>
+				</Box>
+				<MenuDrawer
+					menus={NAVIGATION_LIST}
+					open={openDialog}
+					onClose={() => setOpenDialog(false)}
+				/>
+			</MediaQuery>
+		</Box>
+	)
 }
 
 export default Navigation

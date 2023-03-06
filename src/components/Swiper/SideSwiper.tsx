@@ -5,8 +5,8 @@
 
 import Box, { BoxProps } from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
-import makeStyles, { Theme } from "utils/styles/makeStyles";
-import VariantList from "components/Variant/VariantList";
+import makeStyles, { Theme } from "core/makeStyles";
+import VariantList from "components/Animation/Variant/VariantList";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight"
 import Buttons from "components/Buttons";

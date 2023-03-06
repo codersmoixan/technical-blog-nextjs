@@ -9,7 +9,7 @@ import { makeStyles } from "@mui/styles";
 import Grid from "@mui/material/Grid"
 import BlogCard, { DESCRIPTION, EXPANDED } from "containers/Sharing/components/SharingCard";
 import { blogList } from "./constants"
-import { Variant, VariantContent } from "components/Variant";
+import { Variant, VariantContent } from "components/Animation/Variant";
 import SharingRoot from "containers/Sharing/components/SharingRoot";
 import CreativeGrid from "assets/images/backdrop/creative-grid.jpeg";
 import { stiffnessVariants } from "utils/variants";

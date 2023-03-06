@@ -17,7 +17,8 @@ const routes = {
   editor: '/editor',
   about: '/about',
   login: '/login',
-  signup: '/signup'
+  signup: '/signup',
+  notFond: '/404'
 }
 
 export default routes

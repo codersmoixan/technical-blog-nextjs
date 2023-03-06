@@ -1,5 +1,5 @@
 import { useAddShareMutation, useGetShareListQuery } from "containers/Sharing/queries";
-import useNotifier from "components/Snackbar/hooks/useNotifier";
+import useNotifier from "core/Snackbar/hooks/useNotifier";
 import type { AddSharingParam } from "containers/Sharing/types";
 import type { PageParams } from "@/src/tb.types";
 

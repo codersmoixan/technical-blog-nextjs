@@ -4,7 +4,7 @@
  */
 
 import Box from '@mui/material/Box';
-import SpeedDial, {SpeedDialProps} from '@mui/material/SpeedDial';
+import SpeedDial, { SpeedDialProps } from '@mui/material/SpeedDial';
 import SpeedDialIcon from '@mui/material/SpeedDialIcon';
 import SpeedDialAction from '@mui/material/SpeedDialAction';
 import BookmarkAdd from '@mui/icons-material/BookmarkAdd';
@@ -16,7 +16,7 @@ import { makeStyles } from "@mui/styles";
 import { useRouter } from "next/router";
 import routes from "@/src/routes";
 import Link from "next/link";
-import useSpeedDial from "containers/App/hooks/useSpeedDial";
+import useSpeedDial from "hooks/useSpeedDial";
 import ThemeSettingIcon from "containers/App/components/ThemeSettingIcon";
 import type { ReactNode } from "react";
 import type { Theme } from "@mui/material";

@@ -1,4 +1,4 @@
-import makeStyles, { Theme } from "utils/styles/makeStyles";
+import makeStyles, { Theme } from "core/makeStyles";
 import Box, { BoxProps } from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import { useTheme } from "@mui/material/styles";

@@ -1,6 +1,6 @@
-import useQuery from "hooks/common/query/useQuery";
+import useQuery from "hooks/query/useQuery";
 import { addTagApi, deleteTagApi, getTagListApi, updateTagApi } from "containers/Tag/api";
-import useMutation from "hooks/common/query/useMutation";
+import useMutation from "hooks/query/useMutation";
 
 export enum TAG_QUERY_KEY {
   GET = 'tag.get',
