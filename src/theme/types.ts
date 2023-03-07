@@ -96,6 +96,7 @@ export interface ComponentStyleOverrides {
   AccordionMenu?: EmptyObject;
   Articles?: EmptyObject;
   Login?: EmptyObject;
+  Register?: EmptyObject;
   SuspendButtons?: EmptyObject;
 }
 

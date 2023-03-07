@@ -36,7 +36,7 @@ const useStyles = makeStyles(
 	'App'
 )
 
-const excludeList = [routes.editor, routes.login, routes.notFond]
+const excludeList = [routes.editor, routes.login, routes.notFond, routes.register]
 
 function App({ Component, pageProps }: AppProps) {
 	const classes = useStyles()

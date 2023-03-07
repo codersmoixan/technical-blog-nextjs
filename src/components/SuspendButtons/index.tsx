@@ -34,10 +34,10 @@ function SuspendButtons() {
 
 	return (
 		<>
-			<BeforeRoute exclude={[routes.editor, routes.login, routes.notFond]}>
+			<BeforeRoute exclude={[routes.editor, routes.login, routes.notFond, routes.register]}>
 				<BasicSpeedDial />
 			</BeforeRoute>
-			<BeforeRoute include={[routes.login, routes.notFond]}>
+			<BeforeRoute include={[routes.login, routes.notFond, routes.register]}>
 				<Fab className={classes.fab} onClick={() => updateSpeedDial('setting')}>
 					<ThemeSettingIcon />
 				</Fab>

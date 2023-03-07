@@ -134,7 +134,16 @@ const darkTheme = {
         backgroundColor: 'rgb(0, 55, 104)',
         color: 'rgb(97, 243, 243)',
       }
-		}
+		},
+    Register: {
+      submit: {
+        backgroundColor: 'rgb(252, 252, 252)',
+        color: 'rgb(33, 43, 54)',
+        '&.MuiButton-root:hover': {
+          backgroundColor: 'rgba(252, 252, 252, 0.94)'
+        }
+      },
+    }
 	},
 	components: {
 		MuiTypography: {

@@ -11,7 +11,7 @@ function LoginPage() {
   return (
     <>
       <Head>
-        <title>登录你的账号</title>
+        <title>Smoixan - 登录你的账号</title>
         <meta name="description" content="Login" />
       </Head>
       <Login />

@@ -17,7 +17,7 @@ const routes = {
   editor: '/editor',
   about: '/about',
   login: '/login',
-  signup: '/signup',
+  register: '/register',
   notFond: '/404'
 }
 

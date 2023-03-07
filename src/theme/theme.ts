@@ -48,21 +48,7 @@ const theme: DefaultThemeOptions = {
   },
   typography: {
     fontFamily: [
-      "Open Sans",
-      'SourceHanSansSC',
-      'Noto Sans CJK SC',
-      'Hiragino Sans GB',
-      'Roboto',
-      'Helvetica',
-      'Arial',
-      'STXihei',
-      '华文细黑',
-      'Microsoft YaHei',
-      'Microsoft YaHei UI',
-      '微软雅黑',
-      'Heiti',
-      '黑体',
-      '冬青黑体简体中文',
+      'Public Sans'
     ].join(','),
     h1: {
       fontSize: 'clamp(64px, 6vw, 96px)',

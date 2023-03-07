@@ -12,11 +12,12 @@ import MediaQuery from 'components/MediaQuery'
 import makeStyles, { Theme } from 'core/makeStyles'
 import Image from 'next/image'
 import { Error } from '@mui/icons-material'
+import routes from '@/src/routes'
+import {useRouter} from "next/router";
 
 const useStyles = makeStyles(
 	(theme: Theme) => ({
 		root: {
-			position: 'relative',
 			display: 'flex',
 			height: '100vh',
 			boxSizing: 'border-box',
@@ -28,11 +29,6 @@ const useStyles = makeStyles(
 		},
 		welcome: {
 			flex: 1
-		},
-		button: {
-			padding: 0,
-			minHeight: 'auto',
-			height: 'auto',
 		},
 		signInForm: {
 			display: 'flex',
@@ -59,25 +55,25 @@ const useStyles = makeStyles(
 				'& .MuiButton-contained': {
 					height: 48
 				}
-			},
+			}
 		},
-    submit: {
-      backgroundColor: 'rgb(33, 43, 54)',
-      '&.MuiButton-root:hover': {
-        backgroundColor: 'rgba(33, 43, 54, 0.94)'
-      }
-    },
+		submit: {
+			backgroundColor: 'rgb(33, 43, 54)',
+			'&.MuiButton-root:hover': {
+				backgroundColor: 'rgba(33, 43, 54, 0.94)'
+			}
+		},
 		example: {
-      display: 'flex',
+			display: 'flex',
 			padding: theme.spacing(1.5, 2),
-      margin: theme.spacing(5, 0, -2),
+			margin: theme.spacing(5, 0, -2),
 			borderRadius: 8,
-      backgroundColor: 'rgb(97, 243, 243)',
-      color: 'rgb(0, 55, 104)',
-      '& .value': {
-        marginLeft: theme.spacing(2),
-        fontSize: 14
-      }
+			backgroundColor: 'rgb(97, 243, 243)',
+			color: 'rgb(0, 55, 104)',
+			'& .value': {
+				marginLeft: theme.spacing(2),
+				fontSize: 14
+			}
 		},
 		divider: {
 			'&::before, &::after': {
@@ -97,11 +93,14 @@ const useStyles = makeStyles(
 
 function Login() {
 	const classes = useStyles()
+  const history = useRouter()
 	const { observer } = useForm()
 
 	const handleLogin = (options: FieldValues) => {
 		console.log(options)
 	}
+
+  const handleToRegister = () => history.replace(routes.register)
 
 	return (
 		<div className={classes.root}>
@@ -114,19 +113,19 @@ function Login() {
 						<Typography variant="h4">Sign in Smoixan</Typography>
 						<div className="desc">
 							<Typography>新用户？</Typography>
-							<Typography className="create" color="primary">
-								快来创建一个吧
-							</Typography>
+							<Buttons variant="text" className="create" onClick={handleToRegister} inline>
+								<Typography color="primary">快来创建一个吧</Typography>
+							</Buttons>
 						</div>
 					</div>
 					<div className={classes.example}>
-            <div className="error-icon">
-              <Error />
-            </div>
-            <div className="value">
-              账号 : <strong>smoixan@qq.com</strong> / 密码 : <strong>smoixan1234</strong>
-            </div>
-          </div>
+						<div className="error-icon">
+							<Error />
+						</div>
+						<div className="value">
+							账号 : <strong>smoixan@qq.com</strong> / 密码 : <strong>smoixan1234</strong>
+						</div>
+					</div>
 					<div className="form">
 						<Form observer={observer} onFinish={handleLogin}>
 							<Box my={3}>
@@ -146,11 +145,16 @@ function Login() {
 								/>
 							</Box>
 							<Box mb={2} mt={-1} textAlign="right">
-								<Buttons className={classes.button}>
+								<Buttons inline>
 									<Typography component="span">忘记密码?</Typography>
 								</Buttons>
 							</Box>
-							<Buttons variant="contained" fullWidth type="submit" className={classes.submit}>
+							<Buttons
+								variant="contained"
+								fullWidth
+								type="submit"
+								className={classes.submit}
+							>
 								登录
 							</Buttons>
 						</Form>
@@ -159,12 +163,12 @@ function Login() {
 						<Typography color="textSecondary">或者</Typography>
 					</Divider>
 					<div className={classes.other}>
-						<Buttons className={classes.button}>
+						<Buttons inline>
 							<Typography component="span" display="flex" alignItems="center">
 								<GitHub />
 							</Typography>
 						</Buttons>
-						<Buttons className={classes.button}>
+						<Buttons inline>
 							<Image src="/icons/ic_wechat.svg" width={26} height={26} alt="ic_wechat" />
 						</Buttons>
 					</div>
