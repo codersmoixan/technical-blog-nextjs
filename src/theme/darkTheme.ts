@@ -1,4 +1,5 @@
 import { breakpoints } from './theme'
+import ThemeSetting from 'containers/App/components/ThemeSetting'
 
 const darkTheme = {
 	colorPalette: {
@@ -123,27 +124,32 @@ const darkTheme = {
 			fab: {
 				boxShadow: 'rgb(0 0 0 / 36%) -12px 12px 32px -4px'
 			},
-      submit: {
-        backgroundColor: 'rgb(252, 252, 252)',
-        color: 'rgb(33, 43, 54)',
-        '&.MuiButton-root:hover': {
-          backgroundColor: 'rgba(252, 252, 252, 0.94)'
-        }
-      },
-      example: {
-        backgroundColor: 'rgb(0, 55, 104)',
-        color: 'rgb(97, 243, 243)',
-      }
+			submit: {
+				backgroundColor: 'rgb(252, 252, 252)',
+				color: 'rgb(33, 43, 54)',
+				'&.MuiButton-root:hover': {
+					backgroundColor: 'rgba(252, 252, 252, 0.94)'
+				}
+			},
+			example: {
+				backgroundColor: 'rgb(0, 55, 104)',
+				color: 'rgb(97, 243, 243)'
+			}
 		},
-    Register: {
-      submit: {
-        backgroundColor: 'rgb(252, 252, 252)',
-        color: 'rgb(33, 43, 54)',
-        '&.MuiButton-root:hover': {
-          backgroundColor: 'rgba(252, 252, 252, 0.94)'
-        }
-      },
-    }
+		Register: {
+			submit: {
+				backgroundColor: 'rgb(252, 252, 252)',
+				color: 'rgb(33, 43, 54)',
+				'&.MuiButton-root:hover': {
+					backgroundColor: 'rgba(252, 252, 252, 0.94)'
+				}
+			}
+		},
+		PopupLayer: {
+			drawerPaper: {
+				backgroundColor: 'rgba(22, 28, 36, 0.9)'
+			}
+		}
 	},
 	components: {
 		MuiTypography: {

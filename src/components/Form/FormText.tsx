@@ -82,6 +82,10 @@ const useStyles = makeStyles((theme: Theme) => ({
       '&::-ms-input-placeholder': {/*Internet Explorer 10+*/
         fontSize: 14,
       },
+      '&:-internal-autofill-previewed, &:-internal-autofill-selected': {
+        'transition': 'background-color 5000s ease-out 0.5s',
+        '-webkit-text-fill-color': theme.palette.primary.main
+      }
     },
   },
   notchedOutline: {

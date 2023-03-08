@@ -3,6 +3,7 @@ import type { EmptyObject } from "@/src/tb.types"
 import type { Breakpoints } from "@mui/system";
 import type { ThemeOptions as MuiThemeOptions } from "@mui/material";
 import SuspendButtons from "components/SuspendButtons";
+import ThemeSetting from "containers/App/components/ThemeSetting";
 
 export interface ConfigOptions {
   backdropHeight: number;
@@ -69,8 +70,9 @@ export interface ColorPaletteOptions {
     five: string;
     six: string;
     colorSecondary: string;
-    bgSecondary: string;
-    bgActive: string;
+    hover: string;
+    active: string;
+    activeHover: string;
   },
   gradient: {
     propagate: string;
@@ -98,6 +100,8 @@ export interface ComponentStyleOverrides {
   Login?: EmptyObject;
   Register?: EmptyObject;
   SuspendButtons?: EmptyObject;
+  ThemeSetting?: EmptyObject;
+  PopupLayer?: EmptyObject;
 }
 
 export type ComponentStyleOverridesKey = keyof ComponentStyleOverrides

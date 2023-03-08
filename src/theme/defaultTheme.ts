@@ -47,8 +47,9 @@ const defaultTheme: ThemeOptions = {
       five: '#fda92d',
       six: '#FF3030',
       colorSecondary: 'rgba(99, 115, 129)',
-      bgSecondary: 'rgba(229, 230, 232, .1)',
-      bgActive: 'rgba(245, 239, 253, 1)',
+      hover: 'rgba(186, 191, 200, 0.08)',
+      active: 'rgba(0, 171, 85, 0.08)',
+      activeHover: 'rgba(0, 171, 85, 0.15)',
     },
     gradient: {
       propagate: '-webkit-linear-gradient(300deg, rgb(0, 171, 85) 0%, rgb(255, 171, 0) 25%, rgb(0, 171, 85) 50%, rgb(255, 171, 0) 75%, rgb(0, 171, 85) 100%) 0% 0% / 400%',

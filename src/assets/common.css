@@ -103,6 +103,5 @@ video {
 
 input:-internal-autofill-previewed,
 input:-internal-autofill-selected {
-	-webkit-text-fill-color: #807c7c;
 	transition: background-color 5000s ease-out 0.5s;
 }

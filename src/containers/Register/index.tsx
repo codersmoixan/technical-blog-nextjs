@@ -123,7 +123,6 @@ function Register() {
 								<Grid item xs={12}>
 									<FormText
 										name="username"
-										autoComplete="off"
 										label="账号"
 										rules={{ required: '请输入账号' }}
 									/>
@@ -131,7 +130,6 @@ function Register() {
 								<Grid item xs={12}>
 									<FormPassword
 										name="password"
-										autoComplete="off"
 										label="密码"
 										rules={{ required: '请输入密码' }}
 									/>
