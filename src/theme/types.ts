@@ -2,8 +2,6 @@ import type { CSSProperties } from "@mui/styles";
 import type { EmptyObject } from "@/src/tb.types"
 import type { Breakpoints } from "@mui/system";
 import type { ThemeOptions as MuiThemeOptions } from "@mui/material";
-import SuspendButtons from "components/SuspendButtons";
-import ThemeSetting from "containers/App/components/ThemeSetting";
 
 export interface ConfigOptions {
   backdropHeight: number;
@@ -12,18 +10,6 @@ export interface ConfigOptions {
   navHeight: number;
   transition: (t?: number) => string;
   transitionTime: string;
-}
-
-export interface CustomThemeOptions {
-  config: ConfigOptions;
-  colorPalette: ColorPaletteOptions;
-  styles: {
-    verticalCenter: CSSProperties;
-    inlineCenter: CSSProperties;
-    spaceBetweenCenter: CSSProperties;
-    columnCenter: CSSProperties;
-  },
-  componentStyleOverrides: ComponentStyleOverrides;
 }
 
 export interface ColorPaletteOptions {
@@ -114,6 +100,18 @@ export interface DefaultThemeOptions extends Pick<MuiThemeOptions, 'config' | 't
     spaceBetweenCenter: CSSProperties;
     columnCenter: CSSProperties;
   };
+  componentStyleOverrides: ComponentStyleOverrides;
+}
+
+export interface CustomThemeOptions {
+  config: ConfigOptions;
+  colorPalette: ColorPaletteOptions;
+  styles: {
+    verticalCenter: CSSProperties;
+    inlineCenter: CSSProperties;
+    spaceBetweenCenter: CSSProperties;
+    columnCenter: CSSProperties;
+  },
   componentStyleOverrides: ComponentStyleOverrides;
 }
 
