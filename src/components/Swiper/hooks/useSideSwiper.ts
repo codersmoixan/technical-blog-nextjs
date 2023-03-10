@@ -44,9 +44,9 @@ const useSideSwiper = ({ sideCount, sideSize: propSideSize }: UseSideSwiperProps
   }, [sideCount, sideRect, containerRect]);
 
   function windowResize() {
-    setSideRect(() => (sideRef.current as any)?.getBoundingClientRect())
-    setSwiperRect(() => (swiperRef.current as any)?.getBoundingClientRect())
-    setContainerRect(() => (containerRef.current as any)?.getBoundingClientRect())
+    setSideRect(() => (sideRef.current as any)?.getBoundingClientRect() ?? {})
+    setSwiperRect(() => (swiperRef.current as any)?.getBoundingClientRect() ?? {})
+    setContainerRect(() => (containerRef.current as any)?.getBoundingClientRect() ?? {})
   }
 
   const scroll = (space: number) => {

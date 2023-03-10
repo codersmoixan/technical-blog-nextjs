@@ -49,6 +49,9 @@ const useStyles = makeStyles(
 			display: 'flex',
 			width: 'max-content'
 		},
+    children: {
+      height: '100%',
+    },
 		prevBtn: {
 			'&.Mui-disabled.MuiButton-textPrimary': {
 				color: theme.colorPalette.text.disabled
@@ -115,7 +118,7 @@ function SideSwiper(props: SideSwiperProps) {
 			) : null}
 			<Box ref={containerRef} className={classes.banner}>
 				<VariantList ref={swiperRef} list={data} className={classes.container}>
-					{option => <div ref={sideRef}>{children(option)}</div>}
+					{option => <div className={classes.children} ref={sideRef}>{children(option)}</div>}
 				</VariantList>
 			</Box>
 		</Box>

@@ -21,7 +21,7 @@ function responseInterceptors(config: AxiosResponse) {
     }))
   }
 
-  return config
+  return data
 }
 
 function responseInterceptorsCatch(err: any) {

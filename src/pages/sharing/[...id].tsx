@@ -5,6 +5,7 @@
 
 import SharingUnit from "containers/Sharing/SharingUnit";
 import Head from "next/head";
+import type {GetServerSideProps} from "next";
 
 function SharingUnitPage() {
 
@@ -17,6 +18,10 @@ function SharingUnitPage() {
       <SharingUnit />
     </>
   )
+}
+
+export async function getServerSideProps(context: GetServerSideProps) {
+
 }
 
 export default SharingUnitPage

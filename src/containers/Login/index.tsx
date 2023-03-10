@@ -145,7 +145,7 @@ function Login() {
 								/>
 							</Box>
 							<Box mb={2} mt={-1} textAlign="right">
-								<Buttons inline>
+								<Buttons inline href={routes.resetPassword}>
 									<Typography component="span">忘记密码?</Typography>
 								</Buttons>
 							</Box>
