@@ -55,7 +55,8 @@ const redTheme: ThemeOptions = {
 			propagate:
 				'-webkit-linear-gradient(300deg, rgb(255, 48, 48) 0%, rgb(255, 171, 0) 25%, rgb(255, 48, 48) 50%, rgb(255, 171, 0) 75%, rgb(255, 48, 48) 100%) 0% 0% / 400%',
 			button:
-				'linear-gradient(76.35deg, rgb(255, 48, 48) 15.89%, rgb(255, 171, 0) 89.75%)'
+				'linear-gradient(76.35deg, rgb(255, 48, 48) 15.89%, rgb(255, 171, 0) 89.75%)',
+      logo: 'linear-gradient(300deg, rgb(255, 48, 48) 0%, rgb(255, 171, 0) 100%)'
 		}
 	},
 	palette: {

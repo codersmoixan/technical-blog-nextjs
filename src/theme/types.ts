@@ -63,6 +63,7 @@ export interface ColorPaletteOptions {
   gradient: {
     propagate: string;
     button: string;
+    logo: string;
   }
 }
 

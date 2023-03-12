@@ -1,9 +1,11 @@
 import { breakpoints } from './theme'
 import type { ThemeOptions } from '@/src/theme/types'
 import type { EmptyObject } from '@/src/tb.types'
+import type { PaletteOptions } from '@mui/material'
 
 interface DarkTheme extends Pick<ThemeOptions, 'componentStyleOverrides' | 'components'> {
 	colorPalette: EmptyObject
+	palette: PaletteOptions
 }
 
 const darkTheme: DarkTheme = {
@@ -20,7 +22,7 @@ const darkTheme: DarkTheme = {
 			three: '#7635dc',
 			four: '#2065D1',
 			five: '#fda92d',
-			six: '#FF3030',
+			six: '#FF3030'
 		},
 		text: {
 			default: '#FFFFFF',
@@ -136,6 +138,9 @@ const darkTheme: DarkTheme = {
 				backgroundColor: 'rgba(22, 28, 36, 0.9)'
 			}
 		}
+	},
+	palette: {
+		mode: 'dark'
 	},
 	components: {
 		MuiTypography: {

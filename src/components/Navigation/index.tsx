@@ -5,8 +5,6 @@
 
 import React, { useEffect, useState } from 'react'
 import Box from "@mui/material/Box";
-import Image from "next/image";
-import Logo from "assets/images/logo/logo.dark.jpg"
 import { NAVIGATION_LIST, NavigationItem } from "components/Navigation/constant";
 import Buttons from "components/Buttons";
 import FormText from "components/Form/FormText";
@@ -22,6 +20,7 @@ import routes from "@/src/routes";
 import { useTheme } from "@mui/material/styles";
 import { Variant } from "components/Animation/Variant";
 import makeStyles, { Theme } from "core/makeStyles";
+import Mask from "components/Container/Mask";
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -91,8 +90,10 @@ const useStyles = makeStyles((theme: Theme) => ({
     width: 425
   },
   logo: {
-    width: 45,
-    height: 45,
+    width: 35,
+    height: 35,
+    background: theme.colorPalette.gradient.logo,
+    cursor: 'pointer',
     [theme.breakpoints.down('lg')]: {
       width: 30,
       height: 30
@@ -153,7 +154,7 @@ function Navigation() {
 				>
 					<Box className={classes.content}>
 						<Box display="flex" alignItems="center">
-							<Image src={Logo} alt="" className={classes.logo} onClick={handleToHome} />
+              <Mask icon="/icons/logo.svg" className={classes.logo} />
 							<Box className={classes.menus}>
 								{NAVIGATION_LIST.map(tab => (
 									<Buttons
@@ -192,7 +193,7 @@ function Navigation() {
 			</MediaQuery>
 			<MediaQuery media="mobile">
 				<Box className={clsx(classes.root, focus ? classes.focus : classes.blur)}>
-					<Image src={Logo} alt="" className={classes.logo} onClick={handleToHome} />
+          <Mask icon="/icons/logo.svg" className={classes.logo} />
 					<Buttons
 						variant="text"
 						space={false}

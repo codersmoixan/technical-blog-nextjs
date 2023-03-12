@@ -6,19 +6,12 @@ import Content from 'components/Layout/Content'
 import { useRouter } from 'next/router'
 import MediaQuery from 'components/MediaQuery'
 import Head from 'next/head'
-import type {
-	GetServerSidePropsContext,
-	GetStaticPathsContext,
-	GetStaticPropsContext
-} from 'next'
 import { getArticle } from 'containers/Articles/api'
-import { dispatch } from '@/src/store'
 import isUndefined from 'lodash/isUndefined'
-import { changeArticle } from 'containers/Articles/slice'
-import { useEffect } from 'react'
-import axios from 'axios'
 import { dehydrate, QueryClient } from '@tanstack/react-query'
-import { ARTICLE_QUERY_KEY, useGetArticleQuery } from 'containers/Articles/queries'
+import { useMediaQuery } from '@mui/material'
+import { ARTICLE_QUERY_KEY } from 'containers/Articles/queries'
+import type { GetServerSidePropsContext } from 'next'
 
 interface ArticlePageProps {
 	article: Article
@@ -56,8 +49,9 @@ const useStyles = makeStyles(
 function ArticlesPage({ article }: ArticlePageProps) {
 	const classes = useStyles()
 	const history = useRouter()
+	const dark = useMediaQuery('(prefers-color-scheme: dark)')
 
-
+	console.log(dark, 1352)
 
 	return (
 		<Box className={classes.root}>
@@ -95,7 +89,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
 
 	return {
 		props: {
-			dehydratedState: dehydrate(queryClient),
+			dehydratedState: dehydrate(queryClient)
 		}
 	}
 }

@@ -54,6 +54,7 @@ const blueTheme: ThemeOptions = {
     gradient: {
       propagate: '-webkit-linear-gradient(300deg, rgb(32, 101, 209) 0%, rgb(255, 171, 0) 25%, rgb(32, 101, 209) 50%, rgb(255, 171, 0) 75%, rgb(32, 101, 209) 100%) 0% 0% / 400%',
       button: 'linear-gradient(76.35deg, rgb(32, 101, 209) 15.89%, rgb(255, 171, 0) 89.75%)',
+      logo: 'linear-gradient(300deg, rgb(32, 101, 209) 0%, rgb(255, 171, 0) 100%)'
     }
   },
   palette: {

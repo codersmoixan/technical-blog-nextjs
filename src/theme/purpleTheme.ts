@@ -55,7 +55,8 @@ const purpleTheme: ThemeOptions = {
 			propagate:
 				'-webkit-linear-gradient(300deg, rgb(118, 53, 220) 0%, rgb(255, 171, 0) 25%, rgb(118, 53, 220) 50%, rgb(255, 171, 0) 75%, rgb(118, 53, 220) 100%) 0% 0% / 400%',
 			button:
-				'linear-gradient(76.35deg, rgb(118, 53, 220) 15.89%, rgb(255, 171, 0) 89.75%)'
+				'linear-gradient(76.35deg, rgb(118, 53, 220) 15.89%, rgb(255, 171, 0) 89.75%)',
+      logo: 'linear-gradient(300deg, rgb(118, 53, 220) 0%, rgb(255, 171, 0) 100%)'
 		}
 	},
 	palette: {
