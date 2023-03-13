@@ -19,20 +19,4 @@ export const toggleExist = <T extends any>(a: T[], b: T) => (indexOf(a, b) === -
 
 export const deepEqual = <T>(aDeps: T, bDeps: T) => isEqual(aDeps, bDeps);
 
-export const findChildNode = (nodes: ReactElement[], key: string) => nodes.find((node: ReactElement) => node.props.slot === key) ?? null
-
-export const separateChildren = <T extends string>(children: ReactElement[] | ReactNode, slots: T[]) => {
-  let slotsChild: any = {}
-
-  if (isArray(children)) {
-    slots.forEach((slot: string) => {
-      slotsChild[slot] = findChildNode(children, slot)
-    })
-  } else {
-    slotsChild[slots[0]] = children ?? null
-  }
-
-  return slotsChild as EmptyObject<T, ReactElement>
-}
-
 export const getValue = <T extends EmptyObject, K extends keyof T>(obj: T, key: K): T[K] => obj[key]

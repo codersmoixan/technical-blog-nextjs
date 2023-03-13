@@ -22,7 +22,7 @@ export default class MyDocument extends Document {
             content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
           />
           {/*<meta name="theme-color" content={index.palette.primary.main} />*/}
-          <link rel="icon" type="image/png" href="/favicon.ico" />
+          <link rel="icon" type="image/png" href="/icons/logo.svg" />
         </Head>
         <body>
           <Main/>

@@ -200,7 +200,7 @@ function Navigation() {
 						className={classes.open}
 						onClick={handleOpenDialog}
 					>
-						<MenuIcon />
+						<MenuIcon width={18} height={18} />
 					</Buttons>
 				</Box>
 				<MenuDrawer

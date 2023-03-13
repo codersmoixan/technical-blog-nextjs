@@ -31,7 +31,7 @@ interface SharingCardProps extends Pick<CardProps, 'onClick'> {
   image?: string | StaticImageData;
   actions?: boolean;
   className?: string;
-  children?: ReactNode | ReactElement[];
+  children?: ReactElement | ReactElement[];
 }
 
 interface ExpandMoreProps extends IconButtonProps {

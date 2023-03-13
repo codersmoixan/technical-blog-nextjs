@@ -162,12 +162,10 @@ function Publish({ open = false, onClose, onPublish }: PublishProps) {
             header: classes.drawerHeader,
             paper: classes.drawerPaper
           }}
-          confirmText="发布文章"
-          cancelText="取消"
           onClose={handleClose}
           onConfirm={handleSubmit(handlePublish)}
         >
-          <Typography component="span" variant="h4" slot="head">发布文章</Typography>
+          <Typography component="span" variant="h4" slot="header">发布文章</Typography>
           <Box px={2} slot="content">
             {formNode()}
           </Box>

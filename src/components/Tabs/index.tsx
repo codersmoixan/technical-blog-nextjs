@@ -41,7 +41,7 @@ function Tabs(props: TabsProps) {
 	}
 
 	const tabPane = useMemo(
-		() => children.find(child => child.props.name === value),
+		() => children.find(child => child.props.name === value) ?? null,
 		[value, children]
 	)
 

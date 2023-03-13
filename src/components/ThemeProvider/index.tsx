@@ -31,15 +31,6 @@ function ThemeProvider({ children }: ThemeProviderProps) {
     const themeOptions = createTheme(themePresets[presets])
 
     return mode === 'dark' ? merge(themeOptions, darkTheme) : themeOptions
-
-    // return mode === 'dark' ? {
-    //   ...themeOptions,
-    //   ...darkTheme,
-    //   colorPalette: {
-    //     ...themeOptions.colorPalette,
-    //     ...darkTheme.colorPalette
-    //   },
-    // } : themeOptions
   }, [mode, presets])
 
   return (
