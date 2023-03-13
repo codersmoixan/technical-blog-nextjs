@@ -5,7 +5,7 @@ import { makeStyles } from "@mui/styles";
 import { useRouter } from "next/router";
 import routes from "@/src/routes";
 import Box from "@mui/material/Box"
-import MediaQuery from "components/MediaQuery";
+import MediaQuery from "core/MediaQuery";
 import clsx from "clsx";
 import { availableIcons } from "containers/Home/constants";
 import type { BoxProps } from "@mui/material/Box";

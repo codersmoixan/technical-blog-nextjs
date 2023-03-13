@@ -17,7 +17,7 @@ import useForm from "@/src/core/Form/hooks/useForm";
 import type { Theme } from "@mui/material";
 import FormChipSelect from "components/Form/FormChipSelect";
 import isEmpty from "lodash/isEmpty";
-import MediaQuery from "components/MediaQuery";
+import MediaQuery from "core/MediaQuery";
 import GlobalDrawer from "components/GlobalDrawer";
 import {useTheme} from "@mui/material/styles";
 import Typography from "@mui/material/Typography";

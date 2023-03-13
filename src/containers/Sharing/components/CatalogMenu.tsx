@@ -5,7 +5,7 @@
 
 import React, { forwardRef, ReactEventHandler } from 'react'
 import Box from '@mui/material/Box';
-import MediaQuery from "components/MediaQuery";
+import MediaQuery from "core/MediaQuery";
 import Typography from "@mui/material/Typography";
 import Menu, {MenuItem} from "components/Menu";
 import Search from "@mui/icons-material/Search";

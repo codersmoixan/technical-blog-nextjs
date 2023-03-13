@@ -12,7 +12,7 @@ import { useRouter } from "next/router";
 import clsx from "clsx";
 import isEmpty from "lodash/isEmpty"
 import isString from "lodash/isString"
-import MediaQuery from "components/MediaQuery";
+import MediaQuery from "core/MediaQuery";
 import MenuIcon from "components/Icons/MenuIcon";
 import MenuDrawer from "components/Navigation/components/MenuDrawer";
 import AccordionMenu from "components/Navigation/components/AccordionMenu";

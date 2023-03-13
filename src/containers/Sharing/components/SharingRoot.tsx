@@ -9,7 +9,7 @@ import Typography from "@mui/material/Typography";
 import { makeStyles } from "@mui/styles";
 import { useTheme } from "@mui/material/styles";
 import ArrowBack from "@mui/icons-material/ArrowBack"
-import MediaQuery from "components/MediaQuery";
+import MediaQuery from "core/MediaQuery";
 import CatalogMenu from "containers/Sharing/components/CatalogMenu";
 import Content from "components/Layout/Content";
 import Root from "components/Layout/Root";

@@ -4,7 +4,7 @@ import ArticleContent, { Article } from 'containers/Articles/components/ArticleC
 import ArticleAside from 'containers/Articles/components/ArticleAside'
 import Content from 'components/Layout/Content'
 import { useRouter } from 'next/router'
-import MediaQuery from 'components/MediaQuery'
+import MediaQuery from 'core/MediaQuery'
 import Head from 'next/head'
 import { getArticle } from 'containers/Articles/api'
 import isUndefined from 'lodash/isUndefined'

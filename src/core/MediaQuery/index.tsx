@@ -5,7 +5,7 @@
 
 import React from "react"
 import Hidden from "@mui/material/Hidden";
-import useMediaQueryKey from "components/MediaQuery/useMediaQueryKey";
+import useMediaQueryKey from "core/MediaQuery/useMediaQueryKey";
 import type { Media } from "./useMediaQueryKey"
 
 interface MediaQueryProps{

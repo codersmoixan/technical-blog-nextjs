@@ -1,5 +1,5 @@
 import makeStyles, { Theme } from 'core/makeStyles'
-import MediaQuery from 'components/MediaQuery'
+import MediaQuery from 'core/MediaQuery'
 import React from 'react'
 import Typography from '@mui/material/Typography'
 import Buttons from 'components/Buttons'

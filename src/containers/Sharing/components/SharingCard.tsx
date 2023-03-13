@@ -19,7 +19,7 @@ import Image, { StaticImageData } from "next/image";
 import makeStyles, { Theme } from "core/makeStyles";
 import ShareFour from "assets/images/share/share-four.png"
 import Typography from "@mui/material/Typography";
-import MediaQuery from "components/MediaQuery";
+import MediaQuery from "core/MediaQuery";
 import Box from "@mui/material/Box";
 import useSeparateChildren from "hooks/useSeparateChildren";
 import clsx from "clsx";
