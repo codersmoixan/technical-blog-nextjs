@@ -20,7 +20,7 @@ import routes from "@/src/routes";
 import { useTheme } from "@mui/material/styles";
 import { Variant } from "components/Animation/Variant";
 import makeStyles, { Theme } from "core/makeStyles";
-import Mask from "components/Container/Mask";
+import GradientLogo from "components/Logo/GradientLogo";
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -89,16 +89,6 @@ const useStyles = makeStyles((theme: Theme) => ({
     justifyContent: 'flex-end',
     width: 425
   },
-  logo: {
-    width: 35,
-    height: 35,
-    background: theme.colorPalette.gradient.logo,
-    cursor: 'pointer',
-    [theme.breakpoints.down('lg')]: {
-      width: 30,
-      height: 30
-    }
-  },
   open: {
     color: theme.palette.primary.main
   },
@@ -120,7 +110,6 @@ function Navigation() {
 
   useEffect(() => {
     const scroll = () => setFocus(window.scrollY >= 150)
-
     window.addEventListener('scroll', scroll)
 
     return () => removeEventListener('scroll', scroll)
@@ -154,7 +143,7 @@ function Navigation() {
 				>
 					<Box className={classes.content}>
 						<Box display="flex" alignItems="center">
-              <Mask icon="/icons/logo.svg" className={classes.logo} />
+              <GradientLogo width={35} height={35} />
 							<Box className={classes.menus}>
 								{NAVIGATION_LIST.map(tab => (
 									<Buttons
@@ -193,7 +182,7 @@ function Navigation() {
 			</MediaQuery>
 			<MediaQuery media="mobile">
 				<Box className={clsx(classes.root, focus ? classes.focus : classes.blur)}>
-          <Mask icon="/icons/logo.svg" className={classes.logo} />
+          <GradientLogo width={30} height={30} />
 					<Buttons
 						variant="text"
 						space={false}

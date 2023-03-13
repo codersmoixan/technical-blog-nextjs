@@ -3,7 +3,7 @@ import Box, { BoxProps } from '@mui/material/Box'
 import clsx from 'clsx'
 import type { Theme } from '@mui/material'
 
-interface MaskProps extends BoxProps {
+export interface MaskProps extends BoxProps {
 	icon: string
 }
 

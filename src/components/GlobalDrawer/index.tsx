@@ -11,19 +11,19 @@ import Box from '@mui/material/Box'
 import useSeparateChildren from 'hooks/useSeparateChildren'
 import type { Theme } from '@mui/material'
 import type { ReactElement } from 'react'
-import type { EmptyObject } from "@/src/tb.types"
+import type { EmptyObject } from '@/src/tb.types'
 
 interface GlobalDrawerProps extends DrawerProps {
-	open: boolean;
-	children: ReactElement | ReactElement[];
-  classes?: EmptyObject;
-	bgColor?: string;
-	onClose?: () => void;
-	onConfirm?: () => void;
+	open: boolean
+	children: ReactElement | ReactElement[]
+	classes?: EmptyObject
+	bgColor?: string
+	onClose?: () => void
+	onConfirm?: () => void
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
-	top: {
+	drawer: {
 		'&.MuiDrawer-root': {
 			bottom: 'initial',
 			height: '100vh'
@@ -36,8 +36,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 		height: 72,
 		textAlign: 'right',
 		lineHeight: '72px',
-		backgroundColor: (props: GlobalDrawerProps) =>
-			props.bgColor ? props.bgColor : theme.colorPalette.background.main,
+		backgroundColor: (props: GlobalDrawerProps) => (props.bgColor ? props.bgColor : theme.colorPalette.background.main),
 		zIndex: 999,
 		'& > button.MuiButtonBase-root': {
 			color: theme.colorPalette.text.default
@@ -47,8 +46,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 		'&.MuiPaper-root': {
 			position: 'static',
 			height: '100%',
-			backgroundColor: (props: GlobalDrawerProps) =>
-				props.bgColor ? props.bgColor : theme.colorPalette.background.main
+			backgroundColor: (props: GlobalDrawerProps) => (props.bgColor ? props.bgColor : theme.colorPalette.background.main)
 		}
 	}
 }))
@@ -58,25 +56,26 @@ function GlobalDrawer(props: GlobalDrawerProps) {
 	const classes = useStyles(props)
 	const { header, content, footer } = useSeparateChildren(children, ['header', 'content', 'footer'])
 
-  return (
+	return (
 		<Drawer
 			open={open}
 			anchor="left"
 			classes={{
-				root: classes.top,
+				root: classes.drawer,
 				paper: classes.paper
 			}}
+      onClose={onClose}
 			{...other}
 		>
-			<Box className={classes.header}>
-				{header ?? (
+			{header ?? (
+				<Box className={classes.header}>
 					<Buttons variant="text" space={false} onClick={onClose}>
 						<CloseIcon />
 					</Buttons>
-				)}
-			</Box>
+				</Box>
+			)}
 			{content}
-      {footer}
+			{footer}
 		</Drawer>
 	)
 }

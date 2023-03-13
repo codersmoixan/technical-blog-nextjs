@@ -26,6 +26,7 @@ export interface MenuItem extends EmptyObject {
 
 interface MenuProps{
   menus: MenuItem[];
+  classes?: EmptyObject;
   isBorder?: boolean;
   onNodeClick?: (options: MenuItem, parent: MenuItem | null) => void;
   childKey?: string;
@@ -55,8 +56,9 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   summary: {
     padding: 0,
+    minHeight: 48,
     '&.Mui-expanded': {
-      minHeight: 'auto'
+      minHeight: 48
     },
   },
   summaryContent: {
