@@ -22,7 +22,8 @@ const useStyles = makeStyles(
 			fontSize: 16
 		},
 		drawerPaper: {
-      backdropFilter: 'blur(6px)'
+      backdropFilter: 'blur(6px)',
+      backgroundImage: 'none'
     }
 	}),
 	'PopupLayer'

@@ -46,7 +46,8 @@ const useStyles = makeStyles((theme: Theme) => ({
 		'&.MuiPaper-root': {
 			position: 'static',
 			height: '100%',
-			backgroundColor: (props: GlobalDrawerProps) => (props.bgColor ? props.bgColor : theme.colorPalette.background.main)
+			backgroundColor: (props: GlobalDrawerProps) => (props.bgColor ? props.bgColor : theme.colorPalette.background.default),
+      backgroundImage: 'none'
 		}
 	}
 }))

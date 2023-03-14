@@ -4,18 +4,15 @@
  */
 
 import { makeStyles } from '@mui/styles'
-import Box from '@mui/material/Box'
 import Menu, { MenuItem } from 'components/Menu'
 import { useRouter } from 'next/router'
 import isString from 'lodash/isString'
 import ExpandLess from '@mui/icons-material/ExpandLess'
 import ExpandMore from '@mui/icons-material/ExpandMore'
-import { Variant, VariantContent } from 'components/Animation/Variant'
-import { stiffnessVariants } from 'utils/variants'
+import { Variant } from 'components/Animation/Variant'
 import GlobalDrawer from 'components/GlobalDrawer'
-import type { Theme } from '@mui/material'
-import React from 'react'
 import GradientLogo from 'components/Logo/GradientLogo'
+import type { Theme } from '@mui/material'
 
 interface MenuDrawerProps {
 	menus: any[]
@@ -41,7 +38,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     display: 'flex',
     alignItems: 'center',
 		height: 'auto',
-		'& > p': {
+		'& p': {
 			fontSize: 14,
 			color: theme.colorPalette.text.textSecondary
 		},
@@ -60,7 +57,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     '&::before': {
       display: 'none'
     },
-  }
+  },
 }))
 
 function MenuDrawer(props: MenuDrawerProps) {
@@ -97,9 +94,9 @@ function MenuDrawer(props: MenuDrawerProps) {
               root: classes.menu,
 							summaryContent: classes.summaryContent,
               value: classes.summaryValue,
-              accordion: classes.accordion
+              accordion: classes.accordion,
 						}}
-					/>
+          />
 				</Variant>
 			</div>
 		</GlobalDrawer>
