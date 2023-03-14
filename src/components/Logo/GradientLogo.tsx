@@ -7,15 +7,14 @@ export interface GradientLogoProps extends Omit<MaskProps, 'icon'> {}
 const useStyles = makeStyles((theme: Theme) => ({
 	root: {
 		background: theme.colorPalette.gradient.logo,
-		cursor: 'pointer',
+		cursor: 'pointer'
 	}
 }))
 
 function GradientLogo(props: GradientLogoProps) {
-	const { width, height } = props
 	const classes = useStyles(props)
 
-	return <Mask width={width} height={height} icon="/icons/logo.svg" className={classes.root} />
+	return <Mask icon="/icons/logo.svg" className={classes.root} {...props} />
 }
 
 export default GradientLogo

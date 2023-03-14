@@ -13,11 +13,15 @@ const useStyles = makeStyles(
 	(theme: Theme) => ({
 		paper: {
 			backgroundColor: theme.colorPalette.background.main,
-			paddingBottom: theme.spacing(4),
-			'& .MuiButtonBase-root': {
-				color: theme.colorPalette.text.default
-			}
+			paddingBottom: theme.spacing(1),
+      borderRadius: 8,
 		},
+    paperTitle: {
+      padding: theme.spacing(2.5)
+    },
+    paperContent: {
+      padding: theme.spacing(2.5)
+    },
 		closeIcon: {
 			fontSize: 16
 		},
@@ -59,7 +63,9 @@ function PopupLayer() {
 				onClose={clearSpeedDial}
 				classes={{
 					paper: classes.paper,
-					closeIcon: classes.closeIcon
+					closeIcon: classes.closeIcon,
+          title: classes.paperTitle,
+          content: classes.paperContent
 				}}
 			>
 				{centerDialogContent}
