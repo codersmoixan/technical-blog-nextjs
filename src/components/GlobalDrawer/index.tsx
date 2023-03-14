@@ -29,9 +29,11 @@ const useStyles = makeStyles((theme: Theme) => ({
 			height: '100vh'
 		}
 	},
-	header: {
-		position: 'sticky',
-		top: 0,
+  header: {
+    position: 'sticky',
+    top: 0,
+  },
+  headerContent: {
 		padding: theme.spacing(0, 3),
 		height: 72,
 		textAlign: 'right',
@@ -49,7 +51,13 @@ const useStyles = makeStyles((theme: Theme) => ({
 			backgroundColor: (props: GlobalDrawerProps) => (props.bgColor ? props.bgColor : theme.colorPalette.background.default),
       backgroundImage: 'none'
 		}
-	}
+	},
+  footer: {
+    position: 'fixed',
+    bottom: 0,
+    width: '100%',
+    left: 0
+  }
 }))
 
 function GlobalDrawer(props: GlobalDrawerProps) {
@@ -68,15 +76,19 @@ function GlobalDrawer(props: GlobalDrawerProps) {
       onClose={onClose}
 			{...other}
 		>
-			{header ?? (
-				<Box className={classes.header}>
-					<Buttons variant="text" space={false} onClick={onClose}>
-						<CloseIcon />
-					</Buttons>
-				</Box>
-			)}
+      <div className={classes.header}>
+        {header ?? (
+          <div className={classes.headerContent}>
+            <Buttons variant="text" space={false} onClick={onClose}>
+              <CloseIcon />
+            </Buttons>
+          </div>
+        )}
+      </div>
 			{content}
-			{footer}
+			<div className={classes.footer}>
+        {footer}
+      </div>
 		</Drawer>
 	)
 }

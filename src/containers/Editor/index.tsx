@@ -11,7 +11,7 @@ import Root from "components/Layout/Root";
 import Box from "@mui/material/Box";
 import Buttons from "components/Buttons";
 import MediaQuery from "core/MediaQuery";
-import Publish, { FormOptions } from "containers/Editor/Publish";
+import Publish, { FormOptions } from "containers/Editor/components/Publish";
 import Fab from "@mui/material/Fab";
 import Send from "@mui/icons-material/Send"
 import useSharing from "containers/Sharing/hooks/useSharing";
