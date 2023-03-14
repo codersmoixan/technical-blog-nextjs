@@ -51,7 +51,7 @@ function ArticlesPage({ article }: ArticlePageProps) {
 	const history = useRouter()
 	const dark = useMediaQuery('(prefers-color-scheme: dark)')
 
-	console.log(dark, 1352)
+	console.log(history, 1352)
 
 	return (
 		<Box className={classes.root}>

@@ -17,6 +17,7 @@ import useDeepCompareEffect from 'hooks/effect/useDeepCompareEffect'
 import type { Theme } from '@mui/material'
 import type { EmptyObject } from '@/src/tb.types'
 import isEmpty from 'lodash/isEmpty'
+import { isFunction } from 'lodash'
 
 export interface MenuItem extends EmptyObject {
 	id: number | string
@@ -26,6 +27,7 @@ export interface MenuItem extends EmptyObject {
 
 interface MenuProps {
 	menus: MenuItem[]
+	checked?: ((menuItem: MenuItem) => boolean) | boolean
 	classes?: EmptyObject
 	isBorder?: boolean
 	onNodeClick?: (options: MenuItem, parent: MenuItem | null) => void
@@ -56,6 +58,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 			borderBottom: 'none'
 		}
 	},
+	checked: {},
 	summary: {
 		padding: 0,
 		minHeight: 48,
@@ -105,7 +108,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 function Menu(props: MenuProps) {
 	const classes = useStyles(props)
-	const { menus, onNodeClick, className, childKey = 'child', expandIcon, closeIcon, value = [], children } = props
+	const { menus, onNodeClick, className, childKey = 'child', expandIcon, closeIcon, value = [], checked } = props
 
 	const [expanded, setExpanded] = useState<string | number | false>(false)
 
@@ -137,7 +140,14 @@ function Menu(props: MenuProps) {
 	return (
 		<VariantContent className={clsx(classes.root, className)}>
 			{menus.map(menu => (
-				<Accordion key={menu.id} expanded={expanded == menu.id} classes={{ root: classes.accordion }}>
+				<Accordion
+					key={menu.id}
+					expanded={expanded == menu.id}
+					classes={{ root: classes.accordion }}
+					className={clsx({
+						[classes.checked]: isFunction(checked) ? checked(menu) : checked
+					})}
+				>
 					<VariantContent variants={stiffnessVariants}>
 						<AccordionSummary
 							classes={{

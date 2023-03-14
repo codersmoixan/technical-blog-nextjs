@@ -55,7 +55,7 @@ const orangeTheme: ThemeOptions = {
 			propagate:
 				'-webkit-linear-gradient(300deg, rgb(253, 169, 45) 0%, rgb(255, 171, 0) 25%, rgb(118, 53, 220) 50%, rgb(255, 171, 0) 75%, rgb(253, 169, 45) 100%) 0% 0% / 400%',
 			button:
-				'linear-gradient(76.35deg, rgb(253, 169, 45) 15.89%, rgb(118, 53, 220) 89.75%)',
+				'linear-gradient(76.35deg, rgba(253, 169, 45, 0.8) 15.89%, rgba(118, 53, 220, 0.8) 89.75%)',
       logo: 'linear-gradient(300deg, rgb(253, 169, 45) 0%, rgb(255, 171, 0) 100%)'
 		}
 	},

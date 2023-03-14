@@ -13,6 +13,7 @@ import { Variant } from 'components/Animation/Variant'
 import GlobalDrawer from 'components/GlobalDrawer'
 import GradientLogo from 'components/Logo/GradientLogo'
 import type { Theme } from '@mui/material'
+import useCompareRoute from "components/Navigation/hooks/useCompareRoute";
 
 interface MenuDrawerProps {
 	menus: any[]
@@ -46,6 +47,17 @@ const useStyles = makeStyles((theme: Theme) => ({
 			color: theme.colorPalette.text.textSecondary
 		}
 	},
+  summaryContentChecked: {
+    backgroundColor: theme.colorPalette.setting.active,
+    '& p': {
+      fontSize: 14,
+      fontWeight: 700,
+      color: theme.palette.primary.main
+    },
+    '& .transform-icon > div': {
+      color: theme.palette.primary.main
+    }
+  },
 	summaryValue: {
 		padding: theme.spacing(0, 4),
 		'& > a': {
@@ -64,8 +76,9 @@ function MenuDrawer(props: MenuDrawerProps) {
 	const { open, menus, onClose } = props
 	const classes = useStyles(props)
 	const history = useRouter()
+  const { compare } = useCompareRoute()
 
-	const handleNodeClick = (options: MenuItem) => {
+  const handleNodeClick = (options: MenuItem) => {
 		const url = options.route
 		onClose?.()
 		return isString(url) ? history.push(url) : history.push(url())
@@ -95,7 +108,9 @@ function MenuDrawer(props: MenuDrawerProps) {
 							summaryContent: classes.summaryContent,
               value: classes.summaryValue,
               accordion: classes.accordion,
+              checked: classes.summaryContentChecked
 						}}
+            checked={(item) => compare(item.route)}
           />
 				</Variant>
 			</div>

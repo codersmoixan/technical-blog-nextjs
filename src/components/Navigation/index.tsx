@@ -22,6 +22,7 @@ import { Variant } from "components/Animation/Variant";
 import makeStyles, { Theme } from "core/makeStyles";
 import GradientLogo from "components/Logo/GradientLogo";
 import {useMediaQuery} from "@mui/material";
+import useCompareRoute from "components/Navigation/hooks/useCompareRoute";
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -96,6 +97,9 @@ const useStyles = makeStyles((theme: Theme) => ({
   btn: {
     '&.MuiButton-textPrimary': {
       color: theme.colorPalette.text.default
+    },
+    '&.checked': {
+      color: theme.palette.primary.main,
     }
   },
 }), 'Navigation')
@@ -105,6 +109,7 @@ function Navigation() {
   const history = useRouter()
   const theme = useTheme()
   const dark = useMediaQuery('(prefers-color-scheme: dark)')
+  const { compare } = useCompareRoute()
 
   console.log(dark, 1352)
 
@@ -147,7 +152,7 @@ function Navigation() {
 				>
 					<Box className={classes.content}>
 						<Box display="flex" alignItems="center">
-              <GradientLogo width={35} height={35} />
+              <GradientLogo width={35} height={35} onClick={handleToHome} />
 							<Box className={classes.menus}>
 								{NAVIGATION_LIST.map(tab => (
 									<Buttons
@@ -155,7 +160,9 @@ function Navigation() {
 										variant="text"
 										onClick={() => handleCheckRoute(tab)}
 										onMouseEnter={() => handleCheckRoute(tab, 'enter')}
-										className={classes.btn}
+										className={clsx(classes.btn, {
+                      checked: compare(tab.route)
+                    })}
 									>
 										{tab.label}
 									</Buttons>
@@ -186,7 +193,7 @@ function Navigation() {
 			</MediaQuery>
 			<MediaQuery media="mobile">
 				<Box className={clsx(classes.root, focus ? classes.focus : classes.blur)}>
-          <GradientLogo width={30} height={30} />
+          <GradientLogo width={30} height={30} onClick={handleToHome} />
 					<Buttons
 						variant="text"
 						space={false}
