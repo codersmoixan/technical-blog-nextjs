@@ -55,14 +55,14 @@ const useStyles = makeStyles((theme: Theme) => ({
 		}
 	},
 	header: {
-		padding: theme.spacing(2),
+		padding: theme.spacing(3, 2),
     textAlign: 'left'
 	},
 	footer: {
-		padding: theme.spacing(2),
+		padding: theme.spacing(3, 2),
     textAlign: 'right',
     '& .MuiButton-outlined': {
-      marginRight: theme.spacing(2)
+      marginRight: theme.spacing(3)
     }
 	}
 }))
