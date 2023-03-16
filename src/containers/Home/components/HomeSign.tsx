@@ -5,12 +5,13 @@ import { makeStyles } from "@mui/styles";
 import { useRouter } from "next/router";
 import routes from "@/src/routes";
 import Box from "@mui/material/Box"
-import MediaQuery from "components/MediaQuery";
+import MediaQuery from "core/MediaQuery";
 import clsx from "clsx";
 import { availableIcons } from "containers/Home/constants";
 import type { BoxProps } from "@mui/material/Box";
 import type { Theme } from "@mui/material";
 import GradientTypography from "components/Typography/GradientTypography";
+import Mask from "components/Container/Mask";
 
 const useStyles = makeStyles((theme: Theme) => ({
   ...theme.styles,
@@ -126,12 +127,6 @@ const useStyles = makeStyles((theme: Theme) => ({
     width: '100%',
     color: theme.palette.text.secondary
   },
-  svgIcon: {
-    display: 'inline-block',
-    width: 24,
-    height: 24,
-    backgroundColor: 'currentColor',
-  }
 }))
 
 function HomeSign(props: BoxProps) {
@@ -175,11 +170,7 @@ function HomeSign(props: BoxProps) {
             </Typography>
             <Box className={clsx(classes.availableIcons, classes.spaceBetweenCenter)}>
               {availableIcons.map(icon => (
-                <span
-                  key={icon.id}
-                  className={classes.svgIcon}
-                  style={{ ['-webkit-mask']: `url(${icon.icon}) center center / contain no-repeat` } as any}
-                ></span>
+                <Mask key={icon.id} icon={icon.icon} />
               ))}
             </Box>
           </Box>

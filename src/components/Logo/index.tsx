@@ -29,7 +29,7 @@ function Logo({ className, bgColor = defaultTheme.colorPalette.background.main, 
 
   return (
     <Box className={clsx(className, classes.root)} {...other}>
-      <LogoIcon bgColor="white" />
+      <LogoIcon />
     </Box>
   )
 }

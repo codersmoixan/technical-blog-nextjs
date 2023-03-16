@@ -47,7 +47,7 @@ const useStyles = makeStyles({
     '& li': {
       listStyle: 'none'
     }
-  }
+  },
 })
 
 

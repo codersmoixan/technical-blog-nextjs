@@ -47,12 +47,14 @@ const blueTheme: ThemeOptions = {
       five: '#fda92d',
       six: '#FF3030',
       colorSecondary: 'rgba(99, 115, 129)',
-      bgSecondary: 'rgba(229 230, 232, .1)',
-      bgActive: 'rgba(245, 239, 253, 1)',
+      hover: 'rgba(186, 191, 200, 0.08)',
+      active: 'rgba(32, 101, 209, 0.08)',
+      activeHover: 'rgba(32, 101, 209, 0.15)',
     },
     gradient: {
       propagate: '-webkit-linear-gradient(300deg, rgb(32, 101, 209) 0%, rgb(255, 171, 0) 25%, rgb(32, 101, 209) 50%, rgb(255, 171, 0) 75%, rgb(32, 101, 209) 100%) 0% 0% / 400%',
       button: 'linear-gradient(76.35deg, rgb(32, 101, 209) 15.89%, rgb(255, 171, 0) 89.75%)',
+      logo: 'linear-gradient(300deg, rgb(32, 101, 209) 0%, rgb(255, 171, 0) 100%)'
     }
   },
   palette: {

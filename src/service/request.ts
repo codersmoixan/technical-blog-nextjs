@@ -1,54 +1,43 @@
-import Axios from "./axios";
-import store from "../store/index"
-import { requestHeader } from "./utils";
-import { BASE_API_URL } from "./utils";
-import { enqueueSnackbar } from "core/Snackbar/slice";
-import type { AxiosRequestConfig, AxiosResponse } from "axios";
-import type { RequestConfig } from "./type";
+import Axios from './axios'
+import { requestHeader } from './utils'
+import { BASE_API_URL } from './utils'
+import notify from 'core/Snackbar/notify'
+import type { AxiosRequestConfig, AxiosResponse } from 'axios'
+import type { RequestConfig } from './type'
 
 function requestInterceptors(config: AxiosRequestConfig): AxiosRequestConfig {
-  return config;
+	return config
 }
 
 function responseInterceptors(config: AxiosResponse) {
-  const { data } = config
-  if (data.code !== 0) {
-    const { dispatch } = store
-    dispatch(enqueueSnackbar({
-      message: data.msg,
-      key: new Date().getTime(),
-      variant: 'warning'
-    }))
-  }
+	const { data } = config
+	if (data.code !== 0) {
+		notify.warning(data.msg)
+	}
 
-  return config
+	return config
 }
 
 function responseInterceptorsCatch(err: any) {
-  const { dispatch } = store
-  dispatch(enqueueSnackbar({
-    message: err.message,
-    key: new Date().getTime(),
-    variant: 'error'
-  }))
+	notify.error(err.message)
 
-  return Promise.reject(err)
+	return Promise.reject(err)
 }
 
 function requestConfig(): RequestConfig {
-  return {
-    url: BASE_API_URL,
-    headers: requestHeader(),
-    interceptors: {
-      requestInterceptors,
-      responseInterceptors,
-      responseInterceptorsCatch,
-    },
-  };
+	return {
+		url: BASE_API_URL,
+		headers: requestHeader(),
+		interceptors: {
+			requestInterceptors,
+			responseInterceptors,
+			responseInterceptorsCatch
+		}
+	}
 }
 
-const axios = new Axios(requestConfig());
+const axios = new Axios(requestConfig())
 
-export const request = axios.request.bind(axios);
+export const request = axios.request.bind(axios)
 
-export default axios;
+export default axios

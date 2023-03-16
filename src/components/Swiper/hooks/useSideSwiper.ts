@@ -4,27 +4,30 @@ import useMount from "hooks/effect/useMount";
 import type { EmptyObject } from "@/src/tb.types";
 
 interface UseSideSwiperProps {
-  sideSize: number;
-  sideLength: number;
+  sideCount: number;
+  sideSize?: number;
 }
 
-const useSideSwiper = ({ sideLength, sideSize }: UseSideSwiperProps) => {
-  const [swiper, setSwiper] = useState<EmptyObject>({})
-  const [container, setContainer] = useState<EmptyObject>({})
+const useSideSwiper = ({ sideCount, sideSize: propSideSize }: UseSideSwiperProps) => {
   const [step, setStep] = useState(0)
+  const [sideRect, setSideRect] = useState<EmptyObject>({})
+  const [swiperRect, setSwiperRect] = useState<EmptyObject>({})
+  const [containerRect, setContainerRect] = useState<EmptyObject>({})
   const [prevDisabled, setPrevDisabled] = useState(true)
   const [nextDisabled, setNextDisabled] = useState(false)
-  const [start, setStart] = useState(0)
+  const [showTrigger, setShowTrigger] = useState(true)
 
+  const sideRef = useRef(null)
   const swiperRef = useRef(null)
   const containerRef = useRef(null)
 
-  const { swiperWidth, containerWidth } = useMemo(() => {
+  const { containerSize, sideSize } = useMemo(() => {
     return ({
-      swiperWidth: swiper.width ?? 0,
-      containerWidth: container.width ?? 0
+      swiperSize: swiperRect.width ?? 0,
+      containerSize: containerRect.width ?? 0,
+      sideSize: propSideSize ?? sideRect.width,
     })
-  }, [swiper, container])
+  }, [swiperRect, containerRect, sideRect, propSideSize])
 
   useMount(() => windowResize())
 
@@ -34,9 +37,16 @@ const useSideSwiper = ({ sideLength, sideSize }: UseSideSwiperProps) => {
     return () => window.removeEventListener('resize', windowResize)
   }, [])
 
+  useEffect(() => {
+    if (sideCount * sideRect.width <= containerRect.width) {
+      setShowTrigger(false);
+    }
+  }, [sideCount, sideRect, containerRect]);
+
   function windowResize() {
-    setSwiper(() => (swiperRef.current as any)?.getBoundingClientRect())
-    setContainer(() => (containerRef.current as any)?.getBoundingClientRect())
+    setSideRect(() => (sideRef.current as any)?.getBoundingClientRect() ?? {})
+    setSwiperRect(() => (swiperRef.current as any)?.getBoundingClientRect() ?? {})
+    setContainerRect(() => (containerRef.current as any)?.getBoundingClientRect() ?? {})
   }
 
   const scroll = (space: number) => {
@@ -64,7 +74,7 @@ const useSideSwiper = ({ sideLength, sideSize }: UseSideSwiperProps) => {
     count ++
     const space = count * sideSize
 
-    const maxOffsetX = (sideLength * sideSize - (space + containerWidth)) < 0
+    const maxOffsetX = (sideCount * sideSize - (space + containerSize)) < 0
     setNextDisabled(maxOffsetX)
     setPrevDisabled(false)
     setStep(count)
@@ -73,9 +83,12 @@ const useSideSwiper = ({ sideLength, sideSize }: UseSideSwiperProps) => {
   }
 
   return {
-    swiper,
+    sideRect,
+    swiperRect,
+    containerRect,
+    showTrigger,
+    sideRef,
     swiperRef,
-    container,
     containerRef,
     prevDisabled,
     nextDisabled,

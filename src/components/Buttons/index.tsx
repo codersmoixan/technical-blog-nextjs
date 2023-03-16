@@ -15,6 +15,7 @@ interface ButtonsProps extends ButtonProps{
   className?: string;
   space?: boolean;
   loading?: boolean;
+  inline?: boolean;
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -24,6 +25,12 @@ const useStyles = makeStyles((theme: Theme) => ({
     textTransform: 'none',
     borderRadius: 8,
     fontSize: 14,
+  },
+  inline: {
+    padding: 0,
+    minWidth: 'auto',
+    minHeight: 'auto',
+    height: 'auto',
   },
   contained: {
     backgroundColor: theme.colorPalette.button.main,
@@ -55,18 +62,19 @@ const useStyles = makeStyles((theme: Theme) => ({
 }))
 
 function Buttons(props: ButtonsProps) {
-  const { children, className, space = true, variant, loading, ...other } = props
+  const { children, className, space = true, variant, loading, inline, ...other } = props
   const classes = useStyles(props)
 
   return (
     <Button
       className={clsx(className, {
-        [classes.emptySpace]: !space
+        [classes.emptySpace]: !space,
+        [classes.inline]: inline,
       })}
       classes={{
         root: classes.root,
         textPrimary: classes.textPrimary,
-        contained: classes.contained
+        contained: classes.contained,
       }}
       color="primary"
       variant={variant}

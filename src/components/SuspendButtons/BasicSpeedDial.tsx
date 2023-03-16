@@ -48,14 +48,20 @@ const useStyles = makeStyles((theme: Theme) => ({
     right: 64,
     transform: 'translateZ(0px)',
     flexGrow: 1,
-    zIndex: 9999,
+    zIndex: 999,
     transition: 'all .3s',
     [theme.breakpoints.down('sm')]: {
       bottom: 12,
       right: 12
     }
   },
-  speedDial: {
+  fab: {
+    [theme.breakpoints.down('md')]: {
+      width: 48,
+      height: 48
+    }
+  },
+  speedDialAction: {
     color: theme.palette.primary.main,
     '& a': {
       color: theme.palette.primary.main
@@ -86,8 +92,6 @@ function BasicSpeedDial({ onChange, ...other }: BasicSpeedDialProps) {
       return
     }
 
-    console.log(action, 9899);
-
     updateSpeedDial(id)
 
     return onChange?.(action)
@@ -99,6 +103,9 @@ function BasicSpeedDial({ onChange, ...other }: BasicSpeedDialProps) {
         ariaLabel="SpeedDial basic example"
         sx={{ position: 'absolute', bottom: 16, right: 16 }}
         icon={<SpeedDialIcon />}
+        classes={{
+          fab: classes.fab
+        }}
         {...other}
       >
         {actions.map((action) => (
@@ -107,7 +114,7 @@ function BasicSpeedDial({ onChange, ...other }: BasicSpeedDialProps) {
             icon={action.icon}
             tooltipTitle={action.name}
             onClick={() => handleAction(action)}
-            className={classes.speedDial}
+            className={classes.speedDialAction}
           />
         ))}
       </SpeedDial>

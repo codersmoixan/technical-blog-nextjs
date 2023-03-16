@@ -3,108 +3,119 @@
  * @description MenuDrawer
  */
 
-import { makeStyles } from "@mui/styles";
-import Box from "@mui/material/Box";
-import UserButtons from "components/Navigation/components/UserButtons";
-import Menu, { MenuItem } from "components/Menu";
-import { useRouter } from "next/router";
-import isString from "lodash/isString";
-import ExpandLess from "@mui/icons-material/ExpandLess";
-import ExpandMore from "@mui/icons-material/ExpandMore"
-import { Variant, VariantContent } from "components/Animation/Variant";
-import { stiffnessVariants } from "utils/variants";
-import GlobalDrawer from "components/GlobalDrawer";
-import type { Theme } from "@mui/material";
+import { makeStyles } from '@mui/styles'
+import Menu, { MenuItem } from 'components/Menu'
+import { useRouter } from 'next/router'
+import isString from 'lodash/isString'
+import ExpandLess from '@mui/icons-material/ExpandLess'
+import ExpandMore from '@mui/icons-material/ExpandMore'
+import { Variant } from 'components/Animation/Variant'
+import GlobalDrawer from 'components/GlobalDrawer'
+import GradientLogo from 'components/Logo/GradientLogo'
+import type { Theme } from '@mui/material'
+import useCompareRoute from "components/Navigation/hooks/useCompareRoute";
 
 interface MenuDrawerProps {
-  menus: any[];
-  open: boolean;
-  onClose?: () => void;
+	menus: any[]
+	open: boolean
+	onClose?: () => void
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
-  userButtons: {
-    padding: theme.spacing(0.5),
-    width: '100%',
-    boxSizing: 'border-box',
-    justifyContent: 'center',
-    '& .MuiButtonBase-root': {
-      margin: theme.spacing(0, 1.5),
-      padding: theme.spacing(1, 2)
+	drawer: {
+		width: 260
+	},
+	header: {
+		display: 'flex',
+		alignItems: 'center',
+		padding: theme.spacing(0, 3),
+		height: 72
+	},
+	menu: {
+		height: 'auto'
+	},
+	summaryContent: {
+		padding: theme.spacing(1, 3),
+    display: 'flex',
+    alignItems: 'center',
+		height: 'auto',
+		'& p': {
+			fontSize: 14,
+			color: theme.colorPalette.text.textSecondary
+		},
+		'& .transform-icon > div': {
+			color: theme.colorPalette.text.textSecondary
+		}
+	},
+  summaryContentChecked: {
+    backgroundColor: theme.colorPalette.setting.active,
+    '& p': {
+      fontSize: 14,
+      fontWeight: 700,
+      color: theme.palette.primary.main
     },
-    '& .MuiButton-outlined': {
-      borderColor: theme.colorPalette.primary.default,
-      color: theme.colorPalette.primary.default
-    },
-    '& .MuiButton-contained': {
-      borderColor: theme.colorPalette.primary.default,
-      backgroundColor: theme.colorPalette.background.main,
+    '& .transform-icon > div': {
       color: theme.palette.primary.main
     }
   },
-  content: {
-    padding: theme.spacing(0, 11, 0, 8)
-  },
-  menu: {
-    height: 'auto',
-    '& .MuiAccordionSummary-content': {
-      '& > p': {
-        fontSize: 18,
-        color: theme.colorPalette.text.default
-      },
-      '& .transform-icon > div': {
-        color: theme.colorPalette.text.default
-      }
+	summaryValue: {
+		padding: theme.spacing(0, 4),
+		'& > a': {
+			fontSize: 14,
+			color: theme.colorPalette.text.textSecondary
+		}
+	},
+  accordion: {
+    '&::before': {
+      display: 'none'
     },
-    '& .MuiAccordionSummary-root': {
-      height: 65
-    },
-    '& .MuiAccordionDetails-root': {
-      padding: theme.spacing(0, 2),
-      '& > a': {
-        fontSize: 16,
-        color: theme.colorPalette.text.default
-      }
-    }
   },
 }))
 
 function MenuDrawer(props: MenuDrawerProps) {
-  const { open, menus, onClose } = props
-  const classes = useStyles(props)
-  const history = useRouter()
+	const { open, menus, onClose } = props
+	const classes = useStyles(props)
+	const history = useRouter()
+  const { compare } = useCompareRoute()
 
   const handleNodeClick = (options: MenuItem) => {
-    const url = options.route
-    onClose?.()
-    return isString(url) ? history.push(url) : history.push(url())
-  }
+		const url = options.route
+		onClose?.()
+		return isString(url) ? history.push(url) : history.push(url())
+	}
 
-  return (
-    <GlobalDrawer open={open} onClose={onClose}>
-      <Box className={classes.content} slot="content">
-        <Variant focus={open}>
-          <Menu
-            menus={menus}
-            childKey="menus"
-            className={classes.menu}
-            onNodeClick={handleNodeClick}
-            expandIcon={<ExpandLess />}
-            closeIcon={<ExpandMore />}
+	return (
+		<GlobalDrawer
+			open={open}
+			onClose={onClose}
+			classes={{
+				drawer: classes.drawer
+			}}
+		>
+			<div slot="header" className={classes.header}>
+				<GradientLogo width={25} height={25} />
+			</div>
+			<div slot="content">
+				<Variant focus={open}>
+					<Menu
+						menus={menus}
+						childKey="menus"
+						onNodeClick={handleNodeClick}
+						expandIcon={<ExpandLess />}
+						closeIcon={<ExpandMore />}
+						classes={{
+              root: classes.menu,
+							summaryContent: classes.summaryContent,
+              value: classes.summaryValue,
+              accordion: classes.accordion,
+              checked: classes.summaryContentChecked
+						}}
+            checked={(item) => compare(item.route)}
           />
-        </Variant>
-      </Box>
-      <Box slot="footer">
-        <Variant focus={open}>
-          <VariantContent>
-            <VariantContent variants={stiffnessVariants}>
-              <UserButtons className={classes.userButtons} />
-            </VariantContent>
-          </VariantContent>
-        </Variant>
-      </Box>
-    </GlobalDrawer>
-  )
+				</Variant>
+			</div>
+		</GlobalDrawer>
+	)
 }
 
 export default MenuDrawer

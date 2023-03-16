@@ -11,13 +11,18 @@ const useStyles = makeStyles(
 	(theme: Theme) => ({
 		fab: {
 			position: 'fixed',
-			right: 24,
-			bottom: 24,
+			right: 64,
+			bottom: 64,
 			backgroundColor: theme.colorPalette.background.main,
 			boxShadow: 'rgb(99 115 129 / 36%) -12px 12px 32px -4px',
+      zIndex: 9999,
 			'&:hover': {
 				backgroundColor: theme.colorPalette.background.default
-			}
+			},
+      [theme.breakpoints.down('sm')]: {
+        bottom: 12,
+        right: 12
+      }
 		}
 	}),
 	'SuspendButtons'
@@ -29,10 +34,10 @@ function SuspendButtons() {
 
 	return (
 		<>
-			<BeforeRoute exclude={[routes.editor, routes.login, routes.notFond]}>
+			<BeforeRoute exclude={[routes.editor, routes.login, routes.notFond, routes.register]}>
 				<BasicSpeedDial />
 			</BeforeRoute>
-			<BeforeRoute include={[routes.login, routes.notFond]}>
+			<BeforeRoute include={[routes.login, routes.notFond, routes.register]}>
 				<Fab className={classes.fab} onClick={() => updateSpeedDial('setting')}>
 					<ThemeSettingIcon />
 				</Fab>

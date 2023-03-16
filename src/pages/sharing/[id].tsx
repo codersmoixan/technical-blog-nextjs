@@ -11,7 +11,7 @@ function SharingSlugPage() {
   return (
     <>
       <Head>
-        <title>总结和分享，会有意想不到的收获</title>
+        <title>Smoixan - 总结和分享，会有意想不到的收获</title>
         <meta name="description" content="Summary and sharing will bring unexpected results" />
       </Head>
       <SharingMain />

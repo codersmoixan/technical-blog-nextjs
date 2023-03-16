@@ -2,7 +2,7 @@ import type { CSSProperties } from "@mui/styles";
 import type { EmptyObject } from "@/src/tb.types"
 import type { Breakpoints } from "@mui/system";
 import type { ThemeOptions as MuiThemeOptions } from "@mui/material";
-import SuspendButtons from "components/SuspendButtons";
+import MenuDrawer from "components/Navigation/components/MenuDrawer";
 
 export interface ConfigOptions {
   backdropHeight: number;
@@ -11,18 +11,6 @@ export interface ConfigOptions {
   navHeight: number;
   transition: (t?: number) => string;
   transitionTime: string;
-}
-
-export interface CustomThemeOptions {
-  config: ConfigOptions;
-  colorPalette: ColorPaletteOptions;
-  styles: {
-    verticalCenter: CSSProperties;
-    inlineCenter: CSSProperties;
-    spaceBetweenCenter: CSSProperties;
-    columnCenter: CSSProperties;
-  },
-  componentStyleOverrides: ComponentStyleOverrides;
 }
 
 export interface ColorPaletteOptions {
@@ -69,12 +57,14 @@ export interface ColorPaletteOptions {
     five: string;
     six: string;
     colorSecondary: string;
-    bgSecondary: string;
-    bgActive: string;
+    hover: string;
+    active: string;
+    activeHover: string;
   },
   gradient: {
     propagate: string;
     button: string;
+    logo: string;
   }
 }
 
@@ -96,7 +86,10 @@ export interface ComponentStyleOverrides {
   AccordionMenu?: EmptyObject;
   Articles?: EmptyObject;
   Login?: EmptyObject;
+  Register?: EmptyObject;
   SuspendButtons?: EmptyObject;
+  ThemeSetting?: EmptyObject;
+  PopupLayer?: EmptyObject;
 }
 
 export type ComponentStyleOverridesKey = keyof ComponentStyleOverrides
@@ -109,6 +102,18 @@ export interface DefaultThemeOptions extends Pick<MuiThemeOptions, 'config' | 't
     spaceBetweenCenter: CSSProperties;
     columnCenter: CSSProperties;
   };
+  componentStyleOverrides: ComponentStyleOverrides;
+}
+
+export interface CustomThemeOptions {
+  config: ConfigOptions;
+  colorPalette: ColorPaletteOptions;
+  styles: {
+    verticalCenter: CSSProperties;
+    inlineCenter: CSSProperties;
+    spaceBetweenCenter: CSSProperties;
+    columnCenter: CSSProperties;
+  },
   componentStyleOverrides: ComponentStyleOverrides;
 }
 

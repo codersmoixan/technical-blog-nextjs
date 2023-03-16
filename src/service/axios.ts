@@ -30,7 +30,7 @@ class Axios {
 
   async request<T extends AxiosRequestConfig>(method: string, url: string, config?: T) {
     const result = await this.instance.request({
-      url: `${this.requestConfig.url}/${url}`,
+      url: `${this.requestConfig.url}${url}`,
       method,
       ...config,
     });

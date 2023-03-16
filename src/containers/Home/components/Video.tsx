@@ -7,7 +7,7 @@ import React, {useEffect, useRef} from 'react'
 import Box, { BoxProps } from '@mui/material/Box';
 import { makeStyles } from "@mui/styles";
 import type { Theme } from "@mui/material";
-import MediaQuery from "components/MediaQuery";
+import MediaQuery from "core/MediaQuery";
 
 const useStyles = makeStyles((theme: Theme) => ({
   backdropVideo: {

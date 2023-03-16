@@ -1,35 +1,20 @@
 import { breakpoints } from './theme'
+import type { ThemeOptions } from '@/src/theme/types'
+import type { EmptyObject } from '@/src/tb.types'
+import type { PaletteOptions } from '@mui/material'
 
-const darkTheme = {
+interface DarkTheme extends Pick<ThemeOptions, 'componentStyleOverrides' | 'components'> {
+	colorPalette: EmptyObject
+	palette: PaletteOptions
+}
+
+const darkTheme: DarkTheme = {
 	colorPalette: {
-		primary: {
-			main: '#00AB55',
-			default: '#FFFFFF',
-			secondary: 'rgba(229 230, 232, 1)',
-			colorSecondary: '#d8dee3',
-			transparent: 'transparent',
-			dark: 'rgb(22, 28, 36)',
-			sullenGrey: '#33323e',
-			lightGrey: '#6c6b7b',
-			lightPurple: '#853bce',
-			error: '#d32f2f',
-			placeholder: '#c1c5cd',
-			disabled: '#86909c',
-			darkPeach: '#f8f6f1'
-		},
 		background: {
 			main: 'rgb(22, 28, 36)',
 			default: 'rgba(22, 28, 36, 0.94)',
 			primary: 'rgb(252, 252, 252)',
 			secondary: 'rgba(145, 158, 171, 0.08)'
-		},
-		text: {
-			main: '#00AB55',
-			default: '#FFFFFF',
-			textSecondary: '#FFFFFF',
-			disabled: '#86909c',
-			dark: 'rgb(22, 28, 36)',
-			secondary: '#86909c'
 		},
 		setting: {
 			one: '#00AB55',
@@ -37,10 +22,14 @@ const darkTheme = {
 			three: '#7635dc',
 			four: '#2065D1',
 			five: '#fda92d',
-			six: '#FF3030',
-			colorSecondary: 'rgba(99, 115, 129)',
-			bgSecondary: 'rgba(229 230, 232, .1)',
-			bgActive: 'rgba(245, 239, 253, 1)'
+			six: '#FF3030'
+		},
+		text: {
+			default: '#FFFFFF',
+			textSecondary: '#FFFFFF',
+			disabled: '#86909c',
+			dark: 'rgb(22, 28, 36)',
+			secondary: '#86909c'
 		}
 	},
 	componentStyleOverrides: {
@@ -120,16 +109,38 @@ const darkTheme = {
 			}
 		},
 		Login: {
-			formContent: {
-				'& .submit': {
-					backgroundColor: 'rgb(252, 252, 252)',
-					color: 'rgb(33, 43, 54)'
-				}
-			},
 			fab: {
 				boxShadow: 'rgb(0 0 0 / 36%) -12px 12px 32px -4px'
+			},
+			submit: {
+				backgroundColor: 'rgb(252, 252, 252)',
+				color: 'rgb(33, 43, 54)',
+				'&.MuiButton-root:hover': {
+					backgroundColor: 'rgba(252, 252, 252, 0.94)'
+				}
+			},
+			example: {
+				backgroundColor: 'rgb(0, 55, 104)',
+				color: 'rgb(97, 243, 243)'
+			}
+		},
+		Register: {
+			submit: {
+				backgroundColor: 'rgb(252, 252, 252)',
+				color: 'rgb(33, 43, 54)',
+				'&.MuiButton-root:hover': {
+					backgroundColor: 'rgba(252, 252, 252, 0.94)'
+				}
+			}
+		},
+		PopupLayer: {
+			drawerPaper: {
+				backgroundColor: 'rgba(22, 28, 36, 0.9)'
 			}
 		}
+	},
+	palette: {
+		mode: 'dark'
 	},
 	components: {
 		MuiTypography: {

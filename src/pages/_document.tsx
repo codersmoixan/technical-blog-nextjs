@@ -6,6 +6,7 @@ import Document, {
   NextScript,
 } from 'next/document';
 import { ServerStyleSheets } from "@mui/styles";
+import Script from "next/script";
 // import index from "@/src/theme/theme";
 
 export default class MyDocument extends Document {
@@ -13,8 +14,6 @@ export default class MyDocument extends Document {
   render() {
     return (
       <Html lang="zh">
-        {/* eslint-disable-next-line @next/next/no-css-tags */}
-        <link rel="stylesheet" href="/fonts/font-family.css"/>
         <Head>
           <meta name="baidu-site-verification" content="k2rYxsvycd" />
           {/* PWA primary color */}
@@ -23,24 +22,11 @@ export default class MyDocument extends Document {
             content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
           />
           {/*<meta name="theme-color" content={index.palette.primary.main} />*/}
-          <link rel="icon" type="image/png" href="/favicon.ico" />
-          <link href="https://unpkg.com/prismjs@latest/themes/prism.css" rel="stylesheet" />
+          <link rel="icon" type="image/png" href="/icons/logo.svg" />
         </Head>
-        <script async src="https://unpkg.com/prismjs@latest/prism.js"></script>
-        <script async src="https://unpkg.com/prismjs@latest/components/prism-core.js"></script>
-        <script async src="https://unpkg.com/prismjs@latest/plugins/autoloader/prism-autoloader.js"></script>
         <body>
-        <Main/>
-        <NextScript/>
-        <script>
-          {
-            `
-              function() {
-                Prism.highlightAll()
-              }()
-              `
-          }
-        </script>
+          <Main/>
+          <NextScript/>
         </body>
       </Html>
     );

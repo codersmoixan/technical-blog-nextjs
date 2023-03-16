@@ -4,17 +4,17 @@
  */
 
 import Head from "next/head";
-import LoginContainer from "containers/Login";
+import Login from "containers/Login";
 
 function LoginPage() {
 
   return (
     <>
       <Head>
-        <title>登录你的账号</title>
+        <title>Smoixan - 登录你的账号</title>
         <meta name="description" content="Login" />
       </Head>
-      <LoginContainer />
+      <Login />
     </>
   )
 }

@@ -5,8 +5,6 @@
 
 import React, { useEffect, useState } from 'react'
 import Box from "@mui/material/Box";
-import Image from "next/image";
-import Logo from "assets/images/logo/logo.dark.jpg"
 import { NAVIGATION_LIST, NavigationItem } from "components/Navigation/constant";
 import Buttons from "components/Buttons";
 import FormText from "components/Form/FormText";
@@ -14,7 +12,7 @@ import { useRouter } from "next/router";
 import clsx from "clsx";
 import isEmpty from "lodash/isEmpty"
 import isString from "lodash/isString"
-import MediaQuery from "components/MediaQuery";
+import MediaQuery from "core/MediaQuery";
 import MenuIcon from "components/Icons/MenuIcon";
 import MenuDrawer from "components/Navigation/components/MenuDrawer";
 import AccordionMenu from "components/Navigation/components/AccordionMenu";
@@ -22,6 +20,9 @@ import routes from "@/src/routes";
 import { useTheme } from "@mui/material/styles";
 import { Variant } from "components/Animation/Variant";
 import makeStyles, { Theme } from "core/makeStyles";
+import GradientLogo from "components/Logo/GradientLogo";
+import {useMediaQuery} from "@mui/material";
+import useCompareRoute from "components/Navigation/hooks/useCompareRoute";
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -90,20 +91,15 @@ const useStyles = makeStyles((theme: Theme) => ({
     justifyContent: 'flex-end',
     width: 425
   },
-  logo: {
-    width: 45,
-    height: 45,
-    [theme.breakpoints.down('lg')]: {
-      width: 30,
-      height: 30
-    }
-  },
   open: {
     color: theme.palette.primary.main
   },
   btn: {
     '&.MuiButton-textPrimary': {
       color: theme.colorPalette.text.default
+    },
+    '&.checked': {
+      color: theme.palette.primary.main,
     }
   },
 }), 'Navigation')
@@ -112,6 +108,10 @@ function Navigation() {
   const classes = useStyles()
   const history = useRouter()
   const theme = useTheme()
+  const dark = useMediaQuery('(prefers-color-scheme: dark)')
+  const { compare } = useCompareRoute()
+
+  console.log(dark, 1352)
 
   const [openDialog, setOpenDialog] = useState(false)
   const [focusTab, setFocusTab] = useState<NavigationItem | null>(null)
@@ -119,7 +119,6 @@ function Navigation() {
 
   useEffect(() => {
     const scroll = () => setFocus(window.scrollY >= 150)
-
     window.addEventListener('scroll', scroll)
 
     return () => removeEventListener('scroll', scroll)
@@ -153,7 +152,7 @@ function Navigation() {
 				>
 					<Box className={classes.content}>
 						<Box display="flex" alignItems="center">
-							<Image src={Logo} alt="" className={classes.logo} onClick={handleToHome} />
+              <GradientLogo width={35} height={35} onClick={handleToHome} />
 							<Box className={classes.menus}>
 								{NAVIGATION_LIST.map(tab => (
 									<Buttons
@@ -161,7 +160,9 @@ function Navigation() {
 										variant="text"
 										onClick={() => handleCheckRoute(tab)}
 										onMouseEnter={() => handleCheckRoute(tab, 'enter')}
-										className={classes.btn}
+										className={clsx(classes.btn, {
+                      checked: compare(tab.route)
+                    })}
 									>
 										{tab.label}
 									</Buttons>
@@ -192,14 +193,14 @@ function Navigation() {
 			</MediaQuery>
 			<MediaQuery media="mobile">
 				<Box className={clsx(classes.root, focus ? classes.focus : classes.blur)}>
-					<Image src={Logo} alt="" className={classes.logo} onClick={handleToHome} />
+          <GradientLogo width={30} height={30} onClick={handleToHome} />
 					<Buttons
 						variant="text"
 						space={false}
 						className={classes.open}
 						onClick={handleOpenDialog}
 					>
-						<MenuIcon />
+						<MenuIcon width={18} height={18} />
 					</Buttons>
 				</Box>
 				<MenuDrawer

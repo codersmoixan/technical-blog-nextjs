@@ -3,122 +3,94 @@
  * @description GlobalDrawer
  */
 
-import Drawer from '@mui/material/Drawer';
-import {makeStyles} from "@mui/styles";
-import Buttons from "components/Buttons";
-import CloseIcon from "components/Icons/CloseIcon";
-import Box from "@mui/material/Box";
-import useSeparateChildren from "hooks/useSeparateChildren";
-import type { EmptyObject } from "@/src/tb.types"
-import type {Theme} from "@mui/material";
-import type { ReactElement, ReactNode } from "react";
+import Drawer, { DrawerProps } from '@mui/material/Drawer'
+import { makeStyles } from '@mui/styles'
+import Buttons from 'components/Buttons'
+import CloseIcon from 'components/Icons/CloseIcon'
+import Box from '@mui/material/Box'
+import useSeparateChildren from 'hooks/useSeparateChildren'
+import type { Theme } from '@mui/material'
+import type { ReactElement } from 'react'
+import type { EmptyObject } from '@/src/tb.types'
 
-interface GlobalDrawerProps {
-  open: boolean;
-  children: ReactNode | ReactElement[];
-  door?: boolean;
-  bgColor?: string;
-  onClose?: () => void;
-  onConfirm?: () => void;
-  classes?: EmptyObject;
-  header?: boolean;
-  footer?: boolean | ReactNode;
-  confirmText?: string;
-  cancelText?: string;
+interface GlobalDrawerProps extends DrawerProps {
+	open: boolean
+	children: ReactElement | ReactElement[]
+	classes?: EmptyObject
+	bgColor?: string
+	onClose?: () => void
+	onConfirm?: () => void
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
-  top: {
-    '&.MuiDrawer-root': {
-      bottom: 'initial',
-      height: (props: GlobalDrawerProps) => props.door ? 'calc(100vh - 72px)' : '100vh',
-    },
-  },
+	drawer: {
+		'&.MuiDrawer-root': {
+			bottom: 'initial',
+			height: '100vh'
+		}
+	},
   header: {
     position: 'sticky',
     top: 0,
-    padding: theme.spacing(0, 3),
-    height: 72,
-    textAlign: 'right',
-    lineHeight: '72px',
-    backgroundColor: (props: GlobalDrawerProps) => props.bgColor ? props.bgColor : theme.colorPalette.background.dark,
-    zIndex: 999,
-    '& > button.MuiButtonBase-root': {
-      color: theme.colorPalette.text.default
-    }
   },
-  paper: {
-    '&.MuiPaper-root': {
-      position: 'static',
-      height: '100%',
-      backgroundColor: (props: GlobalDrawerProps) => props.bgColor ? props.bgColor : theme.colorPalette.background.dark
-    }
-  },
-  bottom: {
-    '&.MuiDrawer-root': {
-      top: 'initial',
-      height: 72,
-    },
-    '&.MuiPaper-root': {
-      justifyContent: 'space-around',
-    }
-  },
-  buttons: {
-    display: 'flex',
-    justifyContent: 'flex-end',
-    alignItems: 'center',
-    padding: theme.spacing(0, 2),
-    height: '100%'
-  },
+  headerContent: {
+		padding: theme.spacing(0, 3),
+		height: 72,
+		textAlign: 'right',
+		lineHeight: '72px',
+		backgroundColor: (props: GlobalDrawerProps) => (props.bgColor ? props.bgColor : theme.colorPalette.background.main),
+		zIndex: 999,
+		'& > button.MuiButtonBase-root': {
+			color: theme.colorPalette.text.default
+		}
+	},
+	paper: {
+		'&.MuiPaper-root': {
+			position: 'static',
+			height: '100%',
+			backgroundColor: (props: GlobalDrawerProps) => (props.bgColor ? props.bgColor : theme.colorPalette.background.default),
+      backgroundImage: 'none'
+		}
+	},
+  footer: {
+    position: 'fixed',
+    bottom: 0,
+    width: '100%',
+    left: 0
+  }
 }))
 
 function GlobalDrawer(props: GlobalDrawerProps) {
-  const { open, door = true, children, header = true, onClose, onConfirm, confirmText, cancelText } = props
-  const classes = useStyles({ ...props, door })
-  const { head, content, footer } = useSeparateChildren(children, ['head', 'content', 'footer'])
+	const { open, children, onClose, classes: propClasses, ...other } = props
+	const classes = useStyles(props)
+	const { header, content, footer } = useSeparateChildren(children, ['header', 'content', 'footer'])
 
-  return (
-    <>
-      {door && (
-        <Drawer
-          open={open}
-          hideBackdrop
-          anchor="bottom"
-          classes={{
-            root: classes.bottom,
-            paper: classes.paper
-          }}
-        >
-          {footer ?? (
-            <Box className={classes.buttons}>
-              <Buttons variant="outlined" color="primary" disableRipple onClick={onClose}>{cancelText}</Buttons>
-              <Buttons variant="contained" color="info" disableRipple onClick={onConfirm} style={{ marginLeft: 16 }}>{confirmText}</Buttons>
-            </Box>
-          )}
-        </Drawer>
-      )}
-      <Drawer
-        open={open}
-        hideBackdrop
-        anchor="top"
-        classes={{
-          root: classes.top,
-          paper: classes.paper,
-        }}
-      >
-        {header ? (
-          <Box className={classes.header}>
-            {head ?? (
-              <Buttons variant="text" space={false} onClick={onClose}>
-                <CloseIcon />
-              </Buttons>
-            )}
-          </Box>
-        ) : null}
-        {content}
-      </Drawer>
-    </>
-  )
+	return (
+		<Drawer
+			open={open}
+			anchor="left"
+			classes={{
+				root: classes.drawer,
+				paper: classes.paper
+			}}
+      onClose={onClose}
+			{...other}
+		>
+      <div className={classes.header}>
+        {header ?? (
+          <div className={classes.headerContent}>
+            <Buttons variant="text" space={false} onClick={onClose}>
+              <CloseIcon />
+            </Buttons>
+          </div>
+        )}
+      </div>
+			{content}
+			<div className={classes.footer}>
+        {footer}
+      </div>
+		</Drawer>
+	)
 }
 
 export default GlobalDrawer
