@@ -8,7 +8,6 @@ import { Editor as WangEditor, Toolbar } from '@wangeditor/editor-for-react'
 import { IDomEditor, DomEditor, IToolbarConfig } from '@wangeditor/editor'
 import { makeStyles } from '@mui/styles'
 import Root from 'components/Layout/Root'
-import Box from '@mui/material/Box'
 import Buttons from 'components/Buttons'
 import MediaQuery from 'core/MediaQuery'
 import Publish, { FormOptions } from 'containers/Editor/components/Publish'
@@ -84,20 +83,20 @@ const useStyles = makeStyles((theme: Theme) => ({
 		}
 	},
 	editor: {
-    height: 'calc(100vh - 130px)',
+		height: 'calc(100vh - 130px)',
 		'& .w-e-text-container': {
 			backgroundColor: 'transparent',
-      '& .w-e-scroll': {
-        padding: theme.spacing(1.875, 0),
-        '& [data-slate-editor]': {
-          margin: theme.spacing(-1.875, 0),
-          backgroundColor: theme.colorPalette.background.main,
-        },
-      }
+			'& .w-e-scroll': {
+				padding: theme.spacing(1.875, 0),
+				'& [data-slate-editor]': {
+					margin: theme.spacing(-1.875, 0),
+					backgroundColor: theme.colorPalette.background.main
+				}
+			}
 		},
-    [theme.breakpoints.down('md')]: {
-      height: 'calc(100vh - 150px)',
-    }
+		[theme.breakpoints.down('md')]: {
+			height: 'calc(100vh - 150px)'
+		}
 	},
 	speedDial: {
 		position: 'fixed',
@@ -208,8 +207,8 @@ function Editor() {
 			</div>
 			<div className={classes.editorContainer}>
 				<Toolbar editor={editor} defaultConfig={toolbarConfig} className={classes.toolbar} />
-        <WangEditor defaultConfig={editorConfig} className={classes.editor} />
-      </div>
+				<WangEditor defaultConfig={editorConfig} className={classes.editor} />
+			</div>
 			<Publish open={open} onPublish={handlePublish} onClose={handleCloseDialog} />
 			<MediaQuery media="mobile">
 				<Fab color="primary" className={classes.speedDial} onClick={handleOpenPublish}>

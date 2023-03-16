@@ -14,21 +14,21 @@ const useStyles = makeStyles(
 		paper: {
 			backgroundColor: theme.colorPalette.background.main,
 			paddingBottom: theme.spacing(1),
-      borderRadius: 8,
+			borderRadius: 8
 		},
-    paperTitle: {
-      padding: theme.spacing(2.5)
-    },
-    paperContent: {
-      padding: theme.spacing(2.5)
-    },
+		paperTitle: {
+			padding: theme.spacing(2.5)
+		},
+		paperContent: {
+			padding: theme.spacing(2.5)
+		},
 		closeIcon: {
 			fontSize: 16
 		},
 		drawerPaper: {
-      backdropFilter: 'blur(6px)',
-      backgroundImage: 'none'
-    }
+			backdropFilter: 'blur(6px)',
+			backgroundImage: 'none'
+		}
 	}),
 	'PopupLayer'
 )
@@ -47,14 +47,8 @@ function PopupLayer() {
 	const classes = useStyles()
 	const { clearSpeedDial, speedDial } = useSpeedDial()
 
-	const centerDialogContent = getValue(
-		dialogContent,
-		speedDial as keyof typeof dialogContent
-	)
-	const rightDrawerContent = getValue(
-		drawerContent,
-		speedDial as keyof typeof drawerContent
-	)
+	const centerDialogContent = getValue(dialogContent, speedDial as keyof typeof dialogContent)
+	const rightDrawerContent = getValue(drawerContent, speedDial as keyof typeof drawerContent)
 
 	return (
 		<>
@@ -64,8 +58,8 @@ function PopupLayer() {
 				classes={{
 					paper: classes.paper,
 					closeIcon: classes.closeIcon,
-          title: classes.paperTitle,
-          content: classes.paperContent
+					title: classes.paperTitle,
+					content: classes.paperContent
 				}}
 			>
 				{centerDialogContent}
