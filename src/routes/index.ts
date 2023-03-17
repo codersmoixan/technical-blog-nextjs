@@ -19,6 +19,7 @@ const routes = {
   login: '/auth/login',
   register: '/auth/register',
   resetPassword: '/auth/reset-password',
+  creatorHome: '/creator/home',
   notFond: '/404'
 }
 

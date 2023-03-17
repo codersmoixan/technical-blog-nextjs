@@ -6,7 +6,8 @@
     "dev": "APP_ENV=development next dev",
     "build": "APP_ENV=production next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "copy": "cp -R public/. dist/"
   },
   "dependencies": {
     "@emotion/react": "^11.10.5",
