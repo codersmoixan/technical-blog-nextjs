@@ -56,14 +56,14 @@ const useStyles = makeStyles((theme: Theme) => ({
 	},
 	header: {
 		padding: theme.spacing(3, 2),
-    textAlign: 'left'
+		textAlign: 'left'
 	},
 	footer: {
 		padding: theme.spacing(3, 2),
-    textAlign: 'right',
-    '& .MuiButton-outlined': {
-      marginRight: theme.spacing(3)
-    }
+		textAlign: 'right',
+		'& .MuiButton-outlined': {
+			marginRight: theme.spacing(3)
+		}
 	}
 }))
 
@@ -186,8 +186,12 @@ function Publish({ open = false, onClose, onPublish }: PublishProps) {
 						{formNode()}
 					</Box>
 					<div slot="footer" className={classes.footer}>
-						<Buttons variant="outlined" onClick={handleClose}>取消</Buttons>
-						<Buttons variant="contained" onClick={handleSubmit(handlePublish)}>发布</Buttons>
+						<Buttons variant="outlined" onClick={handleClose}>
+							取消
+						</Buttons>
+						<Buttons variant="contained" onClick={handleSubmit(handlePublish)}>
+							发布
+						</Buttons>
 					</div>
 				</GlobalDrawer>
 			</MediaQuery>

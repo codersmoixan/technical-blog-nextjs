@@ -13,6 +13,7 @@ import FormText from 'components/Form/FormText'
 import Divider from '@mui/material/Divider'
 import { GitHub } from '@mui/icons-material'
 import Image from 'next/image'
+import {useRegisterMutation} from "containers/User/queries";
 
 const useStyles = makeStyles(
 	(theme: Theme) => ({
@@ -81,11 +82,18 @@ const useStyles = makeStyles(
 function Register() {
 	const classes = useStyles()
 	const history = useRouter()
+  const { mutateAsync: register } = useRegisterMutation()
 	const { observer } = useForm()
 
 	const handleToLogin = () => history.replace(routes.login)
 
-	const handleSubmit = () => {}
+	const handleSubmit = async ({ username, password, firstname }: any) => {
+    await register({
+      username,
+      password,
+      nickname: firstname
+    })
+  }
 
 	return (
 		<div className={classes.root}>
@@ -108,14 +116,14 @@ function Register() {
 							<Grid container spacing={2}>
 								<Grid item xs={6}>
 									<FormText
-										name="firstName"
+										name="firstname"
 										label="First name"
 										rules={{ required: '请输入First name' }}
 									/>
 								</Grid>
 								<Grid item xs={6}>
 									<FormText
-										name="lastName"
+										name="lastname"
 										label="Last name"
 										rules={{ required: '请输入Last name' }}
 									/>

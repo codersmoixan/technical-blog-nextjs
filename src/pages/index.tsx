@@ -1,12 +1,11 @@
 /**
  * @author zhengji.su
- * @description Index
+ * @description HomePage
  */
 import HomeContainer from "containers/Home";
 import Head from "next/head";
-import routes from "@/src/routes";
 
-function Home() {
+function HomePage() {
 
   return (
     <>
@@ -19,14 +18,11 @@ function Home() {
   )
 }
 
-export default Home
+export default HomePage
 
 
-// export async function getServerSideProps() {
-//   return {
-//     redirect: {
-//       destination: routes.notFond,
-//       permanent: false
-//     }
-//   }
-// }
+export async function getStaticProps() {
+  return {
+    props: {},
+  }
+}

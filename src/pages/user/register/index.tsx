@@ -1,5 +1,5 @@
 import Head from 'next/head'
-import Register from 'containers/Register'
+import Register from 'containers/User/Register'
 
 function RegisterPage() {
 	return (

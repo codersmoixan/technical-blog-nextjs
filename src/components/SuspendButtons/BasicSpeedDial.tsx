@@ -7,9 +7,9 @@ import Box from '@mui/material/Box';
 import SpeedDial, { SpeedDialProps } from '@mui/material/SpeedDial';
 import SpeedDialIcon from '@mui/material/SpeedDialIcon';
 import SpeedDialAction from '@mui/material/SpeedDialAction';
-import BookmarkAdd from '@mui/icons-material/BookmarkAdd';
+// import BookmarkAdd from '@mui/icons-material/BookmarkAdd';
+// import Queue from '@mui/icons-material/Queue';
 import AddLink from '@mui/icons-material/AddLink';
-import Queue from '@mui/icons-material/Queue';
 import PostAdd from '@mui/icons-material/PostAdd';
 import VerticalAlignTop from "@mui/icons-material/VerticalAlignTop";
 import { makeStyles } from "@mui/styles";
@@ -35,8 +35,8 @@ export interface BasicSpeedDialProps extends Omit<SpeedDialProps, 'onChange' | '
 const actions: SpeedDialOption[] = [
   { id: 'setting', icon: <ThemeSettingIcon />, name: '主题设置' },
   { id: 'links', icon: <AddLink />, name: '新增友情链接' },
-  { id: 'category', icon: <Queue />, name: '新增归档类型' },
-  { id: 'tags', icon: <BookmarkAdd />, name: '新增标签' },
+  // { id: 'category', icon: <Queue />, name: '新增归档类型' },
+  // { id: 'tags', icon: <BookmarkAdd />, name: '新增标签' },
   { id: 'editor', icon: <Link href={routes.editor} target="_blank"><PostAdd /></Link>, name: '新增新的分享' },
   { id: 'top', icon: <VerticalAlignTop /> }
 ];
