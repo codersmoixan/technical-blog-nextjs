@@ -13,7 +13,7 @@ import FormText from 'components/Form/FormText'
 import Divider from '@mui/material/Divider'
 import { GitHub } from '@mui/icons-material'
 import Image from 'next/image'
-import {useRegisterMutation} from "containers/Register/queries";
+import {useRegisterMutation} from "containers/User/queries";
 
 const useStyles = makeStyles(
 	(theme: Theme) => ({

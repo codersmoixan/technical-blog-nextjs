@@ -16,9 +16,9 @@ const routes = {
   articles: (id?: RouteParam) => id ? `/articles/${id}` : '/notfound',
   editor: '/editor',
   about: '/about',
-  login: '/auth/login',
-  register: '/auth/register',
-  resetPassword: '/auth/reset-password',
+  login: '/user/login',
+  register: '/user/register',
+  resetPassword: '/user/reset-password',
   creatorHome: '/creator/home',
   notFond: '/404'
 }

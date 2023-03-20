@@ -4,7 +4,7 @@
  */
 
 import Head from "next/head";
-import Login from "containers/Login";
+import Login from "containers/User/Login";
 
 function LoginPage() {
 
