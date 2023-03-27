@@ -9,11 +9,10 @@ import { useRouter } from 'next/router'
 import isString from 'lodash/isString'
 import ExpandLess from '@mui/icons-material/ExpandLess'
 import ExpandMore from '@mui/icons-material/ExpandMore'
-import { Variant } from 'components/Animation/Variant'
 import GlobalDrawer from 'components/GlobalDrawer'
 import GradientLogo from 'components/Logo/GradientLogo'
-import type { Theme } from '@mui/material'
 import useCompareRoute from "components/Navigation/hooks/useCompareRoute";
+import type { Theme } from '@mui/material'
 
 interface MenuDrawerProps {
 	menus: any[]
@@ -32,7 +31,8 @@ const useStyles = makeStyles((theme: Theme) => ({
 		height: 72
 	},
 	menu: {
-		height: 'auto'
+    padding: 0,
+		height: 'auto',
 	},
 	summaryContent: {
 		padding: theme.spacing(1, 3),
@@ -96,23 +96,21 @@ function MenuDrawer(props: MenuDrawerProps) {
 				<GradientLogo width={25} height={25} />
 			</div>
 			<div slot="content">
-				<Variant focus={open}>
-					<Menu
-						menus={menus}
-						childKey="menus"
-						onNodeClick={handleNodeClick}
-						expandIcon={<ExpandLess />}
-						closeIcon={<ExpandMore />}
-						classes={{
-              root: classes.menu,
-							summaryContent: classes.summaryContent,
-              value: classes.summaryValue,
-              accordion: classes.accordion,
-              checked: classes.summaryContentChecked
-						}}
-            checked={(item) => compare(item.route)}
-          />
-				</Variant>
+        <Menu
+          menus={menus}
+          childKey="menus"
+          onNodeClick={handleNodeClick}
+          expandIcon={<ExpandLess />}
+          closeIcon={<ExpandMore />}
+          classes={{
+            root: classes.menu,
+            summaryContent: classes.summaryContent,
+            value: classes.summaryValue,
+            accordion: classes.accordion,
+            checked: classes.summaryContentChecked
+          }}
+          checked={(item) => compare(item.route)}
+        />
 			</div>
 		</GlobalDrawer>
 	)

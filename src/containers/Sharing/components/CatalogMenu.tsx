@@ -14,9 +14,7 @@ import TransformIcon from "components/TransformIcon";
 import ExpandLess from "@mui/icons-material/ExpandLess";
 import ExpandMore from "@mui/icons-material/ExpandMore";
 import clsx from "clsx";
-import Close from "@mui/icons-material/Close"
-import Buttons from "components/Buttons";
-import { Variant, VariantContent } from "components/Animation/Variant";
+import { Variant } from "components/Animation/Variant";
 import type { Theme } from "@mui/material";
 import type { Variants } from "framer-motion";
 import useSwitchCatalog from "containers/Sharing/hooks/useSwitchCatalog";
@@ -67,11 +65,10 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   menu: {
     width: 205,
+    backgroundColor: theme.colorPalette.background.main,
     [theme.breakpoints.down('md')]: {
+      padding: theme.spacing(0, 2),
       width: 'auto',
-      '& .MuiButtonBase-root': {
-        marginRight: theme.spacing(9)
-      }
     }
   },
   menuLabel: {
@@ -84,41 +81,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     color: theme.palette.primary.main,
     backgroundColor: theme.colorPalette.primary.darkPeach
   },
-  menuHeader: {
-    display: 'flex',
-    justifyContent: 'flex-end',
-    alignItems: 'center',
-    height: 56,
-    color: theme.palette.primary.main,
-    borderBottom: `1px solid ${theme.colorPalette.primary.colorSecondary}`
-  },
-  menuContainer: {
-    padding: theme.spacing(0, 3),
-    backgroundColor: theme.colorPalette.background.main,
-    boxShadow: 'rgb(227 227 227) 0px 2px 4px',
-  }
 }))
-
-const menuVariants: Variants = {
-  open: {
-    display: 'block',
-    height: 'auto',
-    opacity: 1,
-    transition: {
-      duration: 0.3
-    }
-  },
-  closed: {
-    height: 0,
-    opacity: 0,
-    transition: {
-      duration: 0.3
-    },
-    transitionEnd: {
-      display: 'none'
-    }
-  }
-}
 
 export default forwardRef(function CatalogMenu({ menus, onSearchFocus }: CatalogMenuProps, ref) {
   const classes = useStyles()
@@ -171,23 +134,7 @@ export default forwardRef(function CatalogMenu({ menus, onSearchFocus }: Catalog
               <Search />
             </Box>
           </Box>
-          <Variant focus={focus}>
-            <VariantContent
-              variants={menuVariants}
-              className={classes.menuContainer}
-            >
-              <Box className={classes.menuHeader}>
-                <Buttons
-                  variant="text"
-                  space={false}
-                  onClick={() => setFocus(false)}
-                >
-                  <Close />
-                </Buttons>
-              </Box>
-              <Menu menus={menus} isBorder className={classes.menu} onNodeClick={onCheckedMenu} />
-            </VariantContent>
-          </Variant>
+          <Menu focus={focus} menus={menus} isBorder className={classes.menu} onNodeClick={onCheckedMenu} />
         </Box>
       </MediaQuery>
     </Box>
