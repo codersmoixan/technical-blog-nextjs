@@ -140,7 +140,12 @@ const darkTheme: DarkTheme = {
 			drawerPaper: {
 				backgroundColor: 'rgba(22, 28, 36, 0.9)'
 			}
-		}
+		},
+    Footer: {
+      root: {
+        background: 'linear-gradient(rgba(22, 28, 36, 0.94), rgba(22, 28, 36, 0.94)) center center / cover no-repeat, url(/images/home/overlay_2.jpg)'
+      }
+    }
 	},
 	palette: {
 		mode: 'dark'
