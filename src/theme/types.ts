@@ -2,7 +2,6 @@ import type { CSSProperties } from "@mui/styles";
 import type { EmptyObject } from "@/src/tb.types"
 import type { Breakpoints } from "@mui/system";
 import type { ThemeOptions as MuiThemeOptions } from "@mui/material";
-import MenuDrawer from "components/Navigation/components/MenuDrawer";
 
 export interface ConfigOptions {
   backdropHeight: number;
@@ -74,22 +73,27 @@ declare module '@mui/material/styles' {
   interface ThemeOptions extends CustomThemeOptions {}
 }
 
+export interface StyleOverrides{
+  [k: string]: CSSProperties
+}
+
 export interface ComponentStyleOverrides {
-  App?: EmptyObject;
-  Navigation?: EmptyObject;
-  HomeTechnologySharing?: EmptyObject;
-  HomeCategory?: EmptyObject;
-  HomeCategoryList?: EmptyObject;
-  HomeDesigner?: EmptyObject;
-  SideSwiper?: EmptyObject;
-  SharingCard?: EmptyObject;
-  AccordionMenu?: EmptyObject;
-  Articles?: EmptyObject;
-  Login?: EmptyObject;
-  Register?: EmptyObject;
-  SuspendButtons?: EmptyObject;
-  ThemeSetting?: EmptyObject;
-  PopupLayer?: EmptyObject;
+  App?: StyleOverrides;
+  Navigation?: StyleOverrides;
+  HomeTechnologySharing?: StyleOverrides;
+  HomeCategory?: StyleOverrides;
+  HomeCategoryList?: StyleOverrides;
+  HomeDesigner?: StyleOverrides;
+  SideSwiper?: StyleOverrides;
+  SharingCard?: StyleOverrides;
+  AccordionMenu?: StyleOverrides;
+  Articles?: StyleOverrides;
+  Login?: StyleOverrides;
+  Register?: StyleOverrides;
+  SuspendButtons?: StyleOverrides;
+  ThemeSetting?: StyleOverrides;
+  PopupLayer?: StyleOverrides;
+  Footer?: StyleOverrides;
 }
 
 export type ComponentStyleOverridesKey = keyof ComponentStyleOverrides

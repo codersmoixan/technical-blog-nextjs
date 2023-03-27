@@ -11,13 +11,13 @@ import { AccordionDetails, AccordionSummary } from '@mui/material'
 import Buttons from 'components/Buttons'
 import clsx from 'clsx'
 import TransformIcon from 'components/TransformIcon'
-import { VariantContent } from 'components/Animation/Variant'
-import { stiffnessVariants } from 'utils/variants'
 import useDeepCompareEffect from 'hooks/effect/useDeepCompareEffect'
-import type { Theme } from '@mui/material'
-import type { EmptyObject } from '@/src/tb.types'
 import isEmpty from 'lodash/isEmpty'
 import { isFunction } from 'lodash'
+import FadeInVariantList from 'components/Animation/Variant/FadeInVariantList'
+import type { Variants } from 'framer-motion'
+import type { Theme } from '@mui/material'
+import type { EmptyObject } from '@/src/tb.types'
 
 export interface MenuItem extends EmptyObject {
 	id: number | string
@@ -27,6 +27,7 @@ export interface MenuItem extends EmptyObject {
 
 interface MenuProps {
 	menus: MenuItem[]
+	focus?: boolean
 	checked?: ((menuItem: MenuItem) => boolean) | boolean
 	classes?: EmptyObject
 	isBorder?: boolean
@@ -41,7 +42,7 @@ interface MenuProps {
 
 const useStyles = makeStyles((theme: Theme) => ({
 	root: {
-		width: '100%'
+    padding: theme.spacing(0, 3),
 	},
 	accordion: {
 		backgroundColor: theme.colorPalette.primary.transparent,
@@ -106,9 +107,30 @@ const useStyles = makeStyles((theme: Theme) => ({
 	}
 }))
 
+const menuVariants: Variants = {
+	open: {
+		display: 'block',
+		height: 'auto',
+		opacity: 1,
+		transition: {
+			duration: 0.3
+		}
+	},
+	closed: {
+		height: 0,
+		opacity: 0,
+		transition: {
+			duration: 0.3
+		},
+		transitionEnd: {
+			display: 'none'
+		}
+	}
+}
+
 function Menu(props: MenuProps) {
 	const classes = useStyles(props)
-	const { menus, onNodeClick, className, childKey = 'child', expandIcon, closeIcon, value = [], checked } = props
+	const { menus, focus, onNodeClick, className, childKey = 'child', expandIcon, closeIcon, value = [], checked } = props
 
 	const [expanded, setExpanded] = useState<string | number | false>(false)
 
@@ -138,17 +160,16 @@ function Menu(props: MenuProps) {
 	}
 
 	return (
-		<VariantContent className={clsx(classes.root, className)}>
-			{menus.map(menu => (
-				<Accordion
-					key={menu.id}
-					expanded={expanded == menu.id}
-					classes={{ root: classes.accordion }}
-					className={clsx({
-						[classes.checked]: isFunction(checked) ? checked(menu) : checked
-					})}
-				>
-					<VariantContent variants={stiffnessVariants}>
+		<div className={clsx(className, classes.root)}>
+			<FadeInVariantList list={menus} focus={focus} contentVariants={menuVariants}>
+				{menu => (
+					<Accordion
+						expanded={expanded == menu.id}
+						classes={{ root: classes.accordion }}
+						className={clsx({
+							[classes.checked]: isFunction(checked) ? checked(menu) : checked
+						})}
+					>
 						<AccordionSummary
 							classes={{
 								root: classes.summary,
@@ -178,25 +199,25 @@ function Menu(props: MenuProps) {
 								</Buttons>
 							)}
 						</AccordionSummary>
-					</VariantContent>
-					{menu?.[childKey] && (
-						<AccordionDetails classes={{ root: classes.value }}>
-							{menu?.[childKey].map((c: MenuItem) => (
-								<Typography
-									component="a"
-									key={c.id}
-									className={classes.childItem}
-									onClick={() => onNodeClick?.(c, menu)}
-									fontWeight={value?.[1] == c.id ? 700 : 400}
-								>
-									{c.label}
-								</Typography>
-							))}
-						</AccordionDetails>
-					)}
-				</Accordion>
-			))}
-		</VariantContent>
+						{menu?.[childKey] && (
+							<AccordionDetails classes={{ root: classes.value }}>
+								{menu?.[childKey].map((c: MenuItem) => (
+									<Typography
+										component="a"
+										key={c.id}
+										className={classes.childItem}
+										onClick={() => onNodeClick?.(c, menu)}
+										fontWeight={value?.[1] == c.id ? 700 : 400}
+									>
+										{c.label}
+									</Typography>
+								))}
+							</AccordionDetails>
+						)}
+					</Accordion>
+				)}
+			</FadeInVariantList>
+		</div>
 	)
 }
 

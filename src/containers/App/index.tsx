@@ -8,13 +8,13 @@ import { motion, useScroll, useSpring } from 'framer-motion'
 import makeStyles, { Theme } from 'core/makeStyles'
 import BeforeRoute from 'core/BeforeRoute'
 import Navigation from 'components/Navigation'
-import Footer from 'components/Footer'
+import Footer from 'components/Layout/Footer'
 import Snackbar from 'core/Snackbar'
 import PopupLayer from 'containers/App/components/PopupLayer'
-import type { AppProps } from 'next/app'
 import routes from '@/src/routes'
 import SuspendButtons from 'components/SuspendButtons'
 import type { GetServerSideProps } from 'next'
+import type { AppProps } from 'next/app'
 
 const useStyles = makeStyles(
 	(theme: Theme) => ({
@@ -48,7 +48,7 @@ function App({ Component, pageProps }: AppProps) {
 	})
 
 	return (
-		<Box className={classes.root}>
+		<div className={classes.root}>
 			<motion.div style={{ scaleX }} className={classes.scrollProgress} />
 			<BeforeRoute exclude={excludeList}>
 				<Navigation />
@@ -62,7 +62,7 @@ function App({ Component, pageProps }: AppProps) {
 			<SuspendButtons />
 			<Snackbar />
 			<PopupLayer />
-		</Box>
+		</div>
 	)
 }
 

@@ -1,0 +1,41 @@
+import Variant from 'components/Animation/Variant/Variant'
+import VariantContent from 'components/Animation/Variant/VariantContent'
+import { contentVariants, stiffnessVariants } from 'utils/variants'
+import type { Variants } from 'framer-motion'
+import isEmpty from "lodash/isEmpty";
+
+export interface FadeInVariantListProps {
+	list: any[]
+	children: (child: any) => any
+	focus?: boolean
+	rowKey?: string
+	contentVariants?: Variants
+	stiffnessVariants?: Variants
+}
+
+function FadeInVariantList({
+	list,
+	children,
+	focus,
+	rowKey = 'id',
+	contentVariants: propContentVariants = contentVariants,
+	stiffnessVariants: propStiffnessVariants = stiffnessVariants
+}: FadeInVariantListProps) {
+  if (isEmpty(list)) {
+    return null
+  }
+
+	return (
+		<Variant focus={focus}>
+			<VariantContent variants={propContentVariants}>
+				{list.map(item => (
+					<VariantContent key={item[rowKey]} variants={propStiffnessVariants}>
+						{children(item)}
+					</VariantContent>
+				))}
+			</VariantContent>
+		</Variant>
+	)
+}
+
+export default FadeInVariantList
