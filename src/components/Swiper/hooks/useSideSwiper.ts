@@ -1,4 +1,4 @@
-import { useMemo, useRef, useState, useEffect } from "react";
+import { useRef, useState, useEffect } from "react";
 import throttle from "lodash/throttle";
 import useMount from "hooks/effect/useMount";
 import useDeepCompareEffect from "hooks/effect/useDeepCompareEffect";

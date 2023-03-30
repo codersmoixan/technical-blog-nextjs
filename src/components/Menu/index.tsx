@@ -37,12 +37,13 @@ interface MenuProps {
 	closeIcon?: ReactNode
 	className?: string
 	value?: string[]
+	animate?: boolean
 	children?: (option: MenuItem) => ReactNode
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
 	root: {
-    padding: theme.spacing(0, 3),
+		padding: theme.spacing(0, 3)
 	},
 	accordion: {
 		backgroundColor: theme.colorPalette.primary.transparent,
@@ -130,7 +131,7 @@ const menuVariants: Variants = {
 
 function Menu(props: MenuProps) {
 	const classes = useStyles(props)
-	const { menus, focus, onNodeClick, className, childKey = 'child', expandIcon, closeIcon, value = [], checked } = props
+	const { menus, focus, onNodeClick, className, childKey = 'child', expandIcon, closeIcon, value = [], checked, animate } = props
 
 	const [expanded, setExpanded] = useState<string | number | false>(false)
 
@@ -161,7 +162,7 @@ function Menu(props: MenuProps) {
 
 	return (
 		<div className={clsx(className, classes.root)}>
-			<FadeInVariantList list={menus} focus={focus} contentVariants={menuVariants}>
+			<FadeInVariantList animate={animate} list={menus} focus={focus} contentVariants={menuVariants}>
 				{menu => (
 					<Accordion
 						expanded={expanded == menu.id}

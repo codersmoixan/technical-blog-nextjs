@@ -50,7 +50,7 @@ function App({ Component, pageProps }: AppProps) {
 	return (
 		<div className={classes.root}>
 			<motion.div style={{ scaleX }} className={classes.scrollProgress} />
-			<BeforeRoute exclude={excludeList}>
+			<BeforeRoute exclude={[...excludeList, routes.creatorHome, routes.creatorArticle]}>
 				<Navigation />
 			</BeforeRoute>
 			<Box position="relative">

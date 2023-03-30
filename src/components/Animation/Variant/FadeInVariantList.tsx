@@ -9,6 +9,7 @@ export interface FadeInVariantListProps {
 	children: (child: any) => any
 	focus?: boolean
 	rowKey?: string
+  animate?: boolean
 	contentVariants?: Variants
 	stiffnessVariants?: Variants
 }
@@ -18,11 +19,17 @@ function FadeInVariantList({
 	children,
 	focus,
 	rowKey = 'id',
+  animate = true,
 	contentVariants: propContentVariants = contentVariants,
 	stiffnessVariants: propStiffnessVariants = stiffnessVariants
 }: FadeInVariantListProps) {
+
   if (isEmpty(list)) {
     return null
+  }
+
+  if (!animate) {
+    return <div>{list.map(item => children(item))}</div>
   }
 
 	return (

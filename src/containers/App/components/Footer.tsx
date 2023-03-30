@@ -15,23 +15,33 @@ const useStyles = makeStyles(
 		root: {
 			position: 'relative',
 			background: `linear-gradient(rgba(252, 252, 252, 0.9), rgba(252, 252, 252, 0.9)) center center / cover no-repeat, url(/images/home/overlay_2.jpg)`,
-			backgroundSize: '100% 100%'
+			backgroundSize: '100% 100%',
 		},
 		content: {
-			padding: theme.spacing(3, 0),
+			padding: theme.spacing(3, 3),
 			display: 'flex',
 			flexDirection: 'column',
-			width: 1200,
-			minHeight: 700,
 			'& .content': {
-				display: 'flex',
-				justifyContent: 'flex-end',
+        display: 'flex',
 				flex: 1,
-				'& .list': {
-					width: 240,
-					textAlign: 'right'
-				}
-			}
+			},
+      [theme.breakpoints.down('md')]: {
+        '& .content': {
+          flexWrap: 'wrap',
+          '& .list': {
+            width: '33%'
+          }
+        },
+      },
+      [theme.breakpoints.up('md')]: {
+        '& .content': {
+          justifyContent: 'flex-end',
+          '& .list': {
+            width: 240,
+            textAlign: 'right'
+          }
+        },
+      }
 		},
 		footer: {
 			margin: theme.spacing(2, 'auto', 0),

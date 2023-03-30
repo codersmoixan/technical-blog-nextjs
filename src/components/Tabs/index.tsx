@@ -68,7 +68,7 @@ function Tabs(props: TabsProps) {
 					/>
 				))}
 			</MuiTabs>
-			{tabPane}
+      {tabPane}
 		</div>
 	)
 }

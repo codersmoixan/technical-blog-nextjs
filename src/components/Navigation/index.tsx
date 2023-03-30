@@ -21,7 +21,6 @@ import { useTheme } from "@mui/material/styles";
 import { Variant } from "components/Animation/Variant";
 import makeStyles, { Theme } from "core/makeStyles";
 import GradientLogo from "components/Logo/GradientLogo";
-import {useMediaQuery} from "@mui/material";
 import useCompareRoute from "components/Navigation/hooks/useCompareRoute";
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -108,10 +107,7 @@ function Navigation() {
   const classes = useStyles()
   const history = useRouter()
   const theme = useTheme()
-  const dark = useMediaQuery('(prefers-color-scheme: dark)')
   const { compare } = useCompareRoute()
-
-  console.log(dark, 1352)
 
   const [openDialog, setOpenDialog] = useState(false)
   const [focusTab, setFocusTab] = useState<NavigationItem | null>(null)

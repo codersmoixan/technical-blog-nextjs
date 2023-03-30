@@ -19,7 +19,9 @@ const routes = {
   login: '/user/login',
   register: '/user/register',
   resetPassword: '/user/reset-password',
+  creator: '/creator',
   creatorHome: '/creator/home',
+  creatorArticle: '/creator/content/article',
   notFond: '/404'
 }
 
