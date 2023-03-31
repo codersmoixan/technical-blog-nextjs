@@ -4,14 +4,14 @@
  */
 
 import { makeStyles } from '@mui/styles'
-import Menu, { MenuItem } from 'components/Menu'
+import Menu  from 'components/Menu'
 import { useRouter } from 'next/router'
 import isString from 'lodash/isString'
 import ExpandLess from '@mui/icons-material/ExpandLess'
 import ExpandMore from '@mui/icons-material/ExpandMore'
 import GlobalDrawer from 'components/GlobalDrawer'
 import GradientLogo from 'components/Logo/GradientLogo'
-import useCompareRoute from "components/Navigation/hooks/useCompareRoute";
+import useCompareRoute from "hooks/useCompareRoute";
 import type { Theme } from '@mui/material'
 
 interface MenuDrawerProps {
@@ -47,6 +47,9 @@ const useStyles = makeStyles((theme: Theme) => ({
 			color: theme.colorPalette.text.textSecondary
 		}
 	},
+  accordionDetails: {
+    padding: theme.spacing(0, 7, 2),
+  },
   summaryContentChecked: {
     backgroundColor: theme.colorPalette.setting.active,
     '& p': {
@@ -78,7 +81,7 @@ function MenuDrawer(props: MenuDrawerProps) {
 	const history = useRouter()
   const { compare } = useCompareRoute()
 
-  const handleNodeClick = (options: MenuItem) => {
+  const handleNodeClick = (options: typeof menus[number]) => {
 		const url = options.route
 		onClose?.()
 		return isString(url) ? history.push(url) : history.push(url())
@@ -107,7 +110,8 @@ function MenuDrawer(props: MenuDrawerProps) {
             summaryContent: classes.summaryContent,
             value: classes.summaryValue,
             accordion: classes.accordion,
-            checked: classes.summaryContentChecked
+            checked: classes.summaryContentChecked,
+            accordionDetails: classes.accordionDetails
           }}
           checked={(item) => compare(item.route)}
         />

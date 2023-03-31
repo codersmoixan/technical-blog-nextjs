@@ -20,8 +20,4 @@ function SharingUnitPage() {
   )
 }
 
-export async function getServerSideProps(context: GetServerSideProps) {
-
-}
-
 export default SharingUnitPage

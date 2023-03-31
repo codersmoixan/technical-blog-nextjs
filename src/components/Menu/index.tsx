@@ -13,12 +13,10 @@ import clsx from 'clsx'
 import TransformIcon from 'components/TransformIcon'
 import useDeepCompareEffect from 'hooks/effect/useDeepCompareEffect'
 import isEmpty from 'lodash/isEmpty'
-import { isFunction } from 'lodash'
 import FadeInVariantList from 'components/Animation/Variant/FadeInVariantList'
 import type { Variants } from 'framer-motion'
 import type { Theme } from '@mui/material'
 import type { EmptyObject } from '@/src/tb.types'
-
 
 export interface Option extends EmptyObject {
 	id: number | string
@@ -43,9 +41,7 @@ export interface MenuProps<T = Option> {
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
-	root: {
-		padding: theme.spacing(0, 3)
-	},
+	root: {},
 	accordion: {
 		backgroundColor: theme.colorPalette.primary.transparent,
 		backgroundImage: 'none',
@@ -73,6 +69,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 		}
 	},
 	summaryContent: {
+    padding: theme.spacing(0, 1.5),
 		display: 'flex',
 		justifyContent: 'space-between',
 		alignItems: 'center',
@@ -86,7 +83,6 @@ const useStyles = makeStyles((theme: Theme) => ({
 		display: 'flex',
 		justifyContent: 'space-between',
 		alignItems: 'center',
-		padding: 0
 	},
 	label: {
 		display: 'flex',
@@ -96,8 +92,8 @@ const useStyles = makeStyles((theme: Theme) => ({
 			height: 20
 		}
 	},
-	value: {
-		padding: theme.spacing(0, 2, 2)
+  accordionDetails: {
+		padding: theme.spacing(0, 3, 2),
 	},
 	childItem: {
 		display: 'block',
@@ -105,8 +101,8 @@ const useStyles = makeStyles((theme: Theme) => ({
 		lineHeight: '32px',
 		cursor: 'pointer'
 	},
-  checked: {},
-  childChecked: {}
+	checked: {},
+	childChecked: {},
 }))
 
 const menuVariants: Variants = {
@@ -167,10 +163,11 @@ function Menu<T extends Option>(props: MenuProps<T>) {
 				{(menu: T) => (
 					<Accordion
 						expanded={expanded == menu.id}
-						classes={{ root: classes.accordion }}
-						className={clsx({
-							// checked: isFunction(checked) ? checked(menu) : checked
-						})}
+						classes={{
+							root: clsx(classes.accordion, {
+								[classes.checked]: value?.[0] === menu.id
+							})
+						}}
 					>
 						<AccordionSummary
 							classes={{
@@ -178,13 +175,10 @@ function Menu<T extends Option>(props: MenuProps<T>) {
 								expanded: classes.expanded,
 								content: classes.summaryContent
 							}}
-							className={clsx({
-								[classes.checked]: value?.[0] === menu.id
-							})}
 						>
 							<div className={classes.label}>
 								{menu.icon && (
-									<Typography lineHeight={1} fontSize={10} mr={2} color="inherit">
+									<Typography lineHeight={1} fontSize={10} mr={1.5} color="inherit">
 										<menu.icon />
 									</Typography>
 								)}
@@ -205,7 +199,7 @@ function Menu<T extends Option>(props: MenuProps<T>) {
 							)}
 						</AccordionSummary>
 						{menu?.[childKey] && (
-							<AccordionDetails classes={{ root: classes.value }}>
+							<AccordionDetails classes={{ root: classes.accordionDetails }}>
 								{menu?.[childKey].map((c: T) => (
 									<Typography
 										component="div"

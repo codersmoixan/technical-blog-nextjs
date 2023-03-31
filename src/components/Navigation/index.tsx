@@ -21,7 +21,7 @@ import { useTheme } from "@mui/material/styles";
 import { Variant } from "components/Animation/Variant";
 import makeStyles, { Theme } from "core/makeStyles";
 import GradientLogo from "components/Logo/GradientLogo";
-import useCompareRoute from "components/Navigation/hooks/useCompareRoute";
+import useCompareRoute from "hooks/useCompareRoute";
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {

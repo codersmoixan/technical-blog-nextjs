@@ -8,8 +8,10 @@ import Content from 'components/Layout/Content'
 import GradientLogo from 'components/Logo/GradientLogo'
 import Menu from 'components/Menu'
 import routes from '@/src/routes'
-import { Article, AttachFile, Book, BookmarkBorder, Home, Queue } from '@mui/icons-material'
+import { Article, Help, Home, Assessment } from '@mui/icons-material'
 import { useRouter } from 'next/router'
+import ExpandLess from "@mui/icons-material/ExpandLess";
+import ExpandMore from "@mui/icons-material/ExpandMore";
 
 export interface LayoutProps {
 	children: ReactNode
@@ -25,6 +27,9 @@ const useStyles = makeStyles((theme: Theme) => ({
 		left: 0,
 		width: '100%',
 		height: theme.config.navHeight,
+    zIndex: 999,
+    backgroundColor: theme.colorPalette.background.default,
+    boxShadow: '0 0 16px rgba(0, 0, 0, 0.08)',
 		'& .header-box': {
 			margin: '0 auto',
 			width: 1300,
@@ -52,31 +57,54 @@ const useStyles = makeStyles((theme: Theme) => ({
 			boxShadow: 'none'
 		}
 	},
+  menu: {
+    marginTop: theme.spacing(2),
+  },
+  accordionDetails: {
+    padding: theme.spacing(0, 5.5, 2),
+  },
 	label: {
 		color: theme.colorPalette.text.default
-	}
+	},
+  childItem: {
+    height: 48,
+    lineHeight: '48px',
+    color: theme.colorPalette.text.textSecondary
+  },
+  menuChecked: {
+    '& .MuiAccordionSummary-content': {
+      backgroundColor: theme.colorPalette.setting.active
+    }
+  }
 }))
 
 export const NAVIGATION_LIST = [
 	{
 		id: 'home',
 		label: '首页',
+    icon: Home,
 		route: routes.creatorHome
 	},
 	{
 		id: 'article',
 		label: '内容管理',
+    icon: Article,
 		menus: [
 			{
 				id: 1,
 				label: '文章管理',
 				route: routes.creatorArticle
-			}
+			},
+      {
+        id: 2,
+        label: '专栏管理'
+      }
 		]
 	},
 	{
 		id: 'data',
 		label: '数据中心',
+    icon: Assessment,
 		menus: [
 			{
 				id: 1,
@@ -87,6 +115,7 @@ export const NAVIGATION_LIST = [
 	{
 		id: 'help',
 		label: '帮助中心',
+    icon: Help,
 		menus: [
 			{
 				id: 1,
@@ -105,9 +134,9 @@ function Layout(props: LayoutProps) {
 		history.push(routes.home)
 	}
 
-  const handleNodeClick = (menu: any) => {
-    if (menu.route) {
-      history.push(menu.route)
+  const handleNodeClick = (option: typeof NAVIGATION_LIST[number]) => {
+    if (option.route) {
+      history.push(option.route)
     }
   }
 
@@ -131,11 +160,19 @@ function Layout(props: LayoutProps) {
 					<Menu
 						menus={NAVIGATION_LIST}
 						classes={{
-							label: classes.label
+              root: classes.menu,
+              accordionDetails: classes.accordionDetails,
+							label: classes.label,
+              childItem: classes.childItem,
+              checked: classes.menuChecked
 						}}
 						childKey="menus"
             onNodeClick={handleNodeClick}
             animate={false}
+            isBorder={false}
+            value={['article', 1]}
+            expandIcon={<ExpandLess />}
+            closeIcon={<ExpandMore />}
 					/>
 				</div>
 				<div>{children}</div>
