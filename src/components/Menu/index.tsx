@@ -19,26 +19,27 @@ import type { Variants } from 'framer-motion'
 import type { Theme } from '@mui/material'
 import type { EmptyObject } from '@/src/tb.types'
 
-export interface MenuItem extends EmptyObject {
+
+export interface Option extends EmptyObject {
 	id: number | string
 	label: string
-	child?: MenuItem[]
+	child?: Array<Option>
 }
 
-interface MenuProps {
-	menus: MenuItem[]
+export interface MenuProps<T = Option> {
+	menus: T[]
 	focus?: boolean
-	checked?: ((menuItem: MenuItem) => boolean) | boolean
+	checked?: ((option: any) => boolean) | boolean
 	classes?: EmptyObject
 	isBorder?: boolean
-	onNodeClick?: (options: MenuItem, parent: MenuItem | null) => void
+	onNodeClick?: (option: any, parent: any | null) => void
 	childKey?: string
 	expandIcon?: ReactNode
 	closeIcon?: ReactNode
 	className?: string
-	value?: string[]
+	value?: (string | number)[]
 	animate?: boolean
-	children?: (option: MenuItem) => ReactNode
+	children?: (option: any) => ReactNode
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -58,9 +59,12 @@ const useStyles = makeStyles((theme: Theme) => ({
 		},
 		'&:last-of-type': {
 			borderBottom: 'none'
+		},
+		'&::before': {
+			content: '""',
+			backgroundColor: (props: MenuProps) => (props.isBorder ? 'rgba(0, 0, 0, 0.12)' : 'transparent')
 		}
 	},
-	checked: {},
 	summary: {
 		padding: 0,
 		minHeight: 48,
@@ -93,19 +97,16 @@ const useStyles = makeStyles((theme: Theme) => ({
 		}
 	},
 	value: {
-		padding: theme.spacing(0, 2, 2),
-		'& > a': {
-			display: 'block',
-			height: 32,
-			lineHeight: '32px'
-		}
+		padding: theme.spacing(0, 2, 2)
 	},
 	childItem: {
 		display: 'block',
-		height: 25,
-		lineHeight: '25px',
+		height: 32,
+		lineHeight: '32px',
 		cursor: 'pointer'
-	}
+	},
+  checked: {},
+  childChecked: {}
 }))
 
 const menuVariants: Variants = {
@@ -129,7 +130,7 @@ const menuVariants: Variants = {
 	}
 }
 
-function Menu(props: MenuProps) {
+function Menu<T extends Option>(props: MenuProps<T>) {
 	const classes = useStyles(props)
 	const { menus, focus, onNodeClick, className, childKey = 'child', expandIcon, closeIcon, value = [], checked, animate } = props
 
@@ -147,7 +148,7 @@ function Menu(props: MenuProps) {
 		const parent = menus.find(menu => menu.id == value[0]) ?? menus[0]
 
 		if (value.length === 2) {
-			const child = parent?.child?.find(c => c.id == value[1])
+			const child = parent.child?.find(c => c.id == value[1]) as T
 			setExpanded(value[0])
 
 			return child && onNodeClick?.(child, parent)
@@ -163,12 +164,12 @@ function Menu(props: MenuProps) {
 	return (
 		<div className={clsx(className, classes.root)}>
 			<FadeInVariantList animate={animate} list={menus} focus={focus} contentVariants={menuVariants}>
-				{menu => (
+				{(menu: T) => (
 					<Accordion
 						expanded={expanded == menu.id}
 						classes={{ root: classes.accordion }}
 						className={clsx({
-							[classes.checked]: isFunction(checked) ? checked(menu) : checked
+							// checked: isFunction(checked) ? checked(menu) : checked
 						})}
 					>
 						<AccordionSummary
@@ -177,6 +178,9 @@ function Menu(props: MenuProps) {
 								expanded: classes.expanded,
 								content: classes.summaryContent
 							}}
+							className={clsx({
+								[classes.checked]: value?.[0] === menu.id
+							})}
 						>
 							<div className={classes.label}>
 								{menu.icon && (
@@ -188,7 +192,7 @@ function Menu(props: MenuProps) {
 									lineHeight={1}
 									flex={1}
 									onClick={() => onNodeClick?.(menu, null)}
-									fontWeight={value?.[0] == menu.id ? 700 : 400}
+									fontWeight={value?.[0] === menu.id ? 700 : 400}
 									color="inherit"
 								>
 									{menu.label}
@@ -202,13 +206,15 @@ function Menu(props: MenuProps) {
 						</AccordionSummary>
 						{menu?.[childKey] && (
 							<AccordionDetails classes={{ root: classes.value }}>
-								{menu?.[childKey].map((c: MenuItem) => (
+								{menu?.[childKey].map((c: T) => (
 									<Typography
-										component="a"
+										component="div"
 										key={c.id}
-										className={classes.childItem}
+										className={clsx(classes.childItem, {
+											[classes.childChecked]: value?.[1] === c.id
+										})}
 										onClick={() => onNodeClick?.(c, menu)}
-										fontWeight={value?.[1] == c.id ? 700 : 400}
+										fontWeight={value?.[1] === c.id ? 700 : 400}
 									>
 										{c.label}
 									</Typography>
