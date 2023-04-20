@@ -1,9 +1,8 @@
 import { makeStyles } from '@mui/styles'
 import type { Theme } from '@mui/material'
 import Layout from "containers/Creator/components/Layout";
-import Buttons from "components/Buttons";
-import routes from "@/src/routes";
 import Typography from "@mui/material/Typography";
+import {ReactNode} from "react";
 
 const useStyles = makeStyles((theme: Theme) => ({
 	root: {
@@ -15,14 +14,16 @@ function HomePage() {
 	const classes = useStyles()
 
 	return (
-    <Layout>
-      <div className={classes.root}>
-        <Buttons href={routes.creatorArticle}>
-          <Typography>文章管理</Typography>
-        </Buttons>
-      </div>
-    </Layout>
+    <div className={classes.root}>
+      <Typography>首页</Typography>
+    </div>
   )
 }
+
+HomePage.getLayout = (page: ReactNode) => (
+  <Layout>
+    {page}
+  </Layout>
+)
 
 export default HomePage

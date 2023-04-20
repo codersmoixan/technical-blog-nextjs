@@ -10,8 +10,16 @@ import Menu from 'components/Menu'
 import routes from '@/src/routes'
 import { Article, Help, Home, Assessment } from '@mui/icons-material'
 import { useRouter } from 'next/router'
-import ExpandLess from "@mui/icons-material/ExpandLess";
-import ExpandMore from "@mui/icons-material/ExpandMore";
+import ExpandLess from '@mui/icons-material/ExpandLess'
+import ExpandMore from '@mui/icons-material/ExpandMore'
+import { useMemo } from 'react'
+import type { EmptyObject } from '@/src/tb.types'
+import isEmpty from 'lodash/isEmpty'
+
+export interface FindMenuReturns {
+	parent: number | string
+	current: number | string
+}
 
 export interface LayoutProps {
 	children: ReactNode
@@ -27,9 +35,9 @@ const useStyles = makeStyles((theme: Theme) => ({
 		left: 0,
 		width: '100%',
 		height: theme.config.navHeight,
-    zIndex: 999,
-    backgroundColor: theme.colorPalette.background.default,
-    boxShadow: '0 0 16px rgba(0, 0, 0, 0.08)',
+		zIndex: 999,
+		backgroundColor: theme.colorPalette.background.default,
+		boxShadow: '0 0 16px rgba(0, 0, 0, 0.08)',
 		'& .header-box': {
 			margin: '0 auto',
 			width: 1300,
@@ -57,54 +65,54 @@ const useStyles = makeStyles((theme: Theme) => ({
 			boxShadow: 'none'
 		}
 	},
-  menu: {
-    marginTop: theme.spacing(2),
-  },
-  accordionDetails: {
-    padding: theme.spacing(0, 5.5, 2),
-  },
+	menu: {
+		marginTop: theme.spacing(2)
+	},
+	accordionDetails: {
+		padding: theme.spacing(0, 5.5, 2)
+	},
 	label: {
 		color: theme.colorPalette.text.default
 	},
-  childItem: {
-    height: 48,
-    lineHeight: '48px',
-    color: theme.colorPalette.text.textSecondary
-  },
-  menuChecked: {
-    '& .MuiAccordionSummary-content': {
-      backgroundColor: theme.colorPalette.setting.active
-    }
-  }
+	childItem: {
+		height: 48,
+		lineHeight: '48px',
+		color: theme.colorPalette.text.textSecondary
+	},
+	menuChecked: {
+		'& .MuiAccordionSummary-content': {
+			backgroundColor: theme.colorPalette.setting.active
+		}
+	}
 }))
 
 export const NAVIGATION_LIST = [
 	{
 		id: 'home',
 		label: '首页',
-    icon: Home,
+		icon: Home,
 		route: routes.creatorHome
 	},
 	{
 		id: 'article',
 		label: '内容管理',
-    icon: Article,
+		icon: Article,
 		menus: [
 			{
 				id: 1,
 				label: '文章管理',
 				route: routes.creatorArticle
 			},
-      {
-        id: 2,
-        label: '专栏管理'
-      }
+			{
+				id: 2,
+				label: '专栏管理'
+			}
 		]
 	},
 	{
 		id: 'data',
 		label: '数据中心',
-    icon: Assessment,
+		icon: Assessment,
 		menus: [
 			{
 				id: 1,
@@ -115,7 +123,7 @@ export const NAVIGATION_LIST = [
 	{
 		id: 'help',
 		label: '帮助中心',
-    icon: Help,
+		icon: Help,
 		menus: [
 			{
 				id: 1,
@@ -125,20 +133,45 @@ export const NAVIGATION_LIST = [
 	}
 ]
 
+const findMenu = (pathname: string, menus: any[], parentMenu: EmptyObject = {}): FindMenuReturns => {
+	let find = {}
+
+	menus.forEach(menu => {
+		if (pathname === menu.route) {
+			find = { parent: parentMenu.id, current: menu.id }
+		}
+
+		if (isEmpty(find) && menu.menus) {
+			find = findMenu(pathname, menu.menus, menu)
+		}
+	})
+
+	return find as FindMenuReturns
+}
+
 function Layout(props: LayoutProps) {
 	const classes = useStyles(props)
 	const { children } = props
 	const history = useRouter()
 
+	const value = useMemo(() => {
+		const pathname = history.pathname
+		const { parent, current } = findMenu(pathname, NAVIGATION_LIST)
+
+		return parent ? [parent, current] : [current]
+	}, [history])
+
+	console.log(value, 125)
+
 	const handleToHome = () => {
 		history.push(routes.home)
 	}
 
-  const handleNodeClick = (option: typeof NAVIGATION_LIST[number]) => {
-    if (option.route) {
-      history.push(option.route)
-    }
-  }
+	const handleNodeClick = (option: (typeof NAVIGATION_LIST)[number]) => {
+		if (option.route) {
+			history.push(option.route)
+		}
+	}
 
 	return (
 		<div className={classes.root}>
@@ -160,19 +193,19 @@ function Layout(props: LayoutProps) {
 					<Menu
 						menus={NAVIGATION_LIST}
 						classes={{
-              root: classes.menu,
-              accordionDetails: classes.accordionDetails,
+							root: classes.menu,
+							accordionDetails: classes.accordionDetails,
 							label: classes.label,
-              childItem: classes.childItem,
-              checked: classes.menuChecked
+							childItem: classes.childItem,
+							checked: classes.menuChecked
 						}}
 						childKey="menus"
-            onNodeClick={handleNodeClick}
-            animate={false}
-            isBorder={false}
-            value={['article', 1]}
-            expandIcon={<ExpandLess />}
-            closeIcon={<ExpandMore />}
+						onNodeClick={handleNodeClick}
+						animate={false}
+						isBorder={false}
+						value={value}
+						expandIcon={<ExpandLess />}
+						closeIcon={<ExpandMore />}
 					/>
 				</div>
 				<div>{children}</div>

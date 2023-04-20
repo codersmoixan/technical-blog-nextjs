@@ -13,8 +13,21 @@ import Snackbar from 'core/Snackbar'
 import PopupLayer from 'containers/App/components/PopupLayer'
 import routes from '@/src/routes'
 import SuspendButtons from 'components/SuspendButtons'
-import type { GetServerSideProps } from 'next'
+import type { GetServerSideProps, NextPage } from 'next'
 import type { AppProps } from 'next/app'
+import type {ReactNode} from "react";
+
+type GetLayout = (page: ReactNode) => ReactNode;
+
+// eslint-disable-next-line @typescript-eslint/ban-types
+type Page<P = {}, IP = P> = NextPage<P, IP> & {
+  getLayout?: GetLayout;
+};
+
+// eslint-disable-next-line @typescript-eslint/ban-types
+type MyAppProps<P = {}> = AppProps<P> & {
+  Component: Page<P>;
+};
 
 const useStyles = makeStyles(
 	(theme: Theme) => ({
@@ -38,7 +51,7 @@ const useStyles = makeStyles(
 
 const excludeList = [routes.editor, routes.login, routes.notFond, routes.register]
 
-function App({ Component, pageProps }: AppProps) {
+function App({ Component, pageProps }: MyAppProps) {
 	const classes = useStyles()
 	const { scrollYProgress } = useScroll()
 	const scaleX = useSpring(scrollYProgress, {
@@ -47,23 +60,25 @@ function App({ Component, pageProps }: AppProps) {
 		restDelta: 0.001
 	})
 
-	return (
-		<div className={classes.root}>
-			<motion.div style={{ scaleX }} className={classes.scrollProgress} />
-			<BeforeRoute exclude={[...excludeList, routes.creatorHome, routes.creatorArticle]}>
-				<Navigation />
-			</BeforeRoute>
-			<Box position="relative">
-				<Component {...pageProps} />
-			</Box>
-			<BeforeRoute exclude={excludeList}>
-				<Footer />
-			</BeforeRoute>
-			<SuspendButtons />
-			<Snackbar />
-			<PopupLayer />
-		</div>
-	)
+  const getLayout = Component.getLayout || ((page) => (
+    <div className={classes.root}>
+      <motion.div style={{ scaleX }} className={classes.scrollProgress} />
+      <BeforeRoute exclude={[...excludeList, routes.creatorHome, routes.creatorArticle]}>
+        <Navigation />
+      </BeforeRoute>
+      <Box position="relative">
+        {page}
+      </Box>
+      <BeforeRoute exclude={excludeList}>
+        <Footer />
+      </BeforeRoute>
+      <SuspendButtons />
+      <Snackbar />
+      <PopupLayer />
+    </div>
+  ))
+
+  return getLayout(<Component {...pageProps} />)
 }
 
 export default App

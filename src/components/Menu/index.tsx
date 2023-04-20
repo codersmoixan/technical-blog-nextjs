@@ -147,10 +147,10 @@ function Menu<T extends Option>(props: MenuProps<T>) {
 			const child = parent.child?.find(c => c.id == value[1]) as T
 			setExpanded(value[0])
 
-			return child && onNodeClick?.(child, parent)
+			// return child && onNodeClick?.(child, parent)
 		}
 
-		return onNodeClick?.(parent, null)
+		// return onNodeClick?.(parent, null)
 	}
 
 	const handleOpenAccordion = (panel: string | number) => {
