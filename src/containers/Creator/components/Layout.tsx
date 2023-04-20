@@ -27,7 +27,8 @@ export interface LayoutProps {
 
 const useStyles = makeStyles((theme: Theme) => ({
 	root: {
-		padding: theme.spacing(2)
+		padding: theme.spacing(2),
+    backgroundColor: theme.colorPalette.background.secondary
 	},
 	header: {
 		position: 'fixed',
@@ -50,21 +51,25 @@ const useStyles = makeStyles((theme: Theme) => ({
 		fontWeight: 700
 	},
 	content: {
-		display: 'flex',
 		marginTop: theme.config.navHeight
 	},
 	sidebar: {
+    position: 'fixed',
+    top: 106,
 		padding: theme.spacing(2, 1.5),
-		marginRight: theme.spacing(2),
 		width: 200,
 		minHeight: 568,
-		backgroundColor: theme.colorPalette.background.main,
+		backgroundColor: theme.colorPalette.background.default,
 		boxSizing: 'border-box',
+    borderRadius: 6,
 		'& .edit-article': {
 			borderRadius: 4,
 			boxShadow: 'none'
 		}
 	},
+  main: {
+    marginLeft: theme.spacing(27.25)
+  },
 	menu: {
 		marginTop: theme.spacing(2)
 	},
@@ -230,7 +235,7 @@ function Layout(props: LayoutProps) {
 						closeIcon={<ExpandMore />}
 					/>
 				</div>
-				<div>{children}</div>
+				<div className={classes.main}>{children}</div>
 			</Content>
 		</div>
 	)

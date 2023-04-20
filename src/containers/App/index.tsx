@@ -17,7 +17,7 @@ import type { GetServerSideProps, NextPage } from 'next'
 import type { AppProps } from 'next/app'
 import type {ReactNode} from "react";
 
-type GetLayout = (page: ReactNode) => ReactNode;
+type GetLayout = (page: ReactNode) => JSX.Element;
 
 // eslint-disable-next-line @typescript-eslint/ban-types
 type Page<P = {}, IP = P> = NextPage<P, IP> & {
