@@ -68,22 +68,40 @@ const useStyles = makeStyles((theme: Theme) => ({
 	menu: {
 		marginTop: theme.spacing(2)
 	},
-	accordionDetails: {
-		padding: theme.spacing(0, 5.5, 2)
-	},
 	label: {
-		color: theme.colorPalette.text.default
+		color: theme.colorPalette.text.default,
+    '& .MuiTypography-root': {
+      fontWeight: '700 !important'
+    }
 	},
-	childItem: {
+  subItem: {
 		height: 48,
 		lineHeight: '48px',
-		color: theme.colorPalette.text.textSecondary
+    '& .MuiTypography-root': {
+      marginLeft: theme.spacing(5.5),
+      color: theme.colorPalette.text.textSecondary
+    }
 	},
-	menuChecked: {
+  menuActive: {
 		'& .MuiAccordionSummary-content': {
-			backgroundColor: theme.colorPalette.setting.active
-		}
-	}
+			backgroundColor: theme.colorPalette.setting.active,
+      color: theme.colorPalette.text.main
+		},
+	},
+  textActive: {
+    '& .label': {
+      color: theme.colorPalette.text.main
+    },
+    '& .MuiAccordionSummary-content': {
+      color: theme.colorPalette.text.main
+    }
+  },
+  subActive: {
+    backgroundColor: theme.colorPalette.setting.active,
+    '& .MuiTypography-root': {
+      color: theme.colorPalette.text.main
+    }
+  }
 }))
 
 export const NAVIGATION_LIST = [
@@ -99,13 +117,14 @@ export const NAVIGATION_LIST = [
 		icon: Article,
 		menus: [
 			{
-				id: 1,
+				id: 'article',
 				label: '文章管理',
 				route: routes.creatorArticle
 			},
 			{
-				id: 2,
-				label: '专栏管理'
+				id: 'column',
+				label: '专栏管理',
+        route: routes.creatorColumn
 			}
 		]
 	},
@@ -115,8 +134,9 @@ export const NAVIGATION_LIST = [
 		icon: Assessment,
 		menus: [
 			{
-				id: 1,
-				label: '内容数据'
+				id: 'content',
+				label: '内容数据',
+        route: routes.creatorContentData
 			}
 		]
 	},
@@ -126,8 +146,9 @@ export const NAVIGATION_LIST = [
 		icon: Help,
 		menus: [
 			{
-				id: 1,
-				label: '常见问题'
+				id: 'question',
+				label: '常见问题',
+        route: routes.creatorHelp
 			}
 		]
 	}
@@ -161,7 +182,7 @@ function Layout(props: LayoutProps) {
 		return parent ? [parent, current] : [current]
 	}, [history])
 
-	console.log(value, 125)
+  const open = useMemo(() => NAVIGATION_LIST.map(item => item.id), [])
 
 	const handleToHome = () => {
 		history.push(routes.home)
@@ -194,15 +215,16 @@ function Layout(props: LayoutProps) {
 						menus={NAVIGATION_LIST}
 						classes={{
 							root: classes.menu,
-							accordionDetails: classes.accordionDetails,
 							label: classes.label,
-							childItem: classes.childItem,
-							checked: classes.menuChecked
+							subItem: classes.subItem,
+							active: value.length <= 1 ? classes.menuActive : classes.textActive,
+              subActive: classes.subActive,
 						}}
-						childKey="menus"
+            subKey="menus"
 						onNodeClick={handleNodeClick}
 						animate={false}
 						isBorder={false}
+            open={open}
 						value={value}
 						expandIcon={<ExpandLess />}
 						closeIcon={<ExpandMore />}

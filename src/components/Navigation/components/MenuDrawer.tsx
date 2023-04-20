@@ -101,7 +101,7 @@ function MenuDrawer(props: MenuDrawerProps) {
 			<div slot="content">
         <Menu
           menus={menus}
-          childKey="menus"
+          subKey="menus"
           onNodeClick={handleNodeClick}
           expandIcon={<ExpandLess />}
           closeIcon={<ExpandMore />}
@@ -113,7 +113,7 @@ function MenuDrawer(props: MenuDrawerProps) {
             checked: classes.summaryContentChecked,
             accordionDetails: classes.accordionDetails
           }}
-          checked={(item) => compare(item.route)}
+          active={(item) => compare(item.route)}
         />
 			</div>
 		</GlobalDrawer>

@@ -22,6 +22,9 @@ const routes = {
   creator: '/creator',
   creatorHome: '/creator/home',
   creatorArticle: '/creator/content/article',
+  creatorColumn: '/creator/content/column',
+  creatorContentData: '/creator/data/content',
+  creatorHelp: '/creator/help/question',
   notFond: '/404'
 }
 
