@@ -1,7 +1,7 @@
 import React from 'react'
 import CenterDialog from 'components/Dialog/CenterDialog'
 import makeStyles, { Theme } from 'core/makeStyles'
-import useSpeedDial from 'hooks/useSpeedDial'
+import useSpeedDial from 'components/SuspendButtons/hooks/useSpeedDial'
 import { getValue } from 'utils/index'
 import OperateTag from 'containers/Tag/components/OperateTag'
 import OperateCategory from 'containers/Category/components/OperateCategory'

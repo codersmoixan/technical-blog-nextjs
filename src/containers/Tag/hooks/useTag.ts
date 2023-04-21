@@ -1,6 +1,6 @@
 import { useAddTagMutation, useDeleteTagMutation, useGetTagListQuery, useUpdateTagMutation } from "containers/Tag/queries";
 import useNotifier from "core/Snackbar/hooks/useNotifier";
-import useSpeedDial from "hooks/useSpeedDial";
+import useSpeedDial from "components/SuspendButtons/hooks/useSpeedDial";
 
 export type Tag = {
   id: string;

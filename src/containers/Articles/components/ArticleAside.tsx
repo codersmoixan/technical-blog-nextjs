@@ -16,6 +16,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   user: {
     padding: theme.spacing(2),
     marginBottom: theme.spacing(2),
+    borderRadius: 6,
     backgroundColor: theme.colorPalette.background.main
   },
   userInfo: {
@@ -32,6 +33,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   recommend: {
     padding: theme.spacing(2),
+    borderRadius: 6,
     backgroundColor: theme.colorPalette.background.main,
     '& .list': {
       margin: theme.spacing(2, 0, -2),

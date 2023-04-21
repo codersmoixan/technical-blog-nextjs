@@ -61,8 +61,7 @@ function App({ Component, pageProps }: MyAppProps) {
 	})
 
   const getLayout = Component.getLayout || ((page) => (
-    <div className={classes.root}>
-      <motion.div style={{ scaleX }} className={classes.scrollProgress} />
+    <>
       <BeforeRoute exclude={[...excludeList, routes.creatorHome, routes.creatorArticle]}>
         <Navigation />
       </BeforeRoute>
@@ -73,12 +72,17 @@ function App({ Component, pageProps }: MyAppProps) {
         <Footer />
       </BeforeRoute>
       <SuspendButtons />
-      <Snackbar />
-      <PopupLayer />
-    </div>
+    </>
   ))
 
-  return getLayout(<Component {...pageProps} />)
+  return (
+    <div className={classes.root}>
+      <motion.div style={{ scaleX }} className={classes.scrollProgress} />
+      {getLayout(<Component {...pageProps} />)}
+      <PopupLayer />
+      <Snackbar />
+    </div>
+  )
 }
 
 export default App

@@ -70,7 +70,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     justifyContent: 'space-between',
     alignItems: 'center',
     margin: '0 auto',
-    width: '100%',
+    padding: theme.spacing(0, 2),
     height: '100%',
     maxWidth: theme.config.navWidth,
   },

@@ -12,9 +12,13 @@ import { Article, Help, Home, Assessment } from '@mui/icons-material'
 import { useRouter } from 'next/router'
 import ExpandLess from '@mui/icons-material/ExpandLess'
 import ExpandMore from '@mui/icons-material/ExpandMore'
-import { useMemo } from 'react'
+import React, { useMemo } from 'react'
 import type { EmptyObject } from '@/src/tb.types'
 import isEmpty from 'lodash/isEmpty'
+import BasicSpeedDial, {SpeedDialOption} from "components/SuspendButtons/BasicSpeedDial";
+import ThemeSettingIcon from "containers/App/components/ThemeSettingIcon";
+import VerticalAlignTop from "@mui/icons-material/VerticalAlignTop";
+import useSpeedDial from "components/SuspendButtons/hooks/useSpeedDial";
 
 export interface FindMenuReturns {
 	parent: number | string
@@ -28,12 +32,12 @@ export interface LayoutProps {
 const useStyles = makeStyles((theme: Theme) => ({
 	root: {
     minHeight: '100vh',
-    backgroundColor: theme.colorPalette.background.secondary
 	},
 	header: {
 		position: 'fixed',
 		top: 0,
 		left: 0,
+    padding: theme.spacing(0, 2),
 		width: '100%',
 		height: theme.config.navHeight,
 		zIndex: 999,
@@ -51,7 +55,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 		fontWeight: 700
 	},
 	content: {
-		marginTop: theme.config.navHeight
+		paddingTop: theme.config.navHeight
 	},
 	sidebar: {
     position: 'fixed',
@@ -108,6 +112,9 @@ const useStyles = makeStyles((theme: Theme) => ({
     '& .MuiTypography-root': {
       color: theme.colorPalette.text.main
     }
+  },
+  speedial: {
+
   }
 }))
 
@@ -177,10 +184,16 @@ const findMenu = (pathname: string, menus: any[], parentMenu: EmptyObject = {}):
 	return find as FindMenuReturns
 }
 
+const actions: SpeedDialOption[] = [
+  { id: 'setting', icon: <ThemeSettingIcon />, name: '主题设置' },
+  { id: 'top', icon: <VerticalAlignTop /> }
+];
+
 function Layout(props: LayoutProps) {
 	const classes = useStyles(props)
 	const { children } = props
 	const history = useRouter()
+  const { updateSpeedDial } = useSpeedDial()
 
 	const value = useMemo(() => {
 		const pathname = history.pathname
@@ -200,6 +213,19 @@ function Layout(props: LayoutProps) {
 			history.push(option.route)
 		}
 	}
+
+  const handleSpeedDial = ({ id }: SpeedDialOption) => {
+    if (id === 'top') {
+      document.body.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start'
+      })
+
+      return
+    }
+
+    updateSpeedDial(id)
+  }
 
 	return (
 		<div className={classes.root}>
@@ -239,6 +265,7 @@ function Layout(props: LayoutProps) {
 				</div>
 				<div className={classes.main}>{children}</div>
 			</Content>
+      <BasicSpeedDial options={actions} onChange={handleSpeedDial} />
 		</div>
 	)
 }

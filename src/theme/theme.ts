@@ -18,7 +18,7 @@ const theme: DefaultThemeOptions = {
   breakpoints,
   config: {
     backdropHeight: 580,
-    navWidth: 1200,
+    navWidth: 1300,
     contentWidth: 1200,
     navHeight: 88,
     transition: TB_STATUS_TRANSITION,
