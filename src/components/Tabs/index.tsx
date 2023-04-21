@@ -5,8 +5,9 @@ import { makeStyles } from '@mui/styles'
 import type { TabPaneProps } from 'components/Tabs/TabPane'
 import type { Theme } from '@mui/material'
 
-export interface TabsProps extends Omit<MuiTabsProps, 'onChange'> {
+export interface TabsProps extends Omit<MuiTabsProps, 'onChange' | 'classes'> {
 	onChange?: (newValue: string, event: SyntheticEvent) => void
+  classes?: Partial<ReturnType<typeof useStyles>>
 	children: ReactElement<TabPaneProps>[]
 }
 

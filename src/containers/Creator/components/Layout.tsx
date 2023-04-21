@@ -27,7 +27,7 @@ export interface LayoutProps {
 
 const useStyles = makeStyles((theme: Theme) => ({
 	root: {
-		padding: theme.spacing(2),
+    minHeight: '100vh',
     backgroundColor: theme.colorPalette.background.secondary
 	},
 	header: {
@@ -55,7 +55,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 	},
 	sidebar: {
     position: 'fixed',
-    top: 106,
+    top: 104,
 		padding: theme.spacing(2, 1.5),
 		width: 200,
 		minHeight: 568,
@@ -68,7 +68,9 @@ const useStyles = makeStyles((theme: Theme) => ({
 		}
 	},
   main: {
-    marginLeft: theme.spacing(27.25)
+    marginLeft: theme.spacing(27.25),
+    padding: theme.spacing(2, 0),
+    minHeight: 568,
   },
 	menu: {
 		marginTop: theme.spacing(2)

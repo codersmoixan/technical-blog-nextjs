@@ -44,7 +44,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 		borderRadius: 6,
 		'& .title': {
 			padding: theme.spacing(2),
-			borderBottom: `1px solid ${theme.colorPalette.primary.placeholder}`
+			borderBottom: `1px solid ${theme.colorPalette.primary.colorSecondary}`
 		}
 	},
 	contentItem: {
