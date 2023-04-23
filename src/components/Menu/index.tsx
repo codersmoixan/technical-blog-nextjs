@@ -15,6 +15,7 @@ import FadeInVariantList from 'components/Animation/Variant/FadeInVariantList'
 import type { Variants } from 'framer-motion'
 import type { Theme } from '@mui/material'
 import type { EmptyObject } from '@/src/tb.types'
+import { toggle } from '@/src/utils'
 
 export interface Option extends EmptyObject {
 	id: number | string
@@ -27,6 +28,7 @@ export interface MenuProps<T = Option> {
 	focus?: boolean
 	active?: ((option: any) => boolean) | boolean
 	open?: (string | number)[]
+	uniqueOpened?: boolean
 	classes?: EmptyObject
 	isBorder?: boolean
 	onNodeClick?: (option: any, parent: any | null) => void
@@ -137,7 +139,20 @@ const menuVariants: Variants = {
 
 function Menu<T extends Option>(props: MenuProps<T>) {
 	const classes = useStyles(props)
-	const { menus, focus, onNodeClick, className, subKey = 'child', expandIcon, closeIcon, value = [], active, open = [], animate } = props
+	const {
+		menus,
+		focus,
+		onNodeClick,
+		className,
+		subKey = 'child',
+		expandIcon,
+		closeIcon,
+		value = [],
+		active,
+		open = [],
+		uniqueOpened,
+		animate
+	} = props
 
 	const [expanded, setExpanded] = useState<(string | number)[]>(open)
 
@@ -163,7 +178,12 @@ function Menu<T extends Option>(props: MenuProps<T>) {
 	// }, [value, menus, open])
 
 	const handleOpenAccordion = (panel: string | number) => {
-		setExpanded(state => (state.includes(panel) ? [] : [panel]))
+		if (uniqueOpened) {
+			setExpanded(state => (state.includes(panel) ? [] : [panel]))
+			return
+		}
+
+		setExpanded(state => toggle(state, panel))
 	}
 
 	return (

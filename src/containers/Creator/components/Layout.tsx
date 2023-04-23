@@ -1,7 +1,6 @@
+import React, { useMemo, ReactNode } from 'react'
 import Box from '@mui/material/Box'
-import type { ReactNode } from 'react'
 import { makeStyles } from '@mui/styles'
-import type { Theme } from '@mui/material'
 import Buttons from 'components/Buttons'
 import Typography from '@mui/material/Typography'
 import Content from 'components/Layout/Content'
@@ -12,13 +11,13 @@ import { Article, Help, Home, Assessment } from '@mui/icons-material'
 import { useRouter } from 'next/router'
 import ExpandLess from '@mui/icons-material/ExpandLess'
 import ExpandMore from '@mui/icons-material/ExpandMore'
-import React, { useMemo } from 'react'
-import type { EmptyObject } from '@/src/tb.types'
 import isEmpty from 'lodash/isEmpty'
-import BasicSpeedDial, {SpeedDialOption} from "components/SuspendButtons/BasicSpeedDial";
-import ThemeSettingIcon from "containers/App/components/ThemeSettingIcon";
-import VerticalAlignTop from "@mui/icons-material/VerticalAlignTop";
-import useSpeedDial from "components/SuspendButtons/hooks/useSpeedDial";
+import BasicSpeedDial, { SpeedDialOption } from 'components/SuspendButtons/BasicSpeedDial'
+import ThemeSettingIcon from 'containers/App/components/ThemeSettingIcon'
+import VerticalAlignTop from '@mui/icons-material/VerticalAlignTop'
+import useSpeedDial from 'components/SuspendButtons/hooks/useSpeedDial'
+import type { Theme } from '@mui/material'
+import type { EmptyObject } from '@/src/tb.types'
 
 export interface FindMenuReturns {
 	parent: number | string
@@ -31,13 +30,13 @@ export interface LayoutProps {
 
 const useStyles = makeStyles((theme: Theme) => ({
 	root: {
-    minHeight: '100vh',
+		minHeight: '100vh'
 	},
 	header: {
 		position: 'fixed',
 		top: 0,
 		left: 0,
-    padding: theme.spacing(0, 2),
+		padding: theme.spacing(0, 2),
 		width: '100%',
 		height: theme.config.navHeight,
 		zIndex: 999,
@@ -58,64 +57,61 @@ const useStyles = makeStyles((theme: Theme) => ({
 		paddingTop: theme.config.navHeight
 	},
 	sidebar: {
-    position: 'fixed',
-    top: 104,
+		position: 'fixed',
+		top: 104,
 		padding: theme.spacing(2, 1.5),
 		width: 200,
 		minHeight: 568,
 		backgroundColor: theme.colorPalette.background.default,
 		boxSizing: 'border-box',
-    borderRadius: 6,
+		borderRadius: 6,
 		'& .edit-article': {
 			borderRadius: 4,
 			boxShadow: 'none'
 		}
 	},
-  main: {
-    marginLeft: theme.spacing(27.25),
-    padding: theme.spacing(2, 0),
-    minHeight: 568,
-  },
+	main: {
+		marginLeft: theme.spacing(27.25),
+		padding: theme.spacing(2, 0),
+		minHeight: 568
+	},
 	menu: {
 		marginTop: theme.spacing(2)
 	},
 	label: {
 		color: theme.colorPalette.text.default,
-    '& .MuiTypography-root': {
-      fontWeight: '700 !important'
-    }
+		'& .MuiTypography-root': {
+			fontWeight: '700 !important'
+		}
 	},
-  subItem: {
+	subItem: {
 		height: 48,
 		lineHeight: '48px',
-    '& .MuiTypography-root': {
-      marginLeft: theme.spacing(5.5),
-      color: theme.colorPalette.text.textSecondary
-    }
+		'& .MuiTypography-root': {
+			marginLeft: theme.spacing(5.5),
+			color: theme.colorPalette.text.textSecondary
+		}
 	},
-  menuActive: {
+	menuActive: {
 		'& .MuiAccordionSummary-content': {
 			backgroundColor: theme.colorPalette.setting.active,
-      color: theme.colorPalette.text.main
-		},
+			color: theme.colorPalette.text.main
+		}
 	},
-  textActive: {
-    '& .label': {
-      color: theme.colorPalette.text.main
-    },
-    '& .MuiAccordionSummary-content': {
-      color: theme.colorPalette.text.main
-    }
-  },
-  subActive: {
-    backgroundColor: theme.colorPalette.setting.active,
-    '& .MuiTypography-root': {
-      color: theme.colorPalette.text.main
-    }
-  },
-  speedial: {
-
-  }
+	textActive: {
+		'& .label': {
+			color: theme.colorPalette.text.main
+		},
+		'& .MuiAccordionSummary-content': {
+			color: theme.colorPalette.text.main
+		}
+	},
+	subActive: {
+		backgroundColor: theme.colorPalette.setting.active,
+		'& .MuiTypography-root': {
+			color: theme.colorPalette.text.main
+		}
+	}
 }))
 
 export const NAVIGATION_LIST = [
@@ -138,7 +134,7 @@ export const NAVIGATION_LIST = [
 			{
 				id: 'column',
 				label: '专栏管理',
-        route: routes.creatorColumn
+				route: routes.creatorColumn
 			}
 		]
 	},
@@ -150,7 +146,7 @@ export const NAVIGATION_LIST = [
 			{
 				id: 'content',
 				label: '内容数据',
-        route: routes.creatorContentData
+				route: routes.creatorContentData
 			}
 		]
 	},
@@ -162,7 +158,7 @@ export const NAVIGATION_LIST = [
 			{
 				id: 'question',
 				label: '常见问题',
-        route: routes.creatorHelp
+				route: routes.creatorHelp
 			}
 		]
 	}
@@ -185,15 +181,15 @@ const findMenu = (pathname: string, menus: any[], parentMenu: EmptyObject = {}):
 }
 
 const actions: SpeedDialOption[] = [
-  { id: 'setting', icon: <ThemeSettingIcon />, name: '主题设置' },
-  { id: 'top', icon: <VerticalAlignTop /> }
-];
+	{ id: 'setting', icon: <ThemeSettingIcon />, name: '主题设置' },
+	{ id: 'top', icon: <VerticalAlignTop /> }
+]
 
 function Layout(props: LayoutProps) {
 	const classes = useStyles(props)
 	const { children } = props
 	const history = useRouter()
-  const { updateSpeedDial } = useSpeedDial()
+	const { updateSpeedDial } = useSpeedDial()
 
 	const value = useMemo(() => {
 		const pathname = history.pathname
@@ -202,7 +198,7 @@ function Layout(props: LayoutProps) {
 		return parent ? [parent, current] : [current]
 	}, [history])
 
-  const open = useMemo(() => NAVIGATION_LIST.map(item => item.id), [])
+	const open = useMemo(() => NAVIGATION_LIST.map(item => item.id), [])
 
 	const handleToHome = () => {
 		history.push(routes.home)
@@ -214,18 +210,18 @@ function Layout(props: LayoutProps) {
 		}
 	}
 
-  const handleSpeedDial = ({ id }: SpeedDialOption) => {
-    if (id === 'top') {
-      document.body.scrollIntoView({
-        behavior: 'smooth',
-        block: 'start'
-      })
+	const handleSpeedDial = ({ id }: SpeedDialOption) => {
+		if (id === 'top') {
+			document.body.scrollIntoView({
+				behavior: 'smooth',
+				block: 'start'
+			})
 
-      return
-    }
+			return
+		}
 
-    updateSpeedDial(id)
-  }
+		updateSpeedDial(id)
+	}
 
 	return (
 		<div className={classes.root}>
@@ -251,13 +247,13 @@ function Layout(props: LayoutProps) {
 							label: classes.label,
 							subItem: classes.subItem,
 							active: value.length <= 1 ? classes.menuActive : classes.textActive,
-              subActive: classes.subActive,
+							subActive: classes.subActive
 						}}
-            subKey="menus"
+						subKey="menus"
 						onNodeClick={handleNodeClick}
 						animate={false}
 						isBorder={false}
-            open={open}
+						open={open}
 						value={value}
 						expandIcon={<ExpandLess />}
 						closeIcon={<ExpandMore />}
@@ -265,7 +261,7 @@ function Layout(props: LayoutProps) {
 				</div>
 				<div className={classes.main}>{children}</div>
 			</Content>
-      <BasicSpeedDial options={actions} onChange={handleSpeedDial} />
+			<BasicSpeedDial options={actions} onChange={handleSpeedDial} />
 		</div>
 	)
 }
