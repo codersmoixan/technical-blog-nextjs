@@ -1,28 +1,20 @@
-import React, { useMemo, ReactNode } from 'react'
+import React, { ReactNode, useState } from 'react'
 import Box from '@mui/material/Box'
 import { makeStyles } from '@mui/styles'
 import Buttons from 'components/Buttons'
 import Typography from '@mui/material/Typography'
 import Content from 'components/Layout/Content'
 import GradientLogo from 'components/Logo/GradientLogo'
-import Menu from 'components/Menu'
 import routes from '@/src/routes'
-import { Article, Help, Home, Assessment } from '@mui/icons-material'
 import { useRouter } from 'next/router'
-import ExpandLess from '@mui/icons-material/ExpandLess'
-import ExpandMore from '@mui/icons-material/ExpandMore'
-import isEmpty from 'lodash/isEmpty'
 import BasicSpeedDial, { SpeedDialOption } from 'components/SuspendButtons/BasicSpeedDial'
 import ThemeSettingIcon from 'containers/App/components/ThemeSettingIcon'
 import VerticalAlignTop from '@mui/icons-material/VerticalAlignTop'
 import useSpeedDial from 'components/SuspendButtons/hooks/useSpeedDial'
 import type { Theme } from '@mui/material'
-import type { EmptyObject } from '@/src/tb.types'
-
-export interface FindMenuReturns {
-	parent: number | string
-	current: number | string
-}
+import MediaQuery from 'core/MediaQuery'
+import MenuIcon from 'components/Icons/MenuIcon'
+import SideMenu from 'containers/Creator/components/SideMenu'
 
 export interface LayoutProps {
 	children: ReactNode
@@ -46,139 +38,44 @@ const useStyles = makeStyles((theme: Theme) => ({
 			margin: '0 auto',
 			width: 1300,
 			height: '100%'
-		}
+		},
+    [theme.breakpoints.down('md')]: {
+      display: 'flex',
+      justifyContent: 'space-between',
+      alignItems: 'center',
+      boxSizing: 'border-box',
+      '& .header-box': {
+        margin: 0,
+        width: 'auto'
+      }
+    }
 	},
 	headerTitle: {
 		marginLeft: theme.spacing(2),
 		color: theme.palette.primary.main,
 		fontWeight: 700
 	},
+	open: {
+		color: theme.palette.primary.main
+	},
 	content: {
-		paddingTop: theme.config.navHeight
+		paddingTop: theme.config.navHeight,
+    display: 'flex',
 	},
-	sidebar: {
-		position: 'fixed',
-		top: 104,
-		padding: theme.spacing(2, 1.5),
-		width: 200,
-		minHeight: 568,
-		backgroundColor: theme.colorPalette.background.default,
-		boxSizing: 'border-box',
-		borderRadius: 6,
-		'& .edit-article': {
-			borderRadius: 4,
-			boxShadow: 'none'
-		}
-	},
+  space: {
+    marginLeft: theme.spacing(2),
+    width: 200,
+    height: 568,
+  },
 	main: {
-		marginLeft: theme.spacing(27.25),
-		padding: theme.spacing(2, 0),
-		minHeight: 568
+		padding: theme.spacing(2),
+    flex: 1,
+		minHeight: 568,
 	},
-	menu: {
-		marginTop: theme.spacing(2)
-	},
-	label: {
-		color: theme.colorPalette.text.default,
-		'& .MuiTypography-root': {
-			fontWeight: '700 !important'
-		}
-	},
-	subItem: {
-		height: 48,
-		lineHeight: '48px',
-		'& .MuiTypography-root': {
-			marginLeft: theme.spacing(5.5),
-			color: theme.colorPalette.text.textSecondary
-		}
-	},
-	menuActive: {
-		'& .MuiAccordionSummary-content': {
-			backgroundColor: theme.colorPalette.setting.active,
-			color: theme.colorPalette.text.main
-		}
-	},
-	textActive: {
-		'& .label': {
-			color: theme.colorPalette.text.main
-		},
-		'& .MuiAccordionSummary-content': {
-			color: theme.colorPalette.text.main
-		}
-	},
-	subActive: {
-		backgroundColor: theme.colorPalette.setting.active,
-		'& .MuiTypography-root': {
-			color: theme.colorPalette.text.main
-		}
-	}
+  sideMenu: {
+    marginLeft: theme.spacing(2)
+  }
 }))
-
-export const NAVIGATION_LIST = [
-	{
-		id: 'home',
-		label: '首页',
-		icon: Home,
-		route: routes.creatorHome
-	},
-	{
-		id: 'article',
-		label: '内容管理',
-		icon: Article,
-		menus: [
-			{
-				id: 'article',
-				label: '文章管理',
-				route: routes.creatorArticle
-			},
-			{
-				id: 'column',
-				label: '专栏管理',
-				route: routes.creatorColumn
-			}
-		]
-	},
-	{
-		id: 'data',
-		label: '数据中心',
-		icon: Assessment,
-		menus: [
-			{
-				id: 'content',
-				label: '内容数据',
-				route: routes.creatorContentData
-			}
-		]
-	},
-	{
-		id: 'help',
-		label: '帮助中心',
-		icon: Help,
-		menus: [
-			{
-				id: 'question',
-				label: '常见问题',
-				route: routes.creatorHelp
-			}
-		]
-	}
-]
-
-const findMenu = (pathname: string, menus: any[], parentMenu: EmptyObject = {}): FindMenuReturns => {
-	let find = {}
-
-	menus.forEach(menu => {
-		if (pathname === menu.route) {
-			find = { parent: parentMenu.id, current: menu.id }
-		}
-
-		if (isEmpty(find) && menu.menus) {
-			find = findMenu(pathname, menu.menus, menu)
-		}
-	})
-
-	return find as FindMenuReturns
-}
 
 const actions: SpeedDialOption[] = [
 	{ id: 'setting', icon: <ThemeSettingIcon />, name: '主题设置' },
@@ -191,23 +88,10 @@ function Layout(props: LayoutProps) {
 	const history = useRouter()
 	const { updateSpeedDial } = useSpeedDial()
 
-	const value = useMemo(() => {
-		const pathname = history.pathname
-		const { parent, current } = findMenu(pathname, NAVIGATION_LIST)
-
-		return parent ? [parent, current] : [current]
-	}, [history])
-
-	const open = useMemo(() => NAVIGATION_LIST.map(item => item.id), [])
+	const [openDialog, setOpenDialog] = useState(false)
 
 	const handleToHome = () => {
 		history.push(routes.home)
-	}
-
-	const handleNodeClick = (option: (typeof NAVIGATION_LIST)[number]) => {
-		if (option.route) {
-			history.push(option.route)
-		}
 	}
 
 	const handleSpeedDial = ({ id }: SpeedDialOption) => {
@@ -234,33 +118,19 @@ function Layout(props: LayoutProps) {
 						</Typography>
 					</Box>
 				</Box>
+        <MediaQuery media="mobile">
+          <Buttons variant="text" space={false} className={classes.open} onClick={() => setOpenDialog(true)}>
+            <MenuIcon width={18} height={18} />
+          </Buttons>
+        </MediaQuery>
 			</header>
-			<Content className={classes.content}>
-				<div className={classes.sidebar}>
-					<Buttons variant="contained" fullWidth color="primary" className="edit-article" href={routes.editor}>
-						写文章
-					</Buttons>
-					<Menu
-						menus={NAVIGATION_LIST}
-						classes={{
-							root: classes.menu,
-							label: classes.label,
-							subItem: classes.subItem,
-							active: value.length <= 1 ? classes.menuActive : classes.textActive,
-							subActive: classes.subActive
-						}}
-						subKey="menus"
-						onNodeClick={handleNodeClick}
-						animate={false}
-						isBorder={false}
-						open={open}
-						value={value}
-						expandIcon={<ExpandLess />}
-						closeIcon={<ExpandMore />}
-					/>
-				</div>
-				<div className={classes.main}>{children}</div>
-			</Content>
+			<MediaQuery media={['pc', 'pad']}>
+				<Content className={classes.content}>
+					<SideMenu classes={{ root: classes.sideMenu }} />
+          <div className={classes.space} />
+					<div className={classes.main}>{children}</div>
+				</Content>
+			</MediaQuery>
 			<BasicSpeedDial options={actions} onChange={handleSpeedDial} />
 		</div>
 	)
