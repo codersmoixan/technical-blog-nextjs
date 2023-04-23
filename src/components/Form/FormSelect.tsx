@@ -33,7 +33,7 @@ export interface FormSelectProps extends SelectProps {
 	rules?: EmptyObject<any>
 	multiple?: boolean
 	rowKey?: string
-	classes?: object
+	classes?: Partial<ReturnType<typeof useStyles>>
 	type?: 'chip' | 'text'
 }
 

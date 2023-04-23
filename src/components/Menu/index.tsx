@@ -29,7 +29,7 @@ export interface MenuProps<T = Option> {
 	active?: ((option: any) => boolean) | boolean
 	open?: (string | number)[]
 	uniqueOpened?: boolean
-	classes?: EmptyObject
+	classes?: Partial<ReturnType<typeof useStyles>>
 	isBorder?: boolean
 	onNodeClick?: (option: any, parent: any | null) => void
 	subKey?: string
