@@ -105,9 +105,9 @@ const darkTheme: DarkTheme = {
 		SharingCard: {
 			root: {
 				backgroundColor: 'rgb(22, 28, 36)',
-				boxShadow: 'rgb(0 0 0 / 40%) 4px 4px 16px',
+				boxShadow: 'rgb(0 0 0 / 40%) 4px 4px 12px',
 				'&:hover': {
-					boxShadow: 'rgb(0 0 0) 0px 5px 15px'
+					boxShadow: 'rgb(0 0 0) 4px 4px 14px'
 				}
 			}
 		},

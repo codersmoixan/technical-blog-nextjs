@@ -15,6 +15,7 @@ import type { Theme } from '@mui/material'
 import MediaQuery from 'core/MediaQuery'
 import MenuIcon from 'components/Icons/MenuIcon'
 import SideMenu from 'containers/Creator/components/SideMenu'
+import GlobalDrawer from 'components/GlobalDrawer'
 
 export interface LayoutProps {
 	children: ReactNode
@@ -39,16 +40,16 @@ const useStyles = makeStyles((theme: Theme) => ({
 			width: 1300,
 			height: '100%'
 		},
-    [theme.breakpoints.down('md')]: {
-      display: 'flex',
-      justifyContent: 'space-between',
-      alignItems: 'center',
-      boxSizing: 'border-box',
-      '& .header-box': {
-        margin: 0,
-        width: 'auto'
-      }
-    }
+		[theme.breakpoints.down('md')]: {
+			display: 'flex',
+			justifyContent: 'space-between',
+			alignItems: 'center',
+			boxSizing: 'border-box',
+			'& .header-box': {
+				margin: 0,
+				width: 'auto'
+			}
+		}
 	},
 	headerTitle: {
 		marginLeft: theme.spacing(2),
@@ -60,21 +61,35 @@ const useStyles = makeStyles((theme: Theme) => ({
 	},
 	content: {
 		paddingTop: theme.config.navHeight,
-    display: 'flex',
+		display: 'flex'
 	},
-  space: {
-    marginLeft: theme.spacing(2),
-    width: 200,
-    height: 568,
-  },
+	space: {
+		marginLeft: theme.spacing(2),
+		width: 200,
+		height: 568
+	},
 	main: {
 		padding: theme.spacing(2),
-    flex: 1,
+		flex: 1,
 		minHeight: 568,
+    [theme.breakpoints.down('md')]: {
+      paddingTop: theme.spacing(13),
+      minHeight: 'auto'
+    }
 	},
-  sideMenu: {
-    marginLeft: theme.spacing(2)
-  }
+	sideMenu: {
+		marginLeft: theme.spacing(2),
+    [theme.breakpoints.down('md')]: {
+      padding: theme.spacing(2),
+      top: 0,
+      position: 'static',
+      margin: 0,
+      width: '100%'
+    }
+	},
+  drawer: {
+    width: 260
+  },
 }))
 
 const actions: SpeedDialOption[] = [
@@ -118,18 +133,30 @@ function Layout(props: LayoutProps) {
 						</Typography>
 					</Box>
 				</Box>
-        <MediaQuery media="mobile">
-          <Buttons variant="text" space={false} className={classes.open} onClick={() => setOpenDialog(true)}>
-            <MenuIcon width={18} height={18} />
-          </Buttons>
-        </MediaQuery>
+				<MediaQuery media="mobile">
+					<Buttons variant="text" space={false} className={classes.open} onClick={() => setOpenDialog(true)}>
+						<MenuIcon width={18} height={18} />
+					</Buttons>
+				</MediaQuery>
 			</header>
 			<MediaQuery media={['pc', 'pad']}>
 				<Content className={classes.content}>
 					<SideMenu classes={{ root: classes.sideMenu }} />
-          <div className={classes.space} />
+					<div className={classes.space} />
 					<div className={classes.main}>{children}</div>
 				</Content>
+			</MediaQuery>
+			<MediaQuery media="mobile">
+				<GlobalDrawer
+					open={openDialog}
+					onClose={() => setOpenDialog(false)}
+					classes={{
+						drawer: classes.drawer
+					}}
+				>
+					<SideMenu classes={{ root: classes.sideMenu }} />
+				</GlobalDrawer>
+        <div className={classes.main}>{children}</div>
 			</MediaQuery>
 			<BasicSpeedDial options={actions} onChange={handleSpeedDial} />
 		</div>

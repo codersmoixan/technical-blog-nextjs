@@ -30,7 +30,15 @@ const useStyles = makeStyles((theme: Theme) => ({
       color: theme.colorPalette.text.textSecondary
     }
   },
-}), )
+  banner: {
+    padding: theme.spacing(3, 2),
+    marginLeft: theme.spacing(-2),
+    [theme.breakpoints.down('md')]: {
+      padding: theme.spacing(1.5, 0, 1.5, 3),
+      margin: theme.spacing(0, -3)
+    }
+  },
+}))
 
 function SharingSwiper({ blogs, ...other }: SharingSwiperProps) {
   const mdUp = useMediaQuery((theme: Theme) => theme.breakpoints.up('md'))
@@ -42,7 +50,7 @@ function SharingSwiper({ blogs, ...other }: SharingSwiperProps) {
   }
 
   return (
-    <SideSwiper data={blogs} triggerScroll={mdUp} {...other}>
+    <SideSwiper data={blogs} triggerScroll={mdUp} classes={{ banner: classes.banner }} {...other}>
       {blog => (
         <SharingCard
           key={blog.id}

@@ -58,7 +58,10 @@ const useStyles = makeStyles((theme: Theme) => ({
 		boxSizing: 'border-box',
 		'& .notes': {
 			color: theme.colorPalette.text.textSecondary
-		}
+		},
+    [theme.breakpoints.down('md')]: {
+      minWidth: 'auto'
+    }
 	},
 	publishContent: {
 		height: 500
@@ -137,7 +140,7 @@ function HomePage() {
 				<Box p={2}>
 					<Grid container spacing={2}>
 						{Object.keys(overview).map(item => (
-							<Grid item key={item}>
+							<Grid item key={item} xs={6} md={6} lg={4}>
 								<div className={classes.contentItem}>
 									<Typography className="notes">总粉丝数</Typography>
 									<Typography variant="h3">0</Typography>

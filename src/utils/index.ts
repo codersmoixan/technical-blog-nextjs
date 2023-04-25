@@ -25,7 +25,7 @@ export const getValue = <T extends EmptyObject, K extends keyof T>(obj: T, key: 
 /**
  * @description includes
  * */
-export const includes = (a: any[], b: any[] | string) => {
+export const includes = (a: any[], b: any[] | string | number) => {
 	if (isArray(b)) {
 		return a.some(i => b.includes(i))
 	}
@@ -50,21 +50,19 @@ export const toggle = <A extends any[], B extends (string | number | any[] | obj
 		return mergeParams.filter(item => includesKeys.includes(item.id))
 	}
 
-	if (isPlainObject(b) && key) {
-		return filterObject(a, [b], key)
-	}
-
-	if (isArray(b) && key) {
-		return filterObject(a, b, key)
+	if (isPlainObject(b)) {
+		return key ? filterObject(a, [b], key) : a
 	}
 
 	if (isArray(b)) {
+    if (key) {
+      return filterObject(a, b, key)
+    }
+
 		return includes(a, b) ? without(a, ...b) : union(a, b)
 	}
 
-  if (isString(b)) {
-    return includes(a, b) ? without(a, b) : union(a, [b])
-  }
+  const _b = b as string | number
 
-	return a
+  return includes(a, _b) ? without(a, _b) : union(a, [_b])
 }

@@ -16,6 +16,7 @@ import type { ReactNode } from 'react'
 export interface SideSwiperProps extends Omit<BoxProps, 'children'> {
 	data: any[]
 	children: (option: any) => ReactNode
+	classes?: Partial<ReturnType<typeof useStyles>>
 	triggerScroll?: boolean
 }
 
@@ -36,22 +37,19 @@ const useStyles = makeStyles(
 			cursor: 'pointer'
 		},
 		banner: {
-			padding: theme.spacing(3, 2),
-			marginLeft: theme.spacing(-2),
+      padding: theme.spacing(2),
 			overflowX: 'clip',
 			[theme.breakpoints.down('md')]: {
 				overflowX: 'auto',
-				padding: theme.spacing(2, 0, 0, 3),
-				margin: theme.spacing(0, -3)
 			}
 		},
 		container: {
 			display: 'flex',
 			width: 'max-content'
 		},
-    children: {
-      height: '100%',
-    },
+		children: {
+			height: '100%'
+		},
 		prevBtn: {
 			'&.Mui-disabled.MuiButton-textPrimary': {
 				color: theme.colorPalette.text.disabled
@@ -67,19 +65,10 @@ const useStyles = makeStyles(
 )
 
 function SideSwiper(props: SideSwiperProps) {
-	const { data, title, triggerScroll, children, ...other } = props
+	const { data, title, triggerScroll, children, classes: propClasses, ...other } = props
 	const classes = useStyles(props)
 
-	const {
-		containerRef,
-		swiperRef,
-		sideRef,
-		prevDisabled,
-		nextDisabled,
-		showTrigger,
-		onNext,
-		onPrev
-	} = useSideSwiper({
+	const { containerRef, swiperRef, sideRef, prevDisabled, nextDisabled, showTrigger, onNext, onPrev } = useSideSwiper({
 		sideCount: data.length
 	})
 
@@ -94,22 +83,10 @@ function SideSwiper(props: SideSwiperProps) {
 					)}
 					{triggerScroll && (
 						<Box className={classes.action}>
-							<Buttons
-								variant="text"
-								onClick={onPrev}
-								disabled={prevDisabled}
-								className={classes.prevBtn}
-								space={false}
-							>
+							<Buttons variant="text" onClick={onPrev} disabled={prevDisabled} className={classes.prevBtn} space={false}>
 								<ChevronLeftIcon />
 							</Buttons>
-							<Buttons
-								variant="text"
-								onClick={onNext}
-								disabled={nextDisabled}
-								className={classes.nextBtn}
-								space={false}
-							>
+							<Buttons variant="text" onClick={onNext} disabled={nextDisabled} className={classes.nextBtn} space={false}>
 								<ChevronRightIcon />
 							</Buttons>
 						</Box>
@@ -118,7 +95,11 @@ function SideSwiper(props: SideSwiperProps) {
 			) : null}
 			<Box ref={containerRef} className={classes.banner}>
 				<VariantList ref={swiperRef} list={data} className={classes.container}>
-					{option => <div className={classes.children} ref={sideRef}>{children(option)}</div>}
+					{option => (
+						<div className={classes.children} ref={sideRef}>
+							{children(option)}
+						</div>
+					)}
 				</VariantList>
 			</Box>
 		</Box>

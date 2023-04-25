@@ -224,7 +224,9 @@ function Menu<T extends Option>(props: MenuProps<T>) {
 								</div>
 								{menu[subKey] && (
 									<Buttons color="inherit" variant="text" space={false} onClick={() => handleOpenAccordion(menu.id)}>
-										<TransformIcon color="inherit" focus={expanded.includes(menu.id)} originIcon={expandIcon} finishIcon={closeIcon} />
+										<Typography component="div">
+                      <TransformIcon color="inherit" focus={expanded.includes(menu.id)} originIcon={expandIcon} finishIcon={closeIcon} />
+                    </Typography>
 									</Buttons>
 								)}
 							</AccordionSummary>

@@ -172,6 +172,11 @@ function Navigation() {
 									bgColor={theme.colorPalette.primary.transparent}
 								/>
 							</Box>
+              <Box mr={2}>
+                <Buttons variant="contained" color="primary" href={routes.creator}>
+                  创作者中心
+                </Buttons>
+              </Box>
 							<Buttons
 								variant="contained"
 								color="primary"

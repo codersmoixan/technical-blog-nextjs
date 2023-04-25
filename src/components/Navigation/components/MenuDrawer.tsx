@@ -30,49 +30,48 @@ const useStyles = makeStyles((theme: Theme) => ({
 		padding: theme.spacing(0, 3),
 		height: 72
 	},
-	menu: {
-    padding: 0,
-		height: 'auto',
-	},
-	summaryContent: {
-		padding: theme.spacing(1, 3),
-    display: 'flex',
-    alignItems: 'center',
-		height: 'auto',
-		'& p': {
-			fontSize: 14,
-			color: theme.colorPalette.text.textSecondary
-		},
-		'& .transform-icon > div': {
-			color: theme.colorPalette.text.textSecondary
-		}
-	},
-  accordionDetails: {
-    padding: theme.spacing(0, 7, 2),
+  menu: {
+    marginTop: theme.spacing(2)
   },
-  summaryContentChecked: {
-    backgroundColor: theme.colorPalette.setting.active,
-    '& p': {
-      fontSize: 14,
-      fontWeight: 700,
-      color: theme.palette.primary.main
-    },
-    '& .transform-icon > div': {
-      color: theme.palette.primary.main
+  label: {
+    color: theme.colorPalette.text.default,
+    '& .MuiTypography-root': {
+      fontWeight: '700 !important'
     }
   },
-	summaryValue: {
-		padding: theme.spacing(0, 4),
-		'& > a': {
-			fontSize: 14,
-			color: theme.colorPalette.text.textSecondary
-		}
-	},
-  accordion: {
-    '&::before': {
-      display: 'none'
-    },
+  subItem: {
+    height: 48,
+    lineHeight: '48px',
+    '& .MuiTypography-root': {
+      marginLeft: theme.spacing(7),
+      color: theme.colorPalette.text.textSecondary
+    }
   },
+  summaryContent: {
+    padding: theme.spacing(0, 3)
+  },
+  menuActive: {
+    '& .MuiAccordionSummary-content': {
+      backgroundColor: theme.colorPalette.setting.active,
+      color: theme.colorPalette.text.main
+    }
+  },
+  textActive: {
+    '& .label': {
+      color: theme.colorPalette.text.main
+    },
+    '& .MuiAccordionSummary-content': {
+      '& .MuiButtonBase-root > .MuiTypography-root': {
+        color: theme.colorPalette.text.main
+      }
+    }
+  },
+  subActive: {
+    backgroundColor: theme.colorPalette.setting.active,
+    '& .MuiTypography-root': {
+      color: theme.colorPalette.text.main
+    }
+  }
 }))
 
 function MenuDrawer(props: MenuDrawerProps) {
@@ -107,11 +106,11 @@ function MenuDrawer(props: MenuDrawerProps) {
           closeIcon={<ExpandMore />}
           classes={{
             root: classes.menu,
+            label: classes.label,
+            subItem: classes.subItem,
             summaryContent: classes.summaryContent,
-            value: classes.summaryValue,
-            accordion: classes.accordion,
-            checked: classes.summaryContentChecked,
-            accordionDetails: classes.accordionDetails
+            // active: value.length <= 1 ? classes.menuActive : classes.textActive,
+            subActive: classes.subActive
           }}
           active={(item) => compare(item.route)}
         />

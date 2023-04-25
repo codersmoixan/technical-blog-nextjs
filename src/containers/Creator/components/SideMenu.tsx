@@ -49,7 +49,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 	menuActive: {
 		'& .MuiAccordionSummary-content': {
 			backgroundColor: theme.colorPalette.setting.active,
-			color: theme.colorPalette.text.main
+      color: theme.colorPalette.text.main
 		}
 	},
 	textActive: {
@@ -57,7 +57,9 @@ const useStyles = makeStyles((theme: Theme) => ({
 			color: theme.colorPalette.text.main
 		},
 		'& .MuiAccordionSummary-content': {
-			color: theme.colorPalette.text.main
+      '& .MuiButtonBase-root > .MuiTypography-root': {
+        color: theme.colorPalette.text.main
+      }
 		}
 	},
 	subActive: {

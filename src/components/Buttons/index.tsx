@@ -36,7 +36,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     backgroundColor: theme.colorPalette.button.main,
     fontWeight: 700,
     '&.MuiButton-root:hover': {
-      backgroundColor: theme.colorPalette.button.hover,
+      // backgroundColor: theme.colorPalette.button.hover,
     },
   },
   textPrimary: {

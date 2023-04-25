@@ -3,84 +3,92 @@
  * @description SearchFormText
  */
 
-import React, { MutableRefObject, useState } from "react";
-import Box from '@mui/material/Box';
-import { makeStyles } from "@mui/styles";
-import Backdrop from "@mui/material/Backdrop"
-import FormText, { FormTextProps } from "components/Form/FormText";
-import clsx from "clsx";
-import Search from "@mui/icons-material/Search"
-import type { Theme } from "@mui/material";
+import React, { MutableRefObject, useState } from 'react'
+import Box from '@mui/material/Box'
+import { makeStyles } from '@mui/styles'
+import Backdrop from '@mui/material/Backdrop'
+import FormText, { FormTextProps } from 'components/Form/FormText'
+import clsx from 'clsx'
+import Search from '@mui/icons-material/Search'
+import type { Theme } from '@mui/material'
 
 export interface SearchFormTextProps extends FormTextProps {
-  backdrop?: boolean;
-  anchorPoint?: MutableRefObject<JSX.Element | HTMLElement | null>
+	backdrop?: boolean
+	classes?: Partial<ReturnType<typeof useStyles>>
+	anchorPoint?: MutableRefObject<JSX.Element | HTMLElement | null>
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
-  root: {
-    width: '100%',
-    transition: theme.config.transition()
-  },
-  formText: {
-    position: 'relative',
-    '&.focus': {
-      zIndex: 999,
-    }
-  },
-  focus: {
-    '& .MuiInputBase-root': {
-      backgroundColor: theme.colorPalette.background.main
-    }
-  },
-  backdrop: {
-    zIndex: 990
-  }
+	root: {
+		width: '100%',
+		transition: theme.config.transition()
+	},
+	formText: {
+		position: 'relative',
+		'&.focus': {
+			zIndex: 999
+		}
+	},
+	focus: {
+		'& .MuiInputBase-root': {
+			backgroundColor: theme.colorPalette.background.main
+		}
+	},
+	backdrop: {
+		zIndex: 990
+	},
+  icon: {}
 }))
 
-function SearchFormText (props: SearchFormTextProps) {
-  const { backdrop = true, onFocus, onBlur, className, anchorPoint, ...other } = props
-  const classes = useStyles(props)
+function SearchFormText(props: SearchFormTextProps) {
+	const { backdrop = true, onFocus, onBlur, className, anchorPoint, classes: propClasses, ...other } = props
+	const classes = useStyles(props)
 
-  const [focus, setFocus] = useState(false)
+	const [focus, setFocus] = useState(false)
 
-  const handleFocus = (event: React.FocusEvent<HTMLInputElement>) => {
-    setFocus(true)
-    const dom = anchorPoint?.current ?? anchorPoint
-    // @ts-ignore
-    if (dom.scrollIntoView) {
-      // @ts-ignore
-      dom.scrollIntoView({
-        behavior: 'smooth',
-        block: 'start',
-      })
-    }
+	const handleFocus = (event: React.FocusEvent<HTMLInputElement>) => {
+		setFocus(true)
+		const dom = anchorPoint?.current ?? anchorPoint
+		// @ts-ignore
+		if (dom.scrollIntoView) {
+			// @ts-ignore
+			dom.scrollIntoView({
+				behavior: 'smooth',
+				block: 'start'
+			})
+		}
 
-    onFocus?.(event)
-  }
+		onFocus?.(event)
+	}
 
-  const handleBlur = (event: React.FocusEvent<HTMLInputElement>) => {
-    setFocus(false)
-    onBlur?.(event)
-  }
+	const handleBlur = (event: React.FocusEvent<HTMLInputElement>) => {
+		setFocus(false)
+		onBlur?.(event)
+	}
 
-  return (
-    <Box className={clsx(classes.root, {
-      [classes.focus]: focus
-    })}>
-      <FormText
-        onFocus={handleFocus}
-        onBlur={handleBlur}
-        className={clsx(classes.formText, {
-          focus
-        }, className)}
-        margin="dense"
-        startAdornment={<Search />}
-        {...other}
-      />
-      {backdrop && <Backdrop open={focus} className={classes.backdrop} />}
-    </Box>
-  )
+	return (
+		<Box
+			className={clsx(classes.root, {
+				[classes.focus]: focus
+			})}
+		>
+			<FormText
+				onFocus={handleFocus}
+				onBlur={handleBlur}
+				className={clsx(
+					classes.formText,
+					{
+						focus
+					},
+					className
+				)}
+				margin="dense"
+				startAdornment={<Search className={classes.icon} />}
+				{...other}
+			/>
+			{backdrop && <Backdrop open={focus} className={classes.backdrop} />}
+		</Box>
+	)
 }
 
 export default SearchFormText
