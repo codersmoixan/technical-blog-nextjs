@@ -1,6 +1,6 @@
 /**
  * @author zhengji.su
- * @description SharingRoot
+ * @description SharingLayout
  */
 
 import React, { useRef, ReactElement } from 'react'
@@ -22,12 +22,14 @@ import useSeparateChildren from 'hooks/useSeparateChildren'
 import Buttons from 'components/Buttons'
 
 interface SharingRootProps {
+  children: ReactElement | ReactElement[]
 	backdrop?: string | StaticImageData
-	children: ReactElement | ReactElement[]
+  classes?: Partial<ReturnType<typeof useStyles>>
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
 	...theme.styles,
+  root: {},
 	banner: {
 		alignItems: 'flex-start'
 	},
@@ -60,6 +62,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     color: theme.palette.primary.main
   },
 	back: {
+    color: theme.colorPalette.primary.default,
 		'&.MuiButton-root': {
 			position: 'absolute',
 			bottom: 0,
@@ -69,8 +72,11 @@ const useStyles = makeStyles((theme: Theme) => ({
 			width: 185,
 			height: 45,
 			backgroundColor: theme.palette.primary.main,
-			borderRadius: '2px 2px 0 0',
-			color: theme.colorPalette.text.default,
+			borderRadius: '4px 4px 0 0',
+      boxShadow: 'none',
+      '&:hover': {
+        boxShadow: 'none'
+      },
 			'& svg': {
 				marginRight: theme.spacing(1),
 				fontSize: 14
@@ -79,8 +85,8 @@ const useStyles = makeStyles((theme: Theme) => ({
 	}
 }))
 
-function SharingRoot({ children, backdrop }: SharingRootProps) {
-	const classes = useStyles()
+function SharingLayout({ children, backdrop, ...other }: SharingRootProps) {
+	const classes = useStyles(other)
 	const theme = useTheme()
 	const { content, banner } = useSeparateChildren(children, ['content', 'banner'])
 
@@ -92,7 +98,7 @@ function SharingRoot({ children, backdrop }: SharingRootProps) {
 	}
 
 	return (
-		<Root backdrop={backdrop}>
+		<Root backdrop={backdrop} classes={{ root: classes.root }}>
 			<Content>
 				<Banner className={classes.banner}>
 					{banner ?? (
@@ -143,4 +149,4 @@ function SharingRoot({ children, backdrop }: SharingRootProps) {
 	)
 }
 
-export default SharingRoot
+export default SharingLayout

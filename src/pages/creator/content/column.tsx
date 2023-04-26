@@ -1,4 +1,4 @@
-import Layout from 'containers/Creator/components/Layout'
+import CretorLayout from 'containers/Creator/components/CretorLayout'
 import type { ReactNode } from 'react'
 import Tags from "containers/Creator/components/Tags";
 
@@ -10,6 +10,6 @@ function ColumnPage() {
   )
 }
 
-ColumnPage.getLayout = (page: ReactNode) => <Layout>{page}</Layout>
+ColumnPage.getLayout = (page: ReactNode) => <CretorLayout>{page}</CretorLayout>
 
 export default ColumnPage

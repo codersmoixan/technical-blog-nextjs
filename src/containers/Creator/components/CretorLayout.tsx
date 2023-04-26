@@ -97,7 +97,7 @@ const actions: SpeedDialOption[] = [
 	{ id: 'top', icon: <VerticalAlignTop /> }
 ]
 
-function Layout(props: LayoutProps) {
+function CretorLayout(props: LayoutProps) {
 	const classes = useStyles(props)
 	const { children } = props
 	const history = useRouter()
@@ -163,4 +163,4 @@ function Layout(props: LayoutProps) {
 	)
 }
 
-export default Layout
+export default CretorLayout

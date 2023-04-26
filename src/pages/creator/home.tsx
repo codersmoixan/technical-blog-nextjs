@@ -1,6 +1,6 @@
 import { makeStyles } from '@mui/styles'
 import type { Theme } from '@mui/material'
-import Layout from 'containers/Creator/components/Layout'
+import CretorLayout from 'containers/Creator/components/CretorLayout'
 import Typography from '@mui/material/Typography'
 import { ReactNode } from 'react'
 import Image from 'next/image'
@@ -163,6 +163,6 @@ function HomePage() {
 	)
 }
 
-HomePage.getLayout = (page: ReactNode) => <Layout>{page}</Layout>
+HomePage.getLayout = (page: ReactNode) => <CretorLayout>{page}</CretorLayout>
 
 export default HomePage

@@ -7,7 +7,7 @@ export type Routes = keyof typeof routes
 const routes = {
   home: '/',
   sharing: (id?: RouteParam) => id ? `/sharing/${id}` : '/sharing',
-  shareCategory: (category?: RouteParam, id?: RouteParam) => category && id ?  `/share/${category}/${id}` : '/sharing',
+  shareCategory: (category?: RouteParam, id?: RouteParam) => category && id ?  `/sharing/${category}/${id}` : '/sharing',
   category: (id?: RouteParam) => id ? `/category/${id}` : '/category',
   tags: (id?: RouteParam) => id ? `/tags/${id}` : '/tags',
   works: (id?: RouteParam) => id ? `/works/${id}` : '/works',

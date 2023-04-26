@@ -4,8 +4,6 @@
  */
 
 import Box from "@mui/material/Box"
-import CreativeLines from "assets/images/backdrop/creative-lines.jpeg"
-import SharingRoot from "containers/Sharing/components/SharingRoot";
 import useSwitchCatalog from "containers/Sharing/hooks/useSwitchCatalog";
 import { blogList } from "containers/Sharing/constants";
 import SharingSwiper from "containers/Sharing/components/SharingSwiper";
@@ -16,15 +14,11 @@ function SharingMain() {
   const { blogs } = useSharing()
 
   return (
-    <>
-      <SharingRoot backdrop={CreativeLines}>
-        <Box mb={8}>
-          <SharingSwiper blogs={blogList} title="React" />
-          <SharingSwiper blogs={blogList} title="Vue" />
-          <SharingSwiper blogs={blogList} title="Angular" />
-        </Box>
-      </SharingRoot>
-    </>
+    <Box mb={8}>
+      <SharingSwiper blogs={blogList} title="React" />
+      <SharingSwiper blogs={blogList} title="Vue" />
+      <SharingSwiper blogs={blogList} title="Angular" />
+    </Box>
   )
 }
 

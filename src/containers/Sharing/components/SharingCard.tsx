@@ -58,14 +58,20 @@ const useStyles = makeStyles((theme: Theme) => ({
     flexDirection: 'column',
     width: '100%',
     height: '100%',
-    boxShadow: 'rgb(240 240 240) 4px 4px 16px',
+    boxShadow: 'rgb(240 240 240 / 30%) 4px 4px 12px',
     borderRadius: 8,
     cursor: 'pointer',
     '&:hover': {
-      boxShadow: 'rgb(170 170 170) 0px 5px 15px'
+      boxShadow: 'rgb(220 220 220 / 70%) 4px 4px 14px'
     },
     [theme.breakpoints.up("sm")]: {
       maxWidth: 325,
+    },
+    [theme.breakpoints.down('md')]: {
+      boxShadow: 'rgb(240 240 240 / 30%) 4px 4px 12px',
+      '&:hover': {
+        boxShadow: 'rgb(220 220 220 / 70%) 4px 4px 12px'
+      },
     }
   },
   header: {

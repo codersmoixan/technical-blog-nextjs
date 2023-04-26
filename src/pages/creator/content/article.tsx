@@ -1,4 +1,4 @@
-import Layout from 'containers/Creator/components/Layout'
+import CretorLayout from 'containers/Creator/components/CretorLayout'
 import type { ReactNode } from 'react'
 import { makeStyles } from '@mui/styles'
 import Tabs from 'components/Tabs'
@@ -56,6 +56,6 @@ function ArticlePage() {
 	)
 }
 
-ArticlePage.getLayout = (page: ReactNode) => <Layout>{page}</Layout>
+ArticlePage.getLayout = (page: ReactNode) => <CretorLayout>{page}</CretorLayout>
 
 export default ArticlePage
