@@ -1,70 +1,70 @@
 export const options = [
   {
-    id: 1,
+    id: 'frontEnd',
     label: '前端',
     child: [
       {
-        id: 1,
+        id: 'react',
         label: 'react'
       },
       {
-        id: 2,
+        id: 'vue',
         label: 'vue'
       }
     ]
   },
   {
-    id: 2,
+    id: 'backEnd',
     label: '后端',
     child: [
       {
-        id: 1,
+        id: 'java',
         label: 'java'
       },
       {
-        id: 2,
+        id: 'go',
         label: 'go'
       }
     ]
   },
   {
-    id: 3,
+    id: 'opex',
     label: '运维',
     child: [
       {
-        id: 1,
+        id: 'k8s',
         label: 'k8s'
       },
       {
-        id: 2,
+        id: 'docker',
         label: 'docker'
       }
     ]
   },
   {
-    id: 4,
+    id: 'ai',
     label: '人工智能',
     child: [
       {
-        id: 1,
+        id: 'machineLearning',
         label: '机器学习'
       },
       {
-        id: 2,
+        id: 'algorithm',
         label: '算法导论'
       }
     ]
   },
   {
-    id: 5,
+    id: 'bigData',
     label: '大数据',
     child: [
       {
-        id: 1,
+        id: 'theory',
         label: '大数据理论'
       },
       {
-        id: 2,
+        id: '2',
         label: '算法导论'
       }
     ]

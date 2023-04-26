@@ -85,7 +85,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 export default forwardRef(function CatalogMenu({ menus, onSearchFocus }: CatalogMenuProps, ref) {
 	const classes = useStyles()
-	const { focus, checked, setFocus, onCheckedMenu } = useSwitchCatalog()
+	const { focus, selected, setFocus, onCheckedMenu } = useSwitchCatalog()
 
 	const handleSearchFocus = (event: React.MouseEvent) => {
 		setFocus(false)
@@ -112,7 +112,7 @@ export default forwardRef(function CatalogMenu({ menus, onSearchFocus }: Catalog
 								label: classes.label
 							}}
 							onNodeClick={onCheckedMenu}
-							value={checked}
+							value={selected}
 						/>
 					</Variant>
 				</Box>

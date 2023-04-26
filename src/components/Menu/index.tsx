@@ -16,6 +16,8 @@ import type { Variants } from 'framer-motion'
 import type { Theme } from '@mui/material'
 import type { EmptyObject } from '@/src/tb.types'
 import { toggle } from '@/src/utils'
+import useDeepCompareEffect from "hooks/effect/useDeepCompareEffect";
+import isEmpty from "lodash/isEmpty";
 
 export interface Option extends EmptyObject {
 	id: number | string
@@ -156,26 +158,11 @@ function Menu<T extends Option>(props: MenuProps<T>) {
 
 	const [expanded, setExpanded] = useState<(string | number)[]>(open)
 
-	// function init() {
-	//   if (isEmpty(value)) {
-	//     return
-	//   }
-	//
-	//   const parent = menus.find(menu => menu.id == value[0]) ?? menus[0]
-	//
-	//   if (value.length === 2) {
-	//     const child = parent.child?.find(c => c.id == value[1]) as T
-	//     setExpanded([value[0]])
-	//
-	//     // return child && onNodeClick?.(child, parent)
-	//   }
-	//
-	//   // return onNodeClick?.(parent, null)
-	// }
-	//
-	// useDeepCompareEffect(() => {
-	// 	init()
-	// }, [value, menus, open])
+  useDeepCompareEffect(() => {
+    if (!isEmpty(value) && isEmpty(open)) {
+      setExpanded([value[0]])
+    }
+  }, [value, open])
 
 	const handleOpenAccordion = (panel: string | number) => {
 		if (uniqueOpened) {

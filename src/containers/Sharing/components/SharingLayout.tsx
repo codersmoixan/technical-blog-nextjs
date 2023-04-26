@@ -16,10 +16,11 @@ import Root from 'components/Layout/Root'
 import SearchFormText from 'components/Form/SearchFormText'
 import Banner from 'components/Layout/Banner'
 import { options } from '../constants'
-import type { Theme } from '@mui/material'
-import type { StaticImageData } from 'next/image'
 import useSeparateChildren from 'hooks/useSeparateChildren'
 import Buttons from 'components/Buttons'
+import routes from "@/src/routes";
+import type { Theme } from '@mui/material'
+import type { StaticImageData } from 'next/image'
 
 interface SharingRootProps {
   children: ReactElement | ReactElement[]
@@ -113,7 +114,7 @@ function SharingLayout({ children, backdrop, ...other }: SharingRootProps) {
 					)}
 					<MediaQuery media={['pad', 'pc']}>
 						<Box ref={pointRef}>
-							<Buttons variant="contained" className={classes.back}>
+							<Buttons variant="contained" className={classes.back} href={routes.home}>
 								<ArrowBack />
 								<Typography component="a" variant="body1" color="inherit">
 									返回首页
