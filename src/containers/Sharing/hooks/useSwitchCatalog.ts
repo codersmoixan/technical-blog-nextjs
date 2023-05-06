@@ -5,7 +5,7 @@ import { checkedMenuAction, selectCheckedMenu, selectParentMenu, parentMenuActio
 import routes from "@/src/routes";
 import get from "lodash/get";
 import isString from "lodash/isString";
-import type { MenuItem } from "components/Menu";
+import type { Option } from "components/Menu";
 
 const useSwitchCatalog = () => {
   const dispatch = useDispatch()
@@ -14,9 +14,9 @@ const useSwitchCatalog = () => {
   const history = useRouter()
 
   const [focus, setFocus] = useState(false)
-  const checked = get(history, 'query.id', [])
+  const selected = get(history, 'query.id', [])
 
-  const onCheckedMenu = (option: MenuItem, parent: MenuItem | null) => {
+  const onCheckedMenu = (option: Option, parent: Option | null) => {
     dispatch(checkedMenuAction(option))
 
     if (parent) {
@@ -29,7 +29,7 @@ const useSwitchCatalog = () => {
 
   return {
     focus,
-    checked: isString(checked) ? [checked] : checked,
+    selected: isString(selected) ? [selected] : selected,
     parentMenu,
     checkedMenu,
     setFocus,

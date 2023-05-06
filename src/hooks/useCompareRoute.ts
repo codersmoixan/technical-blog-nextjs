@@ -7,6 +7,10 @@ const useCompareRoute = () => {
   const pathname = history.pathname.split('/').slice(0, 2)
 
 	const compare = (url: string | ((id?: RouteParam) => string)): boolean => {
+    if (!url) {
+      return false
+    }
+
     const route = (isFunction(url) ? url() : url).split('/').slice(0, 2)
 
 		if (pathname.length === 1 && route.length === 1) {

@@ -21,8 +21,7 @@ import { useTheme } from "@mui/material/styles";
 import { Variant } from "components/Animation/Variant";
 import makeStyles, { Theme } from "core/makeStyles";
 import GradientLogo from "components/Logo/GradientLogo";
-import {useMediaQuery} from "@mui/material";
-import useCompareRoute from "components/Navigation/hooks/useCompareRoute";
+import useCompareRoute from "hooks/useCompareRoute";
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -71,7 +70,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     justifyContent: 'space-between',
     alignItems: 'center',
     margin: '0 auto',
-    width: '100%',
+    padding: theme.spacing(0, 2),
     height: '100%',
     maxWidth: theme.config.navWidth,
   },
@@ -108,10 +107,7 @@ function Navigation() {
   const classes = useStyles()
   const history = useRouter()
   const theme = useTheme()
-  const dark = useMediaQuery('(prefers-color-scheme: dark)')
   const { compare } = useCompareRoute()
-
-  console.log(dark, 1352)
 
   const [openDialog, setOpenDialog] = useState(false)
   const [focusTab, setFocusTab] = useState<NavigationItem | null>(null)
@@ -176,6 +172,11 @@ function Navigation() {
 									bgColor={theme.colorPalette.primary.transparent}
 								/>
 							</Box>
+              <Box mr={2}>
+                <Buttons variant="contained" color="primary" href={routes.creator}>
+                  创作者中心
+                </Buttons>
+              </Box>
 							<Buttons
 								variant="contained"
 								color="primary"

@@ -16,7 +16,7 @@ import type { EmptyObject } from '@/src/tb.types'
 interface GlobalDrawerProps extends DrawerProps {
 	open: boolean
 	children: ReactElement | ReactElement[]
-	classes?: EmptyObject
+	classes?: Partial<ReturnType<typeof useStyles>>
 	bgColor?: string
 	onClose?: () => void
 	onConfirm?: () => void

@@ -1,6 +1,8 @@
-import { useMemo, useRef, useState, useEffect } from "react";
+import { useRef, useState, useEffect } from "react";
 import throttle from "lodash/throttle";
 import useMount from "hooks/effect/useMount";
+import useDeepCompareEffect from "hooks/effect/useDeepCompareEffect";
+import useDeepCompareMemo from "hooks/effect/useDeepCompareMemo";
 import type { EmptyObject } from "@/src/tb.types";
 
 interface UseSideSwiperProps {
@@ -15,13 +17,13 @@ const useSideSwiper = ({ sideCount, sideSize: propSideSize }: UseSideSwiperProps
   const [containerRect, setContainerRect] = useState<EmptyObject>({})
   const [prevDisabled, setPrevDisabled] = useState(true)
   const [nextDisabled, setNextDisabled] = useState(false)
-  const [showTrigger, setShowTrigger] = useState(true)
+  const [showTrigger, setShowTrigger] = useState(false)
 
   const sideRef = useRef(null)
   const swiperRef = useRef(null)
   const containerRef = useRef(null)
 
-  const { containerSize, sideSize } = useMemo(() => {
+  const { containerSize, sideSize } = useDeepCompareMemo(() => {
     return ({
       swiperSize: swiperRect.width ?? 0,
       containerSize: containerRect.width ?? 0,
@@ -37,9 +39,9 @@ const useSideSwiper = ({ sideCount, sideSize: propSideSize }: UseSideSwiperProps
     return () => window.removeEventListener('resize', windowResize)
   }, [])
 
-  useEffect(() => {
-    if (sideCount * sideRect.width <= containerRect.width) {
-      setShowTrigger(false);
+  useDeepCompareEffect(() => {
+    if (sideCount * sideRect.width >= containerRect.width) {
+      setShowTrigger(true);
     }
   }, [sideCount, sideRect, containerRect]);
 

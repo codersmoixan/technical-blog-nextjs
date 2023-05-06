@@ -9,9 +9,7 @@ import Form from 'core/Form'
 import useForm from 'core/Form/hooks/useForm'
 import FormTextarea from 'components/Form/FormTextarea'
 import Buttons from 'components/Buttons'
-import MediaQuery from 'core/MediaQuery'
 import dayjs from 'dayjs'
-import isEmpty from 'lodash/isEmpty'
 import { useRouter } from 'next/router'
 import { useGetArticleQuery } from 'containers/Articles/queries'
 import get from 'lodash/get'
@@ -31,6 +29,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 	root: {},
 	article: {
 		padding: theme.spacing(3),
+    borderRadius: 6,
 		backgroundColor: theme.colorPalette.background.main
 	},
 	header: {},
@@ -43,6 +42,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 	comment: {
 		padding: theme.spacing(3),
 		marginTop: theme.spacing(2),
+    borderRadius: 6,
 		backgroundColor: theme.colorPalette.background.main,
 		'& .writing-board': {
 			display: 'flex',
@@ -77,6 +77,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 	recommend: {
 		padding: theme.spacing(3),
 		marginTop: theme.spacing(2),
+    borderRadius: 6,
 		backgroundColor: theme.colorPalette.background.main,
 		'& .list': {
 			padding: theme.spacing(2, 0, 0)
@@ -100,27 +101,6 @@ const useStyles = makeStyles((theme: Theme) => ({
 			}
 		}
 	},
-	fixedComment: {
-		position: 'fixed',
-		left: 0,
-		bottom: 0,
-		padding: theme.spacing(2),
-		width: '100%',
-		height: 55,
-		zIndex: 99,
-		backgroundColor: theme.colorPalette.background.default,
-		boxShadow: '0 -2px 10px rgb(0 0 0 / 5%)',
-		'& .form': {
-			margin: '0 auto',
-			display: 'flex',
-			alignItems: 'flex-end',
-			width: theme.config.contentWidth,
-			'& .textarea': {
-				marginRight: theme.spacing(2),
-				width: '70%'
-			}
-		}
-	}
 }))
 
 function ArticleContent(props: ArticleContentProps) {
@@ -212,26 +192,6 @@ function ArticleContent(props: ArticleContentProps) {
 					))}
 				</Box>
 			</Box>
-			<MediaQuery media="pc">
-				<Box className={classes.fixedComment}>
-					<Form observer={fullObserver} onFinish={handleSubmit} className="form">
-						<Box className="textarea">
-							<FormTextarea
-								name="comment"
-								placeholder="写下你的评论..."
-								rules={{ required: '请输入你的评论' }}
-								rows={1}
-							/>
-						</Box>
-						<Box className={clsx(classes.buttons, 'buttons')}>
-							<Buttons type="submit" variant="contained">
-								发布
-							</Buttons>
-							<Buttons variant="outlined">取消</Buttons>
-						</Box>
-					</Form>
-				</Box>
-			</MediaQuery>
 		</Box>
 	)
 }

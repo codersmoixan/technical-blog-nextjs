@@ -23,7 +23,7 @@ export interface FormTextProps extends OutlinedInputProps {
   name?: string;
   rules?: EmptyObject<any>;
   helpText?: string;
-  classes?: object;
+  classes?: Partial<ReturnType<typeof useStyles>>;
 }
 
 const useStyles = makeStyles((theme: Theme) => ({

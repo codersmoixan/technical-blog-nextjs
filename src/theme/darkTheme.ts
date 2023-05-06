@@ -4,10 +4,10 @@ import type { PaletteOptions } from '@mui/material'
 
 interface DarkTheme extends Pick<ThemeOptions, 'componentStyleOverrides' | 'components'> {
 	colorPalette: {
-    background: ColorPaletteOptions['background']
-    setting: Partial<ColorPaletteOptions['setting']>
-    text: Partial<ColorPaletteOptions['text']>
-  }
+		background: ColorPaletteOptions['background']
+		setting: Partial<ColorPaletteOptions['setting']>
+		text: Partial<ColorPaletteOptions['text']>
+	}
 	palette: PaletteOptions
 }
 
@@ -25,7 +25,7 @@ const darkTheme: DarkTheme = {
 			three: '#7635dc',
 			four: '#2065D1',
 			five: '#fda92d',
-			six: '#FF3030',
+			six: '#FF3030'
 		},
 		text: {
 			default: '#FFFFFF',
@@ -105,9 +105,15 @@ const darkTheme: DarkTheme = {
 		SharingCard: {
 			root: {
 				backgroundColor: 'rgb(22, 28, 36)',
-				boxShadow: 'rgb(0 0 0 / 40%) 4px 4px 16px',
+				boxShadow: 'rgb(0 0 0 / 30%) 4px 4px 12px',
 				'&:hover': {
-					boxShadow: 'rgb(0 0 0) 0px 5px 15px'
+					boxShadow: 'rgb(0 0 0 / 70%) 4px 4px 14px'
+				},
+				[breakpoints.down('md')]: {
+					boxShadow: 'rgb(0 0 0 / 30%) 4px 4px 12px',
+					'&:hover': {
+						boxShadow: 'rgb(0 0 0 / 70%) 4px 4px 12px'
+					}
 				}
 			}
 		},
@@ -141,11 +147,12 @@ const darkTheme: DarkTheme = {
 				backgroundColor: 'rgba(22, 28, 36, 0.9)'
 			}
 		},
-    Footer: {
-      root: {
-        background: 'linear-gradient(rgba(22, 28, 36, 0.94), rgba(22, 28, 36, 0.94)) center center / cover no-repeat, url(/images/home/overlay_2.jpg)'
-      }
-    }
+		Footer: {
+			root: {
+				background:
+					'linear-gradient(rgba(22, 28, 36, 0.94), rgba(22, 28, 36, 0.94)) center center / cover no-repeat, url(/images/home/overlay_2.jpg)'
+			}
+		}
 	},
 	palette: {
 		mode: 'dark'
@@ -165,7 +172,7 @@ const darkTheme: DarkTheme = {
 				}
 			}
 		}
-	},
+	}
 }
 
 export default darkTheme

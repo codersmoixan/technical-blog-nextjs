@@ -5,7 +5,7 @@ import {
   useUpdateCategoryMutation,
 } from "containers/Category/queries";
 import useNotifier from "core/Snackbar/hooks/useNotifier";
-import useSpeedDial from "hooks/useSpeedDial";
+import useSpeedDial from "components/SuspendButtons/hooks/useSpeedDial";
 
 export interface UseCategoryReturns {
   categories: any[];

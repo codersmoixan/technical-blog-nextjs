@@ -1,6 +1,6 @@
 /**
  * @author zhengji.su
- * @description SharingRoot
+ * @description SharingLayout
  */
 
 import React, { useRef, ReactElement } from 'react'
@@ -16,18 +16,21 @@ import Root from 'components/Layout/Root'
 import SearchFormText from 'components/Form/SearchFormText'
 import Banner from 'components/Layout/Banner'
 import { options } from '../constants'
-import type { Theme } from '@mui/material'
-import type { StaticImageData } from 'next/image'
 import useSeparateChildren from 'hooks/useSeparateChildren'
 import Buttons from 'components/Buttons'
+import routes from "@/src/routes";
+import type { Theme } from '@mui/material'
+import type { StaticImageData } from 'next/image'
 
 interface SharingRootProps {
+  children: ReactElement | ReactElement[]
 	backdrop?: string | StaticImageData
-	children: ReactElement | ReactElement[]
+  classes?: Partial<ReturnType<typeof useStyles>>
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
 	...theme.styles,
+  root: {},
 	banner: {
 		alignItems: 'flex-start'
 	},
@@ -52,15 +55,15 @@ const useStyles = makeStyles((theme: Theme) => ({
 	},
 	formText: {
 		width: '100%',
-		boxShadow: 'rgb(19 19 19 / 12%) 0px 2px 5px 0.5px',
-		'& .MuiInputBase-root': {
-			backgroundColor: theme.colorPalette.background.default
-		},
 		'& input.MuiInputBase-input': {
 			height: 58
 		}
 	},
+  formTextIcon: {
+    color: theme.palette.primary.main
+  },
 	back: {
+    color: theme.colorPalette.primary.default,
 		'&.MuiButton-root': {
 			position: 'absolute',
 			bottom: 0,
@@ -70,8 +73,11 @@ const useStyles = makeStyles((theme: Theme) => ({
 			width: 185,
 			height: 45,
 			backgroundColor: theme.palette.primary.main,
-			borderRadius: '2px 2px 0 0',
-			color: theme.colorPalette.text.default,
+			borderRadius: '4px 4px 0 0',
+      boxShadow: 'none',
+      '&:hover': {
+        boxShadow: 'none'
+      },
 			'& svg': {
 				marginRight: theme.spacing(1),
 				fontSize: 14
@@ -80,8 +86,8 @@ const useStyles = makeStyles((theme: Theme) => ({
 	}
 }))
 
-function SharingRoot({ children, backdrop }: SharingRootProps) {
-	const classes = useStyles()
+function SharingLayout({ children, backdrop, ...other }: SharingRootProps) {
+	const classes = useStyles(other)
 	const theme = useTheme()
 	const { content, banner } = useSeparateChildren(children, ['content', 'banner'])
 
@@ -93,7 +99,7 @@ function SharingRoot({ children, backdrop }: SharingRootProps) {
 	}
 
 	return (
-		<Root backdrop={backdrop}>
+		<Root backdrop={backdrop} classes={{ root: classes.root }}>
 			<Content>
 				<Banner className={classes.banner}>
 					{banner ?? (
@@ -108,7 +114,7 @@ function SharingRoot({ children, backdrop }: SharingRootProps) {
 					)}
 					<MediaQuery media={['pad', 'pc']}>
 						<Box ref={pointRef}>
-							<Buttons variant="contained" className={classes.back}>
+							<Buttons variant="contained" className={classes.back} href={routes.home}>
 								<ArrowBack />
 								<Typography component="a" variant="body1" color="inherit">
 									返回首页
@@ -122,7 +128,10 @@ function SharingRoot({ children, backdrop }: SharingRootProps) {
 					<Box className={classes.main}>
 						<Box className={classes.search}>
 							<SearchFormText
-								className={classes.formText}
+								classes={{
+                  formText: classes.formText,
+                  icon: classes.formTextIcon
+                }}
 								bgColor={theme.colorPalette.primary.transparent}
 								placeholder="这里可以搜索你想知道的内容"
 								anchorPoint={pointRef}
@@ -131,7 +140,9 @@ function SharingRoot({ children, backdrop }: SharingRootProps) {
 								}}
 							/>
 						</Box>
-						{content}
+						<Box py={1.5}>
+              {content}
+            </Box>
 					</Box>
 				</Box>
 			</Content>
@@ -139,4 +150,4 @@ function SharingRoot({ children, backdrop }: SharingRootProps) {
 	)
 }
 
-export default SharingRoot
+export default SharingLayout

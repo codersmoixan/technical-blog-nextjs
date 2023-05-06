@@ -22,7 +22,7 @@ interface CenterDialogProps extends DialogProps {
   cancelText?: string;
   onClose?: () => void;
   onConfirm?: () => void;
-  classes?: any;
+  classes?: Partial<ReturnType<typeof useStyles>>;
   children?: React.ReactNode;
 }
 

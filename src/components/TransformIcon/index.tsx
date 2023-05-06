@@ -28,7 +28,6 @@ const useStyles = makeStyles((theme: Theme) => ({
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-    color: theme.palette.primary.main,
     transition: theme.config.transition(0.5)
   },
   fadeIn: {
@@ -42,11 +41,11 @@ const useStyles = makeStyles((theme: Theme) => ({
 }))
 
 function TransformIcon(props: TransformIconProps) {
-  const { focus, originIcon, finishIcon, color, ...other } = props
+  const { focus, originIcon, finishIcon, color = 'inherit', ...other } = props
   const classes = useStyles(props)
 
   return (
-    <Box className={clsx(classes.root, 'transform-icon')} {...other}>
+    <Box color="inherit" className={clsx(classes.root, 'transform-icon')} {...other}>
       <Box className={clsx(classes.icon, focus ? classes.fadeOn : classes.fadeIn)} color={color}>
         {originIcon ?? <RemoveIcon />}
       </Box>

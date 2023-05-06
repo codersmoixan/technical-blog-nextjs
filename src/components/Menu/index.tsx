@@ -11,44 +11,46 @@ import { AccordionDetails, AccordionSummary } from '@mui/material'
 import Buttons from 'components/Buttons'
 import clsx from 'clsx'
 import TransformIcon from 'components/TransformIcon'
-import useDeepCompareEffect from 'hooks/effect/useDeepCompareEffect'
-import isEmpty from 'lodash/isEmpty'
-import { isFunction } from 'lodash'
 import FadeInVariantList from 'components/Animation/Variant/FadeInVariantList'
 import type { Variants } from 'framer-motion'
 import type { Theme } from '@mui/material'
 import type { EmptyObject } from '@/src/tb.types'
+import { toggle } from '@/src/utils'
+import useDeepCompareEffect from "hooks/effect/useDeepCompareEffect";
+import isEmpty from "lodash/isEmpty";
 
-export interface MenuItem extends EmptyObject {
+export interface Option extends EmptyObject {
 	id: number | string
 	label: string
-	child?: MenuItem[]
+	child?: Array<Option>
 }
 
-interface MenuProps {
-	menus: MenuItem[]
+export interface MenuProps<T = Option> {
+	menus: T[]
 	focus?: boolean
-	checked?: ((menuItem: MenuItem) => boolean) | boolean
-	classes?: EmptyObject
+	active?: ((option: any) => boolean) | boolean
+	open?: (string | number)[]
+	uniqueOpened?: boolean
+	classes?: Partial<ReturnType<typeof useStyles>>
 	isBorder?: boolean
-	onNodeClick?: (options: MenuItem, parent: MenuItem | null) => void
-	childKey?: string
+	onNodeClick?: (option: any, parent: any | null) => void
+	subKey?: string
 	expandIcon?: ReactNode
 	closeIcon?: ReactNode
 	className?: string
-	value?: string[]
-	children?: (option: MenuItem) => ReactNode
+	value?: (string | number)[]
+	animate?: boolean
+	children?: (option: any) => ReactNode
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
-	root: {
-    padding: theme.spacing(0, 3),
-	},
+	root: {},
 	accordion: {
 		backgroundColor: theme.colorPalette.primary.transparent,
 		backgroundImage: 'none',
 		boxShadow: 'none',
 		borderBottom: (props: MenuProps) => (props.isBorder ? `1px solid ${theme.colorPalette.primary.colorSecondary}` : 'none'),
+		transition: 'all .3s',
 		'&.MuiPaper-root': {
 			borderRadius: 0
 		},
@@ -57,9 +59,12 @@ const useStyles = makeStyles((theme: Theme) => ({
 		},
 		'&:last-of-type': {
 			borderBottom: 'none'
+		},
+		'&::before': {
+			content: '""',
+			backgroundColor: (props: MenuProps) => (props.isBorder ? 'rgba(0, 0, 0, 0.12)' : 'transparent')
 		}
 	},
-	checked: {},
 	summary: {
 		padding: 0,
 		minHeight: 48,
@@ -68,6 +73,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 		}
 	},
 	summaryContent: {
+		padding: theme.spacing(0, 1.5),
 		display: 'flex',
 		justifyContent: 'space-between',
 		alignItems: 'center',
@@ -80,8 +86,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 	expanded: {
 		display: 'flex',
 		justifyContent: 'space-between',
-		alignItems: 'center',
-		padding: 0
+		alignItems: 'center'
 	},
 	label: {
 		display: 'flex',
@@ -91,19 +96,25 @@ const useStyles = makeStyles((theme: Theme) => ({
 			height: 20
 		}
 	},
-	value: {
-		padding: theme.spacing(0, 2, 2),
-		'& > a': {
-			display: 'block',
-			height: 32,
-			lineHeight: '32px'
+	accordionDetails: {
+		padding: 0
+	},
+	subItem: {
+		display: 'block',
+		height: 56,
+		lineHeight: '56px',
+		cursor: 'pointer',
+		transition: 'all .3s',
+		'& .MuiTypography-root': {
+			marginLeft: theme.spacing(3)
 		}
 	},
-	childItem: {
-		display: 'block',
-		height: 25,
-		lineHeight: '25px',
-		cursor: 'pointer'
+	active: {},
+	subActive: {
+		'& .MuiTypography-root': {
+			marginLeft: theme.spacing(3),
+			color: theme.colorPalette.text.main
+		}
 	}
 }))
 
@@ -128,94 +139,104 @@ const menuVariants: Variants = {
 	}
 }
 
-function Menu(props: MenuProps) {
+function Menu<T extends Option>(props: MenuProps<T>) {
 	const classes = useStyles(props)
-	const { menus, focus, onNodeClick, className, childKey = 'child', expandIcon, closeIcon, value = [], checked } = props
+	const {
+		menus,
+		focus,
+		onNodeClick,
+		className,
+		subKey = 'child',
+		expandIcon,
+		closeIcon,
+		value = [],
+		active,
+		open = [],
+		uniqueOpened,
+		animate
+	} = props
 
-	const [expanded, setExpanded] = useState<string | number | false>(false)
+	const [expanded, setExpanded] = useState<(string | number)[]>(open)
 
-	useDeepCompareEffect(() => {
-		init()
-	}, [value, menus])
+  useDeepCompareEffect(() => {
+    if (!isEmpty(value) && isEmpty(open)) {
+      setExpanded([value[0]])
+    }
+  }, [value, open])
 
-	function init() {
-		if (isEmpty(value)) {
+	const handleOpenAccordion = (panel: string | number) => {
+		if (uniqueOpened) {
+			setExpanded(state => (state.includes(panel) ? [] : [panel]))
 			return
 		}
 
-		const parent = menus.find(menu => menu.id == value[0]) ?? menus[0]
-
-		if (value.length === 2) {
-			const child = parent?.child?.find(c => c.id == value[1])
-			setExpanded(value[0])
-
-			return child && onNodeClick?.(child, parent)
-		}
-
-		return onNodeClick?.(parent, null)
-	}
-
-	const handleOpenAccordion = (panel: string | number) => {
-		setExpanded(expanded === panel ? false : panel)
+		setExpanded(state => toggle(state, panel))
 	}
 
 	return (
 		<div className={clsx(className, classes.root)}>
-			<FadeInVariantList list={menus} focus={focus} contentVariants={menuVariants}>
-				{menu => (
-					<Accordion
-						expanded={expanded == menu.id}
-						classes={{ root: classes.accordion }}
-						className={clsx({
-							[classes.checked]: isFunction(checked) ? checked(menu) : checked
-						})}
-					>
-						<AccordionSummary
+			<FadeInVariantList animate={animate} list={menus} focus={focus} contentVariants={menuVariants}>
+				{(menu: T) => {
+					return (
+						<Accordion
+							expanded={expanded.includes(menu.id)}
 							classes={{
-								root: classes.summary,
-								expanded: classes.expanded,
-								content: classes.summaryContent
+								root: clsx(classes.accordion, {
+									[classes.active]: value?.[0] === menu.id
+								})
 							}}
 						>
-							<div className={classes.label}>
-								{menu.icon && (
-									<Typography lineHeight={1} fontSize={10} mr={2} color="inherit">
-										<menu.icon />
-									</Typography>
-								)}
-								<Typography
-									lineHeight={1}
-									flex={1}
-									onClick={() => onNodeClick?.(menu, null)}
-									fontWeight={value?.[0] == menu.id ? 700 : 400}
-									color="inherit"
-								>
-									{menu.label}
-								</Typography>
-							</div>
-							{menu[childKey] && (
-								<Buttons variant="text" space={false} onClick={() => handleOpenAccordion(menu.id)}>
-									<TransformIcon focus={expanded == menu.id} originIcon={expandIcon} finishIcon={closeIcon} />
-								</Buttons>
-							)}
-						</AccordionSummary>
-						{menu?.[childKey] && (
-							<AccordionDetails classes={{ root: classes.value }}>
-								{menu?.[childKey].map((c: MenuItem) => (
+							<AccordionSummary
+								classes={{
+									root: classes.summary,
+									expanded: classes.expanded,
+									content: classes.summaryContent
+								}}
+							>
+								<div className={clsx(classes.label, 'label')}>
+									{menu.icon && (
+										<Typography lineHeight={1} fontSize={10} mr={1.5} color="inherit">
+											<menu.icon />
+										</Typography>
+									)}
 									<Typography
-										component="a"
-										key={c.id}
-										className={classes.childItem}
-										onClick={() => onNodeClick?.(c, menu)}
-										fontWeight={value?.[1] == c.id ? 700 : 400}
+										lineHeight={1}
+										flex={1}
+										onClick={() => onNodeClick?.(menu, null)}
+										fontWeight={value?.[0] === menu.id ? 700 : 400}
+										color="inherit"
 									>
-										{c.label}
+										{menu.label}
 									</Typography>
-								))}
-							</AccordionDetails>
-						)}
-					</Accordion>
-				)}
+								</div>
+								{menu[subKey] && (
+									<Buttons color="inherit" variant="text" space={false} onClick={() => handleOpenAccordion(menu.id)}>
+										<Typography component="div">
+                      <TransformIcon color="inherit" focus={expanded.includes(menu.id)} originIcon={expandIcon} finishIcon={closeIcon} />
+                    </Typography>
+									</Buttons>
+								)}
+							</AccordionSummary>
+							{menu?.[subKey] && (
+								<AccordionDetails classes={{ root: classes.accordionDetails }}>
+									{menu?.[subKey].map((c: T) => (
+										<div
+											key={c.id}
+											className={clsx(classes.subItem, {
+												[classes.subActive]: value?.[1] === c.id
+											})}
+											onClick={() => onNodeClick?.(c, menu)}
+										>
+											<Typography component="span" fontWeight={value?.[1] === c.id ? 700 : 400}>
+												{c.label}
+											</Typography>
+										</div>
+									))}
+								</AccordionDetails>
+							)}
+						</Accordion>
+					)
+				}}
 			</FadeInVariantList>
 		</div>
 	)
