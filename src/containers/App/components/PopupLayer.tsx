@@ -56,7 +56,7 @@ function PopupLayer() {
 				open={!!centerDialogContent}
 				onClose={clearSpeedDial}
 				classes={{
-					paper: classes.paper,
+					// paper: classes.paper,
 					closeIcon: classes.closeIcon,
 					title: classes.paperTitle,
 					content: classes.paperContent
