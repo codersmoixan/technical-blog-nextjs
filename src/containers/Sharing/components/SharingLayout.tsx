@@ -21,6 +21,9 @@ import Buttons from 'components/Buttons'
 import routes from "@/src/routes";
 import type { Theme } from '@mui/material'
 import type { StaticImageData } from 'next/image'
+import Navigation from "components/Navigation";
+import Footer from "containers/App/components/Footer";
+import SuspendButtons from "components/SuspendButtons";
 
 interface SharingRootProps {
   children: ReactElement | ReactElement[]
@@ -99,54 +102,59 @@ function SharingLayout({ children, backdrop, ...other }: SharingRootProps) {
 	}
 
 	return (
-		<Root backdrop={backdrop} classes={{ root: classes.root }}>
-			<Content>
-				<Banner className={classes.banner}>
-					{banner ?? (
-						<>
-							<Typography variant="h2" fontWeight={400}>
-								总结和分享
-							</Typography>
-							<Typography variant="h2" fontWeight={400}>
-								会有意想不到的收获
-							</Typography>
-						</>
-					)}
-					<MediaQuery media={['pad', 'pc']}>
-						<Box ref={pointRef}>
-							<Buttons variant="contained" className={classes.back} href={routes.home}>
-								<ArrowBack />
-								<Typography component="a" variant="body1" color="inherit">
-									返回首页
-								</Typography>
-							</Buttons>
-						</Box>
-					</MediaQuery>
-				</Banner>
-				<Box className={classes.content}>
-					<CatalogMenu menus={options} onSearchFocus={handleSearchFocus} ref={pointRef} />
-					<Box className={classes.main}>
-						<Box className={classes.search}>
-							<SearchFormText
-								classes={{
-                  formText: classes.formText,
-                  icon: classes.formTextIcon
-                }}
-								bgColor={theme.colorPalette.primary.transparent}
-								placeholder="这里可以搜索你想知道的内容"
-								anchorPoint={pointRef}
-								inputProps={{
-									ref: searchRef
-								}}
-							/>
-						</Box>
-						<Box py={1.5}>
-              {content}
+		<>
+      <Navigation />
+      <Root backdrop={backdrop} classes={{ root: classes.root }}>
+        <Content>
+          <Banner className={classes.banner}>
+            {banner ?? (
+              <>
+                <Typography variant="h2" fontWeight={400}>
+                  总结和分享
+                </Typography>
+                <Typography variant="h2" fontWeight={400}>
+                  会有意想不到的收获
+                </Typography>
+              </>
+            )}
+            <MediaQuery media={['pad', 'pc']}>
+              <Box ref={pointRef}>
+                <Buttons variant="contained" className={classes.back} href={routes.home}>
+                  <ArrowBack />
+                  <Typography component="a" variant="body1" color="inherit">
+                    返回首页
+                  </Typography>
+                </Buttons>
+              </Box>
+            </MediaQuery>
+          </Banner>
+          <Box className={classes.content}>
+            <CatalogMenu menus={options} onSearchFocus={handleSearchFocus} ref={pointRef} />
+            <Box className={classes.main}>
+              <Box className={classes.search}>
+                <SearchFormText
+                  classes={{
+                    formText: classes.formText,
+                    icon: classes.formTextIcon
+                  }}
+                  bgColor={theme.colorPalette.primary.transparent}
+                  placeholder="这里可以搜索你想知道的内容"
+                  anchorPoint={pointRef}
+                  inputProps={{
+                    ref: searchRef
+                  }}
+                />
+              </Box>
+              <Box py={1.5}>
+                {content}
+              </Box>
             </Box>
-					</Box>
-				</Box>
-			</Content>
-		</Root>
+          </Box>
+        </Content>
+      </Root>
+      <Footer />
+      <SuspendButtons />
+    </>
 	)
 }
 

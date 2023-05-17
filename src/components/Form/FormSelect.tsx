@@ -27,7 +27,7 @@ export interface FormSelectOption extends EmptyObject {
 	value: string
 }
 
-export interface FormSelectProps extends SelectProps {
+export interface FormSelectProps extends Omit<SelectProps, 'classes'> {
 	options: FormSelectOption[]
 	label?: string
 	rules?: EmptyObject<any>

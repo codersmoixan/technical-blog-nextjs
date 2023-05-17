@@ -3,29 +3,73 @@
 #COPY build /etc/nginx/html
 #COPY conf /etc/nginx
 
-# 基础镜像
-FROM node:14.17.0-alpine3.13
+FROM node:18-alpine AS base
 
-# 工作目录
+FROM base AS deps
+RUN apk add --no-cache libc6-compat
 WORKDIR /app
 
-# 将 package.json 和 package-lock.json 复制到容器中
-COPY package*.json ./
+COPY package.json yarn.lock* package-lock.json* pnpm-lock.yaml* ./
+RUN \
+  if [ -f yarn.lock ]; then yarn --frozen-lockfile; \
+  elif [ -f package-lock.json ]; then npm ci; \
+  elif [ -f pnpm-lock.yaml ]; then yarn global add pnpm && pnpm i --frozen-lockfile; \
+  else echo "Lockfile not found." && exit 1; \
+  fi
 
-# 安装依赖
-RUN npm install
 
-# 将项目代码复制到容器中
+FROM base AS builder
+WORKDIR /app
+COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 
-# 构建应用
-RUN npm run build
+RUN yarn build
 
-# 暴露端口
+FROM base AS runner
+WORKDIR /app
+
+ENV NODE_ENV production
+
+RUN addgroup --system --gid 1001 nodejs
+RUN adduser --system --uid 1001 nextjs
+
+COPY --from=builder /app/public ./public
+
+COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
+COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
+
+USER nextjs
+
 EXPOSE 3000
 
-# 运行应用
-CMD ["npm", "start"]
+ENV PORT 3000
+
+CMD ["node", "server.js"]
+
+
+## 基础镜像
+#FROM node:14.17.0-alpine3.13
+#
+## 工作目录
+#WORKDIR /app
+#
+## 将 package.json 和 package-lock.json 复制到容器中
+#COPY package*.json ./
+#
+## 安装依赖
+#RUN npm install
+#
+## 将项目代码复制到容器中
+#COPY . .
+#
+## 构建应用
+##RUN npm run build
+#
+## 暴露端口
+#EXPOSE 3000
+#
+## 运行应用
+#CMD ["npm", "start"]
 
 # 1. Install dependencies only when needed
 #FROM node:14-alpine AS deps
