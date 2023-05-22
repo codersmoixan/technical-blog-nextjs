@@ -4,10 +4,12 @@ import { updateThemeSetting, selectThemeSetting } from "containers/App/slice";
 import useDeepCompareEffect from "hooks/effect/useDeepCompareEffect";
 import isEmpty from "lodash/isEmpty";
 import type { ThemeSettingPresets, ThemeSetting, ThemeSettingMode } from "../types"
+import useBroadcastChannel from "hooks/useBroadcastChannel";
 
 const useSwitchTheme = () => {
   const dispatch = useDispatch()
   const themeSetting = useSelector(selectThemeSetting, shallowEqual) as ThemeSetting
+  const { sendBroadcast, listenBroadcast } = useBroadcastChannel()
   const [setting, setSetting] = useState<ThemeSetting>({
     mode: 'light',
     presets: 'one'
@@ -15,10 +17,15 @@ const useSwitchTheme = () => {
 
   useEffect(() => {
     const storageSetting = localStorage.getItem('setting')
+    const uninstall = listenBroadcast(res => {
+      setSetting({ ...res.options })
+    })
 
     if (storageSetting) {
       setSetting({ ...(JSON.parse(storageSetting) as ThemeSetting) })
     }
+
+    return () => uninstall()
   }, [])
 
   useDeepCompareEffect(() => {
@@ -30,6 +37,7 @@ const useSwitchTheme = () => {
   const updateSetting = (option: ThemeSetting) => {
     dispatch(updateThemeSetting(option))
     localStorage.setItem('setting', JSON.stringify(option))
+    sendBroadcast('theme', option)
   }
 
   const switchMode = (type: ThemeSettingMode) => {
