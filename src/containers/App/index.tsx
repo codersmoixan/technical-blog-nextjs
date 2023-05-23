@@ -16,6 +16,15 @@ import SuspendButtons from 'components/SuspendButtons'
 import type { GetServerSideProps, NextPage } from 'next'
 import type { AppProps } from 'next/app'
 import type {ReactNode} from "react";
+import {NAVIGATION_LIST} from "containers/App/constants";
+import {SpeedDialOption} from "components/SuspendButtons/BasicSpeedDial";
+import ThemeSettingIcon from "containers/App/components/ThemeSettingIcon";
+import AddLink from "@mui/icons-material/AddLink";
+import Link from "next/link";
+import PostAdd from "@mui/icons-material/PostAdd";
+import VerticalAlignTop from "@mui/icons-material/VerticalAlignTop";
+import React from "react";
+import {SuspendActions} from "components/SuspendButtons/types";
 
 type GetLayout = (page: ReactNode) => JSX.Element;
 
@@ -51,6 +60,15 @@ const useStyles = makeStyles(
 
 const excludeList = [routes.editor, routes.login, routes.notFond, routes.register]
 
+const actions: SuspendActions = [
+  { id: 'setting', icon: <ThemeSettingIcon />, name: '主题设置' },
+  { id: 'links', icon: <AddLink />, name: '新增友情链接' },
+  // { id: 'category', icon: <Queue />, name: '新增归档类型' },
+  // { id: 'tags', icon: <BookmarkAdd />, name: '新增标签' },
+  { id: 'editor', icon: <Link href={routes.editor} target="_blank"><PostAdd /></Link>, name: '新增新的分享' },
+  { id: 'top', icon: <VerticalAlignTop /> }
+];
+
 function App({ Component, pageProps }: MyAppProps) {
 	const classes = useStyles()
 	const { scrollYProgress } = useScroll()
@@ -63,7 +81,7 @@ function App({ Component, pageProps }: MyAppProps) {
   const getLayout = Component.getLayout || ((page) => (
     <>
       <BeforeRoute exclude={[...excludeList, routes.creatorHome, routes.creatorArticle]}>
-        <Navigation />
+        <Navigation menus={NAVIGATION_LIST} />
       </BeforeRoute>
       <Box position="relative">
         {page}
@@ -71,7 +89,7 @@ function App({ Component, pageProps }: MyAppProps) {
       <BeforeRoute exclude={excludeList}>
         <Footer />
       </BeforeRoute>
-      <SuspendButtons />
+      <SuspendButtons actions={actions} />
     </>
   ))
 

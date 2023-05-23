@@ -1,3 +1,6 @@
+import {NavigateItemOption} from "components/Navigation/types";
+import routes from "@/src/routes";
+
 export const options = [
   {
     id: 'frontEnd',
@@ -108,4 +111,17 @@ export const blogList = [
     description: '前端性能优化是前端中必不可少的部分',
     content: '前端性能优化是前端中必不可少的部分,那么前端性能优化该从何处下手呢？'
   }
+]
+
+export const navigateList: NavigateItemOption[] = [
+  {
+    id: 'category',
+    label: '归档',
+    route: routes.category
+  },
+  {
+    id: 'tag',
+    label: '标签',
+    route: routes.tags
+  },
 ]

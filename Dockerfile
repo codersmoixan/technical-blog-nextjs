@@ -2,6 +2,7 @@
 #
 #COPY build /etc/nginx/html
 #COPY conf /etc/nginx
+FROM --platform=linux/amd64 ubuntu:latest
 
 FROM node:18-alpine AS base
 

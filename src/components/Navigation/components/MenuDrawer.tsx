@@ -12,10 +12,13 @@ import ExpandMore from '@mui/icons-material/ExpandMore'
 import GlobalDrawer from 'components/GlobalDrawer'
 import GradientLogo from 'components/Logo/GradientLogo'
 import useCompareRoute from "hooks/useCompareRoute";
+import useDeepCompareMemo from "hooks/effect/useDeepCompareMemo";
+import isFunction from "lodash/isFunction";
 import type { Theme } from '@mui/material'
+import type { NavigateItemOption } from "components/Navigation/types";
 
 interface MenuDrawerProps {
-	menus: any[]
+	menus: NavigateItemOption[]
 	open: boolean
 	onClose?: () => void
 }
@@ -43,7 +46,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     height: 48,
     lineHeight: '48px',
     '& .MuiTypography-root': {
-      marginLeft: theme.spacing(7),
+      marginLeft: theme.spacing(6),
       color: theme.colorPalette.text.textSecondary
     }
   },
@@ -71,14 +74,26 @@ const useStyles = makeStyles((theme: Theme) => ({
     '& .MuiTypography-root': {
       color: theme.colorPalette.text.main
     }
+  },
+  active: {
+    '& .MuiTypography-root': {
+      color: theme.colorPalette.text.main
+    }
   }
 }))
 
 function MenuDrawer(props: MenuDrawerProps) {
-	const { open, menus, onClose } = props
+	const { open, menus = [], onClose } = props
 	const classes = useStyles(props)
 	const history = useRouter()
   const { compare } = useCompareRoute()
+
+  const active = useDeepCompareMemo(() => {
+    return menus.find(menu => {
+      const route = menu.route
+      return isFunction(route) ? route().includes(history.pathname) : route.includes(history.pathname)
+    })?.id ?? ''
+  }, [history.pathname, menus])
 
   const handleNodeClick = (options: typeof menus[number]) => {
 		const url = options.route
@@ -109,10 +124,11 @@ function MenuDrawer(props: MenuDrawerProps) {
             label: classes.label,
             subItem: classes.subItem,
             summaryContent: classes.summaryContent,
-            // active: value.length <= 1 ? classes.menuActive : classes.textActive,
-            subActive: classes.subActive
+            subActive: classes.subActive,
+            active: classes.active
           }}
-          active={(item) => compare(item.route)}
+          animate={false}
+          value={[active]}
         />
 			</div>
 		</GlobalDrawer>
