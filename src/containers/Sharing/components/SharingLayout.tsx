@@ -183,9 +183,7 @@ function SharingLayout({ children, backdrop, ...other }: SharingRootProps) {
       <SpeedDialPopupLayer>
         <ThemeSetter />
         <PageLayout />
-        <MediaQuery media="pc">
-          <FullScreen />
-        </MediaQuery>
+        <FullScreen />
       </SpeedDialPopupLayer>
 		</>
 	)

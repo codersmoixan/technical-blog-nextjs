@@ -21,9 +21,11 @@ const useStyles = makeStyles((theme: Theme) => ({
 		border: '1px solid rgba(145, 158, 171, 0.24)',
 		cursor: 'pointer',
 		boxSizing: 'border-box',
+    transition: 'all .3s',
     '&.active': {
       backgroundColor: theme.colorPalette.setting.active,
       '& div': {
+        transition: 'all .3s',
         backgroundColor: theme.colorPalette.primary.main,
         boxShadow: `${theme.colorPalette.primary.main} 0px 4px 8px -3px`
       }

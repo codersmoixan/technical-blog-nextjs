@@ -8,7 +8,6 @@ import OperateCategory from 'containers/Category/components/OperateCategory'
 import OperateLinks from 'containers/Links/components/OperateLinks'
 import Drawer from '@mui/material/Drawer'
 import ThemeSetter from "components/LayoutToolbar/ThemeSetter";
-import MediaQuery from "core/MediaQuery";
 import FullScreen from "components/LayoutToolbar/FullScreen";
 
 interface SpeedDialPopupLayerProps {
@@ -80,9 +79,7 @@ function SpeedDialPopupLayer({ children }: SpeedDialPopupLayerProps) {
 				{children ?? (
           <>
             <ThemeSetter />
-            <MediaQuery media="pc">
-              <FullScreen />
-            </MediaQuery>
+            <FullScreen />
           </>
         )}
 			</Drawer>
