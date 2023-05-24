@@ -10,7 +10,7 @@ import BeforeRoute from 'core/BeforeRoute'
 import Navigation from 'components/Navigation'
 import Footer from 'containers/App/components/Footer'
 import Snackbar from 'core/Snackbar'
-import PopupLayer from 'containers/App/components/PopupLayer'
+import SpeedDialPopupLayer from 'containers/App/components/SpeedDialPopupLayer'
 import routes from '@/src/routes'
 import SuspendButtons from 'components/SuspendButtons'
 import type { GetServerSideProps, NextPage } from 'next'
@@ -63,8 +63,6 @@ const excludeList = [routes.editor, routes.login, routes.notFond, routes.registe
 const actions: SuspendActions = [
   { id: 'setting', icon: <ThemeSettingIcon />, name: '主题设置' },
   { id: 'links', icon: <AddLink />, name: '新增友情链接' },
-  // { id: 'category', icon: <Queue />, name: '新增归档类型' },
-  // { id: 'tags', icon: <BookmarkAdd />, name: '新增标签' },
   { id: 'editor', icon: <Link href={routes.editor} target="_blank"><PostAdd /></Link>, name: '新增新的分享' },
   { id: 'top', icon: <VerticalAlignTop /> }
 ];
@@ -90,6 +88,7 @@ function App({ Component, pageProps }: MyAppProps) {
         <Footer />
       </BeforeRoute>
       <SuspendButtons actions={actions} />
+      <SpeedDialPopupLayer />
     </>
   ))
 
@@ -97,7 +96,6 @@ function App({ Component, pageProps }: MyAppProps) {
     <div className={classes.root}>
       <motion.div style={{ scaleX }} className={classes.scrollProgress} />
       {getLayout(<Component {...pageProps} />)}
-      <PopupLayer />
       <Snackbar />
     </div>
   )

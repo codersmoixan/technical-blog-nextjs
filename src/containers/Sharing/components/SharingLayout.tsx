@@ -31,6 +31,10 @@ import Link from 'next/link'
 import PostAdd from '@mui/icons-material/PostAdd'
 import VerticalAlignTop from '@mui/icons-material/VerticalAlignTop'
 import { Queue, BookmarkAdd } from '@mui/icons-material'
+import SpeedDialPopupLayer from "containers/App/components/SpeedDialPopupLayer";
+import ThemeSetter from "components/LayoutToolbar/ThemeSetter";
+import FullScreen from "components/LayoutToolbar/FullScreen";
+import PageLayout from "containers/Sharing/components/PageLayout";
 
 interface SharingRootProps {
 	children: ReactElement | ReactElement[]
@@ -73,10 +77,10 @@ const useStyles = makeStyles((theme: Theme) => ({
 		color: theme.palette.primary.main
 	},
 	back: {
-		color: theme.colorPalette.primary.default,
-		'&.MuiButton-root': {
-			position: 'absolute',
-			bottom: 0,
+    position: 'absolute',
+    bottom: 0,
+		'& .MuiButton-root': {
+      color: theme.colorPalette.primary.default,
 			display: 'flex',
 			alignItems: 'center',
 			justifyContent: 'center',
@@ -142,8 +146,8 @@ function SharingLayout({ children, backdrop, ...other }: SharingRootProps) {
 							</>
 						)}
 						<MediaQuery media={['pad', 'pc']}>
-							<Box ref={pointRef}>
-								<Buttons variant="contained" className={classes.back} href={routes.home}>
+							<Box ref={pointRef} className={classes.back}>
+								<Buttons variant="contained" href={routes.home}>
 									<ArrowBack />
 									<Typography component="a" variant="body1" color="inherit">
 										返回首页
@@ -176,6 +180,13 @@ function SharingLayout({ children, backdrop, ...other }: SharingRootProps) {
 			</Root>
 			<Footer />
 			<SuspendButtons actions={actions} />
+      <SpeedDialPopupLayer>
+        <ThemeSetter />
+        <PageLayout />
+        <MediaQuery media="pc">
+          <FullScreen />
+        </MediaQuery>
+      </SpeedDialPopupLayer>
 		</>
 	)
 }

@@ -1,8 +1,8 @@
 import routes from '@/src/routes'
-import type { ThemeSettingPresets } from 'containers/App/types'
+import type { ToolbarSetterPresets } from 'components/LayoutToolbar/types'
 import type { NavigateItemOption } from 'components/Navigation/types'
 
-export const themePresets: ThemeSettingPresets[] = ['one', 'two', 'three', 'four', 'five', 'six']
+export const themePresets: ToolbarSetterPresets[] = ['one', 'two', 'three', 'four', 'five', 'six']
 
 export const aboutUsList = [
 	{ id: 'aboutUs', label: '关于我们' },

@@ -1,18 +1,24 @@
 import { useEffect, useState } from "react";
 import { shallowEqual, useDispatch, useSelector } from "react-redux";
-import { updateThemeSetting, selectThemeSetting } from "containers/App/slice";
+import { updateToolbarSetter, selectToolbarSetting } from "containers/App/slice";
 import useDeepCompareEffect from "hooks/effect/useDeepCompareEffect";
 import isEmpty from "lodash/isEmpty";
-import type { ThemeSettingPresets, ThemeSetting, ThemeSettingMode } from "../types"
 import useBroadcastChannel from "hooks/useBroadcastChannel";
+import type {
+  ToolbarSetterPresets,
+  ToolbarSetter,
+  ToolbarSetterMode,
+  ToolbarSetterLayout
+} from "components/LayoutToolbar/types"
 
-const useSwitchTheme = () => {
+const useToolbar = () => {
   const dispatch = useDispatch()
-  const themeSetting = useSelector(selectThemeSetting, shallowEqual) as ThemeSetting
+  const themeSetting = useSelector(selectToolbarSetting, shallowEqual) as ToolbarSetter
   const { sendBroadcast, listenBroadcast } = useBroadcastChannel()
-  const [setting, setSetting] = useState<ThemeSetting>({
+  const [setting, setSetting] = useState<ToolbarSetter>({
     mode: 'light',
-    presets: 'one'
+    presets: 'one',
+    layout: 'row'
   })
 
   useEffect(() => {
@@ -22,7 +28,7 @@ const useSwitchTheme = () => {
     })
 
     if (storageSetting) {
-      setSetting({ ...(JSON.parse(storageSetting) as ThemeSetting) })
+      setSetting({ ...(JSON.parse(storageSetting) as ToolbarSetter) })
     }
 
     return () => uninstall()
@@ -34,33 +40,42 @@ const useSwitchTheme = () => {
     }
   }, [themeSetting])
 
-  const updateSetting = (option: ThemeSetting) => {
-    dispatch(updateThemeSetting(option))
+  const updateSetting = (option: ToolbarSetter) => {
+    dispatch(updateToolbarSetter(option))
     localStorage.setItem('setting', JSON.stringify(option))
     sendBroadcast('theme', option)
   }
 
-  const switchMode = (type: ThemeSettingMode) => {
+  const switchMode = (type: ToolbarSetterMode) => {
     updateSetting({
       ...setting,
       mode: type
     })
   }
 
-  const switchPresets = (type: ThemeSettingPresets) => {
+  const switchPresets = (type: ToolbarSetterPresets) => {
     updateSetting({
       ...setting,
       presets: type
     })
   }
 
+  const switchLayout = (type: ToolbarSetterLayout) => {
+    updateSetting({
+      ...setting,
+      layout: type
+    })
+  }
+
   return {
     mode: setting.mode,
     presets: setting.presets,
+    layout: setting.layout,
     setting,
     switchMode,
-    switchPresets
+    switchLayout,
+    switchPresets,
   }
 }
 
-export default useSwitchTheme
+export default useToolbar

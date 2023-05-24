@@ -1,6 +1,6 @@
 import { useMemo } from "react";
 import { createTheme, ThemeProvider as MuiThemeProvider } from "@mui/material/styles";
-import useSwitchTheme from "containers/App/hooks/useSwitchTheme";
+import useToolbar from "components/LayoutToolbar/hooks/useToolbar";
 import defaultTheme from "@/src/theme/defaultTheme";
 import merge from "lodash/merge";
 import cyanTheme from "@/src/theme/cyanTheme";
@@ -25,7 +25,7 @@ const themePresets = {
 }
 
 function ThemeProvider({ children }: ThemeProviderProps) {
-  const { presets, mode } = useSwitchTheme()
+  const { presets, mode } = useToolbar()
 
   const theme = useMemo(() => {
     const themeOptions = createTheme(themePresets[presets])
