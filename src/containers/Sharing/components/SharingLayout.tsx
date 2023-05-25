@@ -44,7 +44,9 @@ interface SharingRootProps {
 
 const useStyles = makeStyles((theme: Theme) => ({
 	...theme.styles,
-	root: {},
+	root: {
+    overflow: 'initial'
+  },
 	banner: {
 		alignItems: 'flex-start'
 	},
@@ -97,7 +99,11 @@ const useStyles = makeStyles((theme: Theme) => ({
 				fontSize: 14
 			}
 		}
-	}
+	},
+  catalog: {
+    position: 'sticky',
+    top: 90
+  }
 }))
 
 const actions: SuspendActions = [
@@ -157,7 +163,9 @@ function SharingLayout({ children, backdrop, ...other }: SharingRootProps) {
 						</MediaQuery>
 					</Banner>
 					<Box className={classes.content}>
-						<CatalogMenu menus={options} onSearchFocus={handleSearchFocus} ref={pointRef} />
+						<CatalogMenu menus={options} onSearchFocus={handleSearchFocus} ref={pointRef} classes={{
+              catalog: classes.catalog
+            }} />
 						<Box className={classes.main}>
 							<Box className={classes.search}>
 								<SearchFormText

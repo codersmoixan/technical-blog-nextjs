@@ -8,10 +8,14 @@ import Typography from "@mui/material/Typography";
 import { makeStyles } from "@mui/styles";
 import Grid from "@mui/material/Grid"
 import BlogCard, { DESCRIPTION, EXPANDED } from "containers/Sharing/components/SharingCard";
-import { blogList } from "./constants"
 import { Variant, VariantContent } from "components/Animation/Variant";
 import { stiffnessVariants } from "utils/variants";
 import type { Theme } from "@mui/material";
+import {ArticleOption} from "containers/Sharing/types";
+
+interface SharingUnitProps {
+  articles: ArticleOption[]
+}
 
 const useStyles = makeStyles((theme: Theme) => ({
   gridItem: {
@@ -19,13 +23,13 @@ const useStyles = makeStyles((theme: Theme) => ({
   }
 }))
 
-function SharingUnit() {
+function SharingUnit({ articles }: SharingUnitProps) {
   const classes = useStyles()
 
   return (
     <Variant>
       <Grid container spacing={3} py={3}>
-        {blogList.map(blog => (
+        {articles.map(blog => (
           <Grid
             key={blog.id}
             item

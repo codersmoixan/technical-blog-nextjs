@@ -38,7 +38,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     zIndex: 999,
     backgroundColor: 'rgba(255, 255, 255, 0)',
     transition: 'all .2s',
-    [theme.breakpoints.down('lg')]: {
+    [theme.breakpoints.down('md')]: {
       padding: theme.spacing(0, 3),
       display: 'flex',
       justifyContent: 'space-between',

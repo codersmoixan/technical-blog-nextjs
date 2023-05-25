@@ -125,7 +125,7 @@ function ArticleFullRow({ article }: ArticleFullRowProps) {
 				</div>
 			</div>
 			<Box display="flex" justifyContent="space-between" mt={1}>
-				<Box mt={1}>
+				<Box mt={1} flex={1}>
 					<Typography variant="subtitle1" fontWeight={700} className={classes.name}>
 						{article.name}
 					</Typography>
