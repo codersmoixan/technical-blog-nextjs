@@ -6,9 +6,16 @@ import {
 } from "containers/Category/queries";
 import useNotifier from "core/Snackbar/hooks/useNotifier";
 import useSpeedDial from "components/SuspendButtons/hooks/useSpeedDial";
+import get from "lodash/get";
+import type { EmptyObject } from "@/src/tb.types"
+
+export interface CategoryOption extends EmptyObject {
+  label: string
+  id: string | number
+}
 
 export interface UseCategoryReturns {
-  categories: any[];
+  category: CategoryOption[];
   loading: boolean;
   add: (data: any) => void;
   update: (data: any) => void;
@@ -19,7 +26,7 @@ export interface UseCategoryReturns {
 const useCategory = (): UseCategoryReturns => {
   const notify = useNotifier()
   const { clearSpeedDial } = useSpeedDial()
-  const { data: categories, refetch: refetchCategory, isLoading: getLoading } = useGetCategoryQuery()
+  const { data: categoryData, refetch: refetchCategory, isLoading: getLoading } = useGetCategoryQuery()
   const { mutateAsync: addCategory, isLoading: addLoading } = useAddCategoryMutation()
   const { mutateAsync: updateCategory, isLoading: updateLoading } = useUpdateCategoryMutation()
   const { mutateAsync: deleteCategory, isLoading: deleteLoading } = useDeleteCategoryMutation()
@@ -46,7 +53,7 @@ const useCategory = (): UseCategoryReturns => {
   }
 
   return {
-    categories: categories?.data?.data ?? [],
+    category: get(categoryData, 'data.data', []).map((item: any) => ({ ...item, label: item.categoryName })),
     loading: getLoading || addLoading || updateLoading || deleteLoading,
     add,
     update,

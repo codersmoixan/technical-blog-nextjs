@@ -182,8 +182,9 @@ function Editor() {
 	const handlePublish = async ({ cover, ...other }: FormOptions) => {
 		const result = await addSharing({
 			...other,
-			blogImage: '111',
-			name: title,
+			articleCoverUrl: cover.url,
+      articleCoverKey: cover.key,
+			articleName: title,
 			content: html
 		})
 

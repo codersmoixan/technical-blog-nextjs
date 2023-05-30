@@ -1,12 +1,13 @@
 import type { EmptyObject } from '@/src/tb.types'
 
 export interface AddSharingParam {
-  name: string;
+  articleName: string;
   description: string;
   content: string;
   tag: string;
   category: string;
-  blogImage: string;
+  articleCoverUrl: string;
+  articleCoverKey: string;
 }
 
 export interface ArticleOption extends EmptyObject {

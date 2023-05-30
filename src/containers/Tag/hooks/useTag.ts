@@ -1,6 +1,7 @@
 import { useAddTagMutation, useDeleteTagMutation, useGetTagListQuery, useUpdateTagMutation } from "containers/Tag/queries";
 import useNotifier from "core/Snackbar/hooks/useNotifier";
 import useSpeedDial from "components/SuspendButtons/hooks/useSpeedDial";
+import get from "lodash/get";
 
 export type Tag = {
   id: string;
@@ -20,7 +21,7 @@ export interface UseTagReturns {
 const useTag = (): UseTagReturns => {
   const notify = useNotifier()
   const { clearSpeedDial } = useSpeedDial()
-  const { data: tags, isLoading, refetch: refetchTags } = useGetTagListQuery()
+  const { data: tagData, isLoading, refetch: refetchTags } = useGetTagListQuery()
   const { mutateAsync: addTag, isLoading: addLoading } = useAddTagMutation()
   const { mutateAsync: updateTag, isLoading: updateLoading } = useUpdateTagMutation()
   const { mutateAsync: deleteTag, isLoading: deleteLoading } = useDeleteTagMutation()
@@ -46,7 +47,7 @@ const useTag = (): UseTagReturns => {
   }
 
   return {
-    tags: tags?.data?.data ?? [],
+    tags: get(tagData, 'data.data', []).map((item: any) => ({ ...item, label: item.tagName })),
     loading: isLoading || addLoading || updateLoading || deleteLoading,
     add,
     update,
