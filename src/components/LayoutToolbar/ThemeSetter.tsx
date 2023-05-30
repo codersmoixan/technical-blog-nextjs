@@ -3,14 +3,14 @@ import makeStyles, { Theme } from 'core/makeStyles'
 import Typography from '@mui/material/Typography'
 import { useTheme } from '@mui/material/styles'
 import clsx from 'clsx'
-import useSwitchTheme from 'containers/App/hooks/useSwitchTheme'
+import useToolbar from 'components/LayoutToolbar/hooks/useToolbar'
 import MaskIcon from 'components/MaskIcon'
 import Grid from '@mui/material/Grid'
-import { themePresets } from '../constants'
-import type { ThemeSettingPresets } from '../types'
+import { themePresets } from 'containers/App/constants'
+import type { ToolbarSetterPresets } from 'components/LayoutToolbar/types'
 
 interface MakeStylesProps {
-	presets: ThemeSettingPresets
+	presets: ToolbarSetterPresets
 }
 
 const useStyles = makeStyles(
@@ -91,18 +91,18 @@ const useStyles = makeStyles(
 	'ThemeSetting'
 )
 
-function ThemeSetting() {
-	const { mode, presets, switchMode, switchPresets } = useSwitchTheme()
+function ThemeSetter() {
+	const { mode, presets, switchMode, switchPresets } = useToolbar()
 	const classes = useStyles({ presets })
 	const theme = useTheme()
 
 	return (
-		<Box className={classes.root}>
-			<Box className={classes.header}>
+		<div className={classes.root}>
+			<div className={classes.header}>
 				<Typography variant="body1">主题设置</Typography>
-			</Box>
-			<Box className={classes.body}>
-				<Box className="mode">
+			</div>
+			<div className={classes.body}>
+				<div className="mode">
 					<Typography variant="caption" color={theme.palette.text.secondary}>
 						模式
 					</Typography>
@@ -124,14 +124,14 @@ function ThemeSetting() {
 							<MaskIcon url="/icons/setting/ic_moon.svg" />
 						</Box>
 					</Box>
-				</Box>
+				</div>
 				<Box className={classes.presets}>
 					<Typography variant="caption" color={theme.palette.text.secondary}>
 						预设
 					</Typography>
 					<Box className="items">
 						<Grid container spacing={1.5}>
-							{themePresets.map((item: ThemeSettingPresets) => (
+							{themePresets.map((item: ToolbarSetterPresets) => (
 								<Grid item key={item}>
 									<Box
 										className={clsx(classes.item, classes.presetsItem, {
@@ -147,9 +147,9 @@ function ThemeSetting() {
 						</Grid>
 					</Box>
 				</Box>
-			</Box>
-		</Box>
+			</div>
+		</div>
 	)
 }
 
-export default ThemeSetting
+export default ThemeSetter

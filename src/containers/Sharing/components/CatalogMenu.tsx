@@ -22,6 +22,7 @@ import useSwitchCatalog from 'containers/Sharing/hooks/useSwitchCatalog'
 interface CatalogMenuProps {
 	menus: any[]
 	onSearchFocus?: ReactEventHandler
+  classes?: Partial<ReturnType<typeof useStyles>>
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -56,9 +57,6 @@ const useStyles = makeStyles((theme: Theme) => ({
 		backgroundColor: theme.colorPalette.background.main,
 		zIndex: 1,
 	},
-	menuTitle: {
-		paddingBottom: theme.spacing(4)
-	},
 	menu: {
 		width: 205,
 		[theme.breakpoints.down('md')]: {
@@ -83,8 +81,8 @@ const useStyles = makeStyles((theme: Theme) => ({
 	}
 }))
 
-export default forwardRef(function CatalogMenu({ menus, onSearchFocus }: CatalogMenuProps, ref) {
-	const classes = useStyles()
+export default forwardRef(function CatalogMenu({ menus, onSearchFocus, ...other }: CatalogMenuProps, ref) {
+	const classes = useStyles(other)
 	const { focus, selected, setFocus, onCheckedMenu } = useSwitchCatalog()
 
 	const handleSearchFocus = (event: React.MouseEvent) => {
@@ -100,9 +98,6 @@ export default forwardRef(function CatalogMenu({ menus, onSearchFocus }: Catalog
 		<Box className={classes.root}>
 			<MediaQuery media={['pc', 'pad']}>
 				<Box className={classes.catalog}>
-					<Typography variant="h4" fontWeight={400} className={classes.menuTitle}>
-						分类
-					</Typography>
 					<Variant>
 						<Menu
 							menus={menus}

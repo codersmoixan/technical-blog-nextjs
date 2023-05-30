@@ -28,7 +28,6 @@ export interface Option extends EmptyObject {
 export interface MenuProps<T = Option> {
 	menus: T[]
 	focus?: boolean
-	active?: ((option: any) => boolean) | boolean
 	open?: (string | number)[]
 	uniqueOpened?: boolean
 	classes?: Partial<ReturnType<typeof useStyles>>
@@ -150,7 +149,6 @@ function Menu<T extends Option>(props: MenuProps<T>) {
 		expandIcon,
 		closeIcon,
 		value = [],
-		active,
 		open = [],
 		uniqueOpened,
 		animate

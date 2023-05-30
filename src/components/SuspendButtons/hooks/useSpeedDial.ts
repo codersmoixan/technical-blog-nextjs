@@ -5,7 +5,9 @@ const useSpeedDial = () => {
   const dispatch = useDispatch()
   const speedDial = useSelector(selectSpeedDial, shallowEqual)
 
-  const update = (id: string) => dispatch(updateSpeedDial(id))
+  const update = (id: string) => {
+    dispatch(updateSpeedDial(id))
+  }
 
   const clear = () => dispatch(clearSpeedDial())
 

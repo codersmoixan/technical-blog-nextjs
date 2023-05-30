@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { ReactNode } from 'react'
 import CenterDialog from 'components/Dialog/CenterDialog'
 import makeStyles, { Theme } from 'core/makeStyles'
 import useSpeedDial from 'components/SuspendButtons/hooks/useSpeedDial'
@@ -6,8 +6,13 @@ import { getValue } from 'utils/index'
 import OperateTag from 'containers/Tag/components/OperateTag'
 import OperateCategory from 'containers/Category/components/OperateCategory'
 import OperateLinks from 'containers/Links/components/OperateLinks'
-import ThemeSetting from 'containers/App/components/ThemeSetting'
 import Drawer from '@mui/material/Drawer'
+import ThemeSetter from "components/LayoutToolbar/ThemeSetter";
+import FullScreen from "components/LayoutToolbar/FullScreen";
+
+interface SpeedDialPopupLayerProps {
+	children?: ReactNode
+}
 
 const useStyles = makeStyles(
 	(theme: Theme) => ({
@@ -40,10 +45,10 @@ const dialogContent = {
 }
 
 const drawerContent = {
-	setting: <ThemeSetting />
+	setting: 'setting'
 }
 
-function PopupLayer() {
+function SpeedDialPopupLayer({ children }: SpeedDialPopupLayerProps) {
 	const classes = useStyles()
 	const { clearSpeedDial, speedDial } = useSpeedDial()
 
@@ -56,7 +61,6 @@ function PopupLayer() {
 				open={!!centerDialogContent}
 				onClose={clearSpeedDial}
 				classes={{
-					// paper: classes.paper,
 					closeIcon: classes.closeIcon,
 					title: classes.paperTitle,
 					content: classes.paperContent
@@ -72,10 +76,15 @@ function PopupLayer() {
 					paper: classes.drawerPaper
 				}}
 			>
-				<ThemeSetting />
+				{children ?? (
+          <>
+            <ThemeSetter />
+            <FullScreen />
+          </>
+        )}
 			</Drawer>
 		</>
 	)
 }
 
-export default PopupLayer
+export default SpeedDialPopupLayer

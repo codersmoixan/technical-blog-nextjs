@@ -83,6 +83,9 @@ const theme: DefaultThemeOptions = {
       fontSize: '0.875rem',
       lineHeight: 1.5
     },
+    body2: {
+      fontSize: 13
+    },
     button: {
       fontSize: '0.875rem',
       lineHeight: 1.5

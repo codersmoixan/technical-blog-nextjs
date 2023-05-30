@@ -16,18 +16,18 @@ const appSlice = createSlice({
     clearSpeedDial(state) {
       state.speedDial = ''
     },
-    updateThemeSetting(state, action) {
+    updateToolbarSetter(state, action) {
       state.setting = action.payload
     },
-    clearThemeSetting(state) {
+    clearToolbarSetter(state) {
       state.setting = {}
     }
   }
 })
 
-export const { updateSpeedDial, clearSpeedDial, updateThemeSetting, clearThemeSetting } = appSlice.actions
+export const { updateSpeedDial, clearSpeedDial, updateToolbarSetter, clearToolbarSetter } = appSlice.actions
 
 export const selectSpeedDial = (state: RootState) => state.app.speedDial
-export const selectThemeSetting = (state: RootState) => state.app.setting
+export const selectToolbarSetting = (state: RootState) => state.app.setting
 
 export default appSlice

@@ -1,5 +1,4 @@
 import routes from '@/src/routes'
-import { Home, Article, Queue, Book, BookmarkBorder, AttachFile } from '@mui/icons-material'
 import type { RouteParam } from '@/src/routes'
 import type { OverridableComponent } from '@mui/types'
 
@@ -24,31 +23,18 @@ export const NAVIGATION_LIST: NavigationList = [
 		id: 'home',
 		label: '首页',
 		route: routes.home,
-		icon: Home
+		// icon: Home
 	},
 	{
 		id: 'share',
 		label: '分享',
 		route: routes.sharing,
-		icon: Article,
-		menus: [
-			{
-				id: 1,
-				label: '前端',
-				menus: [{ id: 1, label: 'React' }]
-			},
-			{
-				id: 2,
-				label: '后端',
-				menus: [{ id: 1, label: 'Go' }]
-			}
-		]
 	},
 	{
 		id: 'files',
 		label: '归档',
 		route: routes.category,
-		icon: Queue,
+		// icon: Queue,
 		menus: [
 			{
 				id: 1,
@@ -61,13 +47,13 @@ export const NAVIGATION_LIST: NavigationList = [
 		id: 'notes',
 		label: '笔记',
 		route: routes.notes,
-		icon: Book
+		// icon: Book
 	},
 	{
 		id: 'tags',
 		label: '标签',
 		route: routes.tags,
-		icon: BookmarkBorder,
+		// icon: BookmarkBorder,
 		menus: [
 			{
 				id: 1,
@@ -92,6 +78,11 @@ export const NAVIGATION_LIST: NavigationList = [
 		id: 'links',
 		label: '友链',
 		route: routes.links,
-		icon: AttachFile
-	}
+		// icon: AttachFile
+	},
+  {
+    id: 'about',
+    label: '关于',
+    route: routes.about
+  }
 ]

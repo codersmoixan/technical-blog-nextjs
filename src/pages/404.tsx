@@ -13,6 +13,7 @@ import Buttons from 'components/Buttons'
 import { useRouter } from 'next/router'
 import routes from '@/src/routes'
 import type { Theme } from '@mui/material'
+import {useTheme} from "@mui/material/styles";
 
 const useStyles = makeStyles((theme: Theme) => ({
 	root: {
@@ -45,8 +46,9 @@ const useStyles = makeStyles((theme: Theme) => ({
 function NotFoundPage() {
 	const classes = useStyles()
 	const history = useRouter()
+  const theme = useTheme()
 
-	const handleToHome = () => {
+  const handleToHome = () => {
 		history.replace(routes.home)
 	}
 
@@ -68,7 +70,7 @@ function NotFoundPage() {
 				</SpringBox>
 				<SpringBox delay={0.4}>
 					<Box mt={10} px={3}>
-						<NotFoundIcon />
+						<NotFoundIcon themeColor={theme.colorPalette.primary.main} />
 					</Box>
 				</SpringBox>
 				<div className={classes.backHome}>

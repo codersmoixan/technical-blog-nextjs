@@ -5,7 +5,6 @@
 
 import React, { useEffect, useState } from 'react'
 import Box from "@mui/material/Box";
-import { NAVIGATION_LIST, NavigationItem } from "components/Navigation/constant";
 import Buttons from "components/Buttons";
 import FormText from "components/Form/FormText";
 import { useRouter } from "next/router";
@@ -22,6 +21,11 @@ import { Variant } from "components/Animation/Variant";
 import makeStyles, { Theme } from "core/makeStyles";
 import GradientLogo from "components/Logo/GradientLogo";
 import useCompareRoute from "hooks/useCompareRoute";
+import type { NavigateItemOption } from "components/Navigation/types";
+
+interface NavigationProps {
+  menus: NavigateItemOption[]
+}
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -34,7 +38,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     zIndex: 999,
     backgroundColor: 'rgba(255, 255, 255, 0)',
     transition: 'all .2s',
-    [theme.breakpoints.down('lg')]: {
+    [theme.breakpoints.down('md')]: {
       padding: theme.spacing(0, 3),
       display: 'flex',
       justifyContent: 'space-between',
@@ -103,14 +107,14 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }), 'Navigation')
 
-function Navigation() {
+function Navigation({ menus = [] }: NavigationProps) {
   const classes = useStyles()
   const history = useRouter()
   const theme = useTheme()
   const { compare } = useCompareRoute()
 
   const [openDialog, setOpenDialog] = useState(false)
-  const [focusTab, setFocusTab] = useState<NavigationItem | null>(null)
+  const [focusTab, setFocusTab] = useState<NavigateItemOption | null>(null)
   const [focus, setFocus] = useState(false)
 
   useEffect(() => {
@@ -120,7 +124,7 @@ function Navigation() {
     return () => removeEventListener('scroll', scroll)
   }, [])
 
-  const handleCheckRoute = async (tab: NavigationItem | null, type: string = 'click') => {
+  const handleCheckRoute = async (tab: NavigateItemOption | null, type: string = 'click') => {
     if (tab === null || type === 'leave') {
       return setFocusTab(null)
     }
@@ -150,7 +154,7 @@ function Navigation() {
 						<Box display="flex" alignItems="center">
               <GradientLogo width={35} height={35} onClick={handleToHome} />
 							<Box className={classes.menus}>
-								{NAVIGATION_LIST.map(tab => (
+								{menus.map(tab => (
 									<Buttons
 										key={tab.id}
 										variant="text"
@@ -193,7 +197,7 @@ function Navigation() {
 				</Box>
 			</MediaQuery>
 			<MediaQuery media="mobile">
-				<Box className={clsx(classes.root, focus ? classes.focus : classes.blur)}>
+				<div className={clsx(classes.root, focus ? classes.focus : classes.blur)}>
           <GradientLogo width={30} height={30} onClick={handleToHome} />
 					<Buttons
 						variant="text"
@@ -203,9 +207,9 @@ function Navigation() {
 					>
 						<MenuIcon width={18} height={18} />
 					</Buttons>
-				</Box>
+				</div>
 				<MenuDrawer
-					menus={NAVIGATION_LIST}
+					menus={menus}
 					open={openDialog}
 					onClose={() => setOpenDialog(false)}
 				/>
