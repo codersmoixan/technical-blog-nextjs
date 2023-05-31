@@ -23,7 +23,8 @@ const purpleTheme: ThemeOptions = {
 			main: 'rgb(252, 252, 252)',
 			default: '#FFFFFF',
 			primary: 'rgb(252, 252, 252)',
-			secondary: 'rgba(145, 158, 171, 0.08)'
+			secondary: 'rgba(145, 158, 171, 0.08)',
+      opacity: (a) => `rgba(118, 53, 220, ${a})`
 		},
 		text: {
 			main: '#7635dc',
@@ -31,7 +32,7 @@ const purpleTheme: ThemeOptions = {
 			textSecondary: '#6c6b7b',
 			disabled: '#86909c',
 			dark: '#131313',
-			secondary: '#86909c'
+			secondary: '#8c8c8c'
 		},
 		button: {
 			main: '#7635dc',

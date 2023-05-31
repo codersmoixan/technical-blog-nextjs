@@ -23,7 +23,8 @@ const redTheme: ThemeOptions = {
 			main: 'rgb(252, 252, 252)',
 			default: '#FFFFFF',
 			primary: '#131313',
-			secondary: 'rgba(145, 158, 171, 0.08)'
+			secondary: 'rgba(145, 158, 171, 0.08)',
+      opacity: (a) => `rgba(255, 48, 48, ${a})`
 		},
 		text: {
 			main: '#FF3030',
@@ -31,7 +32,7 @@ const redTheme: ThemeOptions = {
 			textSecondary: '#6c6b7b',
 			disabled: '#86909c',
 			dark: '#131313',
-			secondary: '#86909c'
+			secondary: '#8c8c8c'
 		},
 		button: {
 			main: '#FF3030',

@@ -24,6 +24,7 @@ const defaultTheme: ThemeOptions = {
       default: '#FFFFFF',
       primary: 'rgb(252, 252, 252)',
       secondary: 'rgba(145, 158, 171, 0.08)',
+      opacity: (a) => `rgba(0, 171, 100, ${a})`
     },
     text: {
       main: '#00AB55',
@@ -31,7 +32,7 @@ const defaultTheme: ThemeOptions = {
       textSecondary: '#6c6b7b',
       disabled: '#86909c',
       dark: '#131313',
-      secondary: '#86909c',
+      secondary: '#8c8c8c',
     },
     button: {
       main: '#00AB55',

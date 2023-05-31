@@ -32,7 +32,7 @@ const darkTheme: DarkTheme = {
 			textSecondary: '#FFFFFF',
 			disabled: '#86909c',
 			dark: 'rgb(22, 28, 36)',
-			secondary: '#86909c'
+			secondary: '#8c8c8c'
 		}
 	},
 	componentStyleOverrides: {

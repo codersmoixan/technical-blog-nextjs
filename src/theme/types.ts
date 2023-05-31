@@ -33,6 +33,7 @@ export interface ColorPaletteOptions {
     default: string;
     primary: string;
     secondary: string;
+    opacity?: (a: number) => string
   };
   text: {
     main: string;
