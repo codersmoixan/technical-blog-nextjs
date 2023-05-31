@@ -48,6 +48,9 @@ const useStyles = makeStyles((theme: Theme) => ({
 		marginTop: theme.spacing(2),
     borderRadius: 6,
 		backgroundColor: theme.colorPalette.background.main,
+    [theme.breakpoints.down('md')]: {
+      padding: theme.spacing(2)
+    },
 		'& .writing-board': {
 			display: 'flex',
 			marginBottom: theme.spacing(4),
@@ -83,6 +86,9 @@ const useStyles = makeStyles((theme: Theme) => ({
 		marginTop: theme.spacing(2),
     borderRadius: 6,
 		backgroundColor: theme.colorPalette.background.main,
+    [theme.breakpoints.down('md')]: {
+      padding: theme.spacing(2)
+    },
 		'& .list': {
 			padding: theme.spacing(2, 0, 0)
 		},
@@ -105,6 +111,34 @@ const useStyles = makeStyles((theme: Theme) => ({
 			}
 		}
 	},
+  group: {
+    display: 'flex',
+    margin: theme.spacing(4, 0, 2),
+    [theme.breakpoints.down('md')]: {
+      display: 'block'
+    }
+  },
+  category: {
+    display: 'flex',
+    alignItems: 'center',
+    marginRight: theme.spacing(5),
+    '& .item': {
+      backgroundColor: '#f2f3f5'
+    }
+  },
+  tag: {
+    display: 'flex',
+    alignItems: 'center',
+    [theme.breakpoints.down('md')]: {
+      marginTop: theme.spacing(2)
+    }
+  },
+  tagItem: {
+    padding: theme.spacing(0.75, 1.5),
+    marginLeft: theme.spacing(2),
+    borderRadius: 4,
+    backgroundColor: theme.colorPalette.background.opacity?.(0.1)
+  }
 }))
 
 function ArticleContent(props: ArticleContentProps) {
@@ -114,13 +148,6 @@ function ArticleContent(props: ArticleContentProps) {
   const articleClasses = useArticleStyles()
 	const { observer } = useForm()
 	const { observer: fullObserver } = useForm()
-  console.log(article, 1352);
-
-  // useEffect(() => {
-	//   document.querySelectorAll('code').forEach(el => {
-	//     hljs.highlightElement(el)
-	//   })
-	// }, [])
 
 	const handleSubmit = (options: any) => {
 		console.log(options)
@@ -149,6 +176,24 @@ function ArticleContent(props: ArticleContentProps) {
           className={clsx(classes.content, articleClasses.root)}
           dangerouslySetInnerHTML={{ __html: article.content }}
         />
+        <div className={classes.group}>
+          <div className={classes.category}>
+            <Typography>分类:</Typography>
+            <div className={clsx(classes.tagItem, 'item')}>
+              <Typography>{article.category}</Typography>
+            </div>
+          </div>
+          <div className={classes.tag}>
+            <Typography>标签:</Typography>
+            <Box display="flex">
+              {[1, 2, 3].map(item => (
+                <div className={classes.tagItem} key={item}>
+                  <Typography>前端</Typography>
+                </div>
+              ))}
+            </Box>
+          </div>
+        </div>
       </Box>
       <Box className={classes.comment}>
         <Box className="writing-board">
