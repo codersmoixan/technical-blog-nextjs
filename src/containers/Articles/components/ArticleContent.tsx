@@ -31,11 +31,14 @@ const useStyles = makeStyles((theme: Theme) => ({
 	article: {
 		padding: theme.spacing(3),
     borderRadius: 6,
-		backgroundColor: theme.colorPalette.background.main
+		backgroundColor: theme.colorPalette.background.main,
+    [theme.breakpoints.down('md')]: {
+      padding: theme.spacing(2)
+    }
 	},
 	header: {},
 	content: {
-		padding: theme.spacing(2, 0),
+		padding: theme.spacing(2, 0, 0),
 	},
 	articleInfo: {
 		marginTop: theme.spacing(1)
