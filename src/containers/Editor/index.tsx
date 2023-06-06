@@ -179,9 +179,10 @@ function Editor() {
 		setTitle(event.target.value)
 	}
 
-	const handlePublish = async ({ cover, ...other }: FormOptions) => {
+	const handlePublish = async ({ cover, tags, ...other }: FormOptions) => {
 		const result = await addSharing({
 			...other,
+      tags: tags.split(','),
 			articleCoverUrl: cover.url,
       articleCoverKey: cover.key,
 			articleName: title,

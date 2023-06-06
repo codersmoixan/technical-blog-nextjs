@@ -64,12 +64,16 @@ const useStyles = makeStyles(
 	'Articles'
 )
 
-const actions: SpeedDialOption[] = [
+const mobileActions: SpeedDialOption[] = [
 	{ id: 'setting', icon: <ThemeSettingIcon />, name: '主题设置' },
 	{ id: 'liked', icon: <LikedIcon /> },
 	{ id: 'comment', icon: <CommentIcon /> },
 	{ id: 'view', icon: <ViewIcon /> },
 	{ id: 'top', icon: <VerticalAlignTop /> }
+]
+const actions: SpeedDialOption[] = [
+  { id: 'setting', icon: <ThemeSettingIcon />, name: '主题设置' },
+  { id: 'top', icon: <VerticalAlignTop /> }
 ]
 
 function ArticlePage({ article }: ArticlePageProps) {
@@ -92,7 +96,12 @@ function ArticlePage({ article }: ArticlePageProps) {
 				</Content>
 				{/*<DynamicParticleClock width={500} height={500} />*/}
 			</Box>
-			<SuspendButtons actions={actions} icon={<Widgets />} onChange={handleSpeedDialChange} />
+      <MediaQuery media="mobile">
+        <SuspendButtons actions={actions} icon={<Widgets />} onChange={handleSpeedDialChange} />
+      </MediaQuery>
+      <MediaQuery media={['pc', 'pad']}>
+        <SuspendButtons actions={actions} />
+      </MediaQuery>
       <SpeedDialPopupLayer />
 		</PageHead>
 	)

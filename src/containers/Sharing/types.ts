@@ -4,7 +4,7 @@ export interface AddSharingParam {
   articleName: string;
   description: string;
   content: string;
-  tag: string;
+  tags: string[];
   category: string;
   articleCoverUrl: string;
   articleCoverKey: string;

@@ -32,8 +32,9 @@ export interface CoverOption {
   url: string
 }
 
-export interface FormOptions extends Pick<AddSharingParam, 'category' | 'tag' | 'description'> {
+export interface FormOptions extends Pick<AddSharingParam, 'category' | 'description'> {
 	cover: CoverOption
+  tags: string
 }
 
 interface PublishProps {
@@ -126,7 +127,7 @@ function Publish({ open = false, onClose, onPublish }: PublishProps) {
 						</Grid>
 						<Grid item xs={9} sm={10}>
 							<FormSelect
-								name="tag"
+								name="tags"
 								multiple
 								options={tags}
 								placeholder="请选择标签"
