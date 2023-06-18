@@ -1,6 +1,5 @@
 import { NavigateItemOption } from 'components/Navigation/types'
 import routes from '@/src/routes'
-import type { ArticleOption } from 'containers/Sharing/types'
 
 export const options = [
 	{
@@ -75,7 +74,7 @@ export const options = [
 	}
 ]
 
-export const blogList: ArticleOption[] = [
+export const blogList: any[] = [
 	{
 		id: 1,
 		name: '前端性能优化',

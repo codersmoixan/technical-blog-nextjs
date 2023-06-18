@@ -10,12 +10,12 @@ function requestInterceptors(config: AxiosRequestConfig): AxiosRequestConfig {
 }
 
 function responseInterceptors(config: AxiosResponse) {
-	const { data } = config
-	if (data.code !== 0) {
+  const { data, status } = config
+	if (status !== 200) {
 		notify.warning(data.msg)
 	}
 
-	return config
+	return config.data
 }
 
 function responseInterceptorsCatch(err: any) {

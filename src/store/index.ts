@@ -2,7 +2,7 @@ import { configureStore } from "@reduxjs/toolkit";
 import sharingSlice from "containers/Sharing/slice";
 import notifierSlice from "core/Snackbar/slice";
 import appSlice from "containers/App/slice";
-import articlesSlice from "containers/Articles/slice";
+import articlesSlice from "containers/Article/slice";
 
 export type RootState = ReturnType<typeof store.getState>
 

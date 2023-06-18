@@ -10,3 +10,27 @@ export interface PageParams {
   pageSize: number;
   page: number;
 }
+
+export interface UserInfo {
+  id: number
+  createdAt: string
+  uuid: string
+  username: string
+  password: string
+  nickName: string
+  authorityId: string
+  phone: string
+  email: string
+  github: string
+  gitte: string
+  avatar: string
+  gender: number
+  age: number
+}
+
+export interface PageResult<T> {
+  list: T[]
+  total: number
+  page: number
+  pageSize: number
+}

@@ -1,12 +1,12 @@
 import React, { ReactNode } from 'react'
 import Box from '@mui/material/Box'
 import makeStyles, { Theme } from 'core/makeStyles'
-import ArticleContent, { Article } from 'containers/Articles/components/ArticleContent'
-import ArticleAside from 'containers/Articles/components/ArticleAside'
+import ArticleContent from 'containers/Article/components/ArticleContent'
+import ArticleAside from 'containers/Article/components/ArticleAside'
 import Content from 'components/Layout/Content'
 import { useRouter } from 'next/router'
 import MediaQuery from 'core/MediaQuery'
-import { getArticle } from 'containers/Articles/api'
+import { getArticle } from 'containers/Article/api'
 import isUndefined from 'lodash/isUndefined'
 import { useMediaQuery } from '@mui/material'
 import type { GetServerSidePropsContext } from 'next'
@@ -19,8 +19,9 @@ import { Widgets } from '@mui/icons-material'
 import LikedIcon from 'components/Icons/LikedIcon'
 import CommentIcon from 'components/Icons/CommentIcon'
 import ViewIcon from 'components/Icons/ViewIcon'
-import SuspendButtons from "components/SuspendButtons";
-import SpeedDialPopupLayer from "containers/App/components/SpeedDialPopupLayer";
+import SuspendButtons from 'components/SuspendButtons'
+import SpeedDialPopupLayer from 'containers/App/components/SpeedDialPopupLayer'
+import type { ArticleInfo } from 'containers/Article/types'
 
 type SpeedDiaKey = 'liked' | 'comment' | 'view' | 'top' | 'setting'
 
@@ -31,7 +32,7 @@ interface SpeedDialOption {
 }
 
 interface ArticlePageProps {
-	article: Article
+	article: ArticleInfo
 }
 
 const useStyles = makeStyles(
@@ -72,8 +73,8 @@ const mobileActions: SpeedDialOption[] = [
 	{ id: 'top', icon: <VerticalAlignTop /> }
 ]
 const actions: SpeedDialOption[] = [
-  { id: 'setting', icon: <ThemeSettingIcon />, name: '主题设置' },
-  { id: 'top', icon: <VerticalAlignTop /> }
+	{ id: 'setting', icon: <ThemeSettingIcon />, name: '主题设置' },
+	{ id: 'top', icon: <VerticalAlignTop /> }
 ]
 
 function ArticlePage({ article }: ArticlePageProps) {
@@ -81,9 +82,11 @@ function ArticlePage({ article }: ArticlePageProps) {
 	const history = useRouter()
 	const dark = useMediaQuery('(prefers-color-scheme: dark)')
 
-  const handleSpeedDialChange = (type: SpeedDiaKey) => {
-    console.log(type);
-  }
+	console.log(article, 1233)
+
+	const handleSpeedDialChange = (type: SpeedDiaKey) => {
+		console.log(type)
+	}
 
 	return (
 		<PageHead title={article.articleName} content={article.articleName}>
@@ -96,13 +99,13 @@ function ArticlePage({ article }: ArticlePageProps) {
 				</Content>
 				{/*<DynamicParticleClock width={500} height={500} />*/}
 			</Box>
-      <MediaQuery media="mobile">
-        <SuspendButtons actions={actions} icon={<Widgets />} onChange={handleSpeedDialChange} />
-      </MediaQuery>
-      <MediaQuery media={['pc', 'pad']}>
-        <SuspendButtons actions={actions} />
-      </MediaQuery>
-      <SpeedDialPopupLayer />
+			<MediaQuery media="mobile">
+				<SuspendButtons actions={actions} icon={<Widgets />} onChange={handleSpeedDialChange} />
+			</MediaQuery>
+			<MediaQuery media={['pc', 'pad']}>
+				<SuspendButtons actions={actions} />
+			</MediaQuery>
+			<SpeedDialPopupLayer />
 		</PageHead>
 	)
 }
@@ -118,7 +121,9 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
 		}
 	}
 
-	const { data: article } = await getArticle(id)
+	const article = await getArticle(id)
+
+	console.log(article, 155)
 
 	return {
 		props: {

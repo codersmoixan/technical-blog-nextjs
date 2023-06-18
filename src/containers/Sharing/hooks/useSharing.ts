@@ -1,15 +1,21 @@
-import { useAddShareMutation, useGetShareListQuery } from "containers/Sharing/queries";
+import {useAddShareMutation, useGetShareListQuery} from "containers/Sharing/queries";
 import useNotifier from "core/Snackbar/hooks/useNotifier";
-import type { AddSharingParam } from "containers/Sharing/types";
+import type { AddSharingParam, Article } from "containers/Sharing/types";
 import type { PageParams } from "@/src/tb.types";
 
 export interface UseSharingProps extends PageParams {}
 
-const useSharing = (props?: UseSharingProps) => {
+export interface UseSharingReturn {
+  articles: Article[]
+  loading: boolean
+  addSharing: (data: AddSharingParam) => void
+}
+
+const useSharing = (props?: UseSharingProps): UseSharingReturn => {
   const { page = 1, pageSize = 10 } = props ?? {}
 
   const notify = useNotifier()
-  const { data: blogs, isLoading } = useGetShareListQuery({
+  const { data: articles, isLoading } = useGetShareListQuery({
     page,
     pageSize
   })
@@ -23,7 +29,7 @@ const useSharing = (props?: UseSharingProps) => {
   }
 
   return {
-    blogs,
+    articles: (articles?.list ?? []) as Article[],
     loading: isLoading || addLoading,
     addSharing
   }

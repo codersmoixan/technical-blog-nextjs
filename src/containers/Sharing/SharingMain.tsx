@@ -10,13 +10,33 @@ import SharingSwiper from 'containers/Sharing/components/SharingSwiper'
 import useSharing from 'containers/Sharing/hooks/useSharing'
 import useToolbar from 'components/LayoutToolbar/hooks/useToolbar'
 import ArticleFullRow from 'containers/Sharing/components/ArticleFullRow'
+import {makeStyles} from "@mui/styles";
+import {Theme} from "@mui/material";
+import routes from "@/src/routes";
+import {useRouter} from "next/router";
+
+const useStyles = makeStyles((theme: Theme) => ({
+  item: {
+    margin: theme.spacing(0, -3),
+    cursor: 'pointer',
+    '&:hover': {
+      backgroundColor: theme.colorPalette.setting.hover,
+    }
+  }
+}))
 
 function SharingMain() {
+  const classes = useStyles()
+  const history = useRouter()
 	const { checkedMenu } = useSwitchCatalog()
 	const { layout } = useToolbar()
-	const { blogs } = useSharing()
+	const { articles = [] } = useSharing()
 
-	return layout === 'row' ? (
+  console.log(articles, 12);
+
+  const handleClick = (id: string) => history.push(routes.article(id))
+
+  return layout === 'row' ? (
 		<Box mb={8}>
 			<SharingSwiper blogs={blogList} title="React" />
 			<SharingSwiper blogs={blogList} title="Vue" />
@@ -24,8 +44,10 @@ function SharingMain() {
 		</Box>
 	) : (
 		<div>
-			{blogList.map(blog => (
-				<ArticleFullRow key={blog.id} article={blog} />
+			{articles.map(article => (
+				<div key={article.id} className={classes.item} onClick={() => handleClick(article.id)}>
+          <ArticleFullRow article={article} />
+        </div>
 			))}
 		</div>
 	)

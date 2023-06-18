@@ -13,7 +13,7 @@ const routes = {
   works: (id?: RouteParam) => id ? `/works/${id}` : '/works',
   links: (id?: RouteParam) => id ? `/links/${id}` : '/links',
   notes: (id?: RouteParam) => id ? `/notes/${id}` : '/notes',
-  articles: (id?: RouteParam) => id ? `/articles/${id}` : '/notfound',
+  article: (id?: RouteParam) => id ? `/article/${id}` : '/notfound',
   editor: '/editor',
   about: '/about',
   login: '/user/login',

@@ -10,16 +10,29 @@ export interface AddSharingParam {
   articleCoverKey: string;
 }
 
-export interface ArticleOption extends EmptyObject {
-  id: string | number;
-  name: string;
-  description: string;
-  content: string;
-  date: string;
-  author: string;
-  tags: string[];
-  view: number;
-  liked: number;
-  comment: number;
-  cover?: string;
+export interface Article {
+  tags: {
+    tagId: string
+    tagName: string
+  }[]
+  articleName: string
+  articleCoverKey: string
+  articleCoverUrl: string
+  author: string
+  category: string
+  description: string
+  favors: number
+  id: string
+  shares: number
+  status: number
+  views: number
+  liked: number
+  updatedAt: string
+}
+
+export interface ShareResult {
+  list: Article[]
+  page: number
+  pageSize: number
+  total: number
 }

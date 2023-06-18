@@ -95,6 +95,7 @@ export interface ComponentStyleOverrides {
   ThemeSetting?: StyleOverrides;
   PopupLayer?: StyleOverrides;
   Footer?: StyleOverrides;
+  SharingLayout?: StyleOverrides
 }
 
 export type ComponentStyleOverridesKey = keyof ComponentStyleOverrides

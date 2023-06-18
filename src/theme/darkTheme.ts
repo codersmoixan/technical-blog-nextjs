@@ -152,7 +152,17 @@ const darkTheme: DarkTheme = {
 				background:
 					'linear-gradient(rgba(22, 28, 36, 0.94), rgba(22, 28, 36, 0.94)) center center / cover no-repeat, url(/images/home/overlay_2.jpg)'
 			}
-		}
+		},
+    SharingLayout: {
+      menu: {
+        backgroundColor: 'rgba(145, 158, 171, .08)'
+      },
+      main: {
+        [breakpoints.up('md')]: {
+          backgroundColor: 'rgba(145, 158, 171, .08)',
+        }
+      }
+    }
 	},
 	palette: {
 		mode: 'dark'
