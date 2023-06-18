@@ -60,7 +60,9 @@ function CommentItem({ comment, ...other }: CommentItemProps) {
 
 	const isEmptyAvatar = !userInfo.avatar
 
-	return (
+  console.log(comment);
+
+  return (
 		<div className={classes.root}>
 			<Box display="flex">
 				<div

@@ -38,7 +38,8 @@ const cyanTheme: ThemeOptions = {
       main: '#078DEE',
       default: '#FFFFFF',
       background: '#078DEE',
-      hover: 'rgba(141, 238, 100, .8)'
+      hover: 'rgba(7, 141, 238, .8)',
+      disabled: 'rgba(7, 141, 238, .3)'
     },
     setting: {
       one: '#00AB55',

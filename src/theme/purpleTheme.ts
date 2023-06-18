@@ -38,7 +38,8 @@ const purpleTheme: ThemeOptions = {
 			main: '#7635dc',
 			default: '#FFFFFF',
 			background: '#7635dc',
-			hover: 'rgba(118, 53, 220, .8)'
+			hover: 'rgba(118, 53, 220, .8)',
+      disabled: 'rgba(118, 53, 220, .4)'
 		},
 		setting: {
 			one: '#00AB55',

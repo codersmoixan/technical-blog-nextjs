@@ -38,7 +38,8 @@ const defaultTheme: ThemeOptions = {
       main: '#00AB55',
       default: '#FFFFFF',
       background: '#00AB55',
-      hover: 'rgba(0, 171, 85, .8)'
+      hover: 'rgba(0, 171, 85, .8)',
+      disabled: 'rgba(0, 171, 85, .4)'
     },
     setting: {
       one: '#00AB55',

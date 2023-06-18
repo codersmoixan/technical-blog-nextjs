@@ -38,7 +38,8 @@ const blueTheme: ThemeOptions = {
       main: '#2065D1',
       default: '#FFFFFF',
       background: '#2065D1',
-      hover: 'rgba(32, 101, 209, .8)'
+      hover: 'rgba(32, 101, 209, .8)',
+      disabled: 'rgba(32, 101, 209, .4)',
     },
     setting: {
       one: '#00AB55',

@@ -48,6 +48,7 @@ export interface ColorPaletteOptions {
     default: string;
     background: string;
     hover: string;
+    disabled: string;
   };
   setting: {
     one: string;

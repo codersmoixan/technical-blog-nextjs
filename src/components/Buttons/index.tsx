@@ -34,10 +34,14 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   contained: {
     backgroundColor: theme.colorPalette.button.main,
-    fontWeight: 700,
+    fontWeight: 400,
     '&.MuiButton-root:hover': {
       // backgroundColor: theme.colorPalette.button.hover,
     },
+    '&.Mui-disabled': {
+      backgroundColor: theme.colorPalette.button.disabled,
+      color: theme.colorPalette.button.default
+    }
   },
   textPrimary: {
     color: theme.palette.text.primary,
