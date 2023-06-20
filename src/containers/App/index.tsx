@@ -25,6 +25,7 @@ import PostAdd from "@mui/icons-material/PostAdd";
 import VerticalAlignTop from "@mui/icons-material/VerticalAlignTop";
 import React from "react";
 import {SuspendActions} from "components/SuspendButtons/types";
+import Login from "containers/Login";
 
 type GetLayout = (page: ReactNode) => JSX.Element;
 
@@ -97,6 +98,7 @@ function App({ Component, pageProps }: MyAppProps) {
       <motion.div style={{ scaleX }} className={classes.scrollProgress} />
       {getLayout(<Component {...pageProps} />)}
       <Snackbar />
+      <Login />
     </div>
   )
 }

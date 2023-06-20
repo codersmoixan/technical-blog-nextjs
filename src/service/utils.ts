@@ -14,7 +14,7 @@ export function requestHeader<T extends AxiosRequestHeaders>(option?: T): AxiosR
   return auth.type === "user"
     ? {
       ...defaultHeaders,
-      Authorization: `Bearer ${auth.token}`,
+      'x-token': auth.token,
     }
     : { ...defaultHeaders };
 }

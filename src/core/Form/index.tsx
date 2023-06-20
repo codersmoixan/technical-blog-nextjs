@@ -4,7 +4,7 @@ import type { FieldValues } from "react-hook-form/dist/types/fields";
 import type { SubmitErrorHandler, UseFormReturn, SubmitHandler } from "react-hook-form/dist/types/form";
 import type { FormProviderProps } from "react-hook-form/dist/types";
 
-interface FormProps {
+export interface FormProps {
   children?: React.ReactNode;
   onFinish?: SubmitHandler<FieldValues>;
   onError?: SubmitErrorHandler<FieldValues>;

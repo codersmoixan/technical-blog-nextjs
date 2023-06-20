@@ -11,7 +11,7 @@ function requestInterceptors(config: AxiosRequestConfig): AxiosRequestConfig {
 
 function responseInterceptors(config: AxiosResponse) {
   const { data, status } = config
-	if (status !== 200) {
+	if (status !== 200 || data.code !== 200) {
 		notify.warning(data.msg)
 	}
 
