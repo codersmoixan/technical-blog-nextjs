@@ -69,11 +69,14 @@ const useStyles = makeStyles((theme: Theme) => ({
 	buttons: {
 		display: 'flex',
 		justifyContent: 'space-between',
-		width: 150,
+		minWidth: 150,
 		'& .MuiButton-root': {
 			height: 30,
 			borderRadius: 4
-		}
+		},
+    '& .MuiButton-outlined': {
+      marginLeft: theme.spacing(2)
+    }
 	},
 	recommend: {
 		padding: theme.spacing(3),
@@ -140,16 +143,16 @@ function ArticleContent(props: ArticleContentProps) {
 	const history = useRouter()
 	const classes = useStyles(props)
 	const articleClasses = useArticleStyles()
-	const { observer } = useForm()
+	const { observer, clearValues } = useForm()
 	const { observer: fullObserver } = useForm()
-	const { comment, commentTotal } = useComment(article.id)
+	const { comment, commentTotal, submit, submitLoading } = useComment(article.id)
 
-	const handleSubmit = (options: any) => {
-		console.log(options)
-	}
-
-	const handleBottomSubmit = (options: any) => {
-		console.log(options)
+	const handleSubmitComment = async (options: any) => {
+    await submit({
+      content: options.content,
+      articleId: article.id
+    })
+    clearValues('content')
 	}
 
 	return (
@@ -193,10 +196,10 @@ function ArticleContent(props: ArticleContentProps) {
 			<Box className={classes.comment}>
 				<Box className="writing-board">
 					<Box className="avatar"></Box>
-					<Form observer={observer} className="form" onFinish={handleSubmit}>
-						<FormTextarea name="comment" placeholder="写下你的评论..." rules={{ required: '请输入你的评论' }} />
+					<Form observer={observer} className="form" onFinish={handleSubmitComment}>
+						<FormTextarea name="content" placeholder="写下你的评论..." rules={{ required: '请输入你的评论' }} />
 						<Box className={clsx(classes.buttons, 'buttons')}>
-							<Buttons type="submit" variant="contained">
+							<Buttons type="submit" variant="contained" loading={submitLoading}>
 								发布
 							</Buttons>
 							<Buttons variant="outlined">取消</Buttons>

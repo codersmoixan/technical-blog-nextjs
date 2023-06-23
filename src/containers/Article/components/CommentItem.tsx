@@ -12,6 +12,10 @@ import clsx from 'clsx'
 import Typography from '@mui/material/Typography'
 import Box from '@mui/material/Box'
 import If from 'components/Layout/If'
+import Buttons from "components/Buttons";
+import {KeyboardArrowDown} from "@mui/icons-material";
+import useGetReply from "containers/Article/hooks/useGetReply";
+import {useState} from "react";
 
 interface CommentItemProps {
 	comment: ArticleComment
@@ -52,7 +56,11 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 function CommentItem({ comment, ...other }: CommentItemProps) {
 	const classes = useStyles(other)
-	const { commentInfo, userInfo, replyInfos } = (comment ?? {}) as ArticleComment
+  const { getReplyList } = useGetReply()
+	const { commentInfo, userInfo, replyInfos: replyList } = (comment ?? {}) as ArticleComment
+
+  const [replyInfos, setReplyInfos] = useState(replyList)
+  const [page, setPage] = useState(1)
 
 	if (isEmpty(comment)) {
 		return null
@@ -60,7 +68,19 @@ function CommentItem({ comment, ...other }: CommentItemProps) {
 
 	const isEmptyAvatar = !userInfo.avatar
 
-  console.log(comment);
+  const handleGetReplyList = async () => {
+    const result = await getReplyList({
+      page,
+      pageSize: 10,
+      articleId: commentInfo.articleId,
+      replyCommentId: commentInfo.commentId
+    })
+
+    console.log(result, 12333);
+    setPage(page + 1)
+
+    setReplyInfos(value => page === 1 ? result.list : [...value, ...result.list])
+  }
 
   return (
 		<div className={classes.root}>
@@ -92,6 +112,16 @@ function CommentItem({ comment, ...other }: CommentItemProps) {
                   })}
 								/>
 							))}
+              <If factor={commentInfo.replyCount > 2 && replyInfos.length !== commentInfo.replyCount}>
+                <Box mt={2}>
+                  <Buttons space={false} onClick={handleGetReplyList}>
+                    <Typography color="inherit">
+                      查看更多回复
+                    </Typography>
+                    <KeyboardArrowDown width={12} height={12} />
+                  </Buttons>
+                </Box>
+              </If>
 						</div>
 					</If>
 				</Box>

@@ -35,9 +35,20 @@ export interface ArticleComment {
   userInfo: UserInfo
   replyInfos: ArticleReply[]
 }
-
 export interface ArticleCommentResult extends PageResult<ArticleComment>{}
+export interface SubmitCommentParams {
+  articleId: string
+  content: string
+}
 
 export interface ArticleInfo extends Article {
   content: string
 }
+
+export interface GetReplyParams {
+  page: number
+  pageSize: number
+  articleId: string
+  replyCommentId: string
+}
+export interface CommentReplyResult extends PageResult<any>{}

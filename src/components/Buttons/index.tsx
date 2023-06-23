@@ -82,6 +82,7 @@ function Buttons(props: ButtonsProps) {
       }}
       color="primary"
       variant={variant}
+      disabled={loading}
       {...other}
     >
       {loading && <CircularProgress color="inherit" size={16} className={classes.loading} />}
