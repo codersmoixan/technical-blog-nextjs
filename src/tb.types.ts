@@ -26,6 +26,7 @@ export interface UserInfo {
   avatar: string
   gender: number
   age: number
+  userId: string
 }
 
 export interface PageResult<T> {

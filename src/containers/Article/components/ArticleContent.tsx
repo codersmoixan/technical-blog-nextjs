@@ -155,7 +155,9 @@ function ArticleContent(props: ArticleContentProps) {
     clearValues('content')
 	}
 
-	return (
+  console.log(comment, '更新了吗');
+
+  return (
 		<Box className={clsx(className, classes.root)}>
 			<Box className={classes.article}>
 				<Box className={classes.header}>

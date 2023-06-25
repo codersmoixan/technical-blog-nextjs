@@ -8,7 +8,7 @@ const cyanTheme: ThemeOptions = {
       main: '#078DEE',
       default: '#FFFFFF',
       secondary: 'rgba(229 230, 232, 1)',
-      colorSecondary: '#d8dee3',
+      colorSecondary: '#f2f3f5',
       transparent: 'transparent',
       dark: '#131313',
       sullenGrey: '#33323e',

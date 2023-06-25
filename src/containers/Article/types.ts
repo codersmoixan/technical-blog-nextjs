@@ -1,24 +1,8 @@
 import type {PageResult, UserInfo} from "@/src/tb.types"
 import {Article} from "containers/Sharing/types";
 
-export interface ReplyInfo {
-  replyId: string
-  createdAt: string
-  id: number
-  replyCommentId: string
+export interface ArticleInfo extends Article {
   content: string
-  replyToReplyId: string
-  replyToUserId: string
-  replyUserId: string
-  liked: number
-  replyCount: number
-}
-
-export interface ArticleReply {
-  replyId: string
-  replyInfo: ReplyInfo
-  replyToUserInfo: UserInfo
-  replyUserInfo: UserInfo
 }
 
 export interface ArticleComment {
@@ -41,10 +25,27 @@ export interface SubmitCommentParams {
   content: string
 }
 
-export interface ArticleInfo extends Article {
+export interface ReplyInfo {
+  replyId: string
+  articleId: string
+  createdAt: string
+  id: number
   content: string
+  replyToReplyId: string
+  replyToUserId: string
+  replyUserId: string
+  liked: number
+  replyCount: number
+  replyCommentId: string
+  commentId?: string
 }
-
+export interface ArticleReply {
+  replyId: string
+  replyInfo: ReplyInfo
+  replyToUserInfo: UserInfo
+  replyUserInfo: UserInfo
+  parentReply?: ReplyInfo
+}
 export interface GetReplyParams {
   page: number
   pageSize: number
@@ -52,3 +53,9 @@ export interface GetReplyParams {
   replyCommentId: string
 }
 export interface CommentReplyResult extends PageResult<any>{}
+export interface SubmitReplyParams {
+  articleId: string
+  content: string
+  replyCommentId: string
+  replyToReplyId?: string
+}

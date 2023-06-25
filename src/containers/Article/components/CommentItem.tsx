@@ -7,15 +7,16 @@ import { makeStyles } from '@mui/styles'
 import { Theme } from '@mui/material'
 import type { ArticleComment, ReplyInfo } from 'containers/Article/types'
 import isEmpty from 'lodash/isEmpty'
-import ReplyDetail from 'containers/Article/components/ReplyDetail'
+import ReplyDetail, { SubmitAfterEvent } from 'containers/Article/components/ReplyDetail'
 import clsx from 'clsx'
 import Typography from '@mui/material/Typography'
 import Box from '@mui/material/Box'
 import If from 'components/Layout/If'
-import Buttons from "components/Buttons";
-import {KeyboardArrowDown} from "@mui/icons-material";
-import useGetReply from "containers/Article/hooks/useGetReply";
-import {useState} from "react";
+import Buttons from 'components/Buttons'
+import { KeyboardArrowDown } from '@mui/icons-material'
+import useReply from 'containers/Article/hooks/useReply'
+import { ARTICLE_QUERY_KEY } from 'containers/Article/queries'
+import { useQueryClient } from '@tanstack/react-query'
 
 interface CommentItemProps {
 	comment: ArticleComment
@@ -47,42 +48,34 @@ const useStyles = makeStyles((theme: Theme) => ({
 		height: 30
 	},
 	detail: {
-    marginTop: theme.spacing(2),
-    '&.first': {
-      marginTop: 0
-    }
-  }
+		marginTop: theme.spacing(2),
+		'&.first': {
+			marginTop: 0
+		}
+	}
 }))
 
 function CommentItem({ comment, ...other }: CommentItemProps) {
 	const classes = useStyles(other)
-  const { getReplyList } = useGetReply()
-	const { commentInfo, userInfo, replyInfos: replyList } = (comment ?? {}) as ArticleComment
+	const queryClient = useQueryClient()
+  const { getPageReplyList, replyList } = useReply(comment)
+	const { commentInfo, userInfo } = (comment ?? {}) as ArticleComment
 
-  const [replyInfos, setReplyInfos] = useState(replyList)
-  const [page, setPage] = useState(1)
-
-	if (isEmpty(comment)) {
+  if (isEmpty(comment)) {
 		return null
 	}
 
 	const isEmptyAvatar = !userInfo.avatar
 
-  const handleGetReplyList = async () => {
-    const result = await getReplyList({
-      page,
-      pageSize: 10,
-      articleId: commentInfo.articleId,
-      replyCommentId: commentInfo.commentId
-    })
+	const handleGetReplyList = () => getPageReplyList()
 
-    console.log(result, 12333);
-    setPage(page + 1)
+	const handleSubmit = async ({ type }: SubmitAfterEvent) => {
+		if (commentInfo.replyCount < 2) {
+			await queryClient.fetchQuery([ARTICLE_QUERY_KEY.GET_COMMENT])
+		}
+	}
 
-    setReplyInfos(value => page === 1 ? result.list : [...value, ...result.list])
-  }
-
-  return (
+	return (
 		<div className={classes.root}>
 			<Box display="flex">
 				<div
@@ -97,31 +90,33 @@ function CommentItem({ comment, ...other }: CommentItemProps) {
 					) : null}
 				</div>
 				<Box flex={1}>
-					<ReplyDetail userInfo={userInfo} replyInfo={commentInfo as any as ReplyInfo} />
-					<If factor={!isEmpty(replyInfos)}>
+					<ReplyDetail type="comment" userInfo={userInfo} replyInfo={commentInfo as any as ReplyInfo} onSubmitAfter={handleSubmit} />
+					<If factor={!isEmpty(replyList)}>
 						<div className={classes.reply}>
-							{replyInfos.map((reply, index) => (
+							{replyList.map((reply, index) => (
 								<ReplyDetail
 									key={reply.replyId}
 									userInfo={reply.replyUserInfo}
 									replyInfo={reply.replyInfo}
+                  parentReply={reply.parentReply}
+                  replyToUserInfo={reply.replyToUserInfo}
 									isShowAvatar
 									classes={{ avatar: classes.replyAvatar }}
-                  className={clsx(classes.detail, {
-                    first: index === 0
-                  })}
+									className={clsx(classes.detail, {
+										first: index === 0
+									})}
+									onSubmitAfter={handleSubmit}
+                  type="reply"
 								/>
 							))}
-              <If factor={commentInfo.replyCount > 2 && replyInfos.length !== commentInfo.replyCount}>
-                <Box mt={2}>
-                  <Buttons space={false} onClick={handleGetReplyList}>
-                    <Typography color="inherit">
-                      查看更多回复
-                    </Typography>
-                    <KeyboardArrowDown width={12} height={12} />
-                  </Buttons>
-                </Box>
-              </If>
+							<If factor={commentInfo.replyCount > 2 && replyList.length !== commentInfo.replyCount}>
+								<Box mt={2}>
+									<Buttons space={false} onClick={handleGetReplyList}>
+										<Typography color="inherit">查看更多回复</Typography>
+										<KeyboardArrowDown width={12} height={12} />
+									</Buttons>
+								</Box>
+							</If>
 						</div>
 					</If>
 				</Box>
