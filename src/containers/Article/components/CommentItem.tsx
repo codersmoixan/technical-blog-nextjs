@@ -15,8 +15,9 @@ import If from 'components/Layout/If'
 import Buttons from 'components/Buttons'
 import { KeyboardArrowDown } from '@mui/icons-material'
 import useReply from 'containers/Article/hooks/useReply'
-import { ARTICLE_QUERY_KEY } from 'containers/Article/queries'
-import { useQueryClient } from '@tanstack/react-query'
+import { ArticleReply } from 'containers/Article/types'
+import { useState } from 'react'
+import useDeepCompareEffect from 'hooks/effect/useDeepCompareEffect'
 
 interface CommentItemProps {
 	comment: ArticleComment
@@ -57,22 +58,27 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 function CommentItem({ comment, ...other }: CommentItemProps) {
 	const classes = useStyles(other)
-	const queryClient = useQueryClient()
-  const { getPageReplyList, replyList } = useReply(comment)
+	const { getPageReplyList, setReplyList, replyList } = useReply(comment)
+
+	const [replyCount, setReplyCount] = useState(0)
+
 	const { commentInfo, userInfo } = (comment ?? {}) as ArticleComment
 
-  if (isEmpty(comment)) {
+	useDeepCompareEffect(() => {
+		if (!isEmpty(commentInfo)) {
+			setReplyCount(commentInfo.replyCount)
+		}
+	}, [commentInfo])
+
+	if (isEmpty(comment)) {
 		return null
 	}
 
 	const isEmptyAvatar = !userInfo.avatar
 
-	const handleGetReplyList = () => getPageReplyList()
-
-	const handleSubmit = async ({ type }: SubmitAfterEvent) => {
-		if (commentInfo.replyCount < 2) {
-			await queryClient.fetchQuery([ARTICLE_QUERY_KEY.GET_COMMENT])
-		}
+	const handleSubmit = async ({ result }: SubmitAfterEvent) => {
+		setReplyList((value: ArticleReply[]) => [...value, result])
+    setReplyCount(value => value + 1)
 	}
 
 	return (
@@ -90,7 +96,13 @@ function CommentItem({ comment, ...other }: CommentItemProps) {
 					) : null}
 				</div>
 				<Box flex={1}>
-					<ReplyDetail type="comment" userInfo={userInfo} replyInfo={commentInfo as any as ReplyInfo} onSubmitAfter={handleSubmit} />
+					<ReplyDetail
+						type="comment"
+						userInfo={userInfo}
+						replyInfo={commentInfo as any as ReplyInfo}
+						onSubmitAfter={handleSubmit}
+						replyCount={replyCount}
+					/>
 					<If factor={!isEmpty(replyList)}>
 						<div className={classes.reply}>
 							{replyList.map((reply, index) => (
@@ -98,20 +110,21 @@ function CommentItem({ comment, ...other }: CommentItemProps) {
 									key={reply.replyId}
 									userInfo={reply.replyUserInfo}
 									replyInfo={reply.replyInfo}
-                  parentReply={reply.parentReply}
-                  replyToUserInfo={reply.replyToUserInfo}
+									parentReply={reply.parentReply}
+									replyToUserInfo={reply.replyToUserInfo}
 									isShowAvatar
 									classes={{ avatar: classes.replyAvatar }}
 									className={clsx(classes.detail, {
 										first: index === 0
 									})}
 									onSubmitAfter={handleSubmit}
-                  type="reply"
+									type="reply"
+                  isAuthor={reply.isAuthor}
 								/>
 							))}
-							<If factor={commentInfo.replyCount > 2 && replyList.length !== commentInfo.replyCount}>
+							<If factor={commentInfo.replyCount > 2 && replyList.length < commentInfo.replyCount}>
 								<Box mt={2}>
-									<Buttons space={false} onClick={handleGetReplyList}>
+									<Buttons space={false} onClick={getPageReplyList}>
 										<Typography color="inherit">查看更多回复</Typography>
 										<KeyboardArrowDown width={12} height={12} />
 									</Buttons>

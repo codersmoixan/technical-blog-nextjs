@@ -3,6 +3,7 @@ import {Article} from "containers/Sharing/types";
 
 export interface ArticleInfo extends Article {
   content: string
+  authorInfo: UserInfo
 }
 
 export interface ArticleComment {
@@ -40,6 +41,7 @@ export interface ReplyInfo {
   commentId?: string
 }
 export interface ArticleReply {
+  isAuthor: boolean
   replyId: string
   replyInfo: ReplyInfo
   replyToUserInfo: UserInfo

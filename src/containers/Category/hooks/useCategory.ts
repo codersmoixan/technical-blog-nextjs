@@ -53,7 +53,7 @@ const useCategory = (): UseCategoryReturns => {
   }
 
   return {
-    category: get(categoryData, 'data.data', []).map((item: any) => ({ ...item, label: item.categoryName })),
+    category: categoryData?.data,
     loading: getLoading || addLoading || updateLoading || deleteLoading,
     add,
     update,

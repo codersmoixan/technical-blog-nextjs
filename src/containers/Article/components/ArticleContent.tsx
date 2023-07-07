@@ -15,6 +15,9 @@ import useArticleStyles from 'containers/Article/useArticleStyles'
 import useComment from 'containers/Article/hooks/useComment'
 import type { ArticleInfo } from 'containers/Article/types'
 import Comment from "containers/Article/components/Comment";
+import Prism from 'assets/prism/prism'
+import useMount from "hooks/effect/useMount";
+import {useRef} from "react";
 
 interface ArticleContentProps extends BoxProps {
 	article: ArticleInfo
@@ -144,18 +147,23 @@ function ArticleContent(props: ArticleContentProps) {
 	const classes = useStyles(props)
 	const articleClasses = useArticleStyles()
 	const { observer, clearValues } = useForm()
-	const { observer: fullObserver } = useForm()
-	const { comment, commentTotal, submit, submitLoading } = useComment(article.id)
+	const { comment, commentTotal, submit, submitLoading } = useComment(article.articleId)
 
-	const handleSubmitComment = async (options: any) => {
+  const contentRef = useRef(null)
+
+  const articleContentLength = article.content.replace(/<[^>]*>/g, '').replace(/style="[^"]*"/g, '').trim();
+
+  useMount(() => {
+    Prism.highlightAllUnder(contentRef.current)
+  })
+
+  const handleSubmitComment = async (options: any) => {
     await submit({
       content: options.content,
-      articleId: article.id
+      articleId: article.articleId
     })
     clearValues('content')
 	}
-
-  console.log(comment, '更新了吗');
 
   return (
 		<Box className={clsx(className, classes.root)}>
@@ -164,14 +172,15 @@ function ArticleContent(props: ArticleContentProps) {
 					<Typography variant="h2">{article.articleName}</Typography>
 					<UserInfo className={classes.articleInfo}>
 						<Typography variant="body1" fontWeight={700} slot="main">
-							{article.author ?? 'Smoixan'}
+							{article.authorInfo?.nickName ?? ''}
 						</Typography>
 						<Typography variant="caption" color="textSecondary" slot="description">
-							{dayjs(article.updatedAt).format('YYYY-MM-DD HH:mm:ss')} 字数2,770 阅读2,306
+							{dayjs(article.updatedAt).format('YYYY-MM-DD HH:mm:ss')} 字数{articleContentLength.length} 阅读{article.views}
 						</Typography>
 					</UserInfo>
 				</Box>
 				<Box
+          ref={contentRef}
 					component="aside"
 					className={clsx(classes.content, articleClasses.root)}
 					dangerouslySetInnerHTML={{ __html: article.content }}

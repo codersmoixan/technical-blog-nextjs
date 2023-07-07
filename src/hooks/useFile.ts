@@ -6,7 +6,7 @@ const useFile = () => {
     formData.append('file', files[0]);
     const res = await uploadFileApi(formData)
 
-    return res.data.file
+    return res.file
   }
 
   return {

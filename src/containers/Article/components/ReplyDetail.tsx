@@ -12,7 +12,7 @@ import Box from '@mui/material/Box'
 import { makeStyles } from '@mui/styles'
 import type { Theme } from '@mui/material'
 import type { UserInfo } from '@/src/tb.types'
-import type { CommentReplyResult, ReplyInfo } from 'containers/Article/types'
+import type {ArticleReply, CommentReplyResult, ReplyInfo} from 'containers/Article/types'
 import If from 'components/Layout/If'
 import { useState } from 'react'
 import Buttons from 'components/Buttons'
@@ -21,23 +21,26 @@ import FormTextarea from 'components/Form/FormTextarea'
 import Form from 'core/Form'
 import useForm from 'core/Form/hooks/useForm'
 import useReply from 'containers/Article/hooks/useReply'
-import {useSelector} from "react-redux";
-import {selectOpenLogin} from "containers/App/slice";
-import isEmpty from "lodash/isEmpty";
+import { useSelector } from 'react-redux'
+import { selectOpenLogin } from 'containers/App/slice'
+import isEmpty from 'lodash/isEmpty'
 
-export interface SubmitAfterEvent extends CommentReplyResult {
+export interface SubmitAfterEvent {
+	result: CommentReplyResult
 	type?: 'comment' | 'reply'
 }
 
 interface ReplyDetailProps {
 	userInfo: UserInfo
 	replyInfo: ReplyInfo
-  parentReply?: ReplyInfo
-  replyToUserInfo?: UserInfo
+	parentReply?: ReplyInfo
+	replyToUserInfo?: UserInfo
 	isShowAvatar?: boolean
 	classes?: Partial<ReturnType<typeof useStyles>>
 	className?: string
 	type?: 'comment' | 'reply'
+  replyCount?: number
+  isAuthor?: boolean
 	onSubmitAfter?: (data: SubmitAfterEvent) => void
 }
 
@@ -66,6 +69,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 			marginTop: theme.spacing(1),
 			'& .btn': {
 				padding: 0,
+				marginRight: theme.spacing(3),
 				height: 'auto',
 				minWidth: 'auto',
 				'&.active .data-item': {
@@ -75,7 +79,6 @@ const useStyles = makeStyles((theme: Theme) => ({
 			'& .data-item': {
 				display: 'flex',
 				alignItems: 'center',
-				marginRight: theme.spacing(3),
 				fontSize: 12,
 				cursor: 'pointer',
 				'&:hover': {
@@ -87,19 +90,19 @@ const useStyles = makeStyles((theme: Theme) => ({
 			}
 		}
 	},
-  nickname: {
-    display: 'flex',
-  },
-  parentNickname: {
-    display: 'flex'
-  },
-  parentReply: {
-    marginTop: theme.spacing(1),
-    padding: theme.spacing(1),
-    border: `1px solid ${theme.colorPalette.primary.secondary}`,
-    borderRadius: 4,
-    backgroundColor: theme.colorPalette.primary.colorSecondary
-  },
+	nickname: {
+		display: 'flex'
+	},
+	parentNickname: {
+		display: 'flex'
+	},
+	parentReply: {
+		marginTop: theme.spacing(1),
+		padding: theme.spacing(1),
+		border: `1px solid ${theme.colorPalette.primary.secondary}`,
+		borderRadius: 4,
+		backgroundColor: theme.colorPalette.primary.colorSecondary
+	},
 	submit: {
 		width: 92,
 		height: 36,
@@ -107,11 +110,25 @@ const useStyles = makeStyles((theme: Theme) => ({
 	}
 }))
 
-function ReplyDetail({ userInfo, replyInfo, parentReply, replyToUserInfo, isShowAvatar, className, onSubmitAfter, type, ...other }: ReplyDetailProps = {} as ReplyDetailProps) {
+function ReplyDetail(
+	{
+    isAuthor,
+		userInfo,
+		replyInfo,
+		parentReply,
+		replyToUserInfo,
+		isShowAvatar,
+		className,
+		onSubmitAfter,
+		type,
+    replyCount,
+		...other
+	}: ReplyDetailProps = {} as ReplyDetailProps
+) {
 	const classes = useStyles(other)
 	const { observer, watch, clearValues } = useForm()
 	const { submit: submitReply, submitLoading } = useReply()
-  const isOpenDialog = useSelector(selectOpenLogin)
+	const isOpenDialog = useSelector(selectOpenLogin)
 
 	const [openReply, setOpenReply] = useState(false)
 
@@ -123,9 +140,9 @@ function ReplyDetail({ userInfo, replyInfo, parentReply, replyToUserInfo, isShow
 	}
 
 	const handleClickAway = () => {
-    if (isOpenDialog) {
-      return
-    }
+		if (isOpenDialog) {
+			return
+		}
 		setOpenReply(false)
 	}
 
@@ -134,15 +151,17 @@ function ReplyDetail({ userInfo, replyInfo, parentReply, replyToUserInfo, isShow
 			articleId: replyInfo.articleId,
 			replyCommentId: replyInfo.replyCommentId ?? replyInfo.commentId,
 			content: options.content,
-			...(type === 'reply' ? {
-        replyToReplyId: replyInfo.replyId,
-        replyToUserId: userInfo.userId
-      } : {})
+			...(type === 'reply'
+				? {
+						replyToReplyId: replyInfo.replyId,
+						replyToUserId: userInfo.userId
+				  }
+				: {})
 		})
 		clearValues('content')
 		setOpenReply(false)
 		onSubmitAfter?.({
-			...result,
+			result,
 			type
 		})
 	}
@@ -164,24 +183,29 @@ function ReplyDetail({ userInfo, replyInfo, parentReply, replyToUserInfo, isShow
 			</If>
 			<div className={classes.content}>
 				<div className={classes.nickname}>
-					<Typography fontWeight={500}>{userInfo?.nickName}</Typography>
-          <If factor={!isEmpty(replyToUserInfo)}>
-            <div className={classes.parentNickname}>
-              <Typography color="textSecondary" mx={1}>回复</Typography>
-              <Typography fontWeight={500}>{replyToUserInfo?.nickName}</Typography>
-            </div>
-          </If>
+					<Box display="flex">
+            <Typography fontWeight={500}>{userInfo?.nickName}</Typography>
+            <If factor={!!isAuthor}>
+              <Typography ml={1} color="textSecondary">(作者)</Typography>
+            </If>
+          </Box>
+					<If factor={!isEmpty(replyToUserInfo)}>
+						<div className={classes.parentNickname}>
+							<Typography color="textSecondary" mx={1}>
+								回复
+							</Typography>
+							<Typography fontWeight={500}>{replyToUserInfo?.nickName}</Typography>
+						</div>
+					</If>
 				</div>
 				<div className="content">
 					<Typography>{replyInfo?.content}</Typography>
 				</div>
-        <If factor={!isEmpty(parentReply)}>
-          <div className={classes.parentReply}>
-            <Typography color="textSecondary">
-              &#34;{parentReply?.content}&#34;
-            </Typography>
-          </div>
-        </If>
+				<If factor={!isEmpty(parentReply)}>
+					<div className={classes.parentReply}>
+						<Typography color="textSecondary">&#34;{parentReply?.content}&#34;</Typography>
+					</div>
+				</If>
 				<div className="data">
 					<Buttons className="btn">
 						<Typography color="textSecondary" className="data-item">
@@ -197,7 +221,7 @@ function ReplyDetail({ userInfo, replyInfo, parentReply, replyToUserInfo, isShow
 					>
 						<Typography color="textSecondary" className="data-item">
 							{openReply ? <FilledCommentIcon /> : <CommentIcon />}
-							{openReply ? '取消回复' : replyInfo?.replyCount ? replyInfo?.replyCount : '回复'}
+							{openReply ? '取消回复' : replyCount || '回复'}
 						</Typography>
 					</Buttons>
 				</div>

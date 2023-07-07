@@ -83,7 +83,7 @@ function Publish({ open = false, onClose, onPublish }: PublishProps) {
 	const { tags } = useTag()
   const { uploadFile } = useFile()
 
-	const [cover, setCover] = useState({})
+  const [cover, setCover] = useState({})
 
 	const resetForm = () => {
 		observer.reset()
@@ -118,7 +118,7 @@ function Publish({ open = false, onClose, onPublish }: PublishProps) {
 							分类:{' '}
 						</Grid>
 						<Grid item xs={9} sm={10}>
-							<FormChipSelect name="category" options={category} rules={{ required: '请选择文章分类' }} />
+							<FormChipSelect name="category" options={category} rowKey="categoryName" rules={{ required: '请选择文章分类' }} />
 						</Grid>
 					</Grid>
 					<Grid container spacing={1} mt={2}>

@@ -22,7 +22,8 @@ export interface Article {
   category: string
   description: string
   favors: number
-  id: string
+  id: number
+  articleId: string
   shares: number
   status: number
   views: number

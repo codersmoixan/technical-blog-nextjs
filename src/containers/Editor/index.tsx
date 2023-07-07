@@ -180,6 +180,9 @@ function Editor() {
 	}
 
 	const handlePublish = async ({ cover, tags, ...other }: FormOptions) => {
+    console.log(html)
+    return
+
 		const result = await addSharing({
 			...other,
       tags: tags.split(','),

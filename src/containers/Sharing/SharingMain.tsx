@@ -45,7 +45,7 @@ function SharingMain() {
 	) : (
 		<div>
 			{articles.map(article => (
-				<div key={article.id} className={classes.item} onClick={() => handleClick(article.id)}>
+				<div key={article.id} className={classes.item} onClick={() => handleClick(article.articleId)}>
           <ArticleFullRow article={article} />
         </div>
 			))}

@@ -10,7 +10,6 @@ import type { AppProps } from 'next/app'
 
 import '../assets/common.css'
 import '../assets/prism/prism.css'
-import '../assets/prism/prism'
 
 export default function App(props: AppProps) {
 	const [queryClient] = useState(() => new QueryClient())

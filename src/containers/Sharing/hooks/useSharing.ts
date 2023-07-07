@@ -8,7 +8,7 @@ export interface UseSharingProps extends PageParams {}
 export interface UseSharingReturn {
   articles: Article[]
   loading: boolean
-  addSharing: (data: AddSharingParam) => void
+  addSharing: (data: AddSharingParam) => any
 }
 
 const useSharing = (props?: UseSharingProps): UseSharingReturn => {
@@ -25,7 +25,7 @@ const useSharing = (props?: UseSharingProps): UseSharingReturn => {
     const result = await add(data)
 
     notify(result.msg)
-    return true
+    return result
   }
 
   return {
