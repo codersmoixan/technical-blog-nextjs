@@ -10,9 +10,11 @@ import type {
   ToolbarSetterMode,
   ToolbarSetterLayout
 } from "components/LayoutToolbar/types"
+import {useMediaQuery} from "@mui/material";
 
 const useToolbar = () => {
   const dispatch = useDispatch()
+  const darkMode = useMediaQuery('(prefers-color-scheme: dark)')
   const themeSetting = useSelector(selectToolbarSetting, shallowEqual) as ToolbarSetter
   const { sendBroadcast, listenBroadcast } = useBroadcastChannel()
   const [setting, setSetting] = useState<ToolbarSetter>({
@@ -36,9 +38,13 @@ const useToolbar = () => {
 
   useDeepCompareEffect(() => {
     if (!isEmpty(themeSetting)) {
-      setSetting({ ...themeSetting })
+      if (themeSetting.mode === 'system') {
+        setSetting({ ...themeSetting, mode: darkMode ? 'dark' : 'light' })
+      } else {
+        setSetting({ ...themeSetting })
+      }
     }
-  }, [themeSetting])
+  }, [themeSetting, darkMode])
 
   const updateSetting = (option: ToolbarSetter) => {
     dispatch(updateToolbarSetter(option))
@@ -68,6 +74,7 @@ const useToolbar = () => {
   }
 
   return {
+    storeMode: themeSetting.mode,
     mode: setting.mode,
     presets: setting.presets,
     layout: setting.layout,

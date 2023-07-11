@@ -33,6 +33,8 @@ function ThemeProvider({ children }: ThemeProviderProps) {
     return mode === 'dark' ? merge(themeOptions, darkTheme) : themeOptions
   }, [mode, presets])
 
+  console.log(theme, 133);
+
   return (
     <MuiThemeProvider theme={theme}>{children}</MuiThemeProvider>
   )
