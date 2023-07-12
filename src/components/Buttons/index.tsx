@@ -43,12 +43,14 @@ const useStyles = makeStyles((theme: Theme) => ({
       color: theme.colorPalette.button.default
     }
   },
-  textPrimary: {
-    color: theme.palette.text.primary,
+  text: {
     '&.MuiButton-root:hover': {
       backgroundColor: 'transparent',
       color: theme.colorPalette.button.hover,
     },
+  },
+  textPrimary: {
+    color: theme.palette.text.primary,
   },
   emptySpace: {
     '&.MuiButtonBase-root': {
@@ -77,6 +79,7 @@ function Buttons(props: ButtonsProps) {
       })}
       classes={{
         root: classes.root,
+        text: classes.text,
         textPrimary: classes.textPrimary,
         contained: classes.contained,
       }}

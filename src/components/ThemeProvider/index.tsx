@@ -10,6 +10,7 @@ import blueTheme from "@/src/theme/blueTheme";
 import redTheme from "@/src/theme/redTheme";
 import darkTheme from "@/src/theme/darkTheme"
 import type { ReactNode } from "react";
+import isEmpty from "lodash/isEmpty";
 
 interface ThemeProviderProps {
   children: ReactNode
@@ -32,8 +33,6 @@ function ThemeProvider({ children }: ThemeProviderProps) {
 
     return mode === 'dark' ? merge(themeOptions, darkTheme) : themeOptions
   }, [mode, presets])
-
-  console.log(theme, 133);
 
   return (
     <MuiThemeProvider theme={theme}>{children}</MuiThemeProvider>

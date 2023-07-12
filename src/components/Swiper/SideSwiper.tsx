@@ -5,13 +5,14 @@
 
 import Box, { BoxProps } from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
-import makeStyles, { Theme } from 'core/makeStyles'
 import VariantList from 'components/Animation/Variant/VariantList'
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft'
 import ChevronRightIcon from '@mui/icons-material/ChevronRight'
 import Buttons from 'components/Buttons'
 import useSideSwiper from 'components/Swiper/hooks/useSideSwiper'
 import type { ReactNode } from 'react'
+import { makeStyles } from '@mui/styles'
+import type { Theme } from '@mui/material'
 
 export interface SideSwiperProps extends Omit<BoxProps, 'children'> {
 	data: any[]
@@ -20,8 +21,10 @@ export interface SideSwiperProps extends Omit<BoxProps, 'children'> {
 	triggerScroll?: boolean
 }
 
-const useStyles = makeStyles(
-	(theme: Theme) => ({
+const useStyles = makeStyles((theme: Theme) => {
+	const isDark = theme.palette.mode === 'dark'
+
+	return {
 		root: {},
 		actions: {
 			display: 'flex',
@@ -37,10 +40,10 @@ const useStyles = makeStyles(
 			cursor: 'pointer'
 		},
 		banner: {
-      padding: theme.spacing(2),
+			padding: theme.spacing(2),
 			overflowX: 'clip',
 			[theme.breakpoints.down('md')]: {
-				overflowX: 'auto',
+				overflowX: 'auto'
 			}
 		},
 		container: {
@@ -53,16 +56,25 @@ const useStyles = makeStyles(
 		prevBtn: {
 			'&.Mui-disabled.MuiButton-textPrimary': {
 				color: theme.colorPalette.text.disabled
-			}
+			},
+			...(isDark
+				? {
+						color: theme.colorPalette.text.default
+				  }
+				: {})
 		},
 		nextBtn: {
 			'&.Mui-disabled.MuiButton-textPrimary': {
 				color: theme.colorPalette.text.disabled
-			}
+			},
+			...(isDark
+				? {
+						color: theme.colorPalette.text.default
+				  }
+				: {})
 		}
-	}),
-	'SideSwiper'
-)
+	}
+})
 
 function SideSwiper(props: SideSwiperProps) {
 	const { data, title, triggerScroll, children, classes: propClasses, ...other } = props

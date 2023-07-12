@@ -27,8 +27,6 @@ function Comment({ list = [], ...other }: CommentProps) {
     setValue('Index')
   }, [])
 
-  console.log(list, 22);
-
   return (
     <div className={classes.root}>
       {list.map(comment => (

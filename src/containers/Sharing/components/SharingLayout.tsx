@@ -6,7 +6,6 @@
 import React, { useRef, ReactElement } from 'react'
 import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
-import makeStyles, { Theme } from "core/makeStyles";
 import { useTheme } from '@mui/material/styles'
 import ArrowBack from '@mui/icons-material/ArrowBack'
 import MediaQuery from 'core/MediaQuery'
@@ -34,6 +33,8 @@ import SpeedDialPopupLayer from 'containers/App/components/SpeedDialPopupLayer'
 import ThemeSetter from 'components/LayoutToolbar/ThemeSetter'
 import FullScreen from 'components/LayoutToolbar/FullScreen'
 import PageLayout from 'containers/Sharing/components/PageLayout'
+import { makeStyles } from '@mui/styles'
+import type { Theme } from '@mui/material'
 
 interface SharingRootProps {
 	children: ReactElement | ReactElement[]
@@ -41,76 +42,80 @@ interface SharingRootProps {
 	classes?: Partial<ReturnType<typeof useStyles>>
 }
 
-const useStyles = makeStyles((theme: Theme) => ({
-	...theme.styles,
-	root: {
-		overflow: 'initial'
-	},
-	banner: {
-		alignItems: 'flex-start'
-	},
-	content: {
-		[theme.breakpoints.up('md')]: {
-			display: 'flex',
-			marginTop: theme.spacing(8)
-		}
-	},
-	main: {
-		flex: 1,
-		[theme.breakpoints.up('md')]: {
-			padding: theme.spacing(3, 3),
-			width: 'calc(100% - 253px)',
-			boxSizing: 'border-box',
-      backgroundColor: theme.colorPalette.primary.default,
-      borderRadius: 4
-		}
-	},
-	search: {
-		[theme.breakpoints.down('md')]: {
-			marginTop: theme.spacing(3)
-		}
-	},
-	formText: {
-		width: '100%',
-		'& input.MuiInputBase-input': {
-			height: 58
-		}
-	},
-	formTextIcon: {
-		color: theme.palette.primary.main
-	},
-	back: {
-		position: 'absolute',
-		bottom: 0,
-		'& .MuiButton-root': {
-			color: theme.colorPalette.primary.default,
-			display: 'flex',
-			alignItems: 'center',
-			justifyContent: 'center',
-			width: 185,
-			height: 45,
-			backgroundColor: theme.palette.primary.main,
-			borderRadius: '4px 4px 0 0',
-			boxShadow: 'none',
-			'&:hover': {
-				boxShadow: 'none'
-			},
-			'& svg': {
-				marginRight: theme.spacing(1),
-				fontSize: 14
+const useStyles = makeStyles((theme: Theme) => {
+	const isDark = theme.palette.mode === 'dark'
+
+	return {
+		...theme.styles,
+		root: {
+			overflow: 'initial'
+		},
+		banner: {
+			alignItems: 'flex-start'
+		},
+		content: {
+			[theme.breakpoints.up('md')]: {
+				display: 'flex',
+				marginTop: theme.spacing(8)
 			}
+		},
+		main: {
+			flex: 1,
+			[theme.breakpoints.up('md')]: {
+				padding: theme.spacing(3, 3),
+				width: 'calc(100% - 253px)',
+				boxSizing: 'border-box',
+				backgroundColor: isDark ? 'rgba(145, 158, 171, .08)' : theme.colorPalette.primary.default,
+				borderRadius: 4
+			}
+		},
+		search: {
+			[theme.breakpoints.down('md')]: {
+				marginTop: theme.spacing(3)
+			}
+		},
+		formText: {
+			width: '100%',
+			'& input.MuiInputBase-input': {
+				height: 58
+			}
+		},
+		formTextIcon: {
+			color: theme.palette.primary.main
+		},
+		back: {
+			position: 'absolute',
+			bottom: 0,
+			'& .MuiButton-root': {
+				color: theme.colorPalette.primary.default,
+				display: 'flex',
+				alignItems: 'center',
+				justifyContent: 'center',
+				width: 185,
+				height: 45,
+				backgroundColor: theme.palette.primary.main,
+				borderRadius: '4px 4px 0 0',
+				boxShadow: 'none',
+				'&:hover': {
+					boxShadow: 'none'
+				},
+				'& svg': {
+					marginRight: theme.spacing(1),
+					fontSize: 14
+				}
+			}
+		},
+		catalog: {
+			position: 'sticky',
+			top: 72
+		},
+		menu: {
+			padding: theme.spacing(1),
+			backgroundColor: isDark ? 'rgba(145, 158, 171, .08)' : theme.colorPalette.primary.default,
+			borderRadius: 4
 		}
-	},
-	catalog: {
-		position: 'sticky',
-		top: 72,
-	},
-  menu: {
-    padding: theme.spacing(1),
-    backgroundColor: theme.colorPalette.primary.default,
-    borderRadius: 4
-  }
-}), 'SharingLayout')
+	}
+})
 
 const actions: SuspendActions = [
 	{ id: 'setting', icon: <ThemeSettingIcon />, name: '主题设置' },

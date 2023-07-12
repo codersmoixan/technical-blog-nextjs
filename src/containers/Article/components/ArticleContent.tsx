@@ -18,131 +18,145 @@ import Comment from "containers/Article/components/Comment";
 import Prism from 'assets/prism/prism'
 import useMount from "hooks/effect/useMount";
 import {useRef} from "react";
+import {KeyboardArrowDown} from "@mui/icons-material";
+import {useTheme} from "@mui/material/styles";
 
 interface ArticleContentProps extends BoxProps {
 	article: ArticleInfo
 }
 
-const useStyles = makeStyles((theme: Theme) => ({
-	root: {},
-	article: {
-		padding: theme.spacing(3),
-		borderRadius: 6,
-		backgroundColor: theme.colorPalette.background.main,
-		[theme.breakpoints.down('md')]: {
-			padding: theme.spacing(2)
-		}
-	},
-	header: {},
-	content: {
-		padding: theme.spacing(2, 0, 0)
-	},
-	articleInfo: {
-		marginTop: theme.spacing(1)
-	},
-	comment: {
-		padding: theme.spacing(3),
-		marginTop: theme.spacing(2),
-		borderRadius: 6,
-		backgroundColor: theme.colorPalette.background.main,
-		[theme.breakpoints.down('md')]: {
-			padding: theme.spacing(2)
-		},
-		'& .writing-board': {
-			display: 'flex',
-			marginBottom: theme.spacing(4),
-			'& .avatar': {
-				marginRight: theme.spacing(2),
-				width: 40,
-				height: 40,
-				borderRadius: '50%',
-				backgroundColor: theme.palette.primary.main
-			},
-			'& .form': {
-				display: 'flex',
-				flexDirection: 'column',
-				alignItems: 'flex-end',
-				flex: 1,
-				'& .buttons': {
-					marginTop: theme.spacing(2)
-				}
-			}
-		}
-	},
-	buttons: {
-		display: 'flex',
-		justifyContent: 'space-between',
-		minWidth: 150,
-		'& .MuiButton-root': {
-			height: 30,
-			borderRadius: 4
-		},
-    '& .MuiButton-outlined': {
-      marginLeft: theme.spacing(2)
+const useStyles = makeStyles((theme: Theme) => {
+  const isDark = theme.palette.mode === 'dark'
+
+  return ({
+    root: {},
+    article: {
+      padding: theme.spacing(3),
+      borderRadius: 6,
+      backgroundColor: theme.colorPalette.background.main,
+      [theme.breakpoints.down('md')]: {
+        padding: theme.spacing(2)
+      }
+    },
+    header: {},
+    content: {
+      padding: theme.spacing(2, 0, 0)
+    },
+    articleInfo: {
+      marginTop: theme.spacing(1)
+    },
+    comment: {
+      padding: theme.spacing(3),
+      marginTop: theme.spacing(2),
+      borderRadius: 6,
+      backgroundColor: theme.colorPalette.background.main,
+      [theme.breakpoints.down('md')]: {
+        padding: theme.spacing(2)
+      },
+      '& .writing-board': {
+        display: 'flex',
+        marginBottom: theme.spacing(4),
+        '& .avatar': {
+          marginRight: theme.spacing(2),
+          width: 40,
+          height: 40,
+          borderRadius: '50%',
+          backgroundColor: theme.palette.primary.main
+        },
+        '& .form': {
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'flex-end',
+          flex: 1,
+          '& .buttons': {
+            marginTop: theme.spacing(2)
+          }
+        }
+      }
+    },
+    buttons: {
+      display: 'flex',
+      justifyContent: 'space-between',
+      minWidth: 150,
+      '& .MuiButton-root': {
+        height: 30,
+        borderRadius: 4
+      },
+      '& .MuiButton-outlined': {
+        marginLeft: theme.spacing(2)
+      }
+    },
+    recommend: {
+      padding: theme.spacing(3),
+      marginTop: theme.spacing(2),
+      borderRadius: 6,
+      backgroundColor: theme.colorPalette.background.main,
+      [theme.breakpoints.down('md')]: {
+        padding: theme.spacing(2)
+      },
+      '& .list': {
+        padding: theme.spacing(2, 0, 0)
+      },
+      '& .item': {
+        padding: theme.spacing(2, 0),
+        '&.item-border': {
+          borderBottom: `1px solid ${theme.colorPalette.primary.placeholder}`
+        },
+        '& .info': {
+          display: 'flex',
+          alignItems: 'center',
+          marginTop: theme.spacing(2),
+          '& .avatar': {
+            marginRight: theme.spacing(1),
+            width: 24,
+            height: 24,
+            borderRadius: '50%',
+            backgroundColor: theme.palette.primary.main
+          }
+        }
+      }
+    },
+    group: {
+      display: 'flex',
+      margin: theme.spacing(4, 0, 2),
+      [theme.breakpoints.down('md')]: {
+        display: 'block'
+      }
+    },
+    category: {
+      display: 'flex',
+      alignItems: 'center',
+      marginRight: theme.spacing(5),
+      '& .item': {
+        backgroundColor: '#f2f3f5'
+      }
+    },
+    tag: {
+      display: 'flex',
+      alignItems: 'center',
+      [theme.breakpoints.down('md')]: {
+        marginTop: theme.spacing(2)
+      }
+    },
+    tagItem: {
+      padding: theme.spacing(0.75, 1.5),
+      marginLeft: theme.spacing(2),
+      borderRadius: 4,
+      backgroundColor: theme.colorPalette.background.opacity?.(0.1)
+    },
+    fetchMoreComment: {
+      ...theme.styles.verticalCenter,
+      height: 52,
+      ...(isDark ? {
+        color: theme.colorPalette.text.default
+      } : {})
     }
-	},
-	recommend: {
-		padding: theme.spacing(3),
-		marginTop: theme.spacing(2),
-		borderRadius: 6,
-		backgroundColor: theme.colorPalette.background.main,
-		[theme.breakpoints.down('md')]: {
-			padding: theme.spacing(2)
-		},
-		'& .list': {
-			padding: theme.spacing(2, 0, 0)
-		},
-		'& .item': {
-			padding: theme.spacing(2, 0),
-			'&.item-border': {
-				borderBottom: `1px solid ${theme.colorPalette.primary.placeholder}`
-			},
-			'& .info': {
-				display: 'flex',
-				alignItems: 'center',
-				marginTop: theme.spacing(2),
-				'& .avatar': {
-					marginRight: theme.spacing(1),
-					width: 24,
-					height: 24,
-					borderRadius: '50%',
-					backgroundColor: theme.palette.primary.main
-				}
-			}
-		}
-	},
-	group: {
-		display: 'flex',
-		margin: theme.spacing(4, 0, 2),
-		[theme.breakpoints.down('md')]: {
-			display: 'block'
-		}
-	},
-	category: {
-		display: 'flex',
-		alignItems: 'center',
-		marginRight: theme.spacing(5),
-		'& .item': {
-			backgroundColor: '#f2f3f5'
-		}
-	},
-	tag: {
-		display: 'flex',
-		alignItems: 'center',
-		[theme.breakpoints.down('md')]: {
-			marginTop: theme.spacing(2)
-		}
-	},
-	tagItem: {
-		padding: theme.spacing(0.75, 1.5),
-		marginLeft: theme.spacing(2),
-		borderRadius: 4,
-		backgroundColor: theme.colorPalette.background.opacity?.(0.1)
-	}
-}))
+  })
+})
 
 function ArticleContent(props: ArticleContentProps) {
 	const { className, article } = props
+  const theme = useTheme()
 	const history = useRouter()
 	const classes = useStyles(props)
 	const articleClasses = useArticleStyles()
@@ -219,6 +233,14 @@ function ArticleContent(props: ArticleContentProps) {
 				</Box>
 				<AnchorPointer message={`全部评论 ${commentTotal}`} />
         <Comment list={comment} />
+        <div className={classes.fetchMoreComment}>
+          <Buttons variant="text" color="inherit">
+            <Typography fontWeight={700} color="inherit">
+              查看全部{commentTotal}条回复
+            </Typography>
+            <KeyboardArrowDown width={16} height={16} />
+          </Buttons>
+        </div>
 			</Box>
 			<Box className={classes.recommend}>
 				<AnchorPointer message="推荐阅读" />

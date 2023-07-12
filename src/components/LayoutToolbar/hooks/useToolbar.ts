@@ -23,6 +23,14 @@ const useToolbar = () => {
     layout: 'row'
   })
 
+  const updateThemeSetting = (initSetting: ToolbarSetter) => {
+    if (initSetting.mode === 'system') {
+      setSetting({ ...initSetting, mode: darkMode ? 'dark' : 'light' })
+    } else {
+      setSetting({ ...initSetting })
+    }
+  }
+
   useEffect(() => {
     const storageSetting = localStorage.getItem('setting')
     const uninstall = listenBroadcast(res => {
@@ -30,19 +38,15 @@ const useToolbar = () => {
     })
 
     if (storageSetting) {
-      setSetting({ ...(JSON.parse(storageSetting) as ToolbarSetter) })
+      updateThemeSetting((JSON.parse(storageSetting) as ToolbarSetter))
     }
 
     return () => uninstall()
-  }, [])
+  }, [darkMode])
 
   useDeepCompareEffect(() => {
     if (!isEmpty(themeSetting)) {
-      if (themeSetting.mode === 'system') {
-        setSetting({ ...themeSetting, mode: darkMode ? 'dark' : 'light' })
-      } else {
-        setSetting({ ...themeSetting })
-      }
+      updateThemeSetting(themeSetting)
     }
   }, [themeSetting, darkMode])
 
@@ -74,7 +78,7 @@ const useToolbar = () => {
   }
 
   return {
-    storeMode: themeSetting.mode,
+    storeMode: themeSetting.mode || setting.mode,
     mode: setting.mode,
     presets: setting.presets,
     layout: setting.layout,

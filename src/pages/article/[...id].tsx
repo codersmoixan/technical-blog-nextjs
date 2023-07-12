@@ -82,8 +82,6 @@ function ArticlePage({ article }: ArticlePageProps) {
 	const history = useRouter()
 	const dark = useMediaQuery('(prefers-color-scheme: dark)')
 
-	console.log(article, 1233)
-
 	const handleSpeedDialChange = (type: SpeedDiaKey) => {
 		console.log(type)
 	}
