@@ -20,6 +20,8 @@ import useMount from "hooks/effect/useMount";
 import {useRef} from "react";
 import {KeyboardArrowDown} from "@mui/icons-material";
 import {useTheme} from "@mui/material/styles";
+import {value} from "dom7";
+import If from "components/Layout/If";
 
 interface ArticleContentProps extends BoxProps {
 	article: ArticleInfo
@@ -161,7 +163,7 @@ function ArticleContent(props: ArticleContentProps) {
 	const classes = useStyles(props)
 	const articleClasses = useArticleStyles()
 	const { observer, clearValues } = useForm()
-	const { comment, commentTotal, submit, submitLoading } = useComment(article.articleId)
+	const { comment, commentTotal, submitLoading, getLoading, fetchMoreType, submit, setPageParam } = useComment(article.articleId)
 
   const contentRef = useRef(null)
 
@@ -178,6 +180,13 @@ function ArticleContent(props: ArticleContentProps) {
     })
     clearValues('content')
 	}
+
+  const handleFetchMoreComment = () => {
+    setPageParam(value => ({
+      ...value,
+      page: value.page + 1,
+    }))
+  }
 
   return (
 		<Box className={clsx(className, classes.root)}>
@@ -233,14 +242,22 @@ function ArticleContent(props: ArticleContentProps) {
 				</Box>
 				<AnchorPointer message={`全部评论 ${commentTotal}`} />
         <Comment list={comment} />
-        <div className={classes.fetchMoreComment}>
-          <Buttons variant="text" color="inherit">
-            <Typography fontWeight={700} color="inherit">
-              查看全部{commentTotal}条回复
-            </Typography>
-            <KeyboardArrowDown width={16} height={16} />
-          </Buttons>
-        </div>
+        <If factor={comment.length < commentTotal}>
+          <div className={classes.fetchMoreComment}>
+            {fetchMoreType === 'manual' ? (
+              <Buttons variant="text" color="inherit" onClick={handleFetchMoreComment} loading={getLoading}>
+                <Typography fontWeight={700} color="inherit">
+                  查看全部{commentTotal}条回复
+                </Typography>
+                <KeyboardArrowDown width={16} height={16} />
+              </Buttons>
+            ) : (
+              <Typography fontWeight={700} color="inherit">
+                加载中...
+              </Typography>
+            )}
+          </div>
+        </If>
 			</Box>
 			<Box className={classes.recommend}>
 				<AnchorPointer message="推荐阅读" />

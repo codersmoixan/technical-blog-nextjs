@@ -1,14 +1,28 @@
 import { ARTICLE_QUERY_KEY, useGetArticleCommentQuery, useSubmitCommentMutation } from 'containers/Article/queries'
 import { useQueryClient } from '@tanstack/react-query'
 import type { SubmitCommentParams } from 'containers/Article/types'
+import {useEffect, useState} from "react";
+import isEmpty from "lodash/isEmpty";
+import {ArticleComment} from "containers/Article/types";
 
 const useComment = (id: string) => {
 	const queryClient = useQueryClient()
-	const { data: comment, isLoading: getLoading } = useGetArticleCommentQuery(id, {
-		page: 1,
-		pageSize: 10
-	})
-	const { mutateAsync: submitComment, isLoading: submitLoading } = useSubmitCommentMutation()
+  const { mutateAsync: submitComment, isLoading: submitLoading } = useSubmitCommentMutation()
+
+  const [pageParam, setPageParam] = useState({
+    page: 1,
+    pageSize: 20
+  })
+  const [comment, setComment] = useState<ArticleComment[]>([])
+  const [fetchMoreType, setFetchMoreType] = useState<'auto' | 'manual'>('manual')
+
+	const { data: commentData, isLoading: getLoading } = useGetArticleCommentQuery(id, pageParam)
+
+  useEffect(() => {
+    if (!isEmpty(commentData) && !isEmpty(commentData?.list)) {
+      setComment(value => value.concat(commentData.list))
+    }
+  }, [commentData])
 
 	const submit = async (options: SubmitCommentParams) => {
 		await submitComment(options)
@@ -16,11 +30,14 @@ const useComment = (id: string) => {
 	}
 
 	return {
-		comment: comment?.list ?? [],
-		commentTotal: comment?.total ?? 0,
+		comment,
+		commentTotal: commentData?.total ?? 0,
 		getLoading,
+    fetchMoreType,
+    submitLoading,
 		submit,
-		submitLoading
+    setPageParam,
+    setFetchMoreType
 	}
 }
 

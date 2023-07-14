@@ -30,10 +30,10 @@ export const useGetArticleQuery = <TData extends object>(id: string) => {
 	}
 }
 
-export const useGetArticleCommentQuery = (id: string, data: PageParams) =>
+export const useGetArticleCommentQuery = (id: string, pageParams: PageParams) =>
 	useQuery<ArticleCommentResult>({
-		queryKey: [ARTICLE_QUERY_KEY.GET_COMMENT],
-		queryFn: () => getCommentList(id, data)
+		queryKey: [ARTICLE_QUERY_KEY.GET_COMMENT, pageParams.page],
+		queryFn: () => getCommentList(id, pageParams)
 	})
 
 export const useSubmitCommentMutation = () =>
