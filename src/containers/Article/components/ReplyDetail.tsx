@@ -24,6 +24,7 @@ import useReply from 'containers/Article/hooks/useReply'
 import { useSelector } from 'react-redux'
 import { selectOpenLogin } from 'containers/App/slice'
 import isEmpty from 'lodash/isEmpty'
+import useReplyLiked from "containers/Article/hooks/useReplyLiked";
 
 export interface SubmitAfterEvent {
 	result: CommentReplyResult
@@ -42,6 +43,7 @@ interface ReplyDetailProps {
   replyCount?: number
   isAuthor?: boolean
 	onSubmitAfter?: (data: SubmitAfterEvent) => void
+  onLiked?: (replyInfo: ReplyInfo) => void
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -122,13 +124,15 @@ function ReplyDetail(
 		onSubmitAfter,
 		type,
     replyCount,
+    onLiked,
 		...other
 	}: ReplyDetailProps = {} as ReplyDetailProps
 ) {
+  const isOpenDialog = useSelector(selectOpenLogin)
 	const classes = useStyles(other)
 	const { observer, watch, clearValues } = useForm()
 	const { submit: submitReply, submitLoading } = useReply()
-	const isOpenDialog = useSelector(selectOpenLogin)
+  const { likedCount, saveReplyLiked } = useReplyLiked(replyInfo)
 
 	const [openReply, setOpenReply] = useState(false)
 
@@ -207,10 +211,10 @@ function ReplyDetail(
 					</div>
 				</If>
 				<div className="data">
-					<Buttons className="btn">
+					<Buttons className="btn" onClick={saveReplyLiked}>
 						<Typography color="textSecondary" className="data-item">
 							<LikedIcon />
-							{replyInfo?.liked ? replyInfo?.liked : '点赞'}
+							{likedCount || '点赞'}
 						</Typography>
 					</Buttons>
 					<Buttons

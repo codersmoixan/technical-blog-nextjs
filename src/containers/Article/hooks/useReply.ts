@@ -1,5 +1,9 @@
 import { useGetReplyListMutation, useSubmitReplyMutation } from 'containers/Article/queries'
-import type { SubmitReplyParams, ArticleReply, ArticleComment } from 'containers/Article/types'
+import type {
+  SubmitReplyParams,
+  ArticleReply,
+  ArticleComment,
+} from 'containers/Article/types'
 import { useState } from 'react'
 import useDeepCompareEffect from 'hooks/effect/useDeepCompareEffect'
 import isEmpty from 'lodash/isEmpty'
@@ -58,7 +62,7 @@ const useReply = ({ replyInfos: reply, commentInfo }: UseReplyProps = {} as UseR
 		setReplyList,
 		getReplyList,
 		getPageReplyList,
-		submit
+		submit,
 	}
 }
 

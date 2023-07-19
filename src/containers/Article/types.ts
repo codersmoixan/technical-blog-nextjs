@@ -61,3 +61,9 @@ export interface SubmitReplyParams {
   replyCommentId: string
   replyToReplyId?: string
 }
+export interface ReplyLikedParams {
+  replyUserId: string
+  articleId: string
+  replyId: string
+  replyCommentId: string
+}

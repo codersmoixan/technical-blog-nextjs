@@ -58,7 +58,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 function CommentItem({ comment, ...other }: CommentItemProps) {
 	const classes = useStyles(other)
-	const { getPageReplyList, setReplyList, replyList } = useReply(comment)
+	const { replyList, getPageReplyList, setReplyList } = useReply(comment)
 
 	const [replyCount, setReplyCount] = useState(0)
 
