@@ -6,13 +6,14 @@
 import clsx from 'clsx'
 import Typography from '@mui/material/Typography'
 import LikedIcon from 'components/Icons/LikedIcon'
+import LikedActiveIcon from 'components/Icons/LikedActiveIcon'
 import CommentIcon from 'components/Icons/CommentIcon'
 import FilledCommentIcon from 'components/Icons/FilledCommentIcon'
 import Box from '@mui/material/Box'
 import { makeStyles } from '@mui/styles'
 import type { Theme } from '@mui/material'
 import type { UserInfo } from '@/src/tb.types'
-import type {ArticleReply, CommentReplyResult, ReplyInfo} from 'containers/Article/types'
+import type { CommentReplyResult, ReplyInfo } from 'containers/Article/types'
 import If from 'components/Layout/If'
 import { useState } from 'react'
 import Buttons from 'components/Buttons'
@@ -24,7 +25,8 @@ import useReply from 'containers/Article/hooks/useReply'
 import { useSelector } from 'react-redux'
 import { selectOpenLogin } from 'containers/App/slice'
 import isEmpty from 'lodash/isEmpty'
-import useReplyLiked from "containers/Article/hooks/useReplyLiked";
+import useReplyLiked from 'containers/Article/hooks/useReplyLiked'
+import useCommentLiked from 'containers/Article/hooks/useCommentLiked'
 
 export interface SubmitAfterEvent {
 	result: CommentReplyResult
@@ -40,10 +42,10 @@ interface ReplyDetailProps {
 	classes?: Partial<ReturnType<typeof useStyles>>
 	className?: string
 	type?: 'comment' | 'reply'
-  replyCount?: number
-  isAuthor?: boolean
+	replyCount?: number
+	isAuthor?: boolean
 	onSubmitAfter?: (data: SubmitAfterEvent) => void
-  onLiked?: (replyInfo: ReplyInfo) => void
+	onLiked?: (replyInfo: ReplyInfo) => void
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -114,7 +116,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 function ReplyDetail(
 	{
-    isAuthor,
+		isAuthor,
 		userInfo,
 		replyInfo,
 		parentReply,
@@ -123,16 +125,17 @@ function ReplyDetail(
 		className,
 		onSubmitAfter,
 		type,
-    replyCount,
-    onLiked,
+		replyCount,
+		onLiked,
 		...other
 	}: ReplyDetailProps = {} as ReplyDetailProps
 ) {
-  const isOpenDialog = useSelector(selectOpenLogin)
+	const isOpenDialog = useSelector(selectOpenLogin)
 	const classes = useStyles(other)
 	const { observer, watch, clearValues } = useForm()
 	const { submit: submitReply, submitLoading } = useReply()
-  const { likedCount, saveReplyLiked } = useReplyLiked(replyInfo)
+	const { likedCount, saveLiked: saveReplyLiked } = useReplyLiked(replyInfo)
+	const { isLiked, saveLiked: saveCommentLiked } = useCommentLiked(replyInfo)
 
 	const [openReply, setOpenReply] = useState(false)
 
@@ -170,6 +173,8 @@ function ReplyDetail(
 		})
 	}
 
+  const handleLiked = () => type === 'reply' ? saveReplyLiked() : saveCommentLiked()
+
 	return (
 		<div className={clsx(className, classes.root)}>
 			<If factor={!!isShowAvatar}>
@@ -188,11 +193,13 @@ function ReplyDetail(
 			<div className={classes.content}>
 				<div className={classes.nickname}>
 					<Box display="flex">
-            <Typography fontWeight={500}>{userInfo?.nickName}</Typography>
-            <If factor={!!isAuthor}>
-              <Typography ml={1} color="textSecondary">(作者)</Typography>
-            </If>
-          </Box>
+						<Typography fontWeight={500}>{userInfo?.nickName}</Typography>
+						<If factor={!!isAuthor}>
+							<Typography ml={1} color="textSecondary">
+								(作者)
+							</Typography>
+						</If>
+					</Box>
 					<If factor={!isEmpty(replyToUserInfo)}>
 						<div className={classes.parentNickname}>
 							<Typography color="textSecondary" mx={1}>
@@ -211,9 +218,9 @@ function ReplyDetail(
 					</div>
 				</If>
 				<div className="data">
-					<Buttons className="btn" onClick={saveReplyLiked}>
-						<Typography color="textSecondary" className="data-item">
-							<LikedIcon />
+					<Buttons className="btn" onClick={handleLiked}>
+						<Typography color={isLiked ? 'primary' : 'textSecondary'} className="data-item">
+							{isLiked ? <LikedActiveIcon /> : <LikedIcon />}
 							{likedCount || '点赞'}
 						</Typography>
 					</Buttons>

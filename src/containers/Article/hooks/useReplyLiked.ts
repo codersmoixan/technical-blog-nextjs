@@ -5,11 +5,10 @@ import {useState} from "react";
 const useReplyLiked = (replyInfo: ReplyInfo = {} as ReplyInfo) => {
   const [likedCount, setLikedCount] = useState(replyInfo.liked ?? 0)
 
-	const saveReplyLiked = async () => {
+	const saveLiked = async () => {
     try {
       const { replyId, replyCommentId, articleId, replyUserId } = replyInfo
-      const likedAction = replyId ? saveReplyLikedApi : saveCommentLiked
-      const result = await likedAction({
+      const result = await saveReplyLikedApi({
         replyId,
         replyCommentId,
         articleId,
@@ -25,7 +24,7 @@ const useReplyLiked = (replyInfo: ReplyInfo = {} as ReplyInfo) => {
 
 	return {
     likedCount,
-		saveReplyLiked,
+    saveLiked,
 		cancelReplyLiked
 	}
 }
