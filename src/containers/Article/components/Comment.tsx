@@ -3,37 +3,33 @@
  * @description Comment
  */
 
-import React, { useState, useEffect } from 'react'
-import {ArticleComment} from "containers/Article/types";
-import {makeStyles} from "@mui/styles";
-import type {Theme} from "@mui/material";
-import CommentItem from "containers/Article/components/CommentItem";
+import type { ArticleComment, ArticleInfo } from 'containers/Article/types'
+import { makeStyles } from '@mui/styles'
+import type { Theme } from '@mui/material'
+import CommentItem from 'containers/Article/components/CommentItem'
+import { useGetCommentLikedRecordQuery, useGetReplyLikedRecordQuery } from 'containers/Article/queries'
 
 const useStyles = makeStyles((theme: Theme) => ({
-  root: {
-
-  }
+	root: {}
 }))
 
 interface CommentProps {
-  list: ArticleComment[]
+	list: ArticleComment[]
+	articleId: ArticleInfo['articleId']
 }
 
-function Comment({ list = [], ...other }: CommentProps) {
-  const classes = useStyles(other)
-  const [value, setValue] = useState('')
-
-  useEffect(() => {
-    setValue('Index')
-  }, [])
+function Comment({ list = [], articleId, ...other }: CommentProps) {
+	const classes = useStyles(other)
+	useGetCommentLikedRecordQuery(articleId)
+	useGetReplyLikedRecordQuery(articleId)
 
   return (
-    <div className={classes.root}>
-      {list.map(comment => (
-        <CommentItem key={comment.commentInfo.id} comment={comment} />
-      ))}
-    </div>
-  )
+		<div className={classes.root}>
+			{list.map(comment => (
+				<CommentItem key={comment.commentInfo.id} comment={comment} />
+			))}
+		</div>
+	)
 }
 
 export default Comment

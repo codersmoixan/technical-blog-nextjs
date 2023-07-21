@@ -44,6 +44,7 @@ interface ReplyDetailProps {
 	type?: 'comment' | 'reply'
 	replyCount?: number
 	isAuthor?: boolean
+	isLiked?: boolean
 	onSubmitAfter?: (data: SubmitAfterEvent) => void
 	onLiked?: (replyInfo: ReplyInfo) => void
 }
@@ -125,6 +126,7 @@ function ReplyDetail(
 		className,
 		onSubmitAfter,
 		type,
+		isLiked: propIsLiked,
 		replyCount,
 		onLiked,
 		...other
@@ -134,10 +136,12 @@ function ReplyDetail(
 	const classes = useStyles(other)
 	const { observer, watch, clearValues } = useForm()
 	const { submit: submitReply, submitLoading } = useReply()
-	const { likedCount, saveLiked: saveReplyLiked } = useReplyLiked(replyInfo)
-	const { isLiked, saveLiked: saveCommentLiked } = useCommentLiked(replyInfo)
+	const { saveLiked: saveReplyLiked } = useReplyLiked(replyInfo)
+	const { saveLiked: saveCommentLiked } = useCommentLiked(replyInfo)
 
 	const [openReply, setOpenReply] = useState(false)
+	const [isLiked, setIsLiked] = useState(propIsLiked)
+	const [likedCount, setLikedCount] = useState(replyInfo.liked ?? 0)
 
 	const contentValue = watch('content')
 	const isEmptyAvatar = !userInfo?.avatar
@@ -173,7 +177,16 @@ function ReplyDetail(
 		})
 	}
 
-  const handleLiked = () => type === 'reply' ? saveReplyLiked() : saveCommentLiked()
+	const handleLiked = async () => {
+		try {
+			const action = type === 'reply' ? saveReplyLiked : saveCommentLiked
+			await action()
+			setIsLiked(true)
+			setLikedCount(value => value + 1)
+		} catch (err) {
+			console.log(err)
+		}
+	}
 
 	return (
 		<div className={clsx(className, classes.root)}>

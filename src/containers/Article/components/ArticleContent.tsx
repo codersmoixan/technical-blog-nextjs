@@ -11,7 +11,7 @@ import FormTextarea from 'components/Form/FormTextarea'
 import Buttons from 'components/Buttons'
 import dayjs from 'dayjs'
 import { useRouter } from 'next/router'
-import useArticleStyles from 'containers/Article/useArticleStyles'
+import useArticleStyles from 'containers/Article/hooks/useArticleStyles'
 import useComment from 'containers/Article/hooks/useComment'
 import type { ArticleInfo } from 'containers/Article/types'
 import Comment from 'containers/Article/components/Comment'
@@ -245,7 +245,7 @@ function ArticleContent(props: ArticleContentProps) {
 					</Form>
 				</Box>
 				<AnchorPointer message={`全部评论 ${commentTotal}`} />
-				<Comment list={comment} />
+				<Comment list={comment} articleId={article.articleId} />
 				<If factor={comment.length < commentTotal}>
 					<div className={classes.fetchMoreComment}>
 						{fetchMoreType === 'manual' ? (

@@ -18,6 +18,8 @@ import useReply from 'containers/Article/hooks/useReply'
 import { ArticleReply } from 'containers/Article/types'
 import { useState } from 'react'
 import useDeepCompareEffect from 'hooks/effect/useDeepCompareEffect'
+import {useSelector} from "react-redux";
+import {selectCommentLikedRecord, selectReplyLikedRecord} from "containers/Article/slice";
 
 interface CommentItemProps {
 	comment: ArticleComment
@@ -58,6 +60,8 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 function CommentItem({ comment, ...other }: CommentItemProps) {
 	const classes = useStyles(other)
+  const commentLikedRecord = useSelector(selectCommentLikedRecord)
+  const replyLikedRecord = useSelector(selectReplyLikedRecord)
 	const { replyList, getPageReplyList, setReplyList } = useReply(comment)
 
 	const [replyCount, setReplyCount] = useState(0)
@@ -102,6 +106,7 @@ function CommentItem({ comment, ...other }: CommentItemProps) {
 						replyInfo={commentInfo as any as ReplyInfo}
 						onSubmitAfter={handleSubmit}
 						replyCount={replyCount}
+            isLiked={commentLikedRecord.includes(commentInfo.commentId)}
 					/>
 					<If factor={!isEmpty(replyList)}>
 						<div className={classes.reply}>
@@ -120,6 +125,7 @@ function CommentItem({ comment, ...other }: CommentItemProps) {
 									onSubmitAfter={handleSubmit}
 									type="reply"
                   isAuthor={reply.isAuthor}
+                  isLiked={replyLikedRecord.includes(reply.replyId)}
 								/>
 							))}
 							<If factor={commentInfo.replyCount > 2 && replyList.length < commentInfo.replyCount}>
