@@ -1,11 +1,11 @@
 import type { ReplyInfo } from 'containers/Article/types'
-import { saveReplyLiked as saveReplyLikedApi } from 'containers/Article/api'
+import { saveReplyLiked, cancelReplyLiked } from 'containers/Article/api'
 
 const useReplyLiked = (replyInfo: ReplyInfo = {} as ReplyInfo) => {
 	const saveLiked = async () => {
 		try {
 			const { replyId, replyCommentId, articleId, replyUserId } = replyInfo
-			await saveReplyLikedApi({
+			await saveReplyLiked({
 				replyId,
 				replyCommentId,
 				articleId,
@@ -16,11 +16,19 @@ const useReplyLiked = (replyInfo: ReplyInfo = {} as ReplyInfo) => {
 		}
 	}
 
-	const cancelReplyLiked = () => {}
+	const cancelLiked = async () => {
+    const { replyId, replyCommentId, articleId, replyUserId } = replyInfo
+    await cancelReplyLiked({
+      replyId,
+      replyCommentId,
+      articleId,
+      replyUserId
+    })
+  }
 
 	return {
 		saveLiked,
-		cancelReplyLiked
+    cancelLiked
 	}
 }
 

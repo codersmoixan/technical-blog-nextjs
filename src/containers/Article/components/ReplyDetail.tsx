@@ -136,8 +136,8 @@ function ReplyDetail(
 	const classes = useStyles(other)
 	const { observer, watch, clearValues } = useForm()
 	const { submit: submitReply, submitLoading } = useReply()
-	const { saveLiked: saveReplyLiked } = useReplyLiked(replyInfo)
-	const { saveLiked: saveCommentLiked } = useCommentLiked(replyInfo)
+	const { saveLiked: saveReplyLiked, cancelLiked: cancelReplyLiked } = useReplyLiked(replyInfo)
+	const { saveLiked: saveCommentLiked, cancelLiked: cancelCommentLiked } = useCommentLiked(replyInfo)
 
 	const [openReply, setOpenReply] = useState(false)
 	const [isLiked, setIsLiked] = useState(propIsLiked)
@@ -177,8 +177,16 @@ function ReplyDetail(
 		})
 	}
 
-	const handleLiked = async () => {
+	const handleToggleLiked = async () => {
 		try {
+      if (isLiked) {
+        const action = type === "reply" ? cancelReplyLiked : cancelCommentLiked
+        await action()
+        setIsLiked(false)
+        setLikedCount(value => value - 1)
+        return
+      }
+
 			const action = type === 'reply' ? saveReplyLiked : saveCommentLiked
 			await action()
 			setIsLiked(true)
@@ -231,7 +239,7 @@ function ReplyDetail(
 					</div>
 				</If>
 				<div className="data">
-					<Buttons className="btn" onClick={handleLiked}>
+					<Buttons className="btn" onClick={handleToggleLiked}>
 						<Typography color={isLiked ? 'primary' : 'textSecondary'} className="data-item">
 							{isLiked ? <LikedActiveIcon /> : <LikedIcon />}
 							{likedCount || '点赞'}

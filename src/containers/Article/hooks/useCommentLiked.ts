@@ -1,4 +1,4 @@
-import { saveCommentLiked } from 'containers/Article/api'
+import { saveCommentLiked, cancelCommentLiked } from 'containers/Article/api'
 import type { ReplyInfo } from 'containers/Article/types'
 
 const useCommentLiked = ({ articleId, commentId }: ReplyInfo) => {
@@ -12,8 +12,19 @@ const useCommentLiked = ({ articleId, commentId }: ReplyInfo) => {
 		})
 	}
 
+  const cancelLiked = async () => {
+    if (!articleId || !commentId) {
+      return
+    }
+    await cancelCommentLiked({
+      articleId,
+      commentId
+    })
+  }
+
 	return {
-		saveLiked
+		saveLiked,
+    cancelLiked
 	}
 }
 
