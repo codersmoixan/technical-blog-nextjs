@@ -33,6 +33,7 @@ export interface ColorPaletteOptions {
     default: string;
     primary: string;
     secondary: string;
+    opacity?: (a: number) => string
   };
   text: {
     main: string;
@@ -47,6 +48,7 @@ export interface ColorPaletteOptions {
     default: string;
     background: string;
     hover: string;
+    disabled: string;
   };
   setting: {
     one: string;
@@ -94,6 +96,7 @@ export interface ComponentStyleOverrides {
   ThemeSetting?: StyleOverrides;
   PopupLayer?: StyleOverrides;
   Footer?: StyleOverrides;
+  SharingLayout?: StyleOverrides
 }
 
 export type ComponentStyleOverridesKey = keyof ComponentStyleOverrides

@@ -3,7 +3,8 @@ import type { RootState } from "store/index"
 
 const initialState = {
   speedDial: '',
-  setting: {}
+  setting: {},
+  openLogin: false,
 }
 
 const appSlice = createSlice({
@@ -21,13 +22,17 @@ const appSlice = createSlice({
     },
     clearToolbarSetter(state) {
       state.setting = {}
+    },
+    updateOpenLogin(state, action) {
+      state.openLogin = action.payload
     }
   }
 })
 
-export const { updateSpeedDial, clearSpeedDial, updateToolbarSetter, clearToolbarSetter } = appSlice.actions
+export const { updateSpeedDial, clearSpeedDial, updateToolbarSetter, clearToolbarSetter, updateOpenLogin } = appSlice.actions
 
 export const selectSpeedDial = (state: RootState) => state.app.speedDial
 export const selectToolbarSetting = (state: RootState) => state.app.setting
+export const selectOpenLogin = (state: RootState) => state.app.openLogin
 
 export default appSlice

@@ -2,7 +2,7 @@ import { getSharingListApi, addSharingApi, updateSharingApi, deleteSharingApi } 
 import useQuery from "hooks/query/useQuery";
 import useMutation from "hooks/query/useMutation";
 import type { PageParams } from "@/src/tb.types";
-import type { AddSharingParam } from "containers/Sharing/types";
+import type { AddSharingParam, ShareResult } from "containers/Sharing/types";
 
 export enum SHARING_QUERY_KEY {
   GET = 'sharing.get',
@@ -11,7 +11,7 @@ export enum SHARING_QUERY_KEY {
   DELETE = 'sharing.delete'
 }
 
-export const useGetShareListQuery = ({ page, pageSize }: PageParams) => useQuery({
+export const useGetShareListQuery = ({ page, pageSize }: PageParams) => useQuery<ShareResult>({
   queryKey: [SHARING_QUERY_KEY.GET, page, pageSize],
   queryFn: () => getSharingListApi({ page, pageSize }),
   enabled: !!page && !!pageSize

@@ -8,7 +8,7 @@ const redTheme: ThemeOptions = {
 			main: '#FF3030',
 			default: '#FFFFFF',
 			secondary: 'rgba(229 230, 232, 1)',
-			colorSecondary: '#d8dee3',
+			colorSecondary: '#f2f3f5',
 			transparent: 'transparent',
 			dark: '#131313',
 			sullenGrey: '#33323e',
@@ -23,7 +23,8 @@ const redTheme: ThemeOptions = {
 			main: 'rgb(252, 252, 252)',
 			default: '#FFFFFF',
 			primary: '#131313',
-			secondary: 'rgba(145, 158, 171, 0.08)'
+			secondary: 'rgba(145, 158, 171, 0.08)',
+      opacity: (a) => `rgba(255, 48, 48, ${a})`
 		},
 		text: {
 			main: '#FF3030',
@@ -31,13 +32,14 @@ const redTheme: ThemeOptions = {
 			textSecondary: '#6c6b7b',
 			disabled: '#86909c',
 			dark: '#131313',
-			secondary: '#86909c'
+			secondary: '#8c8c8c'
 		},
 		button: {
 			main: '#FF3030',
 			default: '#FFFFFF',
 			background: '#FF3030',
-			hover: 'rgba(255, 48, 48, .8)'
+			hover: 'rgba(255, 48, 48, .8)',
+      disabled: 'rgba(255, 48, 48, .4)'
 		},
 		setting: {
 			one: '#00AB55',

@@ -29,7 +29,6 @@ const useStyles = makeStyles((theme: Theme) => ({
 	...theme.styles,
 	root: {
 		position: 'relative',
-		width: 253,
 		[theme.breakpoints.down('md')]: {
 			margin: theme.spacing(0, -3),
 			width: 'auto',

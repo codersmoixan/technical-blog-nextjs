@@ -21,13 +21,20 @@ import MediaQuery from 'core/MediaQuery'
 import GlobalDrawer from 'components/GlobalDrawer'
 import { useTheme } from '@mui/material/styles'
 import Typography from '@mui/material/Typography'
-import { AddSharingParam } from 'containers/Sharing/types'
+import type { AddSharingParam } from 'containers/Sharing/types'
 import useCategory from 'containers/Category/hooks/useCategory'
 import useTag from 'containers/Tag/hooks/useTag'
 import Buttons from 'components/Buttons'
+import useFile from "hooks/useFile";
 
-export interface FormOptions extends Pick<AddSharingParam, 'category' | 'tag' | 'description'> {
-	cover: File[]
+export interface CoverOption {
+  key: string
+  url: string
+}
+
+export interface FormOptions extends Pick<AddSharingParam, 'category' | 'description'> {
+	cover: CoverOption
+  tags: string
 }
 
 interface PublishProps {
@@ -71,19 +78,16 @@ function Publish({ open = false, onClose, onPublish }: PublishProps) {
 	const notify = useNotifier()
 	const classes = useStyles()
 	const theme = useTheme()
-	const { observer, handleSubmit, watch } = useForm()
-	const { categories } = useCategory()
+	const { observer, handleSubmit } = useForm()
+	const { category } = useCategory()
 	const { tags } = useTag()
+  const { uploadFile } = useFile()
 
-	const [cover, setCover] = useState<File[]>([])
-
-	const tag = watch('tag')
-
-	console.log(tag, 365665)
+  const [cover, setCover] = useState({})
 
 	const resetForm = () => {
 		observer.reset()
-		setCover([])
+		setCover({})
 	}
 
 	const handlePublish = (options: any) => {
@@ -95,8 +99,9 @@ function Publish({ open = false, onClose, onPublish }: PublishProps) {
 		resetForm()
 	}
 
-	const handleImageChange = (files: File[]) => {
-		setCover(files)
+	const handleImageChange = async (files: File[]) => {
+    const { key, url } = await uploadFile(files)
+    setCover({ key, url })
 	}
 
 	const handleClose = () => {
@@ -113,7 +118,7 @@ function Publish({ open = false, onClose, onPublish }: PublishProps) {
 							分类:{' '}
 						</Grid>
 						<Grid item xs={9} sm={10}>
-							<FormChipSelect name="category" options={categories} rules={{ required: '请选择文章分类' }} />
+							<FormChipSelect name="category" options={category} rowKey="categoryName" rules={{ required: '请选择文章分类' }} />
 						</Grid>
 					</Grid>
 					<Grid container spacing={1} mt={2}>
@@ -122,7 +127,7 @@ function Publish({ open = false, onClose, onPublish }: PublishProps) {
 						</Grid>
 						<Grid item xs={9} sm={10}>
 							<FormSelect
-								name="tag"
+								name="tags"
 								multiple
 								options={tags}
 								placeholder="请选择标签"

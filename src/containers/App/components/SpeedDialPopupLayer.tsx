@@ -1,21 +1,24 @@
 import React, { ReactNode } from 'react'
 import CenterDialog from 'components/Dialog/CenterDialog'
-import makeStyles, { Theme } from 'core/makeStyles'
 import useSpeedDial from 'components/SuspendButtons/hooks/useSpeedDial'
 import { getValue } from 'utils/index'
 import OperateTag from 'containers/Tag/components/OperateTag'
 import OperateCategory from 'containers/Category/components/OperateCategory'
 import OperateLinks from 'containers/Links/components/OperateLinks'
 import Drawer from '@mui/material/Drawer'
-import ThemeSetter from "components/LayoutToolbar/ThemeSetter";
-import FullScreen from "components/LayoutToolbar/FullScreen";
+import ThemeSetter from 'components/LayoutToolbar/ThemeSetter'
+import FullScreen from 'components/LayoutToolbar/FullScreen'
+import { makeStyles } from '@mui/styles'
+import type { Theme } from '@mui/material'
 
 interface SpeedDialPopupLayerProps {
 	children?: ReactNode
 }
 
-const useStyles = makeStyles(
-	(theme: Theme) => ({
+const useStyles = makeStyles((theme: Theme) => {
+	const isDark = theme.palette.mode === 'dark'
+
+	return {
 		paper: {
 			backgroundColor: theme.colorPalette.background.main,
 			paddingBottom: theme.spacing(1),
@@ -32,11 +35,11 @@ const useStyles = makeStyles(
 		},
 		drawerPaper: {
 			backdropFilter: 'blur(6px)',
-			backgroundImage: 'none'
+			backgroundImage: 'none',
+			...(isDark ? { backgroundColor: 'rgba(22, 28, 36, 0.9)' } : {})
 		}
-	}),
-	'PopupLayer'
-)
+	}
+})
 
 const dialogContent = {
 	tags: <OperateTag />,
@@ -77,11 +80,11 @@ function SpeedDialPopupLayer({ children }: SpeedDialPopupLayerProps) {
 				}}
 			>
 				{children ?? (
-          <>
-            <ThemeSetter />
-            <FullScreen />
-          </>
-        )}
+					<>
+						<ThemeSetter />
+						<FullScreen />
+					</>
+				)}
 			</Drawer>
 		</>
 	)

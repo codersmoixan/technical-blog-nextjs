@@ -28,95 +28,15 @@ const darkTheme: DarkTheme = {
 			six: '#FF3030'
 		},
 		text: {
-			default: '#FFFFFF',
+			main: '#FFFFFF',
+			default: '#E7EBF0',
 			textSecondary: '#FFFFFF',
 			disabled: '#86909c',
 			dark: 'rgb(22, 28, 36)',
-			secondary: '#86909c'
+			secondary: '#8c8c8c'
 		}
 	},
 	componentStyleOverrides: {
-		App: {
-			root: {
-				background:
-					'linear-gradient(rgba(22, 28, 36, 0.94), rgba(22, 28, 36, 0.94)) center center / cover no-repeat, url(/images/home/overlay_2.jpg)'
-			}
-		},
-		Navigation: {
-			focus: {
-				backgroundColor: 'rgba(22, 28, 36, 0.8)',
-				'& .tools': {
-					'& .MuiOutlinedInput-notchedOutline': {
-						backgroundColor: 'transparent'
-					},
-					'& .MuiButton-outlined': {
-						backgroundColor: 'transparent'
-					}
-				}
-			},
-			btn: {
-				'&.MuiButton-textPrimary': {
-					color: '#FFFFFF'
-				}
-			}
-		},
-		AccordionMenu: {
-			root: {
-				border: '1px solid rgba(145, 158, 171, 0.16)',
-				boxShadow: 'rgb(0 0 0 / 24%) -40px 40px 80px -8px'
-			}
-		},
-		HomeTechnologySharing: {
-			development: {
-				[breakpoints.up('md')]: {
-					boxShadow: 'rgb(0 0 0 / 40%) -40px 40px 80px'
-				}
-			}
-		},
-		HomeCategory: {
-			content: {
-				borderColor: 'rgba(145, 158, 171, 0.24)'
-			},
-			item: {
-				borderColor: 'rgba(145, 158, 171, 0.24)'
-			}
-		},
-		HomeCategoryList: {
-			item: {
-				color: '#FFFFFF'
-			},
-			button: {
-				color: '#FFFFFF'
-			}
-		},
-		HomeDesigner: {
-			image: {
-				boxShadow: 'rgb(0 0 0) -40px 80px 80px'
-			}
-		},
-		SideSwiper: {
-			prevBtn: {
-				color: '#FFFFFF'
-			},
-			nextBtn: {
-				color: '#FFFFFF'
-			}
-		},
-		SharingCard: {
-			root: {
-				backgroundColor: 'rgb(22, 28, 36)',
-				boxShadow: 'rgb(0 0 0 / 30%) 4px 4px 12px',
-				'&:hover': {
-					boxShadow: 'rgb(0 0 0 / 70%) 4px 4px 14px'
-				},
-				[breakpoints.down('md')]: {
-					boxShadow: 'rgb(0 0 0 / 30%) 4px 4px 12px',
-					'&:hover': {
-						boxShadow: 'rgb(0 0 0 / 70%) 4px 4px 12px'
-					}
-				}
-			}
-		},
 		Login: {
 			fab: {
 				boxShadow: 'rgb(0 0 0 / 36%) -12px 12px 32px -4px'
@@ -141,17 +61,6 @@ const darkTheme: DarkTheme = {
 					backgroundColor: 'rgba(252, 252, 252, 0.94)'
 				}
 			}
-		},
-		PopupLayer: {
-			drawerPaper: {
-				backgroundColor: 'rgba(22, 28, 36, 0.9)'
-			}
-		},
-		Footer: {
-			root: {
-				background:
-					'linear-gradient(rgba(22, 28, 36, 0.94), rgba(22, 28, 36, 0.94)) center center / cover no-repeat, url(/images/home/overlay_2.jpg)'
-			}
 		}
 	},
 	palette: {
@@ -160,14 +69,14 @@ const darkTheme: DarkTheme = {
 	components: {
 		MuiTypography: {
 			defaultProps: {
-				color: '#FFFFFF'
+				color: '#E7EBF0'
 			}
 		},
 		MuiButton: {
 			styleOverrides: {
 				outlined: {
 					'&.MuiButton-outlinedPrimary': {
-						color: '#FFFFFF'
+						color: '#E7EBF0'
 					}
 				}
 			}

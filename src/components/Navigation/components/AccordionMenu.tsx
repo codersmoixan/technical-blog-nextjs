@@ -5,21 +5,24 @@
 
 import React from 'react'
 import Box from '@mui/material/Box'
-import makeStyles, { Theme } from 'core/makeStyles'
 import Typography from '@mui/material/Typography'
 import get from 'lodash/get'
 import isEmpty from 'lodash/isEmpty'
 import { VariantContent } from 'components/Animation/Variant'
 import clsx from 'clsx'
 import type { NavigateItemOption } from 'components/Navigation/types'
+import { makeStyles } from '@mui/styles'
+import type { Theme } from '@mui/material'
 
 interface AccordionMenuProps {
 	tab: NavigateItemOption | null
 	className?: string
 }
 
-const useStyles = makeStyles(
-	(theme: Theme) => ({
+const useStyles = makeStyles((theme: Theme) => {
+	const isDark = theme.palette.mode === 'dark'
+
+	return {
 		root: {
 			position: 'absolute',
 			left: '50%',
@@ -32,7 +35,11 @@ const useStyles = makeStyles(
 			backgroundColor: theme.colorPalette.background.default,
 			borderRadius: 16,
 			backdropFilter: 'blur(6px)',
-			opacity: 0
+			opacity: 0,
+      ...(isDark ? {
+        border: '1px solid rgba(145, 158, 171, 0.16)',
+        boxShadow: 'rgb(0 0 0 / 24%) -40px 40px 80px -8px'
+      } : {})
 		},
 		accordionContent: {
 			display: 'flex',
@@ -53,9 +60,8 @@ const useStyles = makeStyles(
 			padding: theme.spacing(1, 0),
 			color: theme.colorPalette.text.secondary
 		}
-	}),
-	'AccordionMenu'
-)
+	}
+})
 
 const rootVariants = {
 	open: {

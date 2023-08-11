@@ -2,9 +2,9 @@ import Box, { BoxProps } from "@mui/material/Box";
 import { makeStyles } from "@mui/styles";
 import clsx from "clsx";
 import type { Theme } from "@mui/material";
-import UserInfo from "containers/Articles/components/UserInfo";
+import UserInfo from "containers/Article/components/UserInfo";
 import Typography from "@mui/material/Typography";
-import AnchorPointer from "containers/Articles/components/AnchorPointer";
+import AnchorPointer from "containers/Article/components/AnchorPointer";
 
 interface ArticleAsideProps extends BoxProps {}
 

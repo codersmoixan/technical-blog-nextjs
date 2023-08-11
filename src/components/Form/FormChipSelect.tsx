@@ -16,8 +16,9 @@ import isUndefined from "lodash/isUndefined";
 import useDeepCompareEffect from "hooks/effect/useDeepCompareEffect";
 import type { Theme } from "@mui/material";
 import type { EmptyObject } from "@/src/tb.types"
+import isEmpty from "lodash/isEmpty";
 
-export type ChipOption = {
+export interface ChipOption extends EmptyObject {
   id: string | number;
   label: string;
   value?: string;
@@ -28,6 +29,7 @@ interface ChipSelectProps {
   onSelect?: (chip: any) => void;
   name?: string;
   rules?: EmptyObject<any>;
+  rowKey?: string
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -39,7 +41,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   }
 }))
 
-function FormChipSelect({ options, onSelect, name, rules }: ChipSelectProps) {
+function FormChipSelect({ options, onSelect, name, rules, rowKey = 'label' }: ChipSelectProps) {
   const theme = useTheme()
   const classes = useStyles()
   const { ref, fieldProps, fieldState, setValue, clearErrors } = useFormController({
@@ -72,13 +74,17 @@ function FormChipSelect({ options, onSelect, name, rules }: ChipSelectProps) {
 
   const isError = !isUndefined(fieldState.error)
 
+  if (isEmpty(options)) {
+    return null
+  }
+
   return (
     <>
       <Grid container spacing={2}>
         {options.map(chip => (
           <Grid item key={chip.id} spacing={2}>
             <TBChip
-              label={chip.label}
+              label={chip[rowKey]}
               active={chip.id === active.id}
               onClick={() => handleCheckChip(chip)}
               className={clsx({

@@ -8,6 +8,7 @@ import MaskIcon from 'components/MaskIcon'
 import Grid from '@mui/material/Grid'
 import { themePresets } from 'containers/App/constants'
 import type { ToolbarSetterPresets } from 'components/LayoutToolbar/types'
+import SystemThemeIcon from 'components/Icons/SystemThemeIcon'
 
 interface MakeStylesProps {
 	presets: ToolbarSetterPresets
@@ -45,15 +46,15 @@ const useStyles = makeStyles(
 				backgroundColor: theme.colorPalette.setting.hover
 			},
 			'&.active': {
-        backgroundColor: theme.colorPalette.setting.active,
+				backgroundColor: theme.colorPalette.setting.active,
 				'&:hover': {
 					backgroundColor: theme.colorPalette.setting.activeHover
 				}
 			}
 		},
 		modeItem: {
-			width: 104,
-			height: 70,
+			width: 65,
+			height: 65,
 			color: theme.colorPalette.setting.colorSecondary,
 			'&.active': {
 				color: theme.palette.primary.main
@@ -73,10 +74,7 @@ const useStyles = makeStyles(
 				'& .preset': {
 					width: 24,
 					height: 24,
-					boxShadow: (props: MakeStylesProps) =>
-						props.presets
-							? `${theme.colorPalette.setting[props.presets]} 0px 4px 8px -3px`
-							: 'none'
+					boxShadow: (props: MakeStylesProps) => (props.presets ? `${theme.colorPalette.setting[props.presets]} 0px 4px 8px -3px` : 'none')
 				}
 			},
 			'& .preset': {
@@ -92,7 +90,7 @@ const useStyles = makeStyles(
 )
 
 function ThemeSetter() {
-	const { mode, presets, switchMode, switchPresets } = useToolbar()
+	const { storeMode, presets, switchMode, switchPresets } = useToolbar()
 	const classes = useStyles({ presets })
 	const theme = useTheme()
 
@@ -109,15 +107,23 @@ function ThemeSetter() {
 					<Box className={classes.modeItems}>
 						<Box
 							className={clsx(classes.item, classes.modeItem, 'primary', {
-								active: mode === 'light'
+								active: storeMode === 'light'
 							})}
 							onClick={() => switchMode('light')}
 						>
 							<MaskIcon url="/icons/setting/ic_sun.svg" />
 						</Box>
 						<Box
+							className={clsx(classes.item, classes.modeItem, 'primary', {
+								active: storeMode === 'system'
+							})}
+							onClick={() => switchMode('system')}
+						>
+							<SystemThemeIcon width={28} height={28} />
+						</Box>
+						<Box
 							className={clsx(classes.item, classes.modeItem, 'secondary', {
-								active: mode === 'dark'
+								active: storeMode === 'dark'
 							})}
 							onClick={() => switchMode('dark')}
 						>

@@ -8,7 +8,7 @@ const blueTheme: ThemeOptions = {
       main: '#2065D1',
       default: '#FFFFFF',
       secondary: 'rgba(229 230, 232, 1)',
-      colorSecondary: '#d8dee3',
+      colorSecondary: '#f2f3f5',
       transparent: 'transparent',
       dark: '#131313',
       sullenGrey: '#33323e',
@@ -23,7 +23,8 @@ const blueTheme: ThemeOptions = {
       main: 'rgb(252, 252, 252)',
       default: '#FFFFFF',
       primary: 'rgb(252, 252, 252)',
-      secondary: 'rgba(145, 158, 171, 0.08)'
+      secondary: 'rgba(145, 158, 171, 0.08)',
+      opacity: (a) => `rgba(32, 101, 209, ${a})`
     },
     text: {
       main: '#2065D1',
@@ -31,13 +32,14 @@ const blueTheme: ThemeOptions = {
       textSecondary: '#6c6b7b',
       disabled: '#86909c',
       dark: '#131313',
-      secondary: '#86909c',
+      secondary: '#8c8c8c',
     },
     button: {
       main: '#2065D1',
       default: '#FFFFFF',
       background: '#2065D1',
-      hover: 'rgba(32, 101, 209, .8)'
+      hover: 'rgba(32, 101, 209, .8)',
+      disabled: 'rgba(32, 101, 209, .4)',
     },
     setting: {
       one: '#00AB55',

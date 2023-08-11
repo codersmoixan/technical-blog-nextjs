@@ -6,16 +6,19 @@ import LikedIcon from 'components/Icons/LikedIcon'
 import CommentIcon from 'components/Icons/CommentIcon'
 import { makeStyles } from '@mui/styles'
 import type { Theme } from '@mui/material'
-import type { ArticleOption } from 'containers/Sharing/types'
+import type { Article } from "../types"
+import dayjs from "dayjs";
 
 interface ArticleFullRowProps {
-	article: ArticleOption
+	article: Article,
+  classes?: Partial<ReturnType<typeof useStyles>>
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
 	root: {
 		padding: theme.spacing(2, 0),
-		borderBottom: `1px solid ${theme.colorPalette.primary.secondary}`
+    margin: theme.spacing(0, 3),
+		borderBottom: `1px solid ${theme.colorPalette.primary.secondary}`,
 	},
 	articleHead: {
 		display: 'flex',
@@ -93,7 +96,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 			fontSize: 12,
 			'& svg': {
 				marginRight: theme.spacing(0.5)
-			}
+			},
 		}
 	}
 }))
@@ -111,14 +114,14 @@ function ArticleFullRow({ article }: ArticleFullRowProps) {
 				</div>
 				<Box px={1} display="flex" justifyContent="center" alignItems="center">
 					<Typography variant="body2" color="textSecondary">
-						{article.date}
+						{dayjs(article.updatedAt).format('YYYY-MM-DD')}
 					</Typography>
 				</Box>
 				<div className={classes.tags}>
-					{article.tags?.map(tag => (
-						<div className={clsx(classes.articleTag, 'tag')} key={tag}>
+					{article.tags.map(tag => (
+						<div className={clsx(classes.articleTag, 'tag')} key={tag.tagId}>
 							<Typography variant="body2" color="textSecondary">
-								{tag}
+								{tag.tagName}
 							</Typography>
 						</div>
 					))}
@@ -127,7 +130,7 @@ function ArticleFullRow({ article }: ArticleFullRowProps) {
 			<Box display="flex" justifyContent="space-between" mt={1}>
 				<Box mt={1} flex={1}>
 					<Typography variant="subtitle1" fontWeight={700} className={classes.name}>
-						{article.name}
+						{article.articleName}
 					</Typography>
 					<Typography variant="body2" color="textSecondary">
 						{article.description}
@@ -138,7 +141,7 @@ function ArticleFullRow({ article }: ArticleFullRowProps) {
 			<div className={classes.data}>
 				<div className="data-item">
 					<ViewIcon />
-					{article.view}
+					{article.views}
 				</div>
 				<div className="data-item">
 					<LikedIcon />
@@ -146,7 +149,7 @@ function ArticleFullRow({ article }: ArticleFullRowProps) {
 				</div>
 				<div className="data-item">
 					<CommentIcon />
-					{article.view}
+					{article.views}
 				</div>
 			</div>
 		</div>

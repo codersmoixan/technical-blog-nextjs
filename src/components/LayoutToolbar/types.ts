@@ -1,5 +1,5 @@
 export type ToolbarSetterPresets = 'one' | 'two' | 'three' | 'four' | 'five' | 'six'
-export type ToolbarSetterMode = 'light' | 'dark'
+export type ToolbarSetterMode = 'light' | 'dark' | 'system'
 export type ToolbarSetterLayout = 'row' | 'column'
 export interface ToolbarSetter {
   mode: ToolbarSetterMode;

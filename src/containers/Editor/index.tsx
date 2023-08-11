@@ -116,21 +116,21 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 const excludeToolKey = [
 	'|',
-	'group-more-style',
-	'underline',
-	'italic',
-	'bgColor',
-	'fontFamily',
-	'lineHeight',
-	'bulletedList',
-	'numberedList',
-	'group-justify',
-	'group-indent',
-	'group-video',
-	'insertTable',
-	'todo',
-	'undo',
-	'redo',
+	// 'group-more-style',
+	// 'underline',
+	// 'italic',
+	// 'bgColor',
+	// 'fontFamily',
+	// 'lineHeight',
+	// 'bulletedList',
+	// 'numberedList',
+	// 'group-justify',
+	// 'group-indent',
+	// 'group-video',
+	// 'insertTable',
+	// 'todo',
+	// 'undo',
+	// 'redo',
 	'fullScreen'
 ]
 
@@ -179,11 +179,16 @@ function Editor() {
 		setTitle(event.target.value)
 	}
 
-	const handlePublish = async ({ cover, ...other }: FormOptions) => {
+	const handlePublish = async ({ cover, tags, ...other }: FormOptions) => {
+    console.log(html)
+    return
+
 		const result = await addSharing({
 			...other,
-			blogImage: '111',
-			name: title,
+      tags: tags.split(','),
+			articleCoverUrl: cover.url,
+      articleCoverKey: cover.key,
+			articleName: title,
 			content: html
 		})
 

@@ -34,17 +34,23 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   contained: {
     backgroundColor: theme.colorPalette.button.main,
-    fontWeight: 700,
+    fontWeight: 400,
     '&.MuiButton-root:hover': {
       // backgroundColor: theme.colorPalette.button.hover,
     },
+    '&.Mui-disabled': {
+      backgroundColor: theme.colorPalette.button.disabled,
+      color: theme.colorPalette.button.default
+    }
   },
-  textPrimary: {
-    color: theme.palette.text.primary,
+  text: {
     '&.MuiButton-root:hover': {
       backgroundColor: 'transparent',
       color: theme.colorPalette.button.hover,
     },
+  },
+  textPrimary: {
+    color: theme.palette.text.primary,
   },
   emptySpace: {
     '&.MuiButtonBase-root': {
@@ -73,11 +79,13 @@ function Buttons(props: ButtonsProps) {
       })}
       classes={{
         root: classes.root,
+        text: classes.text,
         textPrimary: classes.textPrimary,
         contained: classes.contained,
       }}
       color="primary"
       variant={variant}
+      disabled={loading}
       {...other}
     >
       {loading && <CircularProgress color="inherit" size={16} className={classes.loading} />}

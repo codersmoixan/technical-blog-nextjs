@@ -8,7 +8,7 @@ const defaultTheme: ThemeOptions = {
       main: '#00AB55',
       default: '#FFFFFF',
       secondary: 'rgba(229 230, 232, 1)',
-      colorSecondary: '#d8dee3',
+      colorSecondary: '#f2f3f5',
       transparent: 'transparent',
       dark: '#131313',
       sullenGrey: '#33323e',
@@ -24,6 +24,7 @@ const defaultTheme: ThemeOptions = {
       default: '#FFFFFF',
       primary: 'rgb(252, 252, 252)',
       secondary: 'rgba(145, 158, 171, 0.08)',
+      opacity: (a) => `rgba(0, 171, 100, ${a})`
     },
     text: {
       main: '#00AB55',
@@ -31,13 +32,14 @@ const defaultTheme: ThemeOptions = {
       textSecondary: '#6c6b7b',
       disabled: '#86909c',
       dark: '#131313',
-      secondary: '#86909c',
+      secondary: '#8c8c8c',
     },
     button: {
       main: '#00AB55',
       default: '#FFFFFF',
       background: '#00AB55',
-      hover: 'rgba(0, 171, 85, .8)'
+      hover: 'rgba(0, 171, 85, .8)',
+      disabled: 'rgba(0, 171, 85, .4)'
     },
     setting: {
       one: '#00AB55',

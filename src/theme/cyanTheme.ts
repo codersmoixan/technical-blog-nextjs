@@ -8,7 +8,7 @@ const cyanTheme: ThemeOptions = {
       main: '#078DEE',
       default: '#FFFFFF',
       secondary: 'rgba(229 230, 232, 1)',
-      colorSecondary: '#d8dee3',
+      colorSecondary: '#f2f3f5',
       transparent: 'transparent',
       dark: '#131313',
       sullenGrey: '#33323e',
@@ -23,7 +23,8 @@ const cyanTheme: ThemeOptions = {
       main: 'rgb(252, 252, 252)',
       default: '#FFFFFF',
       primary: 'rgb(252, 252, 252)',
-      secondary: 'rgba(145, 158, 171, 0.08)'
+      secondary: 'rgba(145, 158, 171, 0.08)',
+      opacity: (a) => `rgba(7, 141, 238, ${a})`
     },
     text: {
       main: '#078DEE',
@@ -31,13 +32,14 @@ const cyanTheme: ThemeOptions = {
       textSecondary: '#6c6b7b',
       disabled: '#86909c',
       dark: '#131313',
-      secondary: '#86909c',
+      secondary: '#8c8c8c',
     },
     button: {
       main: '#078DEE',
       default: '#FFFFFF',
       background: '#078DEE',
-      hover: 'rgba(141, 238, 100, .8)'
+      hover: 'rgba(7, 141, 238, .8)',
+      disabled: 'rgba(7, 141, 238, .3)'
     },
     setting: {
       one: '#00AB55',

@@ -10,6 +10,7 @@ import blueTheme from "@/src/theme/blueTheme";
 import redTheme from "@/src/theme/redTheme";
 import darkTheme from "@/src/theme/darkTheme"
 import type { ReactNode } from "react";
+import isEmpty from "lodash/isEmpty";
 
 interface ThemeProviderProps {
   children: ReactNode

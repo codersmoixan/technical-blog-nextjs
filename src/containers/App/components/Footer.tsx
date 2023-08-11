@@ -3,45 +3,50 @@
  * @description Footer
  */
 
-import makeStyles, { Theme } from 'core/makeStyles'
 import Typography from '@mui/material/Typography'
 import dayjs from 'dayjs'
 import Content from 'components/Layout/Content'
 import FooterNavList from 'containers/App/components/FooterNavList'
 import { aboutUsList, documentList } from 'containers/App/constants'
+import { makeStyles } from '@mui/styles'
+import type { Theme } from '@mui/material'
 
-const useStyles = makeStyles(
-	(theme: Theme) => ({
+const useStyles = makeStyles((theme: Theme) => {
+	const isDark = theme.palette.mode === 'dark'
+
+	return {
 		root: {
 			position: 'relative',
-			background: `linear-gradient(rgba(252, 252, 252, 0.9), rgba(252, 252, 252, 0.9)) center center / cover no-repeat, url(/images/home/overlay_2.jpg)`,
-			backgroundSize: '100% 100%',
+			background: isDark
+				? 'linear-gradient(rgba(22, 28, 36, 0.94), rgba(22, 28, 36, 0.94)) center center / cover no-repeat, url(/images/home/overlay_2.jpg)'
+				: `linear-gradient(rgba(252, 252, 252, 0.9), rgba(252, 252, 252, 0.9)) center center / cover no-repeat, url(/images/home/overlay_2.jpg)`,
+			backgroundSize: '100% 100%'
 		},
 		content: {
 			padding: theme.spacing(3, 3),
 			display: 'flex',
 			flexDirection: 'column',
 			'& .content': {
-        display: 'flex',
-				flex: 1,
+				display: 'flex',
+				flex: 1
 			},
-      [theme.breakpoints.down('md')]: {
-        '& .content': {
-          flexWrap: 'wrap',
-          '& .list': {
-            width: '33%'
-          }
-        },
-      },
-      [theme.breakpoints.up('md')]: {
-        '& .content': {
-          justifyContent: 'flex-end',
-          '& .list': {
-            width: 240,
-            textAlign: 'right'
-          }
-        },
-      }
+			[theme.breakpoints.down('md')]: {
+				'& .content': {
+					flexWrap: 'wrap',
+					'& .list': {
+						width: '33%'
+					}
+				}
+			},
+			[theme.breakpoints.up('md')]: {
+				'& .content': {
+					justifyContent: 'flex-end',
+					'& .list': {
+						width: 240,
+						textAlign: 'right'
+					}
+				}
+			}
 		},
 		footer: {
 			margin: theme.spacing(2, 'auto', 0),
@@ -58,9 +63,8 @@ const useStyles = makeStyles(
 				marginRight: theme.spacing(2)
 			}
 		}
-	}),
-	'Footer'
-)
+	}
+})
 
 function Footer() {
 	const classes = useStyles()

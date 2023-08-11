@@ -252,7 +252,7 @@ function FormSelect(props: FormSelectProps) {
 				</MenuItem>
 				{options.map(option => (
 					<MenuItem key={option.id} value={option[rowKey]} style={getStyles(option[rowKey], selected, theme)}>
-						{option.label}
+						{option[rowKey]}
 					</MenuItem>
 				))}
 			</Select>

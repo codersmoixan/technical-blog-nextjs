@@ -20,7 +20,7 @@ export interface UseTagReturns {
 const useTag = (): UseTagReturns => {
   const notify = useNotifier()
   const { clearSpeedDial } = useSpeedDial()
-  const { data: tags, isLoading, refetch: refetchTags } = useGetTagListQuery()
+  const { data: tagData, isLoading, refetch: refetchTags } = useGetTagListQuery()
   const { mutateAsync: addTag, isLoading: addLoading } = useAddTagMutation()
   const { mutateAsync: updateTag, isLoading: updateLoading } = useUpdateTagMutation()
   const { mutateAsync: deleteTag, isLoading: deleteLoading } = useDeleteTagMutation()
@@ -46,7 +46,7 @@ const useTag = (): UseTagReturns => {
   }
 
   return {
-    tags: tags?.data?.data ?? [],
+    tags: tagData?.data,
     loading: isLoading || addLoading || updateLoading || deleteLoading,
     add,
     update,

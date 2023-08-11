@@ -1,8 +1,8 @@
 import BeforeRoute from 'core/BeforeRoute'
-import BasicSpeedDial, { SpeedDialOption } from 'components/SuspendButtons/BasicSpeedDial'
+import BasicSpeedDial  from 'components/SuspendButtons/BasicSpeedDial'
 import ThemeSettingIcon from 'containers/App/components/ThemeSettingIcon'
 import Fab from '@mui/material/Fab'
-import React from 'react'
+import React, { ReactNode } from 'react'
 import makeStyles, { Theme } from 'core/makeStyles'
 import useSpeedDial from 'components/SuspendButtons/hooks/useSpeedDial'
 import routes from '@/src/routes'
@@ -10,6 +10,8 @@ import type { SuspendActions } from 'components/SuspendButtons/types'
 
 interface SuspendButtonsProps {
 	actions: SuspendActions
+	icon?: ReactNode
+  onChange?: (type: any) => void
 }
 
 const useStyles = makeStyles(
@@ -33,11 +35,12 @@ const useStyles = makeStyles(
 	'SuspendButtons'
 )
 
-function SuspendButtons({ actions = [] }: SuspendButtonsProps) {
+function SuspendButtons({ actions = [], icon, onChange }: SuspendButtonsProps) {
 	const classes = useStyles()
 	const { updateSpeedDial } = useSpeedDial()
 
-	const handleAction = ({ id }: SpeedDialOption) => {
+	const handleAction = (id: string) => {
+    onChange?.(id)
 		if (id === 'top') {
 			document.body.scrollIntoView({
 				behavior: 'smooth',
@@ -57,10 +60,10 @@ function SuspendButtons({ actions = [] }: SuspendButtonsProps) {
 	return (
 		<>
 			<BeforeRoute exclude={[routes.editor, routes.login, routes.notFond, routes.register]}>
-				<BasicSpeedDial options={actions} onChange={handleAction} />
+				<BasicSpeedDial options={actions} icon={icon} onChange={handleAction} />
 			</BeforeRoute>
 			<BeforeRoute include={[routes.login, routes.notFond, routes.register]}>
-				<Fab className={classes.fab} onClick={() => updateSpeedDial('setting')}>
+				<Fab className={classes.fab} onClick={() => handleAction('setting')}>
 					<ThemeSettingIcon />
 				</Fab>
 			</BeforeRoute>
